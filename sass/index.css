@@ -1,0 +1,23 @@
+body, #container {
+  position: relative; }
+
+body {
+  text-align: center;
+  min-width: 1000px;
+  padding: 0 100px; }
+  body #container {
+    margin: 0 auto;
+    min-width: 800px; }
+    body #container header {
+      height: 60px;
+      line-height: 60px; }
+      body #container header #welcome {
+        display: inline-block;
+        float: left;
+        font-size: 20px; }
+      body #container header a {
+        display: inline-block;
+        float: right;
+        text-decoration: none; }
+
+/*# sourceMappingURL=index.css.map */

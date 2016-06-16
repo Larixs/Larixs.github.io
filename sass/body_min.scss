@@ -1,0 +1,30 @@
+
+$min-browserWidth: 800px;
+$bodyPadding:100px;
+
+body,#container{
+  position: relative;
+}
+body{
+  text-align: center;
+  min-width:$min-browserWidth+2*$bodyPadding;
+  padding: 0 $bodyPadding;
+  #container{
+    margin: 0 auto;
+    min-width: $min-browserWidth;
+    header{
+      height: 60px;
+      line-height: 60px;
+      #welcome{
+        display: inline-block;
+        float: left;
+        font-size:20px;
+      }
+      a{
+        display: inline-block;
+        float: right;
+        text-decoration: none;
+      }
+    }
+  }
+}

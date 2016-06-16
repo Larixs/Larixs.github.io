@@ -51,9 +51,10 @@
                 <ul>
                   <li>前者获取的值带单位，后者获取的值不带单位（非常方便计算）。</li>
                   <li>前者获取的是css样式（包括通过js写入的），而后者获取的是实际高度。</li>
-                  <li>后者是相对于<strong>父元素</strong>的距离</li>
+                  <li>offsetHeight获取的是内容加上下padding加border的高度</li>
                 </ul>
               </li>
+              <li>offsetTop是相对于<strong>顶部</strong>或者父元素(??)的距离</li>
               <li>设置了!important的属性值，其优先级最高，覆盖其他同属性的值。IE6.0不支持。</li>
               <li>tr的display属性的默认值是table-row。</li>
             </ol>
