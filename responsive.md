@@ -50,3 +50,8 @@
 	
 picture是h5标签，它想audio和video一样，可以设置多个source，第一个source是最佳的。还可以将css的媒体查询化为media属性进行设置。media是可选的。上面的代码意思即为，当视口（？）宽度小于400px时，显示第一张图片img_smallflower.jpg，除此之外显示第二张图片img_flowers.jpg。img是做平稳退化使用，当浏览器不支持picture标签时，使之可以退化为img标签。
 
+##3. 如何在兼容ie8的情况下实现响应式布局
+
+这点在另外一篇经验总结[css布局]（layout.md）里的第五点提到了，使用respond.js进行兼容。
+
+

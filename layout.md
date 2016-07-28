@@ -197,3 +197,4 @@
 - \<!--[if lt IE 9]>是条件注释，IE以外的浏览器将会把它们看作是普通的注释而完全忽略它们。IE将会根据if条件来判断是否如解析普通的页面内容一样解析条件注释里的内容。条件注释是一种安全的区分IE浏览器版本的语法，且被认为是取代针对IE css hack的首选办法。
 
 - html5shiv解决html5的兼容性问题，respond解决响应式的问题。respond需要在css文件之后，但要尽早解析，避免出现闪屏。更多注意事项见[respond.js](https://github.com/scottjehl/Respond)
+
