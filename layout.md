@@ -15,7 +15,7 @@
  	}
 
 
-解决方案2(亲测可用)
+解决方案2
 
 	.clearfix{
 		overflow:hidden;
@@ -159,4 +159,41 @@
 ####参考链接：
 [counter-increment MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment)
 		
-	
+## 4.段落文字左右两边对齐
+
+### text-align:justify 
+报纸一样的排版，每行的左右两边努力对齐
+
+### word-break:break-all
+强行拆开一个单词
+
+
+## 5.移动端去掉点击时的阴影
+
+    *{
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent;
+        /* For some Androids */
+    }
+    
+## 6.HTML5、@media兼容ie8的做法
+
+
+	<!-- html -->
+  	 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <link rel="stylesheet" href="style.css">
+ 	 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries  -->
+  	<!--[if lt IE 9]>
+ 	 <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  	<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  	<![endif]-->
+  	
+ 
+以上为html的代码，还需在css文件中增加以下代码
+
+	article,aside,dialog,footer,header,section,footer,nav,figure,menu{
+  	display:block}
+
+- \<!--[if lt IE 9]>是条件注释，IE以外的浏览器将会把它们看作是普通的注释而完全忽略它们。IE将会根据if条件来判断是否如解析普通的页面内容一样解析条件注释里的内容。条件注释是一种安全的区分IE浏览器版本的语法，且被认为是取代针对IE css hack的首选办法。
+
+- html5shiv解决html5的兼容性问题，respond解决响应式的问题。respond需要在css文件之后，但要尽早解析，避免出现闪屏。更多注意事项见[respond.js](https://github.com/scottjehl/Respond)
