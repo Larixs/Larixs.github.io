@@ -52,6 +52,6 @@ picture是h5标签，它想audio和video一样，可以设置多个source，第�
 
 ##3. 如何在兼容ie8的情况下实现响应式布局
 
-这点在另外一篇经验总结[css布局]（layout.md）里的第五点提到了，使用respond.js进行兼容。
+这点在另外一篇经验总结[css布局](layout.md)里的第五点提到了，使用respond.js进行兼容。
 
 
