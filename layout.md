@@ -198,3 +198,47 @@
 
 - html5shiv解决html5的兼容性问题，respond解决响应式的问题。respond需要在css文件之后，但要尽早解析，避免出现闪屏。更多注意事项见[respond.js](https://github.com/scottjehl/Respond)
 
+#### 什么时候才能不兼容ie8呀,ie8烦死惹(摔!)
+
+## 7.css3多栏布局
+
+- column-width:200px; : 内容会分布在200px宽度的栏位中,视口尺寸变化时,浏览器会自动调整栏位数量。
+
+- column-count:3; :保持栏位数量不变而让栏位宽度根据视口调整。
+
+- column-gap:20px; :栏间距
+
+- column-rule: thin dotted #999;  :栏的分割线
+
+
+
+## 8.让li表现为横向菜单
+
+方案一 利用table布局
+
+    ul{
+      display:table-row;
+    }
+    li{
+      display:table-cell;
+    }
+
+方案二 利用float布局,加清除浮动
+
+
+    ul{
+      margin:0;
+      padding:0;
+    }
+
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+
+    }
+    li{
+      float:left;
+      list-style:none;
+    }
+
