@@ -7,19 +7,17 @@
 当子元素处于浮动状态时，因为子元素脱离了文档流，所以父元素的高度或宽度不能完全包含子元素，产生了溢出。此时父元素就需要清除浮动，让父元素的高度和宽度能与子元素的相匹配。
 清除浮动的解决方案：
 
-解决方案1
+解决方案1(非body)
 
 	.clearfix {
 	    overflow: auto;
- 		zoom: 1;
  	}
 
 
-解决方案2
+解决方案2(非body)
 
 	.clearfix{
 		overflow:hidden;
-		zoom:1;
 	}
 		
 解决方案3
@@ -242,3 +240,42 @@
       list-style:none;
     }
 
+## 9.三列布局
+
+双飞翼布局:
+
+    html
+
+    <div class="container">
+        <div class="left">left</div>
+        <div class="right">right</div>
+        <div class="main">main</div>
+     </div>
+
+
+    css
+
+    .container{
+      margin:0 100px 0 100px;
+      border:1px solid black;
+    }
+
+    .main{
+      width:100%;
+      height:200px;
+      border:1pxs solid blue;
+    }
+    .left{
+      position:absolute;
+      left:0;
+      width:100px;
+      height:200px;
+      border:1px solid red;
+    }
+    .right{
+      width:100px;
+      height:200px;
+      border:1px solid red;
+      position:absolute;
+      right:0;
+    }
