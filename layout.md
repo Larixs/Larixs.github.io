@@ -243,6 +243,7 @@
 ## 9.三列布局
 
 双飞翼布局:
+方案一 position:absolute;
 
     html
 
@@ -278,4 +279,38 @@
       border:1px solid red;
       position:absolute;
       right:0;
+    }
+
+
+方案二 display:flex
+
+    html
+
+    <div class="container">
+       <div class="left">left</div>
+       <div class="main">main</div>
+       <div class="right">right</div>
+    </div>
+
+
+
+    css
+
+    .container{
+      border:1px solid red;
+      display:flex;
+      height:200px;
+
+    }
+    .container > div{
+      border:1px solid black;
+    }
+    .left{
+      width:100px;
+    }
+    .right{
+      width:100px;
+    }
+    .main{
+      flex-basis:100%;/*   flex-grow:1; 也同样生效  */
     }
