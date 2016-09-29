@@ -5,7 +5,7 @@
 
 ### 实战总结
 
-[ios下的问题](ios compatibility.md)
+[兼容问题:ios,ie](ios compatibility.md)
 
 [响应式布局](responsive.md)
 
@@ -19,6 +19,4 @@
 [Array](study-Array.md)
 
 
-### 关于面试
-[面试败经](interview.md)
 

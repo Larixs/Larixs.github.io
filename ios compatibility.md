@@ -50,3 +50,18 @@ PS：也许会有其他库来实现粘性布局，不过如果只实现粘性布
  
 ##### 参考链接：
 [position:sticky实现iOS6+下的粘性布局](http://efe.baidu.com/blog/position-sticky/)
+
+
+# ie的问题
+
+### ie8下<b>跨域</b>传送get请求(使用的1.10的jquery不兼容,只得用原生的来写)
+
+    if(!!window.XDomainRequest){
+        var xdr = new XDomainRequest();
+        xdr.open("GET","http://api.smartstudy.com/user/captcha/phone/check?"+phone+"&captchaPhone="+phoneCaptcha);
+        xdr.send();
+        xdr.onload=function () {
+          console.log(xdr.responseText);//responseText 是字符串,如果要提取其中属性的话需要进行处理
+        }
+    }
+
