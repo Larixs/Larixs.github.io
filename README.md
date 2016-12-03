@@ -23,6 +23,8 @@
 
 [css模块化](react/cssmodule.md)
 
+[redux](redux/redux.md)
+
 
 
 ### 书
