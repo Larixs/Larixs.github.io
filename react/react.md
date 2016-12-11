@@ -94,14 +94,18 @@ es6写法：
 	  }
 
 	}
-	//es6 两种写法
-	//写法一，放在class外
-	NewDom.propTypes={//属性校验器，表示改属性必须是bool，否则报错
+
+	NewDom.propTypes={//属性校验器，表示该属性必须是bool，否则报错
 	  title: React.PropTypes.bool,
 	}
 	NewDom.defaultProps={title:'133'};//设置默认属性
 
-	//写法二，放在class内使用static定义
+
+
+es7写法（babel支持）：
+
+//放在class内使用static定义静态属性，静态属性是其本身的属性，即class.propname，实例是否会继承有待测试。
+
     class NewDom extends React.Components {
         static propTypes = {
             title:React.PropTypes.bool
