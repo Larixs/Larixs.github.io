@@ -94,11 +94,21 @@ es6写法：
 	  }
 
 	}
-	//es6 这两个属性不能写在class内。
+	//es6 两种写法
+	//写法一，放在class外
 	NewDom.propTypes={//属性校验器，表示改属性必须是bool，否则报错
 	  title: React.PropTypes.bool,
 	}
 	NewDom.defaultProps={title:'133'};//设置默认属性
+
+	//写法二，放在class内使用static定义
+    class NewDom extends React.Components {
+        static propTypes = {
+            title:React.PropTypes.bool
+        }
+    }
+
+    (感谢贤哥指正）
 
 
 

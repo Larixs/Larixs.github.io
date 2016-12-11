@@ -74,6 +74,24 @@ Store的职责：
 4.  store存储根reducer返回的整个state树。
 
 
+**异步API**
+
+异步API需要三种action:
+
+*   一种通知reducer请求开始的action
+
+切换state的isFetching标志
+
+*   一种通知reducer请求成功的action
+
+reducer可能会把接受到的新数据合并到state中,并重置isFetching
+
+*   一种通知reducer请求失败的action
+
+可能（？）会重置isFetching
+
+tip：请求数据的action最好不要和UI的特定事件耦合到一起。随着应用变得复杂，不仅仅是UI事件需要请求数据，有些用户操作（比如，预加载最流行的 subreddit，或者一段时间后自动刷新过期数据）后需要马上请求数据，路由变化时也可能需要请求数据。因此在开始的时候就将数据请求的action与其他action分开创建是一个明智的做法。
+
 
 
 
