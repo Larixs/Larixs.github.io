@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>ASCII图和单极图</title>
+    <style>
+        #target-img{
+            font-family:monospace;
+            font-size: 12px;
+        }
+        .step{
+            margin: 30px 20px;
+        }
+    </style>
 </head>
 <body>
 <img src="example.png" alt="示例图片" id="source-img">
-<p id="target-img" style = "font-family:monospace; font-size: 12px;"></p>
+<div class="step">
+    <label> 采样精度(1~20,四舍五入取整数）: <input type="text" id="step-input"></label>
+    <button id="submit">确定</button>
+</div>
+<p id="target-img"></p>
 <script type="text/javascript">
     window.onload = function () {
         //获取节点和尺寸
@@ -39,58 +52,74 @@
 //        outputImg.src = canvas.toDataURL();
 //        document.body.appendChild(outputImg);
 
-        //将像素灰度转化为字符
-        function gray2asc(gray){
-            /*ASCII--I'mYasic*/
-            gray = 255 - gray;
-            //采用二分法
-            if(gray < 128){
-                if( gray < 64){
-                    if(gray < 32){
-                        return "\'"
-                    }else{
-                        return "c"
-                    }
-                }else{
-                    if( gray < 96){
-                        return "i"
-                    }else{
-                        return "s"
-                    }
-                }
+        var button = document.getElementById("submit");
+        var stepInput = document.getElementById("step-input");
+        button.addEventListener('click',function(){
+            var step = stepInput.value;
+            if(1<=step&&step<=20){
+                pic2asc(Math.round(step));
             }else{
-                if( gray < 192){
-                    if( gray < 160){
-                        return "I"
+                alert("非法输入");
+            }
+        },false);
+
+
+        function pic2asc(step){
+
+            //将像素灰度转化为字符
+            function gray2asc(gray){
+                /*ASCII--I'mYasic*/
+                gray = 255 - gray;
+                //采用二分法
+                if(gray < 128){
+                    if( gray < 64){
+                        if(gray < 32){
+                            return "\'"
+                        }else{
+                            return "c"
+                        }
                     }else{
-                        return "m"
+                        if( gray < 96){
+                            return "i"
+                        }else{
+                            return "s"
+                        }
                     }
                 }else{
-                    if(gray < 224){
-                        return "a"
+                    if( gray < 192){
+                        if( gray < 160){
+                            return "I"
+                        }else{
+                            return "m"
+                        }
                     }else{
-                        return "Y"
+                        if(gray < 224){
+                            return "a"
+                        }else{
+                            return "Y"
+                        }
                     }
                 }
             }
+
+            var result = "";
+            var lineIndex = 0;
+            //采样
+            var widthStep = step,
+                    heightStep = widthStep * 2;
+            //1/2约是字体的宽高比
+            for(var lineHeight = 0 ; lineHeight < height ; lineHeight += heightStep){
+                var lineASC = "";
+                for( var lineWidth = 0 ; lineWidth < width ; lineWidth += widthStep){
+                    lineIndex = (lineHeight * width + lineWidth) * 4;
+                    lineASC += gray2asc(imgDataArray[lineIndex]);
+                }
+                lineASC += "<br>";
+                result += lineASC;
+            }
+            document.querySelector("#target-img").innerHTML = result;
         }
 
-        var result = "";
-        var lineIndex = 0;
-        //采样
-        var heightStep = 4;
-        var widthStep = Math.round(heightStep / 2);
-        //1/2约是字体的宽高比
-        for(var lineHeight = 0 ; lineHeight < height ; lineHeight += heightStep){
-            var lineASC = "";
-            for( var lineWidth = 0 ; lineWidth < width ; lineWidth += widthStep){
-                lineIndex = (lineHeight * width + lineWidth) * 4;
-                lineASC += gray2asc(imgDataArray[lineIndex]);
-            }
-            lineASC += "<br>";
-            result += lineASC;
-        }
-        document.querySelector("#target-img").innerHTML = result;
     };
 
 </script>

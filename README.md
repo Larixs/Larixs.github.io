@@ -34,11 +34,11 @@
 
 [静态成员\(class.static\)](ES6/static.md)
 
-###小作品
+### 小作品
 
 [字符组成的图片](sparks/pictures made of ASCII/index.html)
 
-###其他
+### 其他
 
 [移动端适配](wap.md)
 
