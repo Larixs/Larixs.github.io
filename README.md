@@ -40,14 +40,3 @@
 
 [Array](study-Array.md)
 
-
-## 书
-
-[时间旅行者的妻子](books/book1.md)
-[岛上书店](books/book2.md)
-
-## 影
-
-[时间旅行者的妻子](movies/movie1.md)
-[流感](movies/movie2.md)
-[佩小姐的奇幻城堡](movies/movie3.md)
