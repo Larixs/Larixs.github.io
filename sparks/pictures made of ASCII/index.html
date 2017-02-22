@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASCII图和单极图</title>
+</head>
+<body>
+<img src="example.png" alt="示例图片" id="source-img">
+<p id="target-img" style = "font-family:monospace; font-size: 12px;"></p>
+<script type="text/javascript">
+    window.onload = function () {
+        //获取节点和尺寸
+        var canvas = document.createElement('canvas');
+        var canvasContext = canvas.getContext("2d");
+        var img = document.querySelector("#source-img");
+        var width = canvas.width = img.width;
+        var height = canvas.height = img.height;
+
+        //获取图像所有像素的rgba
+        canvasContext.drawImage(img,0,0);
+        var imgData = canvasContext.getImageData(0,0,width,height);
+        var imgDataArray = imgData.data;
+
+        //将所有像素灰度化
+        var len = imgDataArray.length;
+        for(var i = 0 ; i < len ; i+=4){
+            //i,i+1,i+2,i+3分别是第i个像素点的r、g、b、a值
+            imgDataArray[i]=imgDataArray[i+1]=imgDataArray[i+2]
+                    =rgb2gray(imgDataArray[i],imgDataArray[i+1],imgDataArray[i+2]);
+//            imgDataArray[i+3] = 150;
+        }
+        //灰度化函数
+        function rgb2gray(r,g,b){
+            return (r+g+b)/3;
+        }
+//        canvasContext.putImageData(imgData,0,0);
+//        var outputImg = new Image();
+//        //将canvas转化为img的src
+//        outputImg.src = canvas.toDataURL();
+//        document.body.appendChild(outputImg);
+
+        //将像素灰度转化为字符
+        function gray2asc(gray){
+            /*ASCII--I'mYasic*/
+            gray = 255 - gray;
+            //采用二分法
+            if(gray < 128){
+                if( gray < 64){
+                    if(gray < 32){
+                        return "\'"
+                    }else{
+                        return "c"
+                    }
+                }else{
+                    if( gray < 96){
+                        return "i"
+                    }else{
+                        return "s"
+                    }
+                }
+            }else{
+                if( gray < 192){
+                    if( gray < 160){
+                        return "I"
+                    }else{
+                        return "m"
+                    }
+                }else{
+                    if(gray < 224){
+                        return "a"
+                    }else{
+                        return "Y"
+                    }
+                }
+            }
+        }
+
+        var result = "";
+        var lineIndex = 0;
+        //采样
+        var heightStep = 4;
+        var widthStep = Math.round(heightStep / 2);
+        //1/2约是字体的宽高比
+        for(var lineHeight = 0 ; lineHeight < height ; lineHeight += heightStep){
+            var lineASC = "";
+            for( var lineWidth = 0 ; lineWidth < width ; lineWidth += widthStep){
+                lineIndex = (lineHeight * width + lineWidth) * 4;
+                lineASC += gray2asc(imgDataArray[lineIndex]);
+            }
+            lineASC += "<br>";
+            result += lineASC;
+        }
+        document.querySelector("#target-img").innerHTML = result;
+    };
+
+</script>
+</body>
+
+</html>
