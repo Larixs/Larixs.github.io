@@ -32,6 +32,7 @@ window.onload = function () {
         }
         //选中的卡牌边框变为粉色
         lotteryBackArr[position].parentElement.classList.add("chosen");
+        lotteryList.removeEventListener("click",sendMessage,false);
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
           if(xhr.readyState ==4){
@@ -50,7 +51,8 @@ window.onload = function () {
                   lotteryResultArr.forEach(function(item){
                       item.classList.add("resultRotate");
                   });
-
+              }else{
+                  alert("网络故障，请刷新重试");
               }
           }
         };
