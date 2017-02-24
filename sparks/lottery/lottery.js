@@ -50,5 +50,11 @@ window.onload = function () {
         //需要用get请求。post请求会出现405错误
         xhr.open("get","award.json",true);
         xhr.send(null);
+        function preloadImg(){
+            for(var i = 1 ; i < 10 ; i++){
+                var img = new Image();
+                img.src="pic" + i +".png";
+            }
+        }
     }
 };
