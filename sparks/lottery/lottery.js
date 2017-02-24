@@ -47,8 +47,8 @@ window.onload = function () {
               }
           }
         };
-        xhr.open("post","award.json",true);
-        xhr.setRequestHeader("Content-Type","application/www-x-from-urlencoded");
+        //需要用get请求。post请求会出现405错误
+        xhr.open("get","award.json",true);
         xhr.send(null);
     }
 };
