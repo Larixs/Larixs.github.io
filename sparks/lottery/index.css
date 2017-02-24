@@ -1,0 +1,63 @@
+header{
+    text-align: center;
+}
+#lotteryList{
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 520px;
+}
+#lotteryList li{
+    display: inline-block;
+    list-style: none;
+    border-radius: 10px;
+    border:1px solid transparent;
+}
+#lotteryList li:hover{
+    border:1px solid grey;
+}
+#lotteryList li.chosen{
+    border:1px solid pink;
+}
+
+.result{
+    position: absolute;
+    border-radius: 10px;
+}
+.resultRotate{
+    animation: rotateFromBackToFront 2s;
+    animation-fill-mode: forwards;
+}
+.result img{
+    width: 150px;
+    margin: 10px;
+    height: 150px;
+    border-radius: 10px;
+
+}
+.blur{
+    position: relative;
+}
+.blurRotate{
+    animation: rotateFromFrontToBack 2s;
+    animation-fill-mode: forwards;
+    backface-visibility: hidden;
+}
+.blur img{
+    width: 150px;
+    margin: 10px;
+    height: 150px;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+
+@keyframes rotateFromFrontToBack {
+    from { transform: rotateY(0deg);}
+    to { transform: rotateY(180deg);}
+}
+@keyframes rotateFromBackToFront {
+    from { transform: rotateY(180deg);}
+    to { transform: rotateY(360deg);}
+}
