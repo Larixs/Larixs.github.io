@@ -44,6 +44,8 @@
 
 [幻灯效果（画廊）纯css制作](sparks/PPT/index-css.html)
 
+[头图切换(竖向)组件](sparks/whirlingBanner/index.html)
+
 ### 其他
 
 [移动端适配](wap.md)

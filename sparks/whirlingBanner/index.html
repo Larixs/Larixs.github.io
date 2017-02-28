@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="whirling.css">
+    <style>
+        .whirling-size1,.whirling-size2{
+            width: 370px;
+            height: 500px;
+        }
+        .whirling-active1,.whirling-active2{
+            opacity:1!important;
+        }
+        .whirling-btn-style1,.whirling-btn-style2{
+            margin-left: 7px;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(60,60,60,1);
+            border-radius: 10px;
+            opacity: 0.6;
+            text-align: center;
+            font-size: 12px;
+            line-height: 20px;
+            color: #fff;
+        }
+        textarea{
+            width: 600px;
+            height: 300px;
+            display: block;
+            background-color: transparent;
+            margin: 20px auto;
+        }
+        .example{
+            display: flex;
+            justify-content: space-around;
+        }
+
+    </style>
+</head>
+<body>
+<div class="example">
+    <div class="wrapper">
+        <div class="whirling-box whirling-box1">
+            <ul class="whirling-body whirling-body1">
+                <li class="whirling-item whirling-item1"><img src="img/pic1.jpg" alt="图片"></li>
+                <li class="whirling-item  whirling-item1"><img src="img/pic2.jpg" alt="图片"></li>
+                <li class="whirling-item whirling-item1"><img src="img/pic3.jpg" alt="图片"></li>
+                <li class="whirling-item whirling-item1"><img src="img/pic4.jpg" alt="图片"></li>
+            </ul>
+            <ul class="whirling-btns ">
+                <li class="whirling-btn whirling-active1 whirling-btn1 ">1</li>
+                <li class="whirling-btn whirling-btn1">2</li>
+                <li class="whirling-btn whirling-btn1">3</li>
+                <li class="whirling-btn whirling-btn1">4</li>
+            </ul>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="whirling-box whirling-box2">
+            <ul class="whirling-body whirling-body2">
+                <li class="whirling-item whirling-item2"><img src="img/pic1.jpg" alt="图片"></li>
+                <li class="whirling-item  whirling-item2"><img src="img/pic2.jpg" alt="图片"></li>
+                <li class="whirling-item whirling-item2"><img src="img/pic3.jpg" alt="图片"></li>
+                <li class="whirling-item whirling-item2"><img src="img/pic4.jpg" alt="图片"></li>
+            </ul>
+            <ul class="whirling-btns ">
+                <li class="whirling-btn whirling-active2 whirling-btn2 ">1</li>
+                <li class="whirling-btn whirling-btn2">2</li>
+                <li class="whirling-btn whirling-btn2">3</li>
+                <li class="whirling-btn whirling-btn2">4</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<p>
+    基本框架：
+</p>
+<textarea disabled>
+    <div class="whirling-box">
+        <ul class="whirling-body">
+            <li class="whirling-item"><img src="img/pic1.jpg" alt="图片"></li>
+            <li class="whirling-item"><img src="img/pic2.jpg" alt="图片"></li>
+        </ul>
+        <ul class="whirling-btns ">
+            <li class="whirling-btn whirling-active">1</li>
+            <li class="whirling-btn">2</li>
+        </ul>
+    </div>
+</textarea>
+<p>使用说明：<br>
+    在结构上为各节点写上类名，再将自定义的类名作为参数传入Whirling中。如果某项参数为空，将使用默认参数。如果在一个页面中使用多个Whirling对象，则前7个参数必填。<br>
+    参数列表：
+    <pre>
+    {
+         whirlingBox:外层 selector
+         whirlingBody:内容主题 selector
+         whirlingItem:需要切换的内容分块 selector
+         whirlingBtn:切换按钮 selector
+         whirlingBtnActive:按钮激活样式 class （请使用important覆盖样式）
+         whirlingBtnStyle:按钮样式 class
+         whirlingSize: 整体宽高 class
+         autoplay:是否自动播放，true为自动播放 boolean
+         slideSpeed:自动播放的速度(ms) number
+         aniSpeed: 切换时的过渡速度(s) number
+    }
+</pre>
+如果使用多个Whirling对象，请给每一个插件的每个部分取不同的名称。
+</p>
+
+<script src="../common/jquery.min.js"></script>
+<script src="whirling.js"></script>
+<script>
+    var whirling1 = new Whirling.Vertical({
+        whirlingBox:".whirling-box1",
+        whirlingBody:".whirling-body1",
+        whirlingItem:".whirling-item1",
+        whirlingBtn:".whirling-btn1",
+        whirlingSize:"whirling-size1",
+        whirlingBtnStyle:"whirling-btn-style1",
+        whirlingBtnActive:"whirling-active1",
+        autoplay:true,
+        slideSpeed:2000,
+        aniSpeed: 1.5
+    });
+    var whirling2 = new Whirling.Vertical({
+        whirlingBox:".whirling-box2",
+        whirlingBody:".whirling-body2",
+        whirlingItem:".whirling-item2",
+        whirlingBtn:".whirling-btn2",
+        whirlingSize:"whirling-size2",
+        whirlingBtnStyle:"whirling-btn-style2",
+        whirlingBtnActive:"whirling-active2",
+        autoplay:true,
+        slideSpeed:3000,
+        aniSpeed: 1.5
+    });
+</script>
+</body>
+</html>
