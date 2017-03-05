@@ -1,10 +1,10 @@
 var Whirling = {};
 //可改写成横向切换，只需将布局改为横向排列，再将js代码中的top改为left即可。以后可做成一个参数进行切换
 (function(win,doc){
-    function Vertical(options){
+    function Slider(options){
         this._init(options);
     }
-    $.extend(Vertical.prototype,{
+    $.extend(Slider.prototype,{
         _init:function (options){
             /*
             * 1.参数初始化
@@ -25,6 +25,7 @@ var Whirling = {};
              slideSpeed:自动播放的速度(ms) number
              aniSpeed: 切换时的过渡速度(s) number
             * */
+            //默认参数
             self.options = {
                 whirlingBox:".whirling-box",
                 whirlingBody:".whirling-body",
@@ -33,10 +34,12 @@ var Whirling = {};
                 whirlingBtnActive:"whirling-active",
                 whirlingBtnStyle:"whirling-btn-style",
                 whirlingSize:"whirling-size",
+                direction:"vertical",
                 autoplay:true,
                 slideSpeed:2000,
                 aniSpeed: 2
             };
+
             $.extend(true,self.options,options||{});
             self._initDOM();
             self._initBtnHoverEvent();
@@ -44,22 +47,33 @@ var Whirling = {};
                 self._initInterval();
             }
         },
-        //获得所需要的dom节点
+        //获得所需要的dom节点。设置参数
         _initDOM: function () {
             var self = this;
             self.$doc = $(doc);
             self.$box = $(self.options.whirlingBox).addClass(self.options.whirlingSize);
-            self.$body = $(self.options.whirlingBody).css("transition","top " + self.options.aniSpeed +"s");
+            self.$body = $(self.options.whirlingBody).css("transition", "all "+ self.options.aniSpeed +"s");
             self.$items = $(self.options.whirlingItem);
             $(self.options.whirlingItem + " img").addClass(self.options.whirlingSize);
             self.$btns = $(self.options.whirlingBtn).addClass(self.options.whirlingBtnStyle);
-            self.itemsPositionArr = self.getAllItemsPosition();
             self.timer = null;
             self.itemIndex = 0;
             if(self.$items.length !== self.$btns.length){
                 alert("切换按钮与图片个数不对应");
                 return;
             }
+            //设置切换方向，如果是水平切换，则需要添加类名使图片水平排列
+            if(self.options.direction=="horizontal"){
+                self.cssDirection = "left";
+                self.$items.addClass("whirling-item-h");
+                //将ul的宽度设置为图片宽度*图片个数,20为预留出的缝隙宽度
+                self.$body.css("width",parseInt(self.$box.css("width"))*self.$items.length + 20 + "px");
+            }else{
+                self.cssDirection = "top";
+            }
+            //获取图片的位置
+            self.itemsPositionArr = self.getAllItemsPosition();
+
         },
         //对切换按钮进行初始化
         _initBtnHoverEvent: function () {
@@ -116,20 +130,21 @@ var Whirling = {};
                 self.timeToSlide(index);
             },self.options.slideSpeed);
         },
-        //获得切换图片的高度
+        //获得切换图片的位置
         getAllItemsPosition: function () {
             var self = this;
             var posArr = [];
             var len = self.$items.length;
             for(var i =  0 ; i < len; i++){
-                posArr.push(self.$items.eq(i).position()["top"]);
+                posArr.push(self.$items.eq(i).position()[self.cssDirection]);
             }
             return posArr;
+
         },
         //切换图片
         changeItemIndex:function(index){
             var self  = this;
-            self.$body.css("top","-" + self.itemsPositionArr[index]+"px");
+            self.$body.css(self.cssDirection,"-" + self.itemsPositionArr[index]+"px");
         },
         //切换按钮
         changeTabIndex: function (index) {
@@ -139,5 +154,5 @@ var Whirling = {};
             self.$btns.eq(index).addClass(active);
         }
     });
-    Whirling.Vertical = Vertical;
+    Whirling.Slider = Slider;
 })(window,document);

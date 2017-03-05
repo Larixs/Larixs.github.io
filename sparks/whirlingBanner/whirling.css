@@ -27,6 +27,9 @@
 .whirling-box li{
     list-style: none;
 }
+.whirling-item-h{
+    float:left;
+}
 .whirling-btns{
     z-index: 2;
     position: absolute;

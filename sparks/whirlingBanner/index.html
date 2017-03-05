@@ -94,13 +94,17 @@
     参数列表：
     <pre>
     {
+        //DOM结构
          whirlingBox:外层 selector
          whirlingBody:内容主题 selector
          whirlingItem:需要切换的内容分块 selector
          whirlingBtn:切换按钮 selector
+        //样式
          whirlingBtnActive:按钮激活样式 class （请使用important覆盖样式）
          whirlingBtnStyle:按钮样式 class
          whirlingSize: 整体宽高 class
+        //播放参数
+         direction:切换方向，默认是垂直切换 "horizontal"/"vertical"
          autoplay:是否自动播放，true为自动播放 boolean
          slideSpeed:自动播放的速度(ms) number
          aniSpeed: 切换时的过渡速度(s) number
@@ -112,7 +116,7 @@
 <script src="../common/jquery.min.js"></script>
 <script src="whirling.js"></script>
 <script>
-    var whirling1 = new Whirling.Vertical({
+    var whirling1 = new Whirling.Slider({
         whirlingBox:".whirling-box1",
         whirlingBody:".whirling-body1",
         whirlingItem:".whirling-item1",
@@ -124,7 +128,7 @@
         slideSpeed:2000,
         aniSpeed: 1.5
     });
-    var whirling2 = new Whirling.Vertical({
+    var whirling2 = new Whirling.Slider({
         whirlingBox:".whirling-box2",
         whirlingBody:".whirling-body2",
         whirlingItem:".whirling-item2",
@@ -132,6 +136,7 @@
         whirlingSize:"whirling-size2",
         whirlingBtnStyle:"whirling-btn-style2",
         whirlingBtnActive:"whirling-active2",
+        direction:"horizontal",
         autoplay:true,
         slideSpeed:3000,
         aniSpeed: 1.5
