@@ -3,7 +3,9 @@
 ## 基本概念
 
 ### 像素篇
+
 #### 物理像素(physical pixel)
+
 显示设备中一个最微小的物理部件
 
 #### 设备独立像素(density-independent pixel)
@@ -52,6 +54,7 @@ rem是以根元素html的font-size为基准来做计算的。
 ### 代码篇
 
 #### 1.动态设置meta
+
 \<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js">\</script>
 
 这个js文件动态改写了meta标签，为不同的设备设置不同的data-dpr、font-size属性。
@@ -98,6 +101,7 @@ rem是以根元素html的font-size为基准来做计算的。
 
 
 #### 学习链接：
+
 [使用Flexible实现手淘H5页面的终端适配](http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html)
 
 [css3的rem设置字体大小](http://www.w3cplus.com/css3/define-font-size-with-css3-rem)
