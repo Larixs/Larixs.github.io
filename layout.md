@@ -314,3 +314,23 @@
     .main{
       flex-basis:100%;/*   flex-grow:1; 也同样生效  */
     }
+    
+## 模糊特效
+
+css3-filter
+
+    filter:blur(20px);
+
+filter对所有元素生效（在ff和chrome下试验过）
+
+filter还支持其他特效，如反色等等，丰富度较高。
+
+## 子元素 height：100%
+
+当设置子元素高度为height:100%时，浏览器会寻找其父元素的高度。
+
+- 如果父元素指定了height值，如100px，则子元素能直接获得高度100px。
+
+- 如果父元素的高度也是使用百分比，则找寻父元素的父元素高度，直到找到为止或者找到height为auto。
+
+- 如果父元素的高度为height:auto,则子元素height:100%会被忽略，其height也是auto。
