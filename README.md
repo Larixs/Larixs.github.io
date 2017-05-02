@@ -43,6 +43,12 @@
 
 [头图切换(竖向)组件](sparks/whirlingBanner/index.html)
 
+### 生活
+
+[读书](books/remarks.md)
+
+[电影](movies/remarks.md)
+
 ### 其他
 
 [移动端适配](wap.md)
