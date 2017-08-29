@@ -29,6 +29,8 @@
 
 [vue+webpack多页面应用项目](https://github.com/Larixs/vue-cli-multi-page)
 
+[如何写一个webpack插件](webpack/how_to_write_a_plugin.md)
+
 ### ES6
 
 [静态成员\(class.static\)](ES6/static.md)
@@ -46,6 +48,10 @@
 [幻灯效果（画廊）纯css制作](sparks/PPT/index-css.html)
 
 [头图切换(竖向)组件](sparks/whirlingBanner/index.html)
+
+### 技术书籍笔记
+
+[JavaScript设计模式与开发实践\[曾探\]](books/javaScript_design_patterns_and_development_practices.md)
 
 ### 生活
 
