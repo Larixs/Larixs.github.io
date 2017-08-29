@@ -1,5 +1,57 @@
 While this.props is set up by React itself and this.state has a special meaning, you are free to add additional fields to the class manually if you need to store something that is not used for the visual output.
 
+# getting started 入门
+
+## reactive updates
+
+- 应该认为props在组件内部是不可变的，即，永远不要给this.props赋值。
+
+- React的组件非常简单，他们都是一些简单的函数，以props和state作为参数，来渲染出HTML。（限制：React组件只能渲染出一个节点。如果你想渲染出多个节点，那么他们必须包含在一个单节点内被渲染）。
+
+## JSX in depth 深入学习JSX
+
+- JSX中的class和for属性被替换为className,htmlFor
+
+- [Namespaced Components](http://reactjs.cn/react/docs/jsx-in-depth.html):将子组件作为父组件的属性进行保存
+
+本来繁琐的代码
+
+    // Awkward block of variable declarations
+    var Form = MyFormComponent;
+    var FormRow = Form.Row;
+    var FormLabel = Form.Label;
+    var FormInput = Form.Input;
+
+    var App = (
+      <Form>
+        <FormRow>
+          <FormLabel />
+          <FormInput />
+        </FormRow>
+      </Form>
+    );
+
+目的代码：
+
+    var Form = MyFormComponent;
+
+    var App = (
+      <Form>
+        <Form.Row>
+          <Form.Label />
+          <Form.Input />
+        </Form.Row>
+      </Form>
+    );
+
+使用Namespaced Components：
+
+    var MyFormComponent = React.createClass({ ... });
+
+    MyFormComponent.Row = React.createClass({ ... });
+    MyFormComponent.Label = React.createClass({ ... });
+    MyFormComponent.Input = React.createClass({ ... });
+
 #state
 
 ## Using State Correctly  正确使用state（其实是讲setState的使用场景）
