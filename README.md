@@ -23,6 +23,8 @@
 
 [Vue 基础学习](Vue/study-vue.md)
 
+[Vue_深入学习_1_监听data](Vue/study_vue_deep1.md)
+
 ### webpack
 
 [webpack基础学习](webpack/studyWebpack.md)
