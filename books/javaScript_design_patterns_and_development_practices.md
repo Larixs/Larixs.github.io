@@ -1,3 +1,5 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 #JavaScript设计模式与开发实践
 
 ## 开放封闭原则
