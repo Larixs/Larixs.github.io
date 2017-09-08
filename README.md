@@ -53,7 +53,7 @@
 
 ### 技术书籍笔记
 
-[JavaScript设计模式与开发实践\[曾探\]](books/javaScript_design_patterns_and_development_practices.md)
+[JavaScript设计模式与开发实践\[曾探\]](books/test.md)
 
 ### 生活
 

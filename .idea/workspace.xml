@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="85b481b3-e341-4c56-b32d-a6c6486479f8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/books/javaScript_design_patterns_and_development_practices.md" afterPath="$PROJECT_DIR$/books/javaScript_design_patterns_and_development_practices.md" />
     </list>
     <ignored path="Larixs.github.io.iws" />
@@ -23,12 +24,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="javaScript_design_patterns_and_development_practices.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/books/javaScript_design_patterns_and_development_practices.md">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="25">
-                <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <first_editor relative-caret-position="325">
+                <caret line="55" column="42" lean-forward="true" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -36,12 +37,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
+      <file leaf-file-name="test.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/books/test.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="325">
-                <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <first_editor relative-caret-position="0">
+                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -155,10 +156,11 @@
         <option value="$PROJECT_DIR$/other/frame_mode.md" />
         <option value="$PROJECT_DIR$/ES/tips.md" />
         <option value="$PROJECT_DIR$/Vue/study_vue_deep.md" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Vue/study_vue_deep1.md" />
         <option value="$PROJECT_DIR$/other/how_to_write_a_great_component.md" />
         <option value="$PROJECT_DIR$/books/javaScript_design_patterns_and_development_practices.md" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/books/test.md" />
       </list>
     </option>
   </component>
@@ -350,12 +352,12 @@
       <workItem from="1504753602093" duration="1859000" />
       <workItem from="1504780583712" duration="1158000" />
       <workItem from="1504856850942" duration="724000" />
-      <workItem from="1504860721716" duration="115000" />
+      <workItem from="1504860721716" duration="367000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102523000" />
+    <option name="totallyTimeSpent" value="102775000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -407,21 +409,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1225">
-          <caret line="49" column="23" lean-forward="false" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ES6/static.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3025">
-          <caret line="121" column="3" lean-forward="true" selection-start-line="121" selection-start-column="3" selection-end-line="121" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Vue/study-vue.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2350">
@@ -779,11 +766,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ios compatibility.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/books/javaScript_design_patterns_and_development_practices.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="325">
-            <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <caret line="55" column="42" lean-forward="true" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
             <folding />
           </first_editor>
           <second_editor />
@@ -796,11 +805,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/books/javaScript_design_patterns_and_development_practices.md">
+    <entry file="file://$PROJECT_DIR$/books/test.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="25">
-            <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
