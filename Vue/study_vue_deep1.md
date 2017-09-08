@@ -33,7 +33,6 @@ vue利用了访问器属性来实现数据监听。因为Object.defineProperty()
 
 相关api：Object.getOwnPropertyDescriptor (访问器属性、数据属性都能读到)
 
-- Object
 #### 2、具体代码实现：
 
 **Object:**
@@ -55,7 +54,7 @@ arrrayMethods以寄生组合式（js高程p172）的方式继承了Array。为ar
 ____
 
 
-###参考资料：
+### 参考资料：
 1. [vue早期版本](https://github.com/vuejs/vue/tree/706c67d1d013577fdbfab258bca78557419cba7c)
 2. [vue近期版本](https://github.com/vuejs/vue/tree/0cc8c27a3543b63677f1ac947d404bcda47b26e2) 
 3. [youngwind的blog](https://github.com/youngwind/blog)
