@@ -98,3 +98,39 @@ Vue异步执行DOM更新。和浏览器开队列攒任务来渲染页面类似�
 
 在组件内使用时，不需要用全局Vue，使用this.$nextTick()就可调用，并且回调函数中的this将自动指向当前Vue实例。
 
+
+#### 具名slot + 作用域插槽
+
+具名slot通过名称来控制外部组件的插入。同一个名称的slot可以在该组件里多处放置，最后渲染时，同名的slot渲染相同的东西。当引入作用域插槽时，同名的slot都引入同一个template，不过会根据传入props的情况来根据同一个template渲染不同的内容出来。
+
+例如：
+
+
+parents.vue
+
+      <div>
+        <child :items="items">
+          <template slot="item" scope="itemInfo">
+            <item config="content" :info="itemInfo.info"/>
+          </template>
+        </child>
+      </div>
+
+把所有child.vue传入slot的参数都集合到itemInfo这个对象里，然后把itemInfo.info作为<item>的info传入。
+
+child.vue
+
+    <ul>
+      <div v-for="item in items" class="item-div">
+        <slot name="item" :info="item"> <!-- itemInfo.info = item -->
+        </slot>
+      </div>
+    </ul>
+
+child为slot传入参数info。结合parents
+
+item.vue
+
+      <div>
+        {{info[config]}}
+      </div>

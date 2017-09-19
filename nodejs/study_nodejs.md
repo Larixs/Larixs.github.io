@@ -40,3 +40,38 @@ circle.js(与foo.js在同一级目录下)
 
 ____
 
+
+### require的解析路径
+
+require支持斜杠"/"或者盘符"c:"开头的绝对路径，也支持"./"开头的相对路径。
+
+require还支持另外一种路径，写法类似于require("module")。这种写法，node会按照一下规则解析路径，直到找到模块的位置为止：
+
+1. 寻找内置模块
+   
+   如果传递给require函数的是NodeJS内置模块名称，不做路径解析，直接返回内部模块的导出对象，例如require('fs')。
+   
+2. 寻找node_modules目录
+   
+   例如某个模块的绝对路径是/home/user/hello.js，在该模块中使用require('foo/bar')方式加载模块时，则NodeJS依次尝试使用以下路径。
+   
+        /home/user/node_modules/foo/bar         //同级目录
+        /home/node_modules/foo/bar              //上一级目录
+        /node_modules/foo/bar                   //根目录
+  
+  从例子中可以看出，nodejs会从当前同级目录下开始寻找，在没找到的情况下逐级往上寻找，直到找到模块或者寻找到根目录为止。
+  
+3. NODE_PATH环境变量
+
+    与PATH环境变量类似，NodeJS允许通过NODE_PATH环境变量来指定额外的模块搜索路径。NODE_PATH环境变量中包含一到多个目录路径，路径之间在Linux下使用:分隔，在Windows下使用;分隔。例如定义了以下NODE_PATH环境变量：
+    
+   NODE_PATH=/home/user/lib:/home/lib
+   
+   当使用require('foo/bar')的方式加载模块时，则NodeJS依次尝试以下路径。
+
+        /home/user/lib/foo/bar
+        
+        /home/lib/foo/bar
+        
+参考链接：
+1. [7天学会nodejs--模块路径解析规则](http://nqdeng.github.io/7-days-nodejs/#2.1)
