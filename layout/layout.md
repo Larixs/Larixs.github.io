@@ -334,3 +334,9 @@ filter还支持其他特效，如反色等等，丰富度较高。
 - 如果父元素的高度也是使用百分比，则找寻父元素的父元素高度，直到找到为止或者找到height为auto。
 
 - 如果父元素的高度为height:auto,则子元素height:100%会被忽略，其height也是auto。
+
+## 多余的字添加省略号
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
