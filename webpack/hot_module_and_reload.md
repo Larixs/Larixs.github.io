@@ -7,7 +7,7 @@ zelda项目突然有一天就不支持在dev环境下热刷新了。
 今天上午因为后台挂了，没有办法写需求，突然想起来我还可以fix这个问题。这次运气很好，换了关键词（可能上次搜索时钻牛角尖了）就搜到了解决方案。
 
 目前在zelda中，要想实现热刷新热加载，需要以下3个条件：
-1. 每个入口处添加“webpack-hot-middleware/client?reload=true”,即
+1. dev环境下每个入口处添加“webpack-hot-middleware/client?reload=true”,即
 
 
     webpack.config.js={
@@ -23,7 +23,7 @@ zelda项目突然有一天就不支持在dev环境下热刷新了。
 
 终于解决了，开心。o(*￣▽￣*)ブ 
 
-原来是少了第一条所以代码已经热更新了，但是页面没有刷新。感谢写文章的大佬(上次查了好多问题和文章都没写第一条，生气)。
+原来是少了第一条，因此虽然代码已经热更新了，但是页面没有刷新。感谢写文章的大佬(上次查了好多问题和文章都没写第一条，生气)。
 
 参考链接：
 1. [webpack多页面配置6--热加载刷新](https://godbasin.github.io/2017/08/19/webpack-multi-project-6-hot-reload/)

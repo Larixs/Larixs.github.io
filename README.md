@@ -18,12 +18,17 @@
 
 [学习正则表达式](study-reg.md)
 
+### React 
+
+[react小知识点](react/react.md)
 
 ### Vue
 
 [Vue 基础学习](Vue/study-vue.md)
 
 [Vue_深入学习_1_监听data](Vue/study_vue_deep1.md)
+
+[Vue 风格指导](Vue/style-guide.md)
 
 ### webpack
 
@@ -33,11 +38,17 @@
 
 [如何写一个webpack插件](webpack/how_to_write_a_plugin.md)
 
+[热加载](webpack/hot_module_and_reload.md)
+
 ### ES6
 
 [静态成员\(class.static\)](ES6/static.md)
 
 [动态引入模块](ES6/dynamic_import.md)
+
+### Linux
+
+[权限](linux/auth.md)
 
 ### 小作品
 
@@ -57,17 +68,17 @@
 
 ### 生活
 
-[读书](books/remarks.md)
+读书
 
-[电影](movies/remarks.md)
+电影
+
+日记
 
 ### 其他
 
 [移动端适配](wap.md)
 
 [Array](study-Array.md)
-
-[react小知识点](react/react.md)
 
 [css模块化](react/cssmodule.md)
 
