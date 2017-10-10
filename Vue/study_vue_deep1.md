@@ -50,7 +50,7 @@ ____
     
 [源码](https://github.com/vuejs/vue/blob/0cc8c27a3543b63677f1ac947d404bcda47b26e2/src/core/observer/array.js)
       
-arrrayMethods以寄生组合式（js高程p172）的方式继承了Array。为arrayMethods的新定义push,pop,shift,unshift,splice,sort,reverse为数据属性，其值为正常调用Array方法时返回的值。其余方法使用Array的原生方法。当使用unshift,push,splice增加新元素时，增加这些新元素的监听。
+arrrayMethods以寄生组合式（js高程p172）的方式继承了Array。接着vue重写了push,pop,shift,unshift,splice,sort,reverse等方法，并将其定义为数据属性，其值为正常调用Array方法时返回的值。其余的数组方法使用Array的原生方法。当使用unshift,push,splice增加新元素时，增加这些新元素的监听。
 ____
 
 
@@ -58,5 +58,4 @@ ____
 1. [vue早期版本](https://github.com/vuejs/vue/tree/706c67d1d013577fdbfab258bca78557419cba7c)
 2. [vue近期版本](https://github.com/vuejs/vue/tree/0cc8c27a3543b63677f1ac947d404bcda47b26e2) 
 3. [youngwind的blog](https://github.com/youngwind/blog)
-
 4. 《JavaScript高级程序设计》

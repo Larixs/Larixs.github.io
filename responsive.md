@@ -7,7 +7,7 @@
 ## 1. 设置html字体大小。
   各设备上体现的像素大小不一样，所以要对不同设备的字体大小进行动态设定。之前学长给了一段代码，适用于__移动端__的计算。代码如下：
     
-    （function (doc, win) {//屏幕自适应
+    (function (doc, win) {//屏幕自适应
     
     var docEl = doc.documentElement;
       
