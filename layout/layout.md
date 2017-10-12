@@ -340,3 +340,19 @@ filter还支持其他特效，如反色等等，丰富度较高。
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    
+## 隐藏video的下载按钮
+
+chrome
+
+
+      video::-internal-media-controls-download-button {
+        display:none; //似乎没有用
+      }
+    
+      video::-webkit-media-controls-enclosure {
+        overflow:hidden; 
+      }
+      video::-webkit-media-controls-panel {
+        width: calc(100% + 10px); //就是把控制条拉长了，让下载按钮跑到屏幕外
+      }

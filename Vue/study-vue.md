@@ -134,3 +134,6 @@ item.vue
       <div>
         {{info[config]}}
       </div>
+      
+      
+#### less中/deep/ (vue-loader特性)需要与scope搭配使用
