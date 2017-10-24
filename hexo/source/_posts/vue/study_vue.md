@@ -142,20 +142,49 @@ item.vue
         {{info[config]}}
       </div>
       
-      
+___      
 #### 如何将 函数/第三方库 全局注册到vue上
 
+**简单粗暴的方式**
+
+{% codeblock lang:js%}
 import moment from 'moment';
+    
 Object.defineProperty(Vue.prototype, '$moment', { value: moment });
+{% endcodeblock %}
+    
+**优雅一点的方式--Vue的plugin**
 
-这样在.vue的script里，可以通过vue.$moment或者this.$moment访问到moment。
+_moment.js_
 
-在.vue的template里的 {{ expression }} 中，也可以直接访问$moment。
+{% codeblock lang:js%}
+import moment from 'moment';
+
+export default {
+  install: function(Vue) {
+    Object.defineProperty(Vue.prototype, '$moment', { value: moment });
+  }
+}
+{% endcodeblock %}
+
+_entry.js_
+
+{% codeblock lang:js%}
+import MomentPlugin from './moment.js';
+
+Vue.use(MomentPlugin);
+{% endcodeblock %}
+
+注册之后，
+
+在.vue的script里，可以通过vue.$moment或者this.$moment访问到moment。
+
+在.vue的template里的 &#123;&#123; expression &#125;&#125; 中，也可以直接访问$moment。
 
 例如
-    
-     <p> {{ $moment().format("HH:mm") }} </p>
 
+    <p>{{ $moment().format("HH:mm") }}</p>
+    
 会直接输出当前时间
 
 参考资料
