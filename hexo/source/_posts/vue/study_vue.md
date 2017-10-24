@@ -82,7 +82,7 @@ categories: vue
 	
 	- debounce ：debounce 设置一个最小的延时，在每次敲击之后延时同步输入框的值与数据。如果每次更新都要进行高耗操作（例如在输入提示中 Ajax 请求），它较为有用。
 	
-### API篇
+### 具体问题
 
 #### Vue.extend(object)
 
@@ -142,3 +142,22 @@ item.vue
         {{info[config]}}
       </div>
       
+      
+#### 如何将 函数/第三方库 全局注册到vue上
+
+import moment from 'moment';
+Object.defineProperty(Vue.prototype, '$moment', { value: moment });
+
+这样在.vue的script里，可以通过vue.$moment或者this.$moment访问到moment。
+
+在.vue的template里的 {{ expression }} 中，也可以直接访问$moment。
+
+例如
+    
+     <p> {{ $moment().format("HH:mm") }} </p>
+
+会直接输出当前时间
+
+参考资料
+
+1. [\[译\]如何在 Vue.js 中使用第三方库](https://github.com/dwqs/blog/issues/51)
