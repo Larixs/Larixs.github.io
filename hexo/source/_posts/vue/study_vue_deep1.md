@@ -1,19 +1,21 @@
 ---
-title: 深入学习vue -- 1
+title: 深入学习vue -- core/Observer/index.js
 tags: [study notes]
 categories: vue
 ---
 
-### 如何监听数据变化
+### 1、基础原理：
 
-#### 1、基本原理：
+#### a) 访问器属性
 
 对象属性分为两种，一种是数据属性，另一种是访问器属性。平常使用的属性都是数据属性。例如
 
-    obj.a = 5; //a为数据属性。
-    
+{% codeblock lang:js%}
+ obj.a = 5; //a为数据属性。
+{% endcodeblock %}    
 访问器属性不能直接定义，需要用Object.defineProperty()来定义。
-    
+
+{% codeblock lang:js%}    
     //用js高程的例子
     var book = {
         _year : 2004, //"_year"是数据属性
@@ -32,30 +34,35 @@ categories: vue
     });
     book.year = 2005; //此时访问的是访问器属性"year"
     alert(book.edition); //2
-    
+ {% endcodeblock %}   
+ 
 vue利用了访问器属性来实现数据监听。因为Object.defineProperty()是ES5实现的api，且无法shim，因此vue不支持ie8及以下浏览器。
 
 相关api：Object.getOwnPropertyDescriptor (访问器属性、数据属性都能读到)
 
-#### 2、具体代码实现：
+#### b) 继承数组
 
-**Object:**
+Vue通过**寄生组合式继承**方式来继承数组，以改写数组的一系列方法，方便数组元素变动时能够监听。
 
-[源码](https://github.com/vuejs/vue/blob/0cc8c27a3543b63677f1ac947d404bcda47b26e2/src/core/observer/index.js)
+{% codeblock lang:js%}  
+const arrayProto = Array.prototype 
+export const arrayMethods = Object.create(arrayProto)
 
-源码注释中就有提到，每个被观察的对象都会关联Observer类。一旦关联了，observer就会把这个对象的属性键值转化为getter/setter，以此收集依赖、dispatch 更新。
+//改写  'push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse' 方法以监听增加的元素。
 
+{% endcodeblock %}   
 
+在Observer里改写Array类型的value的原型，使其指向arrayMethods.。
 
-____
-**Array:**
+在实现了__proto__属性的浏览器里，可以直接将value的__proto__改写为arrayMethods，以实现数组继承（protoAugment）。
 
-监听Array的一系列方法：
-    
-[源码](https://github.com/vuejs/vue/blob/0cc8c27a3543b63677f1ac947d404bcda47b26e2/src/core/observer/array.js)
-      
-arrrayMethods以寄生组合式（js高程p172）的方式继承了Array。接着vue重写了push,pop,shift,unshift,splice,sort,reverse等方法，并将其定义为数据属性，其值为正常调用Array方法时返回的值。其余的数组方法使用Array的原生方法。当使用unshift,push,splice增加新元素时，增加这些新元素的监听。
-____
+在没有实现__proto__属性的浏览器里，只能将改写后的方法作为不可枚举的属性定义到value上（copyAugment）。
+
+参考资料:
+1. [How ECMAScript 5 still does not allow to subclass array](http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/)
+2. js高程
+
+### 2、具体代码实现：
 
 
 ### 参考资料：
