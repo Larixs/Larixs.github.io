@@ -62,8 +62,11 @@ export const arrayMethods = Object.create(arrayProto)
 1. [How ECMAScript 5 still does not allow to subclass array](http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/)
 2. js高程
 
-### 2、具体代码实现：
+### 2、代码实现：
 
+Observer简略流程图(可能并不标准)
+
+![](/images/vue/Observer.png)
 
 ### 参考资料：
 1. [vue早期版本](https://github.com/vuejs/vue/tree/706c67d1d013577fdbfab258bca78557419cba7c)
