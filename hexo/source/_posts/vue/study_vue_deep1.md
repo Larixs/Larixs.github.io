@@ -1,8 +1,12 @@
 ---
-title: 深入学习vue -- core/Observer/index.js
+title: 深入学习vue -- 如何监听data变化
 tags: [study notes]
 categories: vue
 ---
+
+本次学习core/Observer/index.js core/Observer/array.js
+
+以下简称为index.js和array.js
 
 ### 1、基础原理：
 
@@ -67,6 +71,20 @@ export const arrayMethods = Object.create(arrayProto)
 Observer简略流程图(可能并不标准)
 
 ![](/images/vue/Observer.png)
+
+### 3、总结
+
+index.js主要对传入的数据进行改造监听。它会将数据属性转化为对应的访问器属性，以达到数据成为响应式的目的。
+
+array.js主要改造Array的方法。
+
+可以看出，vue对Array和Object的处理方式是不一样的。
+
+对于Array，vue改写了它的原型，改造了它的方法。当调用改变元素数量或顺序的方法时，新增元素能够被监听并且通知依赖它的数据等能够更新。
+
+对于Object，vue将遍历它的property并且将可修改的属性转化为访问器属性，因此在访问该属性值时可以设置依赖等，在设置该属性值时可以触发依赖更新。如果property的值为Object,那么将继续observe该property的值。
+
+这是data能够成为响应式的基础。
 
 ### 参考资料：
 1. [vue早期版本](https://github.com/vuejs/vue/tree/706c67d1d013577fdbfab258bca78557419cba7c)
