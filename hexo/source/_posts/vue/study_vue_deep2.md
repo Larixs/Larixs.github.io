@@ -1,5 +1,5 @@
 ---
-title: 深入学习vue -- core/Observer/dep.js, core/Observer/watcher.js
+title: 深入学习vue -- 依赖的收集、触发、和更新
 tags: [study notes]
 categories: vue
 ---
@@ -121,7 +121,14 @@ newDepIds和depIds的联系和区别:
 
 在初始的时候，newDepIds和depIds是一致的。在第一次cleanupDeps之后，depIds为newDepIds的值，newDepIds清空，从此开始newDepIds作为depIds的子集存在，保存从上一次cleanupDeps之后到目前为止新添加的dep的id。
 
-#### c) 如何通知依赖更新
+#### c) 通知依赖更新，并更新依赖关系
+
+在a)的图中可以看出，当数据发生变化时，会调用dep.notify()来通知依赖更新。dep.notify()即遍历订阅者，并通知每个订阅者自己更新(update)。
+
+流程图：
+
+![](/images/vue/Watcher.update.png)
+___
 
 Evan You的注释：
 

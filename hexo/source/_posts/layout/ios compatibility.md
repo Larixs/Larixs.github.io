@@ -52,10 +52,21 @@ audio在ios上的兼容性问题如下：
  sticky其生效条件已经有人研究过，我就不再赘述了。
  
 PS：也许会有其他库来实现粘性布局，不过如果只实现粘性布局的话，就没必要引入库了，自己写写js，ios使用sticky属性，非ios增加对scroll的监听，通过计算位置来调整positon。
- 
+
+
+ 2017.12.21
+
+    已经是第三次解决这个问题了，每次解决这个问题都得看老久文档，然后研究好久父元素需要设置的条件。亲自试验和看别人的文章还是不一样。原因就在于我没理解到文章的点，所以看起来很费解而且用起来也不顺手。决定自己写一下经过实验后自己的理解，对正确性不保证。
+
+    1. 目标元素需要设置position: sticky; top: 0;
+    2. overflow是设置视口。目标元素的祖先元素中，如果有元素的overflow不为visible,则该元素设置为视口。当视口滚动时（设置高度小于内容高度），才触发sticky。
+    3. 如果祖先元素的overflow均为visible, 那么目标元素相对于视口进行定位。
+
+
 ##### 参考链接：
 [position:sticky实现iOS6+下的粘性布局](http://efe.baidu.com/blog/position-sticky/)
 
+[sticky demo](http://html5-demos.appspot.com/static/css/sticky.html)
 
 # ie的问题
 

@@ -361,3 +361,46 @@ chrome
       video::-webkit-media-controls-panel {
         width: calc(100% + 10px); //就是把控制条拉长了，让下载按钮跑到屏幕外
       }
+
+## position:absolute top:0 bottom:0
+
+emmmm...很奇特的一个性质，当元素的样式为position:absolute时，如果设置了top:0,bottom:0，那么这个元素在不设height的情况下，高度为父元素的内容高度加padding-top padding-bottom。
+在top:-12px,bottom:12px的情况下，高度与上一种情况一样，只不过向下偏移12px。
+
+## -webkit-animation-delay
+
+场景:
+
+给同类名的不同节点设置不同的animation-delay，安卓机出现了兼容问题，需要使用-webkit-animation-delay。
+
+尝试1：
+
+在设置动画相关类名时，同时设置element.style.webkitAnimationDelay。
+
+结果：
+
+设置上了，但是不起作用。失败。
+
+尝试2:
+
+通过css的counter和css的calc结合，计算当前节点所需要的延时。
+
+结果：
+
+counter并不能和calc结合计算。哭泣。
+
+尝试3:
+
+通过sass的for循环生成不同的webkitAnimationDelay，总数只能写死。
+
+结果：
+
+因为文件结构不允许，失败。
+
+最终解决方案：
+
+在设置动画相关类名之*前*，先设置webkitAnimationDelay。应该是浏览器对于动画相关的时机不同的问题。
+
+在android的需要-webkit-兼容动画的浏览器上，必须于动画类名添加之前、动画开始之前设置webkitAnimationDelay。
+
+撒花完结。\*★,°\*:.☆(￣▽￣)/$:\*.°★\* 。

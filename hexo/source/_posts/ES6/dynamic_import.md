@@ -7,7 +7,7 @@ categories: ES6
 
 ___
 
-###1、 ES 的modules模块都是静态引入的
+### 1、 ES 的modules模块都是静态引入的
 引入方式：
 
 	import * as someModule from './dir/someModule.js';
@@ -16,7 +16,7 @@ ___
 
 其次， module specifier './dir/someModule.js'是写死的，你不能在运行的时候才获得准确的值（比如通过函数调用来返回）。
 
-###2、 如何实现动态引入模块(dynamic module imports)
+### 2、 如何实现动态引入模块(dynamic module imports)
 	
 动态引入方式如下：
 	
@@ -27,7 +27,7 @@ ___
 - Module specifier 不再是写死的字符串了，可以是任何能够返回字符串的表达式。
 - 这种引入返回的是一个promise. 一旦module加载完成，那么Promise就算完成了。（意思即为触发resolve）
 
-###3、 用处
+### 3、 用处
 
 参考文章里提到有三种用处
 
@@ -37,7 +37,7 @@ ___
 
 个人觉得这三种用处都是一样的，最终目的都是按需加载，需要什么，再去动态地加载什么。
 
-###4、 Tips
+### 4、 Tips
 
 a. obj的解析语法可以帮助访问module的exports
 
@@ -80,7 +80,7 @@ Import()返回的是promise，正好可以配合async使用。
     }
     main();
 
-###5、 import()支持
+### 5、 import()支持
 	
 - Node.js: node-es-module-loader
 
