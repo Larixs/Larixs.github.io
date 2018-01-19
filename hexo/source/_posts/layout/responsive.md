@@ -44,7 +44,7 @@ categories: layout
 3. initial-scale和font-size是如何配合的？当我的font-size设置为625%(1rem=100px)时，initial-scale设置为1，则在iPhone5se上画布特别大，导致元素也特别大。这个应该可以自己研究一下。
 
 
-##2.H5新标签picture的自适应
+## 2.H5新标签picture的自适应
 
 	<picture>
 	  <source srcset="img_smallflower.jpg" media="(max-width: 400px)">
@@ -54,8 +54,6 @@ categories: layout
 	
 picture是h5标签，它想audio和video一样，可以设置多个source，第一个source是最佳的。还可以将css的媒体查询化为media属性进行设置。media是可选的。上面的代码意思即为，当视口（？）宽度小于400px时，显示第一张图片img_smallflower.jpg，除此之外显示第二张图片img_flowers.jpg。img是做平稳退化使用，当浏览器不支持picture标签时，使之可以退化为img标签。
 
-##3. 如何在兼容ie8的情况下实现响应式布局
+## 3. 如何在兼容ie8的情况下实现响应式布局
 
 这点在另外一篇经验总结[css布局](layout.md)里的第五点提到了，使用respond.js进行兼容。(在《响应式web设计》里提到了Modernizr这个库,里面可以解决响应式布局的大部分问题。)
-
-

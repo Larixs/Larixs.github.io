@@ -1,5 +1,5 @@
 ---
-title: CSS布局问题汇总
+title: CSS布局技巧汇总
 categories: layout
 ---
 
@@ -365,7 +365,7 @@ chrome
 ## position:absolute top:0 bottom:0
 
 emmmm...很奇特的一个性质，当元素的样式为position:absolute时，如果设置了top:0,bottom:0，那么这个元素在不设height的情况下，高度为父元素的内容高度加padding-top padding-bottom。
-在top:-12px,bottom:12px的情况下，高度与上一种情况一样，只不过向下偏移12px。
+在top:12px,bottom:12px的情况下，高度与上一种情况一样，只不过向下偏移12px。
 
 ## -webkit-animation-delay
 
