@@ -2,7 +2,7 @@
 
 现在及以后的.md文档都会存放在hexo/source/_post文件夹中，统一由hexo生成博客。
 
-上线命令：hexo deploy
+上线命令：hexo deploy -c -g
 
 参考资料：
 
