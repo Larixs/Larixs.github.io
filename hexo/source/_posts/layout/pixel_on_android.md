@@ -47,7 +47,7 @@ PPI： 每英寸像素密度。安卓前端通过PPI来计算当前屏幕该用�
 
 如果不做任何设置，h5下1px虚拟像素所对应的物理像素就是dpr的值。粗略的计算，dpr = deviceWidth / clientWidth 。（clientWidth是h5自己取到的视口宽度）
 
-公式：  1px * dpr * ratio = 1px * androidPx
+公式： ( 1 * dpr * ratio )px = ( 1 * androidPx )
 
 即 dpr * ratio = androidPx
 
@@ -56,3 +56,24 @@ PPI： 每英寸像素密度。安卓前端通过PPI来计算当前屏幕该用�
 即 ratio = androidPx * clientWidth / deviceWidth
 
 至此，就求出了h5所需的转化比率，只要在获取clientWidth计算rem时，为rem的计算结果乘上这个ratio，即可让h5的自适应效果与安卓的自适应效果大致相同。
+
+------
+20180307
+
+重新调整了适配策略。
+
+前端在viewport的meta里加上 target-densitydpi = device-dpi。
+
+即  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover,target-densitydpi=device-dpi">
+
+1rem设为定值20px。
+
+安卓那边使用dp单位（原来使用sp单位）写页面。
+
+此时不用传参即可使原生页面和h5页面字体大小一致。
+
+
+参考链接：
+1.[Targeting Screens from Web Apps | Android Developers](https://stuff.mit.edu/afs/sipb/project/android/docs/guide/webapps/targeting.html)
+1.[两分钟理解Android中PX、DP、SP的区别](http://blog.csdn.net/donkor_/article/details/77680042)
+
