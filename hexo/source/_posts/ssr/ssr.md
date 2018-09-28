@@ -1,7 +1,7 @@
 ---
 title: SSR(Server-Side Rendering) + vue
 tags: [study notes]
-categories: redux
+categories: ssr
 ---
 
 公司最近的pc站要用SSR了，陆哥先行学习了一把，我也得跟着学一学，不然咋开发呢。（听说天津下雪了而北京就只是冷而已
