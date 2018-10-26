@@ -12,3 +12,15 @@
 - [定制lodash](http://lodash.think2011.net/custom-builds)
 
     步骤： 安装lodash-cli -> 通过lodash的不同命令定制lodash.js。
+
+- [使用CSS自定义属性构建骨架屏](https://juejin.im/post/5bd07157f265da0ad221cd19)
+
+    骨架屏的实现方案之一： css (background-image + 自定义变量) 或考虑(:empty选择器 + 伪元素)。
+
+- [前端组件设计--位运算的妙用](https://juejin.im/post/5bd052aff265da0a857ab850)
+
+    组件的解耦设计与巧用位运算表示多项选择（只有是或否两种选择，这样才可以用二进制的位运算）结果。
+
+- [深入浏览器的事件循环 (GDD@2018)](https://zhuanlan.zhihu.com/p/45111890)
+
+    macrotask(如setTimeout), requestAnimationFrame, microtask(如Promise.then)的执行流程。
