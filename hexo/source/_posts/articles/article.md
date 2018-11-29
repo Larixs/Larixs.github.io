@@ -24,3 +24,33 @@
 - [深入浏览器的事件循环 (GDD@2018)](https://zhuanlan.zhihu.com/p/45111890)
 
     macrotask(如setTimeout), requestAnimationFrame, microtask(如Promise.then)的执行流程。
+
+- [跨页面通信](https://github.com/ProtoTeam/blog/blob/master/201709/3.md)
+
+    页面间通信:
+
+    1、 window.open(搭配postMessage) / iframe 通信,
+
+    2、 localStorage(浏览器，同域名同端口）。
+
+    3、 sessionStorage(浏览器，同域名同端口同一会话）。从当前页面新开(window.open)的页面，会copy一份当前页面的sessionStorage，但父子页面之间sessionStorage变化不互通。
+
+    4、 cookie。不推荐使用，因为会弄脏cookie数据并且每次发送请求时有多余的内容。
+
+    5、 [BroadcastChannel](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/BroadcastChannel)。与localStorage类似，生命周期更短，但[兼容性](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/BroadcastChannel#Browser_compatibility)更差。
+
+    6、 [SharedWorker](https://developer.mozilla.org/en-US/search?q=SharedWorker)。不是专门用来通信的，但也可以实现跨页面通信。
+
+    7、 server。 tab被激活时请求服务器端数据；Websocket。
+
+- [WebComponent和Polymer](http://taobaofed.org/blog/2018/10/31/a-tag/)
+
+- [记一次 Node.js 应用内存暴涨分析](http://taobaofed.org/blog/2016/01/14/nodejs-memory-leak-analyze/)
+
+    zelda-nuxt本地测试环境日益卡顿，竟然卡到我还没动手它就自己崩溃了。并不知道是为何导致的node内存泄漏，因为框架被包装太多层了：nuxt -> backpack -> webpack -> ...。没有太多时间去探究zelda-nuxt的病因，只能先简单粗暴地在node_modules/.bin的backpack执行程序中增大了node的最大内存。
+
+    zelda-nuxt的崩溃，个人猜测是日益增多的业务代码导致测试环境的热更新占用越来越多的内存而导致的崩溃。不过这与我对热更新的印象不符，热更新不应该是每次只更新一部分代码，与总代码量无关吗？（只是瞎猜，还没实际去研究热更新机制）
+
+    这篇文章提到了一种可能导致内存泄漏的原因：使用vm（virtual machine)时重复创建了释放速度很慢的变量，占用大量内存导致node程序崩溃。
+
+    第一次读这种node和v8知识点比较多的文章，质量对我这种小白来说挺不错的。
