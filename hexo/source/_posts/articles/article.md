@@ -25,6 +25,12 @@
 
     macrotask(如setTimeout), requestAnimationFrame, microtask(如Promise.then)的执行流程。
 
+- [ES6的Symbol竟然那么强大，面试中的加分点啊](https://juejin.im/post/5bdbb3406fb9a022752c319e)
+
+  [Symbol.toPrimitive--mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive)
+
+    symbol： 通过Symbol.for创建的symbol会进入全局注册表，每次创建之前会先去表里查找；对象可以修改其[Symbol.toPrimitive]来修改获取其值的函数，有点类似于修改valueOf和toString(通过hint值判断需要转换的类型)。
+
 - [跨页面通信](https://github.com/ProtoTeam/blog/blob/master/201709/3.md)
 
     页面间通信:
