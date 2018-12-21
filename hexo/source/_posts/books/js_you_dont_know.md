@@ -54,3 +54,97 @@ categories: books
     - 在严格模式下会限制或者禁止欺骗词法。
     - 代码可读性下降。
 
+6. 函数作用域与块作用域
+
+    定义不赘述。
+
+    注： for循环里如果for的循环变量是声明的let变量，则每次进入循环的时候，都会**重新**绑定到每一个迭代中。
+
+    加上闭包概念的典型示例：
+
+        for(let i = 1; i <= 5; i++) {
+            setTimeout(function timer(){
+                console.log(i);
+            }, i*1000);
+        } // 输出1,2,3,4,5
+
+        for (var j = 1; j <= 5; j++){
+            setTimeout(function timer(){
+                console.log(j);
+            }, j*1000);
+        } // 输出6,6,6,6,6
+
+7. 提升
+
+    - 函数声明会首先被提升。
+    - 变量var存在变量声明提升，而let不存在变量声明提升。
+
+    变量var声明提升示例：
+
+        console.log(a); // undefined
+        var a;
+
+        console.log(c); // Uncaught ReferenceError: c is not defined;
+
+        console.log(b); // Uncaught ReferenceError: b is not defined;
+        let b;
+
+    原理：
+
+    - 编译器在读取``console.log(a); var a;``时，因为有var声明符，所以编译器会先在当前作用域创建一个变量a，值为undefined。引擎再读取时，存在该变量a，但是该变量取值为undefined。因此打印"undefined"。
+    - ``console.log(c);``没有变量声明，编译器也不会提前创建一个相关变量，所以引擎使用时会找不到变量而报错。
+    - let声明符与var表现不同，没有提升的作用。
+
+### closures
+
+   函数在定义时的词法作用域以外的地方被调用，且此时可以继续访问定义时的词法作用域，该行为称之为闭包。
+
+   示例
+
+        function foo(){
+            var a = 2;
+            function bar(){
+                console.log(a);
+            }
+            return bar;
+        }
+        var baz = foo();  // baz也是对bar函数的引用。
+        baz(); // 2。通过闭包访问到了foo内部的变量a
+
+### this
+
+this是在运行时进行绑定的，并不是在编写时绑定。this的上下文取决于函数调用时的各种条件，和函数声明的位置没有任何关系，只取决于函数的调用方式。
+
+1. 默认绑定：
+    **非严格模式**下，this默认绑定到全局对象。严格模式下，全局对象无法使用默认绑定，this会绑定到undefined。
+
+2. 隐式绑定：
+    当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象。
+
+    简单示例：
+
+        function foo() {
+        console.log( this.a );
+        }
+        var obj = {
+        a: 2,
+        foo: foo
+        };
+        obj.foo(); // 2
+
+3. 隐式丢失：
+    当为一个绑定了上下文的函数创建一个新的别名时，此时通过新别名调用函数，可能会丢失this对象。
+
+    简单示例：
+
+        function foo() {
+            console.log( this.a );
+        }
+        var obj = {
+            a: 2,
+            foo: foo
+        };
+        var bar = obj.foo; // 函数别名！
+        var a = "oops, global"; // a 是全局对象的属性
+        bar(); // "oops, global" // 丢失了绑定的obj上下文
+
