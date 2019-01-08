@@ -133,7 +133,7 @@ this是在运行时进行绑定的，并不是在编写时绑定。this的上下
         obj.foo(); // 2
 
 3. 隐式丢失：
-    当为一个绑定了上下文的函数创建一个新的别名时，此时通过新别名调用函数，可能会丢失this对象。
+    当为一个绑定了上下文的函数创建一个新的别名时，此时通过新别名调用函数，可能会丢失this对象。注意，参数传递其实也是一种隐形赋值，所以函数在作为参数传递的过程中，容易丢失this对象而使用默认绑定。
 
     简单示例：
 
@@ -147,4 +147,20 @@ this是在运行时进行绑定的，并不是在编写时绑定。this的上下
         var bar = obj.foo; // 函数别名！
         var a = "oops, global"; // a 是全局对象的属性
         bar(); // "oops, global" // 丢失了绑定的obj上下文
+
+4. 显式绑定：
+
+    - 硬绑定：call, apply, bind
+
+    - api调用的"上下文"
+
+        简单示例：
+
+            function foo(el) {
+                console.log( el, this.id );
+            }
+            var obj = {
+                id: "awesome"
+            }; // 调用 foo(..) 时把 this 绑定到 obj [1, 2, 3].forEach( foo, obj );
+            // 1 awesome 2 awesome 3 awesome
 
