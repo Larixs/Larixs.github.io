@@ -111,7 +111,7 @@ categories: books
         var baz = foo();  // baz也是对bar函数的引用。
         baz(); // 2。通过闭包访问到了foo内部的变量a
 
-### this
+## part2, this
 
 this是在运行时进行绑定的，并不是在编写时绑定。this的上下文取决于函数调用时的各种条件，和函数声明的位置没有任何关系，只取决于函数的调用方式。
 
@@ -124,7 +124,7 @@ this是在运行时进行绑定的，并不是在编写时绑定。this的上下
     简单示例：
 
         function foo() {
-        console.log( this.a );
+            console.log( this.a );
         }
         var obj = {
         a: 2,
@@ -163,4 +163,67 @@ this是在运行时进行绑定的，并不是在编写时绑定。this的上下
                 id: "awesome"
             }; // 调用 foo(..) 时把 this 绑定到 obj [1, 2, 3].forEach( foo, obj );
             // 1 awesome 2 awesome 3 awesome
+
+5. new 绑定
+
+    javascript实际上不存在所谓的"构造函数"，只有对于函数的"构造调用"。
+
+    构造函数调用时的操作：
+    
+    1. 创建一个全新对象。
+    
+    2. 对这个新对象执行"原型"连接。
+
+    3. 函数里的this会指向这个新对象（原译文：'这个新对象会绑定到函数调用的this。'，感觉原译文有点奇怪，此项为自行理解的内容）。
+    
+    4. 执行函数。如果函数没有其他返回对象，那么new表达式中的函数调用会自动返回这个新对象。
+
+6. 优先级
+
+    new 绑定 > 显示绑定 > 隐式绑定 > 默认绑定
+
+7. 箭头函数
+
+    箭头函数会捕获所在外部函数被调用时的当时环境，并绑定该环境的this。箭头函数的绑定无法被修改。
+
+## part3, object
+
+对象的属性名永远都是字符串。如果使用了string(字面量)以外的其他值作为属性名，那它首先会使用该值的toString方法被转化成一个字符串。
+
+### 不变性
+
+1. 创建对象常量：
+    
+    结合属性描述符writable: false, configurable: false就可以创建一个真正的常量属性（无法修改、重定义或者删除）。
+
+2. 禁止扩展
+
+    禁止一个对象添加新属性并保留已有属性：
+
+    Object.preventExtensions(myObject);
+    
+3. 密封
+
+    禁止添加新属性并且不可删除、重新配置已有的属性。
+    
+    即在一个现有对象上调用 Object.preventExtensions(..) 并把所有现有属性标记为 configurable:false 。
+    
+    Object.seal(myObject);
+    
+4. 冻结
+
+    禁止添加新属性并且不可修改、删除、重新配置已有属性。
+    
+    即在一个现有对象上调用 Object.seal(..) 并把所有“数据访问”属性标记为 writable:false。
+    
+    Object.freeze(myObject);
+    
+### 遍历
+
+可以使用@@iterator对象和它的next()方法遍历数据值（而非属性名）。
+
+## part4、 混合对象类
+
+
+
 
