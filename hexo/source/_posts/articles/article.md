@@ -2,7 +2,7 @@
 
 - [实例解析防抖动（Debouncing）和节流阀（Throttling）](https://jinlong.github.io/2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/)
 
-   debounce: 连续（即两次触发间隔较短）多次（任意多次）触发同一事件，只执行一次函数。可zv 先执行，也可最后执行。
+   debounce: 连续（即两次触发间隔较短）多次（任意多次）触发同一事件，只执行一次函数。可最先执行，也可最后执行。
 
    throttle: 一段时间内，如果有多次事件触发，只执行一次函数。
 
@@ -60,3 +60,9 @@
     这篇文章提到了一种可能导致内存泄漏的原因：使用vm（virtual machine)时重复创建了释放速度很慢的变量，占用大量内存导致node程序崩溃。
 
     第一次读这种node和v8知识点比较多的文章，质量对我这种小白来说挺不错的。
+
+- [深度剖析：如何实现一个 Virtual DOM 算法](https://github.com/livoras/blog/issues/13)
+
+    简单介绍了一下虚拟DOM的实现：用js对象模拟DOM树 -> 发生变化时找出差异 -> 差异更新到真实DOM树上。
+
+    其中差异对比算法类似于最小编辑距离（动态规划问题，时间复杂度O(m*n)），但做了相应的优化，让算法时间复杂度降到O(max(m,n))。具体实现在相关链接[合格前端系列第五弹-Virtual Dom && Diff](https://zhuanlan.zhihu.com/p/27437595)里有提到。
