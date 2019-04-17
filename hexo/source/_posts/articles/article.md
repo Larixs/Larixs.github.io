@@ -66,3 +66,7 @@
     简单介绍了一下虚拟DOM的实现：用js对象模拟DOM树 -> 发生变化时找出差异 -> 差异更新到真实DOM树上。
 
     其中差异对比算法类似于最小编辑距离（动态规划问题，时间复杂度O(m*n)），但做了相应的优化，让算法时间复杂度降到O(max(m,n))。具体实现在相关链接[合格前端系列第五弹-Virtual Dom && Diff](https://zhuanlan.zhihu.com/p/27437595)里有提到。
+
+- [跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
+
+介绍了一些跨域资源共享（Cross-origin resource sharing）里常用的头信息。
