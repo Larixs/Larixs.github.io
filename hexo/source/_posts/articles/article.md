@@ -70,3 +70,38 @@
 - [跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
 
 介绍了一些跨域资源共享（Cross-origin resource sharing）里常用的头信息。
+
+- REST(REpresentational State Transfer), 表现层状态转移
+
+REST是一种设计风格，可以用来设计api的名称等。简单来说：
+
+URL里原则上只使用名词表示资源所属位置，用HTTP（GET,POST,DELETE,DETC,PATCH）方法去描述操作。并且使用HTTP Status Code传递Server的状态信息，例如200为成功，500为Server内部错误。
+
+例如：
+
+    GET /v1/zoos: v1版本,列出所有动物园
+    POST /v2/zoos  v2版本，新建一个动物园
+    DELETE /v2/zoos v2版本，删除一个动物园
+
+优点：
+
+- 提供一套统一的接口为不同端(web，ios，android, ...)提供相同的服务。
+-
+
+缺点：
+
+- 批量删除？
+- http动词太少
+
+相关引申：
+
+- RESTful api的一种特点： HATEOAS, Hypermedia as the engine of application state, 超媒体即应用状态引擎。返回结果中除了得到资源本身以外，还附带连向其他api的地址（具有连通性），使得用户不用查文档也知道下一步应该做什么。[github示例](https://api.github.com/)
+
+
+可以用到前端路由设计里来吗？
+
+参考：
+    - [怎样用通俗的语言解释REST，以及RESTful？](https://www.zhihu.com/question/28557115)
+    - [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
+    - [不要被名字吓到-RESTful、HATEOAS、Spring boot之整合](https://www.jianshu.com/p/65b9e54dee7d)
+
