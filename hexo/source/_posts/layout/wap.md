@@ -10,11 +10,19 @@ categories: layout
 
 #### 物理像素(physical pixel)
 
-显示设备中一个最微小的物理部件
+显示设备中一个最微小的物理部件。
+
+#### ppi(pixel per inch)
+
+屏幕每英寸所存在的物理像素。
 
 #### 设备独立像素(density-independent pixel)
 
 设备独立像素也称为密度无关像素，可以认为是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说CSS像素)，然后由相关系统转换为物理像素。
+
+#### 逻辑像素(device point)
+
+为了调和距离不一致导致的差异，所有设备根据距离，透视缩放到一个相等水平的观看距离之后得到的尺寸，是一个抽象的概念。
 
 #### CSS像素(device-independent pixel，简称DIPs)
 
@@ -24,20 +32,20 @@ categories: layout
 设备像素比简称为dpr，其定义了物理像素和设备独立像素的对应关系。它的值可以按下面的公式计算得到：
 
 	设备像素比 ＝ 物理像素 / 设备独立像素
-	
+
 css中2px*2px的元素，在实际设备（dpr=2）上，是有4\*4=16个物理像素点来显示
 
 （原来的理解好像有误，综合后面对不同dpr设置不同font-size的代码来看，在dpr=1和dpr=2的设备上，2px控制的都是两个像素点，但是dpr=2的像素点更多更密集，让dpr=2上的2px小于dpr=1的2px。因此在dpr=2的设备上，需要4px，才能和dpr=1上的2px效果一样。
 
 有个疑惑的地方，我用chrome的dpr去测试同一个页面，同一个font-size，dpr=3和dpr=2的表现是一样的。是chrome的调试环境有问题，还是我测试的不对呢？）
 
-	
+
 #### initial-scale  缩放比例：
-  
+
   \<meta name="viewport" content="initial-scale=2.0,width=device-width"\>
-  
+
   缩放比例为2.0，这会使页面放大到设备尺寸两倍显示
-  
+
 #### viewport 视窗：
 
 简单理解，viewport是严格等于浏览器的窗口。
@@ -78,7 +86,7 @@ rem是以根元素html的font-size为基准来做计算的。
 文本使用px单位，但会根据不同的dpr设置不同的字号大小。如：
 
 	div {
-    	width: 1rem; 
+    	width: 1rem;
     	height: 0.4rem;
     	font-size: 12px; // 默认写上dpr为1的	fontSize
 	}
