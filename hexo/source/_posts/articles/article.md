@@ -105,3 +105,19 @@
         - [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
         - [不要被名字吓到-RESTful、HATEOAS、Spring boot之整合](https://www.jianshu.com/p/65b9e54dee7d)
 
+- DOM的attribute和property
+
+    简单来说，DOM作为js对象在生成的时候就会存在的属性是property，其他的成为就是attribute(也称特性)。
+
+    property可以通过DOM节点直接访问，它是js对象(DOM在js中就是一个对象)的一个属性值。attribute放在了DOM对象的attributes里，也可以通过API getAttribute去访问。
+
+   以``<input id="the-input" type="foo" value="Name:">``为例子，文章提到了property对于attribute的映射关系：
+   - pure reflected: 对property的操作都会反映到attribute。读写property就是读写attribute。例如id。
+   - not pure reflected: property是有限制的值，例如是枚举值。写入property会如实写入attribute，但是property自身会做相应的处理，导致读取property和读取attribute的值是不一样的。例如type="foo", 读取attribute为"foo"，但是读取property是"text"。
+   - does not reflected: 完全不存在映射关系。例如input的value， 假设输入框后来输入了"test"，这时读取property的value是"test",但是attribute的value还是写在DOM上的"Name:"。无论input输入什么值，property的value都不会影响attribute的value。但是如果修改attribute的value就会写入property的value。
+   - 以上都是同名的情况。也存在非同名的property、attribute有映射关系。例如property的className和attribute的class就是pure reflected。
+
+    参考：
+        - [What is the difference between properties and attributes in HTML?](https://stackoverflow.com/questions/6003819/what-is-the-difference-between-properties-and-attributes-in-html#answer-6004028)
+        - [DOM 中 Property 和 Attribute 的区别](https://www.cnblogs.com/elcarim5efil/p/4698980.html)
+        - [attribute和property在英语里有什么区别?](https://www.zhihu.com/question/30111950)
