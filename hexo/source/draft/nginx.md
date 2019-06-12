@@ -1,7 +1,5 @@
 ---
 title: 初步学习使用nginx
-tags: [nginx]
-categories: [other, study-notes]
 ---
 
 1. 先整个服务器（选用的vultr的ubuntu服务器）
