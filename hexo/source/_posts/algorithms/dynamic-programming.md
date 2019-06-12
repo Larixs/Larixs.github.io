@@ -3,6 +3,9 @@ title: 动态规划学习笔记
 tags: [study notes]
 categories: algorithms
 ---
+
+本文仅为个人学习笔记，欢迎指正、评论。
+
 ## 介绍
 
 动态规划 dynamic programming 中的"programming"指的是一种表格法，并非编写计算机程序。
@@ -97,7 +100,7 @@ categories: algorithms
 
 ### 钢铁的最优切割问题
 
-习题来自算法导论.
+习题及解题思路来自《算法导论》。
 
 #### **问题**
 
@@ -129,7 +132,7 @@ r<sub>5</sub> = 13
 
 #### **朴素的递归算法**
 
-当钢条长度为n时，将钢条水平放置，从左往右计量下刀长度。假设切第1刀，第一刀的位置范围是[1,n]，为n表示不切割。长度为0时，钢条价值为0。
+当钢条长度为n时，将钢条水平放置，从左往右计量下刀位置。假设切第一刀，第一刀的位置范围是[1,n]，为n表示不切割。长度为0时，钢条价值为0。
 
 只要遍历所有第一刀的情况,找到最大值，就能找到此时钢条的最优切割方案 r<sub>n</sub>。第一刀左边的钢条长度为i，并且不再切割，其价值为p<sub>i</sub>；第一刀右边的钢条长度为n-i, 价值为r<sub>n-i</sub>。现在我们可以得到公式：
 
@@ -137,30 +140,94 @@ r<sub>5</sub> = 13
 
 有了这个递推公式，我们就可以实现一个递推算法：
 
-    function cut(p, n) {
+    function cut_recursive(p, n) {
         if(n===0){
             return 0;
         }
         let q = Number.NEGATIVE_INFINITY;
         for(let i = 1; i <= n; i++) {
-            q = Math.max(q, p[i]+ cut(p, n-i));
+            q = Math.max(q, p[i]+ cut_recursive(p, n-i));
         }
         return q;
     }
 
-考察一下算法复杂度：
+现在来考察一下这个递推算法的复杂度
 
-调用了2<sup>n</sup>次递归函数
+![](/images/algorithms/dynamic_programming/cutting-steel-recursive-tree.png)
+
+上图里树的每一个节点代表一次递归，节点的数字代表当前cut_recursive的参数n，n是钢条长度。其子节点为当前递归为了解决问题需要再次调用的递归及参数n。例如根节点4，表示本次递归的钢条长度为4，为了解决这个问题，还需要通过递归求解钢条长度为3、钢条长度为2、钢条长度为1、钢条长度为0的问题。
+
+图中的树有2<sup>4</sup>=16个节点。可以证明（此处略）为了解决长度为n的钢铁切割问题，生成的递归树一共有2<sup>n</sup>个节点，代表调用了2<sup>n</sup>次递归函数。随着n增大，算法递归的数量呈指数型增长。
 
 #### **动态规划求解**
 
-以一个标准的动态规划步骤求解问题
+仔细观察递归树可以发现，有些节点是不断重复的：
 
-首先： 刻画一个最优解的子结构，证明问题的最优解包含子结构的最优解
+![](/images/algorithms/dynamic_programming/cutting-steel-recursive-tree-colored.png)
 
-然后：找到递推公式
+将相同问题进行同色着色处理，其实要解决的非重复问题只有5个，大多数都是递归过程中不断求解重复的问题。
 
-最后：一般来说是自底向上求解
+假如我们安排一下计算的顺序，将计算过的结果保存下来，再遇到相同的子问题时，可以直接使用计算好的值，不必再重新计算。因此：
+
+> 动态规划方法是付出额外的内存空间来节省计算时间，是典型的时空权衡（time-memory trade-off)。
+
+动态规划一般有两种保存结果的实现方法：
+
+第一种是**带备忘的自顶向下法**。自顶向下法可以用递归实现，加上保存计算结果的备忘即可。在朴素的递归算法里，只要稍微修改一下，求值时先检查备忘里是否已经有计算好的值，如果有，直接使用计算好的值，否则进入下一层递归。
+
+第二种是**自底向上法**。自底向上法是预先求出小问题的解，再通过小问题的解构成大问题的解。
+
+
+    // 第一种：带备忘的自顶向下法
+    function memory_cut(p, n) {
+        let r = new Array(n+1).fill(Number.NEGATIVE_INFINITY);
+        return memory_cut_recursive(p, n, r)
+    }
+    function memory_cut_recursive(p, n, r) {
+        if(r[n] >= 0){
+            // 检查是否存在计算过的值
+            return r[n];
+        }
+        // 没有计算过则按正常流程计算
+        if(n===0){
+            return 0;
+        }
+        let q = Number.NEGATIVE_INFINITY;
+        for(let i = 1; i <= n; i++) {
+            q = Math.max(q, p[i]+ memory_cut_recursive(p, n-i, r));
+        }
+        return q;
+    }
+
+在原来递归算法的基础上加上备忘就实现了第一种方法。现在的递归调用树情况：
+
+![](/images/algorithms/dynamic_programming/cutting-steel-recursive-tree-memorized.png)
+
+图中带五角星的节点在递归过程中直接返回了之前的计算结果。可以看到，现在已经减少了许多不必要的计算过程，生成的递归树一共有(n*(n+1)/2) + 1个节点。与原来的算法相比，已经从2<sup>n</sup>这种指数基本的递归数量将至多项式n<sup>2</sup>级别。
+
+
+现在实现第二种：
+
+    // 第二种：带备忘的自顶向下法
+    function memory_cut(p, n) {
+        let r = new Array(n+1).fill(Number.NEGATIVE_INFINITY);
+        return memory_cut_recursive(p, n, r)
+    }
+    function memory_cut_recursive(p, n, r) {
+        if(r[n] >= 0){
+            // 检查是否存在计算过的值
+            return r[n];
+        }
+        // 没有计算过则按正常流程计算
+        if(n===0){
+            return 0;
+        }
+        let q = Number.NEGATIVE_INFINITY;
+        for(let i = 1; i <= n; i++) {
+            q = Math.max(q, p[i]+ memory_cut_recursive(p, n-i, r));
+        }
+        return q;
+    }
 
 ## 动态规划原理
 
