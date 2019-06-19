@@ -1,7 +1,6 @@
 ---
 title: 动态规划学习笔记
-tags: [study notes]
-categories: algorithms
+categories: 算法 algorithms
 ---
 
 本文仅为个人学习笔记，欢迎指正、评论。

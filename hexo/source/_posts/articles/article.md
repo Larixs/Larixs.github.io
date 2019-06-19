@@ -121,3 +121,16 @@
         - [What is the difference between properties and attributes in HTML?](https://stackoverflow.com/questions/6003819/what-is-the-difference-between-properties-and-attributes-in-html#answer-6004028)
         - [DOM 中 Property 和 Attribute 的区别](https://www.cnblogs.com/elcarim5efil/p/4698980.html)
         - [attribute和property在英语里有什么区别?](https://www.zhihu.com/question/30111950)
+
+- [带标签的模板字符串](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings#%E5%B8%A6%E6%A0%87%E7%AD%BE%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2)
+
+        function myFun(strings, p1, p2){
+            console.log(strings); // ['this is a ', ' test ', '']
+            console.log(p1); // 'interesting'
+            console.log(p2); // '!'
+            return 'hello world' + p2;
+        }
+        const p1 = 'interesting', p2 = '!';
+        console.log(myFun`this is a ${p1} test ${p2}`) // 'hello world!'
+
+    标签函数可以用来处理模板字符串。不然我还真不知道该怎么去取模板字符串的各部分。
