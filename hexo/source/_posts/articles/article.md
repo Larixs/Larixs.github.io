@@ -134,3 +134,9 @@
         console.log(myFun`this is a ${p1} test ${p2}`) // 'hello world!'
 
     标签函数可以用来处理模板字符串。不然我还真不知道该怎么去取模板字符串的各部分。
+
+- [谷歌开发者文档](https://developers.google.com/web/fundamentals/)
+
+看帖子看到的，之前都没有了解过这个文档。涉及的优化知识挺多的，应该仔细阅读一下。
+
+- [富文本原理了解一下?](https://juejin.im/post/5cfe4e8a6fb9a07ec63b09a4)
