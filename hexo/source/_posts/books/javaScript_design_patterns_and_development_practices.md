@@ -265,55 +265,106 @@ categories: books
 
 **定义：**
 
-使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系，将这些对象连成一条链，并沿着这条链传递该请求，知道有一个对象处理它为止。
+使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系，将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。
 
 职责链模式就像是把每部分的处理函数当作节点做成一个单向链表，如果当前节点不能处理则向后传递。
 
-我自己将书上p183的例子用数组储存链表，用Array.prototype.every实现顺序执行。这个无法实现异步职责链。
+简单实现了一个支持异步的、可返回参数的职责链：
 
-    var order500 = function(orderType, pay, stock){
-      if( orderType === 1 && pay === true){
-        console.log("500元，100优惠券")
-      }else{
-        return true
+    class Chain {
+      constructor(fn, successor) {
+        this.fn = fn;
+        this.successor = successor;
       }
-    }
-    var order200 = function(orderType, pay, stock){
-      if( orderType === 2 && pay === true){
-        console.log("200元，50优惠券")
-      }else{
-        return true
+      async passRequest(...arg) {
+        // 不能记录旧参数，因为在同时调用同1个ChainList连续调用两次时，后调用的参数会覆盖先调用的参数，导致后续函数调用时的参数是不对的。
+        return await this.fn.apply(this, arg);
       }
-    }
-    var orderNormal = function(orderType, pay, stock){
-      if( orderType === 3){
-        if( stock > 0){
-          console.log("普通购买，无优惠券");
-        }else{
-          console.log("手机库存不足")
+      async next(...arg) {
+        if (this.successor instanceof Chain) {
+          return await this.successor.passRequest(...arg);
         }
       }
     }
 
-    function chain(arr){
-      return (function(orderType, pay, stock){
-        arr.every(function(i){
-          return i(orderType, pay, stock)
-        })
-      })
+    class ChainList {
+      constructor(list) {
+        const chainList = [];
+        for (let i = list.length; --i > -1; ) {
+          const node = new Chain(list[i], chainList[0] || null);
+          chainList.unshift(node);
+        }
+        this.chainList = chainList;
+      }
+      async passRequest(...arg) {
+        if (this.chainList[0] instanceof Chain) {
+          return await this.chainList[0].passRequest(...arg);
+        } else {
+          throw 'no chainList';
+        }
+      }
     }
-    var order = chain([order500, order200, orderNormal]);
-    order(1, true, 500)
+    let order500 = async function(orderType, pay) {
+      if (orderType === 1 && pay === true) {
+        return '500成立';
+      } else {
+        return await new Promise(res => {
+          setTimeout(() => {
+            res();
+          }, 1000);
+        }).then(async () => {
+          // 为了确保参数的正确性，需要手动将参数下传
+          return await this.next(orderType, pay);
+        });
+      }
+    };
+
+    let order200 = function(orderType, pay) {
+      if (orderType === 2 && pay === true) {
+        return '200成立';
+      } else {
+        return this.next && this.next(orderType, pay);
+      }
+    };
+    let normal = function() {
+      return 'normal';
+    };
+
+    let aa = new ChainList([order500, order200, normal]);
+    let aa2 = new ChainList([order500, normal]);
+    let tt = async (list, ...arg) => {
+      const re = await list.passRequest(...arg);
+      console.log('re', re);
+    };
+    tt(aa, 1, true); // re 500成立
+    tt(aa2, 1, true); // re 500成立
+    tt(aa, 2, true); // re 200成立
+    tt(aa2, 2, true); // re normal
+    tt(aa, 2, false); // re normal
+    tt(aa2, 2, false); // re normal
 
 **注意点**
 
 当职责链中没有任何一个节点可以处理时，请求就得不到回复。我们可以在链尾增加一个保底的接受者节点来处理这种即将离开链尾的请求。
 
-过长的职责链会带来性能损耗？（可是不用职责链也要用if-else分支，都得走一遍，有什么区别呢？）
+过长的职责链会带来性能损耗，包括函数调用的开销、可能不会用到的节点。
 
 **AOP实现职责链**
 
 改写Function.prototype.after （3.2.3节）
+
+    Function.prototype.after = function(fn) {
+        var self = this;
+        return function(...arg) {
+            var ret = self.apply(this, arg);
+            if(ret === 'nextSuccessor'){
+                return fn.apply(this, arg);
+            }
+            return ret;
+        }
+    }
+
+    A.after(B).after(C); // A -> B -> C
 
 缺点: 叠加了函数作用域，如果链条太长，那么对性能也会有较大影响。
 
@@ -361,9 +412,19 @@ Function.prototype.before 和 Function.prototype.after就是典型的例子，�
 
 逻辑分散，状态众多时，需要增加的对象也会很多。
 
+**与策略模式的对比**
+
+相同点： 都有一个上下文、一些策略或者状态类，上下文把请求委托给这些类来执行。
+
+区别：策略模式的各个策略之间是平行又平等的，他们之间没有明显的联系。而在状态模式中，各个状态之间是有相互联系的，并且状态之前的切换是预先封装好的。
+
 **JS版本的状态机**
 
 p242
+
+**表驱动的有限状态机**
+
+核心是基于表驱动的，通过表来查找当前状态如何变成下一个状态。
 
 ### 第十七章 适配器模式
 
