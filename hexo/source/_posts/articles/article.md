@@ -140,3 +140,49 @@
 看帖子看到的，之前都没有了解过这个文档。涉及的优化知识挺多的，应该仔细阅读一下。
 
 - [富文本原理了解一下?](https://juejin.im/post/5cfe4e8a6fb9a07ec63b09a4)
+
+- [H5唤起APP指南(附开源唤端库)](https://juejin.im/post/5b7efb2ee51d45388b6af96c#heading-18)
+
+检查是否成功唤起
+
+        <template>
+          <div>
+            <a @click.prevent="testApp('weixin://')" class="dl-btn" id="download">打开微信</a>
+          </div>
+        </template>
+
+        <script>
+        import { Toast } from 'baseComponents';
+
+        export default {
+          data() {
+            return {
+              timer: 0
+            };
+          },
+          methods: {
+            testApp(url) {
+              document.addEventListener(
+                'visibilitychange',
+                this.visibilityChangeHandler,
+                false
+              );
+              this.timer = setTimeout(() => {
+                if (!document.hidden) {
+                  Toast('唤醒微信超时，请检查是否已安装微信');
+                }
+              }, 2000);
+              window.location.href = url;
+            },
+            visibilityChangeHandler() {
+              if (document.visibilityState === 'visible') {
+                clearTimeout(this.timer);
+                document.removeEventListener(
+                  'visibilitychange',
+                  this.visibilityChangeHandler,
+                  false
+                );
+              }
+            }
+          }
+        };
