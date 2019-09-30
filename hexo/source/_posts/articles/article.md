@@ -186,3 +186,16 @@
             }
           }
         };
+
+- [Mixins Considered Harmful](https://zh-hans.reactjs.org/blog/2016/07/13/mixins-considered-harmful.html)
+
+为了解决在组件间复用代码的问题，react团队首先推出了mixins来解决这个问题。但是react发布三年后在，情况变了，mixins导致的问题也日渐凸显。文章提出了不同情况下比mixins更优的解决方案。
+
+1. 性能优化： 一些性能优化的方式已经有现成的库，不用再自己用mixins写了，例如ShouldComponentUpdate里的浅比较
+2. 订阅和副作用：HOC(高阶组件)
+3. 相似的渲染逻辑： 提成一个公用组件
+4. 上下文：在context稳定之前，建议使用HOC对使用context数据的组件隐藏context的消费行为（将context的使用与子组件解耦）。
+5. 公用的工具函数： 提成一个普通的js模块引入
+
+
+
