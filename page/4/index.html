@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Larix&#39;s blog">
+<meta property="og:url" content="http://larixs.github.io/page/4/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Larix&#39;s blog">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-linux/auth" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/linux/auth/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.634Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/linux/auth/">文件权限相关及linux操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>权限数字：</p>
+<p>一共三位数字，第一位表示所有者的权限，第二位表示同组用户权限，第三位表示公共用户权限。</p>
+<p>读权限-r-4，写入权限-w-2，执行权限-x-1</p>
+<p>每位数等于各自用户权限数值相加。</p>
+<p>例如</p>
+<p>777： 4+2+1 4+2+1 4+2+1 即三种用户都拥有r,w,x权限</p>
+<p>644： 4+2 4 4 即所有者拥有rw权限，同组用户和公共用户只拥有r权限。</p>
+<hr>
+<p>ubuntu下修改权限</p>
+<p>chmod -R 权限数字 文件名</p>
+<hr>
+<p>查看权限：</p>
+<p>(sudo) ls -l 文件名</p>
+<p>__</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="http://blog.sina.com.cn/s/blog_690c53680101jp61.html" target="_blank" rel="noopener">Linux主机文件777，755，644权限详解</a></li>
+<li><a href="http://www.cnblogs.com/CgenJ/archive/2011/07/28/2119454.html" target="_blank" rel="noopener">Linux系统下如何查看及修改文件读写权限</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/linux/auth/" data-id="ck2jtvp1s001pqvg91qikm6nm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/authority/">authority</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-other/frame_mode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/other/frame_mode/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.634Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/other/frame_mode/">mvc 和 mvvm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="框架模式"><a href="#框架模式" class="headerlink" title="框架模式"></a>框架模式</h1><p>在不同的应用场景中，框架模式也许会有所改变，因此同一个框架可能出现不同的图示和理解，不要太纠结细节，理解大概便是。以下皆不放图示了，避免引起误会。</p>
+<p>这篇md很难写。1是内容太过抽象，没有合适的例子，2是众说纷纭，我也不是太理解。3是可应用的机会小，细学的动力小。</p>
+<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>全称Model View Controller,即模型-视图-控制器。</p>
+<p>View:<br>放置视图相关的代码，原则上不应该有任何业务逻辑</p>
+<p>Controller：<br>放置视图与模型之间的映射，原则上只放一些与事件绑定相关的代码，并不实现真正的功能，是一个桥梁。</p>
+<p>Model:<br>主要实现逻辑的地方。</p>
+<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>全称Model View ViewModel。</p>
+<p>未完，不续。</p>
+<p>参考链接：</p>
+<ol>
+<li><a href="http://web.jobbole.com/89314/" target="_blank" rel="noopener">浅谈框架模式 MVC、MVP 和 MVVM</a></li>
+<li><a href="http://www.infoq.com/cn/articles/rethinking-mvc-mvvm" target="_blank" rel="noopener">被误解的MVC和被神化的MVVM</a></li>
+<li><a href="http://draveness.me/mvx.html" target="_blank" rel="noopener">浅谈 MVC、MVP 和 MVVM 架构模式</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/other/frame_mode/" data-id="ck2jtvp220026qvg9f5tstshg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frame/">frame</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/responsive" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/layout/responsive/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.632Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/layout/responsive/">学习响应式布局</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>响应式布局，即同一网页在不同设备上均能正常显示。</p>
+<p>目前学习到的有：</p>
+<h2 id="1-设置html字体大小。"><a href="#1-设置html字体大小。" class="headerlink" title="1. 设置html字体大小。"></a>1. 设置html字体大小。</h2><p>  各设备上体现的像素大小不一样，所以要对不同设备的字体大小进行动态设定。之前学长给了一段代码，适用于<strong>移动端</strong>的计算。代码如下：</p>
+<pre><code>(function (doc, win) {//屏幕自适应
+
+var docEl = doc.documentElement;
+
+  resizeEvt = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;;
+
+  recalc = function () {
+
+  var clientWidth = docEl.clientWidth;
+
+  if (!clientWidth) return;
+    docEl.style.fontSize = 50 * (clientWidth / 375) + &apos;px&apos;;
+  };
+
+   if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener(&apos;DOMContentLoaded&apos;, recalc, false);
+
+
+})(document, window);
+</code></pre><p>假如给的移动端的设计稿是750px，则按照这段代码，font-size = 50 * 750 / 375 + “px” =100px, 则1rem对应的就是100px。设计稿中的100px宽的元素，就可以用1rem表示其宽度，这样做出来的网页在750px的设备下显示最完美，其他设备虽然不够完美但也不会出太大差错。</p>
+<p>####参考网址：<a href="http://www.cnblogs.com/axl234/p/5156956.html" target="_blank" rel="noopener">移动端适配，font-size设置的思考</a></p>
+<p>###<strong>Question</strong>:</p>
+<ol>
+<li>移动端用这段代码没大问题，但是如果这个网页同时在pc端显示，按照之前的计算方法，将pc设计稿中的px单位换算成rem后，网页上的元素就会异常的大。因此，在我做bookcet网页时，通过媒体查询，写了两套样式：一套是pc端，度量单位为px；一套是wap端，度量单位为rem。第一次写同时响应pc和wap的页面,感觉并没有get到响应式的精髓？</li>
+<li>chrome允许的最小字体是12px。之前在网上搜索的时候，发现不少人用的是 html{ font-size:62.5%;}这种方式，将1rem对应的16px折合成10px来布局。我在chrome下尝试过这种设置方式，在浏览器自带的调试器下进行测量，发现1rem对应的是12px。如果设计稿给的是20px，按理来说应该设置为2rem,然后就会得到20px，但是在1rem对应12px的情况下，这只能得到24px。所以他们是怎么能得到正确布局的，是没尝试过就转载了，还是我的理解方式不对？</li>
+<li>initial-scale和font-size是如何配合的？当我的font-size设置为625%(1rem=100px)时，initial-scale设置为1，则在iPhone5se上画布特别大，导致元素也特别大。这个应该可以自己研究一下。</li>
+</ol>
+<h2 id="2-H5新标签picture的自适应"><a href="#2-H5新标签picture的自适应" class="headerlink" title="2.H5新标签picture的自适应"></a>2.H5新标签picture的自适应</h2><pre><code>&lt;picture&gt;
+  &lt;source srcset=&quot;img_smallflower.jpg&quot; media=&quot;(max-width: 400px)&quot;&gt;
+  &lt;source srcset=&quot;img_flowers.jpg&quot;&gt;
+  &lt;img src=&quot;img_flowers.jpg&quot; alt=&quot;Flowers&quot;&gt;
+&lt;/picture&gt;
+</code></pre><p>picture是h5标签，它想audio和video一样，可以设置多个source，第一个source是最佳的。还可以将css的媒体查询化为media属性进行设置。media是可选的。上面的代码意思即为，当视口（？）宽度小于400px时，显示第一张图片img_smallflower.jpg，除此之外显示第二张图片img_flowers.jpg。img是做平稳退化使用，当浏览器不支持picture标签时，使之可以退化为img标签。</p>
+<h2 id="3-如何在兼容ie8的情况下实现响应式布局"><a href="#3-如何在兼容ie8的情况下实现响应式布局" class="headerlink" title="3. 如何在兼容ie8的情况下实现响应式布局"></a>3. 如何在兼容ie8的情况下实现响应式布局</h2><p>这点在另外一篇经验总结<a href="layout.md">css布局</a>里的第五点提到了，使用respond.js进行兼容。(在《响应式web设计》里提到了Modernizr这个库,里面可以解决响应式布局的大部分问题。)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/layout/responsive/" data-id="ck2jtvp1r001mqvg9wghmhe9b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/responsive/">responsive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/pixel_on_android" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/layout/pixel_on_android/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.632Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/layout/pixel_on_android/">安卓app里的px</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目前的项目android的app并不全是原生写的页面，大部分是访问h5页面。h5页面是根据视口宽度、利用rem做自适应，而原生写的页面是根据PPI(每英寸像素密度)来做自适应。</p>
+<p>h5写字体大小是用的虚拟像素，而原生写字体大小用的却是物理像素。</p>
+<p>因为双方做自适应的标准不同，因此做出来的页面之间样式并不统一。为了解决这个问题，最终决定h5去适应原生的方案。</p>
+<p>我之前并没有接触过安卓，导致首次沟通非常困难。挫败感很强，憋着一口气还是把这个搞明白了。</p>
+<h2 id="1-参数们"><a href="#1-参数们" class="headerlink" title="1. 参数们"></a>1. 参数们</h2><p>首先看下iphone的参数</p>
+<p><img src="/images/layout/iphone_screen_density.png" alt></p>
+<p>屏幕尺寸： 屏幕对角线长度</p>
+<p>分辨率(pt)： h5前端通过document.documentElement.clientWidth取得的视口宽度。</p>
+<p>Reader:  dpr ?</p>
+<p>分辨率(px)： 安卓前端读到的物理像素宽高。 width * height</p>
+<p>PPI： 每英寸像素密度。安卓前端通过PPI来计算当前屏幕该用多大字体。 PPI^2 = (width^2 + height^2) / 屏幕尺寸^2   这里的参数都是物理像素宽度(因为不会打开根符号，所以就这么写了）</p>
+<h2 id="2-安卓计算字体的方式"><a href="#2-安卓计算字体的方式" class="headerlink" title="2. 安卓计算字体的方式"></a>2. 安卓计算字体的方式</h2><p>安卓是以PPI值为160作为基准， 在PPI为 x 时，该屏幕设置的14号字(即前端意义上的font-size: 14px)为 (x / 160) * 14 + ‘px’</p>
+<h2 id="3-h5计算自适应字体的方式"><a href="#3-h5计算自适应字体的方式" class="headerlink" title="3. h5计算自适应字体的方式"></a>3. h5计算自适应字体的方式</h2><p>很简单，获取clientWidth，为html元素设置rem，rem随clientWidth的增大而增大。clientWidth获取到的是虚拟像素宽度。</p>
+<h2 id="4-差别与解决方案"><a href="#4-差别与解决方案" class="headerlink" title="4. 差别与解决方案"></a>4. 差别与解决方案</h2><p>差别：双方在做自适应时参考的变量不同。h5仅参考视口宽度，安卓参考了物理宽度和物理高度。</p>
+<p>解决方案： h5去适应安卓。h5用的都是虚拟像素，安卓用的是物理像素。安卓通过一些事件或方法，向前端的h5页面传递安卓取到的屏幕物理像素宽度deviceWidth，以及安卓里1虚拟像素所对应的物理像素androidPx。</p>
+<p>此时需要求的就是h5下如何将h5的1px所对应的物理像素和安卓下1px对应的物理像素相等。</p>
+<p>如果不做任何设置，h5下1px虚拟像素所对应的物理像素就是dpr的值。粗略的计算，dpr = deviceWidth / clientWidth 。（clientWidth是h5自己取到的视口宽度）</p>
+<p>公式： ( 1 <em> dpr </em> ratio )px = ( 1 * androidPx )</p>
+<p>即 dpr * ratio = androidPx</p>
+<p>即 deviceWidth /clientWidth  * ratio = androidPx</p>
+<p>即 ratio = androidPx * clientWidth / deviceWidth</p>
+<p>至此，就求出了h5所需的转化比率，只要在获取clientWidth计算rem时，为rem的计算结果乘上这个ratio，即可让h5的自适应效果与安卓的自适应效果大致相同。</p>
+<hr>
+<p>20180307</p>
+<p>重新调整了适配策略。</p>
+<p>前端在viewport的meta里加上 target-densitydpi = device-dpi。</p>
+<p>即  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover,target-densitydpi=device-dpi"></p>
+<p>1rem设为定值20px。</p>
+<p>安卓那边使用dp单位（原来使用sp单位）写页面。</p>
+<p>此时不用传参即可使原生页面和h5页面字体大小一致。</p>
+<p>参考链接：<br>1.<a href="https://stuff.mit.edu/afs/sipb/project/android/docs/guide/webapps/targeting.html" target="_blank" rel="noopener">Targeting Screens from Web Apps | Android Developers</a><br>1.<a href="http://blog.csdn.net/donkor_/article/details/77680042" target="_blank" rel="noopener">两分钟理解Android中PX、DP、SP的区别</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/layout/pixel_on_android/" data-id="ck2jtvp1p001jqvg97x22372f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/layout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/layout/layout/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.631Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/layout/layout/">CSS布局技巧汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSS布局"><a href="#CSS布局" class="headerlink" title="CSS布局"></a>CSS布局</h1><p>作为一名小白，在刚会制作网页的时候，遇到了不少问题。先把这些遇到的问题和解决方案总结一下，以后用时方便查找。</p>
+<h2 id="1-清除浮动"><a href="#1-清除浮动" class="headerlink" title="1. 清除浮动"></a>1. 清除浮动</h2><p>当子元素处于浮动状态时，因为子元素脱离了文档流，所以父元素的高度或宽度不能完全包含子元素，产生了溢出。此时父元素就需要清除浮动，让父元素的高度和宽度能与子元素的相匹配。<br>清除浮动的解决方案：</p>
+<p>解决方案1(非body)</p>
+<pre><code>.clearfix {
+    overflow: auto;
+ }
+</code></pre><p>解决方案2(非body)</p>
+<pre><code>.clearfix{
+    overflow:hidden;
+}
+</code></pre><p>解决方案3</p>
+<pre><code>.clearfix::after{
+    content:&apos;&apos;;
+    display:block;
+    clear:both;
+}
+</code></pre><h2 id="2-居中"><a href="#2-居中" class="headerlink" title="2. 居中"></a>2. 居中</h2><p>居中分为：</p>
+<ol>
+<li>水平居中</li>
+<li>垂直居中</li>
+<li>水平垂直居中</li>
+</ol>
+<p>####水平居中的方法：</p>
+<p>解决方案1(flex)</p>
+<pre><code>.father{
+    display:flex;
+    justify-content:center;
+}
+</code></pre><p>解决方案2(text-align)</p>
+<pre><code>.father{
+    text-align:center;
+}
+.children{
+    margin: 0 auto;//只要左右边距是auto就行了
+    width: 200px; //如果不设置width的话，看不出居中的效果
+}
+</code></pre><p>解决方案3(margin-left)</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    left:50%;
+    margin-left:-150px;//margin-left的绝对值设为width的一半
+    width:300px;
+}
+</code></pre><p>####垂直居中的方法：</p>
+<p>解决方案1(flex)</p>
+<pre><code>.father{
+    display:flex;
+      flex-direction:column;
+    justify-content:center;
+}
+</code></pre><p>解决方案2(margin-top)</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    top:50%;
+    margin-top:-100px;//margin-top的绝对值设为height的一半
+    height:200px;
+}
+</code></pre><h4 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h4><p>解决方案1（flex）</p>
+<pre><code>.father{
+    display:flex;
+}
+.children{
+    margin:auto;
+}
+</code></pre><p>解决方案2（margin）</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-100px;
+    width:200px;
+    height:400px;
+}
+</code></pre><h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p><a href="https://segmentfault.com/a/1190000002910324" target="_blank" rel="noopener">flex布局</a></p>
+<h2 id="3-自动编号（counter-increment）"><a href="#3-自动编号（counter-increment）" class="headerlink" title="3.自动编号（counter-increment）"></a>3.自动编号（counter-increment）</h2><p>利用counter-increment和counter实现自动标号</p>
+<hr>
+<pre><code>li{
+    counter-increment:item; //从0开始，每有一个li，则为计数器item+1
+}
+li::before{
+    content:counter(item); //取出计数器item的值
+}
+</code></pre><p>以上输出的是从1开始依次编号（1,2,3,4…）的li</p>
+<hr>
+<pre><code>li{
+    counter-increment:item+2; //从0开始每有一个li，则为计数器item+2
+}
+li::before{
+    content:counter(item); //取出计数器item的值
+}
+</code></pre><p>以上输出的是从2开始的偶数编号（2，4，6，8…）的li</p>
+<hr>
+<pre><code>h1{
+    counter-increment:chapter -1 section 2 part; //charpter-1，section+2，part+1；
+    }
+</code></pre><hr>
+<p>####参考链接：<br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment" target="_blank" rel="noopener">counter-increment MDN</a></p>
+<h2 id="4-段落文字左右两边对齐"><a href="#4-段落文字左右两边对齐" class="headerlink" title="4.段落文字左右两边对齐"></a>4.段落文字左右两边对齐</h2><h3 id="text-align-justify"><a href="#text-align-justify" class="headerlink" title="text-align:justify"></a>text-align:justify</h3><p>报纸一样的排版，每行的左右两边努力对齐</p>
+<h3 id="word-break-break-all"><a href="#word-break-break-all" class="headerlink" title="word-break:break-all"></a>word-break:break-all</h3><p>强行拆开一个单词</p>
+<h2 id="5-移动端去掉点击时的阴影"><a href="#5-移动端去掉点击时的阴影" class="headerlink" title="5.移动端去掉点击时的阴影"></a>5.移动端去掉点击时的阴影</h2><pre><code>*{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    /* For some Androids */
+}
+</code></pre><h2 id="6-HTML5、-media兼容ie8的做法"><a href="#6-HTML5、-media兼容ie8的做法" class="headerlink" title="6.HTML5、@media兼容ie8的做法"></a>6.HTML5、@media兼容ie8的做法</h2><pre><code>&lt;!-- html --&gt;
+   &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+ &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+  &lt;!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries  --&gt;
+  &lt;!--[if lt IE 9]&gt;
+  &lt;script src=&quot;//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;//cdn.bootcss.com/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;
+  &lt;![endif]--&gt;
+</code></pre><p>以上为html的代码，还需在css文件中增加以下代码</p>
+<pre><code>article,aside,dialog,footer,header,section,footer,nav,figure,menu{
+  display:block}
+</code></pre><ul>
+<li><p>\&lt;!–[if lt IE 9]&gt;是条件注释，IE以外的浏览器将会把它们看作是普通的注释而完全忽略它们。IE将会根据if条件来判断是否如解析普通的页面内容一样解析条件注释里的内容。条件注释是一种安全的区分IE浏览器版本的语法，且被认为是取代针对IE css hack的首选办法。</p>
+</li>
+<li><p>html5shiv解决html5的兼容性问题，respond解决响应式的问题。respond需要在css文件之后，但要尽早解析，避免出现闪屏。更多注意事项见<a href="https://github.com/scottjehl/Respond" target="_blank" rel="noopener">respond.js</a></p>
+</li>
+</ul>
+<h4 id="什么时候才能不兼容ie8呀-ie8烦死惹-摔"><a href="#什么时候才能不兼容ie8呀-ie8烦死惹-摔" class="headerlink" title="什么时候才能不兼容ie8呀,ie8烦死惹(摔!)"></a>什么时候才能不兼容ie8呀,ie8烦死惹(摔!)</h4><h2 id="7-css3多栏布局"><a href="#7-css3多栏布局" class="headerlink" title="7.css3多栏布局"></a>7.css3多栏布局</h2><ul>
+<li><p>column-width:200px; : 内容会分布在200px宽度的栏位中,视口尺寸变化时,浏览器会自动调整栏位数量。</p>
+</li>
+<li><p>column-count:3; :保持栏位数量不变而让栏位宽度根据视口调整。</p>
+</li>
+<li><p>column-gap:20px; :栏间距</p>
+</li>
+<li><p>column-rule: thin dotted #999;  :栏的分割线</p>
+</li>
+</ul>
+<h2 id="8-让li表现为横向菜单"><a href="#8-让li表现为横向菜单" class="headerlink" title="8.让li表现为横向菜单"></a>8.让li表现为横向菜单</h2><p>方案一 利用table布局</p>
+<pre><code>ul{
+  display:table-row;
+}
+li{
+  display:table-cell;
+}
+</code></pre><p>方案二 利用float布局,加清除浮动</p>
+<pre><code>ul{
+  margin:0;
+  padding:0;
+}
+
+.clearfix::after{
+  content:&quot;&quot;;
+  display:block;
+  clear:both;
+
+}
+li{
+  float:left;
+  list-style:none;
+}
+</code></pre><h2 id="9-三列布局"><a href="#9-三列布局" class="headerlink" title="9.三列布局"></a>9.三列布局</h2><p>双飞翼布局:<br>方案一 position:absolute;</p>
+<pre><code>html
+
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;right&lt;/div&gt;
+    &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;
+ &lt;/div&gt;
+
+
+css
+
+.container{
+  margin:0 100px 0 100px;
+  border:1px solid black;
+}
+
+.main{
+  width:100%;
+  height:200px;
+  border:1pxs solid blue;
+}
+.left{
+  position:absolute;
+  left:0;
+  width:100px;
+  height:200px;
+  border:1px solid red;
+}
+.right{
+  width:100px;
+  height:200px;
+  border:1px solid red;
+  position:absolute;
+  right:0;
+}
+</code></pre><p>方案二 display:flex</p>
+<pre><code>html
+
+&lt;div class=&quot;container&quot;&gt;
+   &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;
+   &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;
+   &lt;div class=&quot;right&quot;&gt;right&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+css
+
+.container{
+  border:1px solid red;
+  display:flex;
+  height:200px;
+
+}
+.container &gt; div{
+  border:1px solid black;
+}
+.left{
+  width:100px;
+}
+.right{
+  width:100px;
+}
+.main{
+  flex-basis:100%;/*   flex-grow:1; 也同样生效  */
+}
+</code></pre><h2 id="模糊特效"><a href="#模糊特效" class="headerlink" title="模糊特效"></a>模糊特效</h2><p>css3-filter</p>
+<pre><code>filter:blur(20px);
+</code></pre><p>filter对所有元素生效（在ff和chrome下试验过）</p>
+<p>filter还支持其他特效，如反色等等，丰富度较高。</p>
+<h2 id="子元素-height：100"><a href="#子元素-height：100" class="headerlink" title="子元素 height：100%"></a>子元素 height：100%</h2><p>当设置子元素高度为height:100%时，浏览器会寻找其父元素的高度。</p>
+<ul>
+<li><p>如果父元素指定了height值，如100px，则子元素能直接获得高度100px。</p>
+</li>
+<li><p>如果父元素的高度也是使用百分比，则找寻父元素的父元素高度，直到找到为止或者找到height为auto。</p>
+</li>
+<li><p>如果父元素的高度为height:auto,则子元素height:100%会被忽略，其height也是auto。</p>
+</li>
+</ul>
+<h2 id="多余的字添加省略号"><a href="#多余的字添加省略号" class="headerlink" title="多余的字添加省略号"></a>多余的字添加省略号</h2><pre><code>overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+</code></pre><h2 id="隐藏video的下载按钮"><a href="#隐藏video的下载按钮" class="headerlink" title="隐藏video的下载按钮"></a>隐藏video的下载按钮</h2><p>chrome</p>
+<pre><code>video::-internal-media-controls-download-button {
+  display:none; //似乎没有用
+}
+
+video::-webkit-media-controls-enclosure {
+  overflow:hidden; 
+}
+video::-webkit-media-controls-panel {
+  width: calc(100% + 10px); //就是把控制条拉长了，让下载按钮跑到屏幕外
+}
+</code></pre><h2 id="position-absolute-top-0-bottom-0"><a href="#position-absolute-top-0-bottom-0" class="headerlink" title="position:absolute top:0 bottom:0"></a>position:absolute top:0 bottom:0</h2><p>emmmm…很奇特的一个性质，当元素的样式为position:absolute时，如果设置了top:0,bottom:0，那么这个元素在不设height的情况下，高度为父元素的内容高度加padding-top padding-bottom。<br>在top:12px,bottom:12px的情况下，高度与上一种情况一样，只不过向下偏移12px。</p>
+<h2 id="webkit-animation-delay"><a href="#webkit-animation-delay" class="headerlink" title="-webkit-animation-delay"></a>-webkit-animation-delay</h2><p>场景:</p>
+<p>给同类名的不同节点设置不同的animation-delay，安卓机出现了兼容问题，需要使用-webkit-animation-delay。</p>
+<p>尝试1：</p>
+<p>在设置动画相关类名时，同时设置element.style.webkitAnimationDelay。</p>
+<p>结果：</p>
+<p>设置上了，但是不起作用。失败。</p>
+<p>尝试2:</p>
+<p>通过css的counter和css的calc结合，计算当前节点所需要的延时。</p>
+<p>结果：</p>
+<p>counter并不能和calc结合计算。哭泣。</p>
+<p>尝试3:</p>
+<p>通过sass的for循环生成不同的webkitAnimationDelay，总数只能写死。</p>
+<p>结果：</p>
+<p>因为文件结构不允许，失败。</p>
+<p>最终解决方案：</p>
+<p>在设置动画相关类名之<em>前</em>，先设置webkitAnimationDelay。应该是浏览器对于动画相关的时机不同的问题。</p>
+<p>在android的需要-webkit-兼容动画的浏览器上，必须于动画类名添加之前、动画开始之前设置webkitAnimationDelay。</p>
+<p>撒花完结。*★,°*:.☆(￣▽￣)/$:*.°★* 。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/layout/layout/" data-id="ck2jtvp1o001gqvg9uy8usbnd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/bfc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/layout/bfc/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.631Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/layout/bfc/">BFC (block formatting context)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>一个<strong>块格式化上下文（block formatting context）</strong> 是Web页面的可视化CSS渲染出的一部分。<code>它是块级盒布局出现的区域，也是浮动层元素进行交互的区域。</code></p>
+<h2 id="哪些情况会生成BFC"><a href="#哪些情况会生成BFC" class="headerlink" title="哪些情况会生成BFC"></a>哪些情况会生成BFC</h2><ol>
+<li>根元素</li>
+<li>浮动元素，即float属性不为none</li>
+<li>绝对定位元素，即position为absolute或fixed</li>
+<li>display为inline-block, table-cell, table-caption, flex, inline-flex</li>
+<li>overflow不为visible</li>
+</ol>
+<h2 id="布局规则"><a href="#布局规则" class="headerlink" title="布局规则"></a>布局规则</h2><ol>
+<li>内部的Box会在垂直方向，一个接一个地放置。</li>
+<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠</li>
+<li>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</li>
+<li>BFC的区域不会与float box重叠。</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
+<li>计算BFC的高度时，浮动元素也参与计算</li>
+</ol>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><p>方案1(非body)</p>
+<pre><code>.clearfix {
+    overflow: auto;
+ }
+</code></pre><p>方案2(非body)</p>
+<pre><code>.clearfix{
+    overflow:hidden;
+}
+</code></pre><p>可以看出，两个方案其实原理是一样的，都是利用了overflow不为visible时让该元素触发BFC，这样就应用了BFC的布局规则<code>计算BFC的高度时，浮动元素也参与计算</code></p>
+<h3 id="两列布局"><a href="#两列布局" class="headerlink" title="两列布局"></a>两列布局</h3><h4 id="左列不定宽，右列自适应"><a href="#左列不定宽，右列自适应" class="headerlink" title="左列不定宽，右列自适应"></a>左列不定宽，右列自适应</h4><p>html</p>
+<pre><code>&lt;div class=&quot;parent&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;
+        &lt;p&gt;left&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;
+        &lt;p&gt;right&lt;/p&gt;
+        &lt;p&gt;right&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>css</p>
+<pre><code>.left{
+    float: left;
+    width: 100px;
+    margin-right: 20px;    //形成20px的间隔
+}
+.right{
+    overflow: hidden; //通过设置overflow: hidden来触发BFC特性
+}
+</code></pre><p>原理如下：</p>
+<ol>
+<li>通常情况下，浮动元素的块状兄弟元素会无视浮动元素的位置，尽量占满一整行，这样该兄弟元素就会被浮动元素覆盖。</li>
+<li>若浮动元素的块状兄弟元素为BFC，则该兄弟元素不会占满一整行而导致部分内容被浮动元素遮住。而它会根据浮动元素的宽度，占据该行剩下的宽度，避免与浮动元素重叠。</li>
+<li>浮动元素与其块状BFC兄弟元素之间的margin可以生效，这将继续减少兄弟元素的宽度。</li>
+</ol>
+<p>其实主要用到了布局规则中的<code>BFC的区域不会与float box重叠。</code></p>
+<p>并不是一定要在.right上用overflow: hidden;，只要能让.right触发BFC就行。另外在IE6上也可以触发haslayout特性（推荐用*zoom: 1;）。</p>
+<p>由于.right的宽度是自动计算的，不需要设置任何与.left宽度相关的css，因此.left的宽度可以不固定（由内容盒子决定）。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context" target="_blank" rel="noopener">MDN BFC</a></li>
+<li><a href="http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html" target="_blank" rel="noopener">前端精选文摘：BFC 神奇背后的原理</a></li>
+<li><a href="https://segmentfault.com/a/1190000004424442" target="_blank" rel="noopener">两列自适应布局方案整理</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/layout/bfc/" data-id="ck2jtvp1n001eqvg9bptxtg11" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bfc/">bfc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-books/smashing_nodejs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/books/smashing_nodejs/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.631Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/books/">books</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/books/smashing_nodejs/">了不起的node.js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="了不起的node-js"><a href="#了不起的node-js" class="headerlink" title="了不起的node.js"></a>了不起的node.js</h1><h3 id="Chapter-3-阻塞与非阻塞IO"><a href="#Chapter-3-阻塞与非阻塞IO" class="headerlink" title="Chapter 3 阻塞与非阻塞IO"></a>Chapter 3 阻塞与非阻塞IO</h3><p>Node为js引入了一个复杂的概念: 共享状态的并发。</p>
+<p>通俗讲，Node中，你需要对回调函数如何修改当前内存中的变量（状态）特别小心。此外，你还需要特别注意对错误的处理是否会潜在的修改这些状态。</p>
+<p>Node采用一个长期运行的进程；Node使用了事件轮询；Node是单线程的； </p>
+<hr>
+<p>本书没有看完。在Chapter 5的时候，让我看得十分恼火。</p>
+<p>例如有一小节讲“理解什么是流”，我并没有发现它讲什么是流、流有什么特征，只讲了哪些东西属于流，以及后来书中引入了一个用node写的读取文件夹和文件的示例，一开始就给出了一段不优雅的代码，我照着敲了一遍之后发现功能并不完整。接着书上就开始重构了？！可是这段重构不仅是把一些揉在一起的函数提出来，还在不断的完善功能。这根本不算重构，这就叫没写完的需求接着写好吧。而且重构的过程就是东改一点西加一点，没有明确的思路和计划，看的我晕头转向，最后仍然没有给出完整的整段代码。</p>
+<p>搞不懂这本书是教人写代码还是教人node。如果是教有基础的人学node，那这本书把重点放错了，没有放到node上。node讲的不清晰、不透彻、不广泛、不深入，例子也不是直接给出最优雅的写法，有非常多的代码注释和绕来绕去和node本身无关的优化思路。如果是教没基础的人学node…那还是先学js再来学node吧。</p>
+<p>综上，讲解浅显，例子讲解混乱，这本书十分不合我的胃口。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/books/smashing_nodejs/" data-id="ck2jtvp1g0010qvg9qzjxpxbc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-books/remarks" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/books/remarks/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.630Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/books/">books</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/books/remarks/">书评</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="书名：时间旅行者的妻子"><a href="#书名：时间旅行者的妻子" class="headerlink" title="书名：时间旅行者的妻子"></a>书名：时间旅行者的妻子</h2><h3 id="作者：奥德丽·尼芬格（美）"><a href="#作者：奥德丽·尼芬格（美）" class="headerlink" title="作者：奥德丽·尼芬格（美）"></a>作者：奥德丽·尼芬格（美）</h3><h3 id="阅读时间：2016-09"><a href="#阅读时间：2016-09" class="headerlink" title="阅读时间：2016.09"></a>阅读时间：2016.09</h3><p>整个故事是以妻子（克莱尔）和丈夫（亨利）两人的视角共同叙述的，但标题却强调了妻子，可能是因为作者想点明这是一个关于等待的故事。</p>
+<p>一句话概括故事就是：时间旅行者亨利在过去、现实、未来中不停往返；妻子克莱尔则一直在现实中等待着丈夫归来。</p>
+<p>不过这是一本书，要是只有这么一句话印在一本书上，那环保局会把出版社告上法庭的吧（笑）。</p>
+<p>既然故事是以时间旅行者为核心，那叙事的顺序挺关键的，如何既将故事叙述完整清晰，又让读者感受到丈夫身上的时空错乱、飘忽不定，是件挺困难的事。读完此书，作者对故事结构的把控让我大为惊叹。</p>
+<p>整书大致以妻子的年龄逐渐增长为主线，主线又分为妻子的视角和丈夫的视角。每个视角单独拎出来都可以成为一个故事，但是两个视角在一起能让整个故事更加饱满。之前看过的<br>《1Q84》虽然也是多人视角不停切换，但总觉着只是一条线由不同的人来叙述，你讲前面一句话，我接着你的故事讲后面一句，因而就算整个故事合并起来让一个人讲也无所谓。此书不是这样，妻子视角是牛奶，丈夫视角是巧克力，单独享受是美味，融合之后更是美妙。我其实并不太明白作者是怎么写出这种效果的。</p>
+<p>书中的人物也不是扁平化的，丈夫拥有时间穿越的能力，让他在年轻的时候放荡不羁，却从未用此牟取暴利（如购买即将暴涨的股票和下星期的彩票），因为他也只想过普通人的生活。穿越过去的生活也并非一帆风顺，因为穿越的不确定性，丈夫不会预料到前方是危险或是安逸，有时传送到荒凉无垠的草原上，有时传送到妻子的幼年时光陪伴她长大。而妻子从等待之初的担心到习以为常，最后到麻木。一直在等待的妻子为了给自己保留一丝希望，执意想要怀上丈夫的孩子，这样即使丈夫不在身边，还有孩子可以给她慰藉。于是夫妻之间爆发了最大的矛盾–是否要妻子冒着生命危险去怀一个会时间旅行的孩子。双方都有各自的考虑，没有办法说谁不对。</p>
+<p>虽然小说主题是爱情故事，但又不局限于爱情。书中描写了许多关于音乐的话题，男女主更是对诗歌了如指掌，出口成章。可我并不懂美国的音乐史和诗歌，只得含混地看了几眼，甚是可惜。</p>
+<p>第一次写书评，毫无章法可言，只能庆幸磕磕绊绊地写完了。下来可以看看其他人的书评是如何写的。</p>
+<h2 id="书名：岛上书店"><a href="#书名：岛上书店" class="headerlink" title="书名：岛上书店"></a>书名：岛上书店</h2><h2 id="作者：加布瑞埃拉·泽文-Gabrielle-Zevin）"><a href="#作者：加布瑞埃拉·泽文-Gabrielle-Zevin）" class="headerlink" title="作者：加布瑞埃拉·泽文 (Gabrielle Zevin）"></a>作者：加布瑞埃拉·泽文 (Gabrielle Zevin）</h2><h3 id="阅读时间：2016-11"><a href="#阅读时间：2016-11" class="headerlink" title="阅读时间：2016.11"></a>阅读时间：2016.11</h3><p>一个因为爱而温暖的故事。</p>
+<p>温暖人心的故事情节，虽有一些阴暗处，但作者最后还是让阳光普照大地，成功洗白了每一个人。这样的情节也只能在小说里出现吧。</p>
+<p>背景设定为书店，那少不了作者掉各种书袋，不过不像时间旅行者一样经常引用书中内容，只是简单提了一下书名和作者。个人觉得，若是在故事发展中适当地引用一些话，既可以借这些话恰当烘托人物思想，又可以增添书籍的魅力、引起读者对其他书的兴趣，想必可以将此书列为阅读者入门的推荐之作。</p>
+<p>说实话，我个人不太喜欢这种温暖的小说，没有人性的矛盾，人物形象单薄，为了温暖而温暖，过于简单几乎不会让人长久回味。但是这样的小说能唤起大多数人对于爱和幸福的渴望及珍惜就够了，人世间还是需要一些温暖来让这个世界有值得留念的地方。我对岛上书店能一直跻身各网站畅销书籍排行榜的疑惑终于解开了。</p>
+<h2 id="书名：东方列车谋杀案"><a href="#书名：东方列车谋杀案" class="headerlink" title="书名：东方列车谋杀案"></a>书名：东方列车谋杀案</h2><h3 id="作者：阿加莎·克里斯蒂"><a href="#作者：阿加莎·克里斯蒂" class="headerlink" title="作者：阿加莎·克里斯蒂"></a>作者：阿加莎·克里斯蒂</h3><h3 id="阅读时间：2017-04"><a href="#阅读时间：2017-04" class="headerlink" title="阅读时间：2017.04"></a>阅读时间：2017.04</h3><p>正义的审判？</p>
+<p>阿加莎的小说一如既往的精彩，结尾也是一个美妙的反转，看得人大呼过瘾。</p>
+<p>不知道哪篇无良的荐书文章提前给我剧透了，导致我看了一半就隐隐猜到了结局。我是不赞成用私刑的人，所以读到结尾时，不觉得惊奇，反而有一丝丝荒谬。这就是传说中的“法不责众”？我看过的阿加莎两本著名的小说，一是《无人生还》，一是此本，都是由法律之外的形式来审判罪人。难道是另类的“人民的名义”？</p>
+<h2 id="书名：-浮生六记"><a href="#书名：-浮生六记" class="headerlink" title="书名： 浮生六记"></a>书名： 浮生六记</h2><h3 id="作者：沈复（清）"><a href="#作者：沈复（清）" class="headerlink" title="作者：沈复（清）"></a>作者：沈复（清）</h3><h3 id="阅读时间：-2017-08"><a href="#阅读时间：-2017-08" class="headerlink" title="阅读时间： 2017.08"></a>阅读时间： 2017.08</h3><p>最初决定买这本书，是被沈复和芸娘的狗粮甜到了。因一碗粥结缘，长大便结婚在一起。虽然日子清贫，但是沈复和能持家的芸娘依然把日子过得有声有色。在庭院里搭建小庭院、养盆栽、读书、游园、赏月。最令我觉得芸娘玲珑的便是她将茶叶置于傍晚开放的莲花中，待莲花合上一夜，在清晨莲花绽放之时将茶取出。这清晨的茶就沾上了莲花的香气。</p>
+<p>可惜幸福日子只持续了六记的两记。婆媳、叔婶关系不睦，芸娘病重，沈复辗转谋生，芸娘病逝，沈父过世，沈复的日子过的日渐清冷。</p>
+<p>书还未读完。待看沈复之后如何生活。</p>
+<p>2018.09/06 续</p>
+<p>沈复之后就去各地领略山间风光，让我看的甚是无趣。一是因为本身就毫无波澜，令人发倦。二是因为书上记载的风光已经历过数百年的变化，就算真到了书中所述的地方，也认不出来。小时的街道到现在不过数十年，就已经大变样了，何况这普通的山山水水于现在根本无法做到万古长青。第四记之后，弃。</p>
+<h2 id="书名：我的晃荡的青春"><a href="#书名：我的晃荡的青春" class="headerlink" title="书名：我的晃荡的青春"></a>书名：我的晃荡的青春</h2><h3 id="作者：-东野圭吾"><a href="#作者：-东野圭吾" class="headerlink" title="作者： 东野圭吾"></a>作者： 东野圭吾</h3><h3 id="阅读时间：-2018-08"><a href="#阅读时间：-2018-08" class="headerlink" title="阅读时间： 2018.08"></a>阅读时间： 2018.08</h3><p>自浮生记至2018年八月，我读书的兴趣小了很多，入手的非技术书不过一册《红与黑》、一套《遗失的南境》。《红于黑》是我目前读过的最艰涩的小说，翻译艰涩、充斥大量莫名的自白、时代背景不熟，不提也罢，可能这辈子都不想再翻开它了。《遗失的南境》，我托大地买了一套全英。要知道这是科幻小说，里面的小部分词汇我拿词典都查不到。读完的部分大约不到百一吧。</p>
+<p>快一年没有更新博客，没有写点什么。久别重逢，写点轻松的书目吧。</p>
+<p>《我的晃荡的青春》大致是东野圭吾的童年记事，李小龙、赛文奥特曼、恶魔般的初中、荷尔蒙萌动的高中、大学的射箭部，这些都是东野圭吾的回忆。整个回忆到求职的时候，戛然而止，全书完结。我曾经也想写些童年记事，将遥远的回忆印作无波澜的文字，小小的人儿，大大的烦恼。等再长大一些，当初那些大大的烦恼也变成小小的。但是现在我的身形不会再长大了，是不是烦恼以后不会再变得小小的了？</p>
+<p>整本书大致还是轻松的，没有什么沉重的故事，就像是一个叔叔在酒桌上聊自己的童年一样。一周里，我在公交上（一趟不过十来分钟）就把书看完了。此书前后章没有太大关联，亦无太大深度，无须腾出整块时间来阅读，当做休闲零食即可。</p>
+<h2 id="书名：象棋的故事"><a href="#书名：象棋的故事" class="headerlink" title="书名：象棋的故事"></a>书名：象棋的故事</h2><h3 id="作者：-斯蒂芬·茨威格"><a href="#作者：-斯蒂芬·茨威格" class="headerlink" title="作者： 斯蒂芬·茨威格"></a>作者： 斯蒂芬·茨威格</h3><h3 id="阅读时间：2018-09"><a href="#阅读时间：2018-09" class="headerlink" title="阅读时间：2018.09"></a>阅读时间：2018.09</h3><p>中篇小说，节奏紧凑，心理活动描写细腻生动，成功地塑造了一个“古怪的象棋天才”和一个“癫狂的象棋业余爱好者”。</p>
+<p>1942年1月完稿，一个月后，茨威格自杀。在自杀之前的岁月里，茨威格因为希特勒和盖世太保而流离失所，因此很难不让人联想到B教授就是茨威格的化身，而希特勒就是那冷漠的“古怪的天才”或者说是“神秘的笨蛋”。希特勒或许在其他方面不够出色，但在发动战争和鼓动人心方面堪称天才。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/books/remarks/" data-id="ck2jtvp1d000yqvg9b3z04h3k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/novel/">novel</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-books/refactoring_improving_the_design_of_existing_code" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/books/refactoring_improving_the_design_of_existing_code/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.630Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/books/">books</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/books/refactoring_improving_the_design_of_existing_code/">重构 改善既有代码的设计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="refactoring-improving-the-design-of-existing-code"><a href="#refactoring-improving-the-design-of-existing-code" class="headerlink" title="refactoring improving the design of existing code"></a>refactoring improving the design of existing code</h1><p>Written by Martin Fowler (American)</p>
+<p>熊节（译）</p>
+<p>重构的定义：在不改变软件可观察行为的前提下改善其内部结构。</p>
+<h3 id="第一章-重构-第一个案例"><a href="#第一章-重构-第一个案例" class="headerlink" title="第一章 重构 第一个案例"></a>第一章 重构 第一个案例</h3><blockquote>
+<p>如果你发现自己需要为一个程序添加一个特性，而代码结构使你无法很方便地达成目的，那就先重构那个程序，使特性的添加比较容易进行，然后再添加特性。</p>
+</blockquote>
+<blockquote>
+<p>重构之前，首先检查自己是否有一套可靠的测试机制，这些测试必须有自我检验能力。</p>
+</blockquote>
+<p>Q： 测试需要什么特性，在前端如何编写测试呢？</p>
+<p>第一章以后有需要可以再看一遍，现在只是囫囵吞枣地过了一遍，有点“太长不看”的意思。</p>
+<h3 id="第二章-重构原则"><a href="#第二章-重构原则" class="headerlink" title="第二章 重构原则"></a>第二章 重构原则</h3><blockquote>
+<p>事不过三，三则重构。</p>
+</blockquote>
+<p>何时不该进行重构:</p>
+<ul>
+<li><p>现有代码根本不能正常运作（此时该重写而非重构）</p>
+</li>
+<li><p>项目已近最后期限。（重构的确能提高生产力，但是时间紧急的情况下不应该分心于重构。如果最后你没有足够的时间，通常就表示你其实早该进行重构。）</p>
+</li>
+</ul>
+<p>重构与设计：</p>
+<p>在写代码之前，如果力求设计灵活性高，那么这个软件会变得复杂而难以维护。尤其是为系统各处所有可能变化的地方建立起灵活性时，整个系统的复杂度和维护难度都会大大提高。为了获得自己想要的灵活性，你不得不加入比实际需要更多的灵活性。当然，如果最后发现所有这些灵活性都毫无用处，这才是最大的失败。</p>
+<p>有了重构，你可以有一种不同的方式来设计这些软件。你仍然需要思考潜在的变化以及相应的灵活的解决方案，但是你现在可以不用每个都去实现。在实现之前询问自己：“把一个简单的方案重构成这个灵活的方案需要多大难度？”，如果答案是：“相当容易”，那么现在可以先实现这个简单的方案，待以后有需求的时候再重构成灵活的方案。</p>
+<h3 id="第三章-代码的坏味道"><a href="#第三章-代码的坏味道" class="headerlink" title="第三章 代码的坏味道"></a>第三章 代码的坏味道</h3><p>看完全书之后应该再回顾一下第三章。因为第一次看第三章时，对于各种情况的处理，作者列出了许多重构的手法，但是这些手法细节都在后面，所以应该在看完全书之后再回顾一下第三章，加深理解。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/books/refactoring_improving_the_design_of_existing_code/" data-id="ck2jtvp14000kqvg9qpd94e1a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/refactor/">refactor</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ES6/dynamic_import" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/ES6/dynamic_import/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.628Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ES6/">ES6</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/ES6/dynamic_import/">Dynamic import</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何异步引入模块(译)</p>
+<hr>
+<h3 id="1、-ES-的modules模块都是静态引入的"><a href="#1、-ES-的modules模块都是静态引入的" class="headerlink" title="1、 ES 的modules模块都是静态引入的"></a>1、 ES 的modules模块都是静态引入的</h3><p>引入方式：</p>
+<pre><code>import * as someModule from &apos;./dir/someModule.js&apos;;
+</code></pre><p>首先，import 声明需要在顶部出现，这是为了防止你在if表达式或者其他handler里import模块。</p>
+<p>其次， module specifier ‘./dir/someModule.js’是写死的，你不能在运行的时候才获得准确的值（比如通过函数调用来返回）。</p>
+<h3 id="2、-如何实现动态引入模块-dynamic-module-imports"><a href="#2、-如何实现动态引入模块-dynamic-module-imports" class="headerlink" title="2、 如何实现动态引入模块(dynamic module imports)"></a>2、 如何实现动态引入模块(dynamic module imports)</h3><p>动态引入方式如下：</p>
+<pre><code>const moduleSpecifier = &apos;./dir/someModule.js&apos;;
+import(moduleSpecifier).then(someModule =&gt; someModule.foo());
+</code></pre><p>这个操作更像一个函数。这种引入方式和上面import的方式不一样的点在于：</p>
+<ul>
+<li>Module specifier 不再是写死的字符串了，可以是任何能够返回字符串的表达式。</li>
+<li>这种引入返回的是一个promise. 一旦module加载完成，那么Promise就算完成了。（意思即为触发resolve）</li>
+</ul>
+<h3 id="3、-用处"><a href="#3、-用处" class="headerlink" title="3、 用处"></a>3、 用处</h3><p>参考文章里提到有三种用处</p>
+<pre><code>a. 按需加载
+b. 条件加载模块
+c. 计算module specifiers
+</code></pre><p>个人觉得这三种用处都是一样的，最终目的都是按需加载，需要什么，再去动态地加载什么。</p>
+<h3 id="4、-Tips"><a href="#4、-Tips" class="headerlink" title="4、 Tips"></a>4、 Tips</h3><p>a. obj的解析语法可以帮助访问module的exports</p>
+<pre><code>import(&apos;./myModule.js&apos;)
+.then(({export1, export2}) =&gt; {
+    ···
+});
+</code></pre><p>b. 访问default exports。可以通过点操作符访问，不能通过解析语法访问default。</p>
+<pre><code>import(&apos;./myModule.js&apos;)
+.then(myModule =&gt; {
+    console.log(myModule.default);
+});
+</code></pre><p>c. 动态加载多个模块</p>
+<pre><code>Promise.all([
+    import(&apos;./module1.js&apos;),
+    import(&apos;./module2.js&apos;),
+    import(&apos;./module3.js&apos;),
+])
+.then(([module1, module2, module3]) =&gt; {
+    ···
+});
+</code></pre><p>d. Async函数和import()</p>
+<p>Import()返回的是promise，正好可以配合async使用。</p>
+<pre><code>async function main() {
+const myModule = await import(&apos;./myModule.js&apos;);
+    const {export1, export2} = await import(&apos;./myModule.js&apos;);
+    const [module1, module2, module3] =
+    await Promise.all([
+        import(&apos;./module1.js&apos;),
+        import(&apos;./module2.js&apos;),
+        import(&apos;./module3.js&apos;),
+    ]);
+}
+main();
+</code></pre><h3 id="5、-import-支持"><a href="#5、-import-支持" class="headerlink" title="5、 import()支持"></a>5、 import()支持</h3><ul>
+<li><p>Node.js: node-es-module-loader</p>
+</li>
+<li><p>Webpack v1: babel-plugin=dynamic-import-webpack将import()转化为require.ensure()</p>
+</li>
+<li><p>Webpack v2:  通过 import() 支持code splitting </p>
+</li>
+</ul>
+<p>参考链接: <a href="http://2ality.com/2017/01/import-operator.html" target="_blank" rel="noopener">ES proposal: import() – dynamically importing ES modules</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/ES6/dynamic_import/" data-id="ck2jtvp0n0005qvg9tnogt92h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authority/">authority</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/authority/" style="font-size: 10px;">authority</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/04/react/Q&A/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/01/other/have-a-taste/">技术尝鲜</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/10/other/study-reg/">正则表达式学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/03/articles/article/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/30/books/javaScript_design_patterns_and_development_practices/">JavaScript设计模式与开发实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

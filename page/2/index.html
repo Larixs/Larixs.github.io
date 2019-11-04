@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Larix&#39;s blog">
+<meta property="og:url" content="http://larixs.github.io/page/2/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Larix&#39;s blog">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-layout/wap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/22/layout/wap/" class="article-date">
+  <time datetime="2019-05-22T11:39:14.949Z" itemprop="datePublished">2019-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/22/layout/wap/">移动端响应式布局</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="像素篇"><a href="#像素篇" class="headerlink" title="像素篇"></a>像素篇</h3><h4 id="物理像素-physical-pixel"><a href="#物理像素-physical-pixel" class="headerlink" title="物理像素(physical pixel)"></a>物理像素(physical pixel)</h4><p>显示设备中一个最微小的物理部件。</p>
+<h4 id="ppi-pixel-per-inch"><a href="#ppi-pixel-per-inch" class="headerlink" title="ppi(pixel per inch)"></a>ppi(pixel per inch)</h4><p>屏幕每英寸所存在的物理像素。</p>
+<h4 id="设备独立像素-density-independent-pixel"><a href="#设备独立像素-density-independent-pixel" class="headerlink" title="设备独立像素(density-independent pixel)"></a>设备独立像素(density-independent pixel)</h4><p>设备独立像素也称为密度无关像素，可以认为是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说CSS像素)，然后由相关系统转换为物理像素。</p>
+<h4 id="逻辑像素-device-point"><a href="#逻辑像素-device-point" class="headerlink" title="逻辑像素(device point)"></a>逻辑像素(device point)</h4><p>为了调和距离不一致导致的差异，所有设备根据距离，透视缩放到一个相等水平的观看距离之后得到的尺寸，是一个抽象的概念。</p>
+<h4 id="CSS像素-device-independent-pixel，简称DIPs"><a href="#CSS像素-device-independent-pixel，简称DIPs" class="headerlink" title="CSS像素(device-independent pixel，简称DIPs)"></a>CSS像素(device-independent pixel，简称DIPs)</h4><h4 id="设备像素比-device-pixel-ratio"><a href="#设备像素比-device-pixel-ratio" class="headerlink" title="设备像素比(device pixel ratio)"></a>设备像素比(device pixel ratio)</h4><p>设备像素比简称为dpr，其定义了物理像素和设备独立像素的对应关系。它的值可以按下面的公式计算得到：</p>
+<pre><code>设备像素比 ＝ 物理像素 / 设备独立像素
+</code></pre><p>css中2px<em>2px的元素，在实际设备（dpr=2）上，是有4\</em>4=16个物理像素点来显示</p>
+<p>（原来的理解好像有误，综合后面对不同dpr设置不同font-size的代码来看，在dpr=1和dpr=2的设备上，2px控制的都是两个像素点，但是dpr=2的像素点更多更密集，让dpr=2上的2px小于dpr=1的2px。因此在dpr=2的设备上，需要4px，才能和dpr=1上的2px效果一样。</p>
+<p>有个疑惑的地方，我用chrome的dpr去测试同一个页面，同一个font-size，dpr=3和dpr=2的表现是一样的。是chrome的调试环境有问题，还是我测试的不对呢？）</p>
+<h4 id="initial-scale-缩放比例："><a href="#initial-scale-缩放比例：" class="headerlink" title="initial-scale  缩放比例："></a>initial-scale  缩放比例：</h4><p>  \&lt;meta name=”viewport” content=”initial-scale=2.0,width=device-width”></p>
+<p>  缩放比例为2.0，这会使页面放大到设备尺寸两倍显示</p>
+<h4 id="viewport-视窗："><a href="#viewport-视窗：" class="headerlink" title="viewport 视窗："></a>viewport 视窗：</h4><p>简单理解，viewport是严格等于浏览器的窗口。</p>
+<p>pc端：viewport就是浏览器窗口的宽度高度。</p>
+<p>移动端： 因为视口太窄，所以提供了两个viewport ：可见的visual viewport(what you can see,a portion of layout viewport)和布局的layout viewport（all the web, the size and shape never change）。</p>
+<p>###单位篇</p>
+<h4 id="1-rem-font-size-of-the-root-element"><a href="#1-rem-font-size-of-the-root-element" class="headerlink" title="1.rem (font size of the root element)"></a>1.rem (font size of the root element)</h4><p>rem是以根元素html的font-size为基准来做计算的。</p>
+<h4 id="2-px（pixel）"><a href="#2-px（pixel）" class="headerlink" title="2.px（pixel）"></a>2.px（pixel）</h4><p>像素是相对于显示器屏幕分辨率而言的。</p>
+<h3 id="代码篇"><a href="#代码篇" class="headerlink" title="代码篇"></a>代码篇</h3><h4 id="1-动态设置meta"><a href="#1-动态设置meta" class="headerlink" title="1.动态设置meta"></a>1.动态设置meta</h4><p>\<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js">\</script></p>
+<p>这个js文件动态改写了meta标签，为不同的设备设置不同的data-dpr、font-size属性。</p>
+<h4 id="2-根据不同的dpr，（将rem转化为不同的px值？）"><a href="#2-根据不同的dpr，（将rem转化为不同的px值？）" class="headerlink" title="2.根据不同的dpr，（将rem转化为不同的px值？）"></a>2.根据不同的dpr，（将rem转化为不同的px值？）</h4><p>方案1 使用sublime Text3的cssREM插件</p>
+<p>方案2 使用sass的函数和混合宏（可是并没有根据不同的dpr转化不同的px呀）</p>
+<p>方案3 npm工具px2rem 这个会根据不同的dpr转化为不同的px</p>
+<h4 id="3-描述性文本字号一般不通过rem做适配，通过不同的dpr来设置字号大小"><a href="#3-描述性文本字号一般不通过rem做适配，通过不同的dpr来设置字号大小" class="headerlink" title="3.描述性文本字号一般不通过rem做适配，通过不同的dpr来设置字号大小"></a>3.描述性文本字号一般不通过rem做适配，通过不同的dpr来设置字号大小</h4><p>文本使用px单位，但会根据不同的dpr设置不同的字号大小。如：</p>
+<pre><code>div {
+    width: 1rem;
+    height: 0.4rem;
+    font-size: 12px; // 默认写上dpr为1的    fontSize
+}
+[data-dpr=&quot;2&quot;] div {
+    font-size: 24px;
+}
+[data-dpr=&quot;3&quot;] div {
+    font-size: 36px;
+}
+</code></pre><p>可使用sass的混合宏</p>
+<pre><code>@mixin font-dpr($font-size){
+    font-size: $font-size;
+
+    [data-dpr=&quot;2&quot;] &amp; {
+        font-size: $font-size * 2;
+    }
+
+    [data-dpr=&quot;3&quot;] &amp; {
+        font-size: $font-size * 3;
+    }
+}
+</code></pre><h4 id="学习链接："><a href="#学习链接：" class="headerlink" title="学习链接："></a>学习链接：</h4><p><a href="http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html" target="_blank" rel="noopener">使用Flexible实现手淘H5页面的终端适配</a></p>
+<p><a href="http://www.w3cplus.com/css3/define-font-size-with-css3-rem" target="_blank" rel="noopener">css3的rem设置字体大小</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2019/05/22/layout/wap/" data-id="ck2jtvp1t001sqvg9w9ieezad" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/responsive/">responsive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wap/">wap</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/strange_feature" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/22/layout/strange_feature/" class="article-date">
+  <time datetime="2019-05-22T11:39:14.947Z" itemprop="datePublished">2019-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/22/layout/strange_feature/">一些奇奇怪怪的样式问题处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>做的移动端页面和响应式页面时遇到的兼容性问题：</p>
+<hr>
+<h3 id="1-audio"><a href="#1-audio" class="headerlink" title="1. audio"></a>1. audio</h3><p>audio在ios上的兼容性问题如下：</p>
+<p> 音频的开始和停止在<strong>safari</strong>下都需要手动操作。标签设置的preload属性会被忽略，导致不能自动播放；网页关闭后，音频仍然播放，不会随网页的关闭而停止，除非把浏览器彻底关掉（使用微信浏览器则退出微信）。</p>
+<p> 解决方法：</p>
+<p> 自动播放：</p>
+<pre><code>//player为audio元素
+player.load();//ios9及以上需要先load再play
+player.play();//ios9以下不需要load
+</code></pre><p> <strong>（关于load的说法，因为没有ios9以下的设备进行验证load的必须性，所以此项仅供参考。不过ios9及以上设备使用load是没有问题的) </strong></p>
+<p> 自动停止：</p>
+<pre><code>window.onunload = stopVideo;
+//在关闭网页的时候停止音频播放。stopVideo是自己实现的函数。
+</code></pre><p> <strong> 有人提供了另一种思路，通过document.hidden来判断网页是否缩小、被切换、关闭，然后将音频停止。不过有一个问题，难道浏览器要一直轮询hidden状态吗？如果不的话，怎么得知网页状态的变化呢？或许应该好好看看js高程 </strong></p>
+<hr>
+<h3 id="2-position-sticky"><a href="#2-position-sticky" class="headerlink" title="2. position:sticky"></a>2. position:sticky</h3><p> ios的浏览器，多数在滚动的时候会<strong>暂停所有js代码执行</strong>，注意，是<strong> 所有的 </strong>，包括你提前设定好的定时器。</p>
+<p> 有一个比较直观的例子，你在ios的微信中点开公众号，查看gif动图，当在屏幕在滚动的过程中时，gif会定格在某一画面，等你松手之后gif才会继续播放。</p>
+<p> js就像gif一样，在屏幕滚动的时候会被暂停，滚动结束后才继续。</p>
+<p> 遇到的问题：如何在ios端实现粘性布局？</p>
+<p> 解决方案： position:sticky。 这个css3新属性几乎是为ios特别定制的，它很好的解决了ios的粘性布局问题。</p>
+<p> position:sticky的表现上像是position:fixed和position:relative的结合体，设置了position:sticky的元素，特征如下：</p>
+<pre><code>- 元素不会脱离文档流，并保留元素在文档流中占位的大小
+- 元素在容器中被滚动超过指定的偏移值时，元素在容器内固定在指定位置
+- 元素固定的相对偏移是相对于离它最近的具有滚动框的祖先元素，如果祖先元素都不可以滚动，那么是相对于viewport来计算元素的偏移
+</code></pre><p> sticky其生效条件已经有人研究过，我就不再赘述了。</p>
+<p>PS：也许会有其他库来实现粘性布局，不过如果只实现粘性布局的话，就没必要引入库了，自己写写js，ios使用sticky属性，非ios增加对scroll的监听，通过计算位置来调整positon。</p>
+<hr>
+<p>2017.12.21</p>
+<p>已经是第三次解决这个问题了，每次解决这个问题都得看老久文档，然后研究好久父元素需要设置的条件。亲自试验和看别人的文章还是不一样。原因就在于我没理解到文章的点，所以看起来很费解而且用起来也不顺手。决定自己写一下经过实验后自己的理解，对正确性不保证。</p>
+<ol>
+<li>目标元素需要设置position: sticky; top: 0;</li>
+<li>overflow是设置视口。目标元素的祖先元素中，如果有元素的overflow不为visible,则该元素设置为视口。当视口滚动时（设置高度小于内容高度），才触发sticky。</li>
+<li>如果祖先元素的overflow均为visible, 那么目标元素相对于视口进行定位。</li>
+</ol>
+<hr>
+<p>2018.01.05</p>
+<p>第四次看着这个问题，我还是不能很顺利的一次性解决，我也是服气的。这次出现的问题在于，父元素没有高于目标元素导致目标元素没有滚动起来。目标元素就算设置了sticky并且生效了，也只会在父元素里滚动。因此要注意目标元素的DOM节点位置和父元素的高度。</p>
+<hr>
+<h5 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h5><p><a href="http://efe.baidu.com/blog/position-sticky/" target="_blank" rel="noopener">position:sticky实现iOS6+下的粘性布局</a></p>
+<p><a href="http://html5-demos.appspot.com/static/css/sticky.html" target="_blank" rel="noopener">sticky demo</a></p>
+<hr>
+<h3 id="3-webkit-overflow-scrolling-touch-引起的元素莫名消失的现象"><a href="#3-webkit-overflow-scrolling-touch-引起的元素莫名消失的现象" class="headerlink" title="3. -webkit-overflow-scrolling: touch 引起的元素莫名消失的现象"></a>3. -webkit-overflow-scrolling: touch 引起的元素莫名消失的现象</h3><p>假设存在一个元素的CSS属性同时使用了以下两条：</p>
+<pre><code>overflow:auto;
+-webkit-overflow-scrolling: touch;
+</code></pre><p>且该元素的子元素使用了positon:relative, 在ios的浏览器会触发内容实际存在但显示空白的bug。</p>
+<p>解决方案： 为positon:relative的子节点添加</p>
+<pre><code>transform: translate3d(0,0,0);
+</code></pre><h5 id="参考链接：-1"><a href="#参考链接：-1" class="headerlink" title="参考链接："></a>参考链接：</h5><p><a href="http://isay.me/2015/09/one-css-bug-webkit-overflow-scrolling-touch.html" target="_blank" rel="noopener">-webkit-overflow-scrolling设置为touch的一个bug</a></p>
+<hr>
+<h3 id="4-input-type-”tel”"><a href="#4-input-type-”tel”" class="headerlink" title="4. input type=”tel”"></a>4. input type=”tel”</h3><p>该元素在ios上会弹出纯数字键盘，非常纯，连个小数点都没有，若非特殊需求，请谨慎使用。</p>
+<p>如果想要在input元素获取焦点时首先弹出数字键盘，且可以选择其他字符，那么使用input type=”number”在ios上表现会更好。</p>
+<hr>
+<h3 id="5-pc端浏览器使用win10自带中文输入法时光标错位"><a href="#5-pc端浏览器使用win10自带中文输入法时光标错位" class="headerlink" title="5. pc端浏览器使用win10自带中文输入法时光标错位"></a>5. pc端浏览器使用win10自带中文输入法时光标错位</h3><p>需求： 用户在输入框输入手机号时，将其合理分割并且添加空格。</p>
+<p>现象： 使用vue框架，通过函数处理后返回添加过空格的字符串。当使用win10自带中文输入法且正好该字符串刚添加过一个空格，则光标会错误地停留在前一位。</p>
+<p>解决方案：</p>
+<p>在返回包含空格的字符串后， 利用setTimeout主动设置光标的位置</p>
+<pre><code>if(val.length &gt; 0){
+ //如果不设置if条件，在IE11下会出现不停获得焦点的bug
+    setTimeout(function(){
+        target.setSelectionRange(_self.inputVal.length,_self.inputVal.length)
+    },0)
+}
+</code></pre><hr>
+<h3 id="6-ios移动端滚动穿透"><a href="#6-ios移动端滚动穿透" class="headerlink" title="6. ios移动端滚动穿透"></a>6. ios移动端滚动穿透</h3><p>ios移动端不仅有点击穿透的问题，还有滚动穿透的问题。现象为撑满全屏且可内容滚动的的fixed元素在内容滚到其底部后，再滑动会使body在接收不到touch事件的情况和无冒泡的情况下触发scroll事件，且无法禁止滚动。</p>
+<p>解决方案：</p>
+<p>在弹出fixed元素时，设置body</p>
+<pre><code>body.modal-open {
+    position: fixed;
+    width: 100%;
+}
+</code></pre><p>同时记录body滚动条的位置，待fixed元素关闭后恢复body的css属性和滚动条位置。</p>
+<pre><code>var ModalHelper = (function(bodyCls) {
+  var scrollTop;
+  return {
+    afterOpen: function() {
+      scrollTop = document.scrollingElement.scrollTop;
+      document.body.classList.add(bodyCls);
+      document.body.style.top = -scrollTop + &apos;px&apos;;
+    },
+    beforeClose: function() {
+      document.body.classList.remove(bodyCls);
+      // scrollTop lost after set position:fixed, restore it back.
+      document.scrollingElement.scrollTop = scrollTop;
+    }
+  };
+})(&apos;modal-open&apos;);
+</code></pre><h5 id="参考链接：-2"><a href="#参考链接：-2" class="headerlink" title="参考链接："></a>参考链接：</h5><p><a href="https://segmentfault.com/a/1190000005617307" target="_blank" rel="noopener">移动端滚动穿透问题完美解决方案</a></p>
+<hr>
+<h3 id="7-ios11以下的safari在开启无痕时，localStorage和sessionStorage的setItem操作报错"><a href="#7-ios11以下的safari在开启无痕时，localStorage和sessionStorage的setItem操作报错" class="headerlink" title="7.ios11以下的safari在开启无痕时，localStorage和sessionStorage的setItem操作报错"></a>7.ios11以下的safari在开启无痕时，localStorage和sessionStorage的setItem操作报错</h3><p>如题所述，开发过程中，发现ios11以下的safari在开启无痕模式时，两种storage的setItem操作都会抛出错误 “QUOTA_EXCEEDED_ERR”，如果没有处理错误的话，还会中断后面的js代码。</p>
+<p>似乎没有什么兼容措施，只能判断当前环境是否支持setItem操作，例如</p>
+<pre><code>function isLocalStorageNameSupported() {
+  var testKey = &apos;test&apos;, storage = window.localStorage;
+  try {
+    storage.setItem(testKey, &apos;1&apos;);
+    storage.removeItem(testKey);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+</code></pre><p>把localStorage换成sessionStorage同样适用。</p>
+<p>另一种方式就是，在你进行setItem操作时，用try-catch包装一下。</p>
+<pre><code>function localStorageSetItem( key, value){
+    try{
+        localStorage.setItem(key, value)
+        return true
+    }catch(err){
+        console.log(err)
+        return false
+    }
+}
+</code></pre><h5 id="参考链接：-3"><a href="#参考链接：-3" class="headerlink" title="参考链接："></a>参考链接：</h5><p><a href="https://www.bbsmax.com/A/8Bz8XXm1zx/" target="_blank" rel="noopener">Safari Private 模式下 localStorage 的问题</a></p>
+<p><a href="https://stackoverflow.com/questions/14555347/html5-localstorage-error-with-safari-quota-exceeded-err-dom-exception-22-an" target="_blank" rel="noopener">html5 localStorage error with Safari: “QUOTA_EXCEEDED_ERR: DOM Exception 22: An attempt was made to add something to storage that exceeded the quota.”</a></p>
+<hr>
+<h3 id="8-label的点击事件会触发其关联的input的点击事件"><a href="#8-label的点击事件会触发其关联的input的点击事件" class="headerlink" title="8. label的点击事件会触发其关联的input的点击事件"></a>8. label的点击事件会触发其关联的input的点击事件</h3><pre><code>&lt;div class=&quot;test&quot;&gt;
+  &lt;input id=&quot;input&quot; @click=&quot;inputClickHandler&quot; type=&quot;text&quot;&gt;
+  &lt;label for=&quot;input&quot; @click=&quot;labelClickHandler&quot;&gt;标签&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  { ...
+      inputClickHandler() {
+          console.log(&apos;input click&apos;);
+      },
+      labelClickHandler() {
+          console.log(&apos;label click&apos;);
+      }
+  }
+&lt;/script&gt;
+</code></pre><p>此时label与input元素在位置上并不重叠。点击label的时候，会先打印’label click’, 紧接着打印’input click’。点击input的时候只打印’input click’。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2019/05/22/layout/strange_feature/" data-id="ck2jtvp1v001uqvg95emnkpcw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wap/">wap</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ssr/ssr_practice" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/09/ssr/ssr_practice/" class="article-date">
+  <time datetime="2019-04-09T15:29:38.761Z" itemprop="datePublished">2019-04-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ssr/">ssr</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/ssr/ssr_practice/">SSR实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在业务中，为了使用vue+ssr，选用nuxt.js作为基础框架进行开发。</p>
+<h2 id="nuxt或ssr的优势"><a href="#nuxt或ssr的优势" class="headerlink" title="nuxt或ssr的优势"></a>nuxt或ssr的优势</h2><ul>
+<li>加快首屏渲染速度</li>
+<li>利于SEO</li>
+<li>nuxt接管了打包的一系列事，方便使用</li>
+</ul>
+<h2 id="使用nuxt中遇到的问题"><a href="#使用nuxt中遇到的问题" class="headerlink" title="使用nuxt中遇到的问题"></a>使用nuxt中遇到的问题</h2><ul>
+<li>服务器端渲染的页面，referer指向不对，需要手动透传。</li>
+<li>nuxt项目页面与非nuxt项目页面之间，通过浏览器的前进后退按钮访问时，可能会出现串账号的问题（见以下问题1）。</li>
+<li>功能特别多的脚手架，在碰见特殊需求时一般都不够灵活。</li>
+<li>nuxt的报错有些微的不友好。</li>
+</ul>
+<h2 id="1-思考：客户的登录状态是否应该在服务器端获取？"><a href="#1-思考：客户的登录状态是否应该在服务器端获取？" class="headerlink" title="1. 思考：客户的登录状态是否应该在服务器端获取？"></a>1. 思考：客户的登录状态是否应该在服务器端获取？</h2><p>在服务器端获取客户的登录状态或者账户信息，是因为在服务器端请求接口可以减少等待时间。</p>
+<p>目前正在迁移项目，将非ssr的项目迁为ssr项目。因为个人中心页面数量多，因此想采用分批迁移替换的方式。</p>
+<p>但迁移中发现一个问题：</p>
+<p><code>如果所有可以改变登录状态页面不在一个ssr项目里，通过浏览器的前进后退，可能会串账户信息。</code></p>
+<p>复现条件：</p>
+<ul>
+<li>登录状态通过服务器端发请求提前获取，存在了window.<strong>NUXT</strong>里。</li>
+<li>如果在服务器端获取了数据，则浏览器端不再重发请求。</li>
+<li>页面a在项目A里，页面b在项目B里。项目A是ssr。</li>
+<li>a页面可以直接点击跳到b页面。</li>
+</ul>
+<p>简单的复现步骤：</p>
+<p>在a页面登录账户1，点击跳到b后，b页面正确显示账户1信息。</p>
+<p>通过浏览器的回退按钮回到a页面，a页面则显示无账户登录。前进到b页面又有登录状态。</p>
+<p>此时就有了ab两个连续访问的页面显示了不同的登录状态。</p>
+<p>还有更复杂一点的步骤可以导致a页面显示账户1，b页面显示账户2。这里就不赘述了，但肯定是可以复现的（我是先看见这种情况才发现的bug）。</p>
+<p>原因：</p>
+<p>b通过浏览器回退回到a时，浏览器直接读取了缓存的a页面的html，该html里携带了登录的信息，且因为有数据，在浏览器端不再发送请求而是直接使用html里的数据，所以a页面在不刷新的情况下一定会为“未登录”。</p>
+<p>方案：</p>
+<pre><code>- 临时： asyncData已经获取了数据的情况下，在a页面的created里再次请求接口，保证浏览器无论怎么访问都可以更新数据。（不加loading的情况下可以看见账户信息的突变）
+- 终极： 所有可以触发用户登录状态的页面都放在一个项目里，浏览器前进后退会触发middleware，此时可以更新状态。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2019/04/09/ssr/ssr_practice/" data-id="ck2jtvp2m0036qvg9k7d8rm9o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-books/js_you_dont_know" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/17/books/js_you_dont_know/" class="article-date">
+  <time datetime="2019-02-17T02:28:38.037Z" itemprop="datePublished">2019-02-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/books/">books</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/17/books/js_you_dont_know/">你不知道的Javascript</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="上卷-scope-amp-closures-amp-this-amp-object-prototypes"><a href="#上卷-scope-amp-closures-amp-this-amp-object-prototypes" class="headerlink" title="上卷 (scope &amp; closures &amp; this &amp; object prototypes)"></a>上卷 (scope &amp; closures &amp; this &amp; object prototypes)</h1><h2 id="part1-scope-and-closures"><a href="#part1-scope-and-closures" class="headerlink" title="part1, scope and closures"></a>part1, scope and closures</h2><h3 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h3><ol>
+<li>参与编译的部分：</li>
+</ol>
+<ul>
+<li>引擎： 从头到尾负责整个js程序的编译及执行过程。</li>
+<li>编译器： 负责语法分析及代码生成。</li>
+<li>作用域： 收集并维护所有声明的标识符（变量），确定当前执行的代码对这些标识符的访问权限。</li>
+</ul>
+<ol start="2">
+<li><p>遇到变量时的简要编译运行过程：</p>
+<p> <code>var a = 2;</code></p>
+<p> 编译器将程序分解并解析成一个抽象语法树（AST），遇到var a时，会先询问作用域是否有一个该名称的变量存在同一个作用域的<em>集合</em>中。如果有，则忽略该声明，继续进行编译，否则会要求作用域在当前作用域的<em>集合</em>中声明一个新的变量， 并命名为a。</p>
+<p> 引擎运行a = 2时，会先询问作用域变量是否存在，如果是，引擎就会使用这个变量，否则继续往上查找。</p>
+</li>
+<li><p>LHS、RHS</p>
+<p>获取变量的值使用的是RHS，为变量赋值（或者说是获得变量的指针？）是用的LHS。 函数声明不会触发LHS。在非严格模式下，LHS在作用域的顶层（即全局作用域）也找不到变量时，全局作用域会创建一个具有该名称的变量并返给引擎。</p>
+</li>
+</ol>
+<ol start="4">
+<li><p>作用域嵌套</p>
+<p> 引擎在当前作用域找不到对应变量时，就会继续向外层作用域查找，直到找到变量或者到达最外层作用域。</p>
+<p> 综合示例：</p>
+<pre><code>function test(str){  // 函数传参时有个隐形变量分配，触发LHS。
+    var a = str;  // 编译器在test作用域内声明变量a，引擎触发RHS查找str的值，触发LHS为变量a赋值。
+    b = a; // 因为没有var这个声明符，所以在编译器没有在test作用域内声明变量b。
+           // 引擎运行时，触发RHS查找a的值，触发LHS查找b。LHS在test作用域内没有找到b，便向外层查找，直到全局作用域。全局作用域也没有变量b，在非严格模式下，全局作用域创建了一个全局变量b，并返回给引擎。
+}
+
+test(&apos;hello world&apos;);  // RHS查找函数。
+console.log(b); // b &gt;&gt; &apos;hello world&apos;
+</code></pre></li>
+<li><p>欺骗词法</p>
+<p> 欺骗词法是指运行时“修改”（或者说欺骗）词法作用域，典型的有eval和with。</p>
+<p> 弊端：</p>
+<ul>
+<li>由于作用域的不确定性，影响编译器的优化。</li>
+<li>在严格模式下会限制或者禁止欺骗词法。</li>
+<li>代码可读性下降。</li>
+</ul>
+</li>
+<li><p>函数作用域与块作用域</p>
+<p> 定义不赘述。</p>
+<p> 注： for循环里如果for的循环变量是声明的let变量，则每次进入循环的时候，都会<strong>重新</strong>绑定到每一个迭代中。</p>
+<p> 加上闭包概念的典型示例：</p>
+<pre><code>for(let i = 1; i &lt;= 5; i++) {
+    setTimeout(function timer(){
+        console.log(i);
+    }, i*1000);
+} // 输出1,2,3,4,5
+
+for (var j = 1; j &lt;= 5; j++){
+    setTimeout(function timer(){
+        console.log(j);
+    }, j*1000);
+} // 输出6,6,6,6,6
+</code></pre></li>
+<li><p>提升</p>
+<ul>
+<li>函数声明会首先被提升。</li>
+<li><p>变量var存在变量声明提升，而let不存在变量声明提升。</p>
+<p>变量var声明提升示例：</p>
+<p>  console.log(a); // undefined<br>  var a;</p>
+<p>  console.log(c); // Uncaught ReferenceError: c is not defined;</p>
+<p>  console.log(b); // Uncaught ReferenceError: b is not defined;<br>  let b;</p>
+<p>原理：</p>
+</li>
+<li><p>编译器在读取<code>console.log(a); var a;</code>时，因为有var声明符，所以编译器会先在当前作用域创建一个变量a，值为undefined。引擎再读取时，存在该变量a，但是该变量取值为undefined。因此打印”undefined”。</p>
+</li>
+<li><code>console.log(c);</code>没有变量声明，编译器也不会提前创建一个相关变量，所以引擎使用时会找不到变量而报错。</li>
+<li>let声明符与var表现不同，没有提升的作用。</li>
+</ul>
+</li>
+</ol>
+<h3 id="closures"><a href="#closures" class="headerlink" title="closures"></a>closures</h3><p>   函数在定义时的词法作用域以外的地方被调用，且此时可以继续访问定义时的词法作用域，该行为称之为闭包。</p>
+<p>   示例</p>
+<pre><code>function foo(){
+    var a = 2;
+    function bar(){
+        console.log(a);
+    }
+    return bar;
+}
+var baz = foo();  // baz也是对bar函数的引用。
+baz(); // 2。通过闭包访问到了foo内部的变量a
+</code></pre><h2 id="part2-this"><a href="#part2-this" class="headerlink" title="part2, this"></a>part2, this</h2><p>this是在运行时进行绑定的，并不是在编写时绑定。this的上下文取决于函数调用时的各种条件，和函数声明的位置没有任何关系，只取决于函数的调用方式。</p>
+<ol>
+<li><p>默认绑定：<br> <strong>非严格模式</strong>下，this默认绑定到全局对象。严格模式下，全局对象无法使用默认绑定，this会绑定到undefined。</p>
+</li>
+<li><p>隐式绑定：<br> 当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象。</p>
+<p> 简单示例：</p>
+<pre><code>function foo() {
+    console.log( this.a );
+}
+var obj = {
+a: 2,
+foo: foo
+};
+obj.foo(); // 2
+</code></pre></li>
+<li><p>隐式丢失：<br> 当为一个绑定了上下文的函数创建一个新的别名时，此时通过新别名调用函数，可能会丢失this对象。注意，参数传递其实也是一种隐形赋值，所以函数在作为参数传递的过程中，容易丢失this对象而使用默认绑定。</p>
+<p> 简单示例：</p>
+<pre><code>function foo() {
+    console.log( this.a );
+}
+var obj = {
+    a: 2,
+    foo: foo
+};
+var bar = obj.foo; // 函数别名！
+var a = &quot;oops, global&quot;; // a 是全局对象的属性
+bar(); // &quot;oops, global&quot; // 丢失了绑定的obj上下文
+</code></pre></li>
+<li><p>显式绑定：</p>
+<ul>
+<li><p>硬绑定：call, apply, bind</p>
+</li>
+<li><p>api调用的”上下文”</p>
+<p>  简单示例：</p>
+<pre><code>function foo(el) {
+    console.log( el, this.id );
+}
+var obj = {
+    id: &quot;awesome&quot;
+}; // 调用 foo(..) 时把 this 绑定到 obj [1, 2, 3].forEach( foo, obj );
+// 1 awesome 2 awesome 3 awesome
+</code></pre></li>
+</ul>
+</li>
+<li><p>new 绑定</p>
+<p> javascript实际上不存在所谓的”构造函数”，只有对于函数的”构造调用”。</p>
+<p> 构造函数调用时的操作：</p>
+<ol>
+<li><p>创建一个全新对象。</p>
+</li>
+<li><p>对这个新对象执行”原型”连接。</p>
+</li>
+<li><p>函数里的this会指向这个新对象（原译文：’这个新对象会绑定到函数调用的this。’，感觉原译文有点奇怪，此项为自行理解的内容）。</p>
+</li>
+<li><p>执行函数。如果函数没有其他返回对象，那么new表达式中的函数调用会自动返回这个新对象。</p>
+</li>
+</ol>
+</li>
+<li><p>优先级</p>
+<p> new 绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
+</li>
+<li><p>箭头函数</p>
+<p> 箭头函数会捕获所在外部函数被调用时的当时环境，并绑定该环境的this。箭头函数的绑定无法被修改。</p>
+</li>
+</ol>
+<h2 id="part3-object"><a href="#part3-object" class="headerlink" title="part3, object"></a>part3, object</h2><p>对象的属性名永远都是字符串。如果使用了string(字面量)以外的其他值作为属性名，那它首先会使用该值的toString方法被转化成一个字符串。</p>
+<h3 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h3><ol>
+<li><p>创建对象常量：</p>
+<p> 结合属性描述符writable: false, configurable: false就可以创建一个真正的常量属性（无法修改、重定义或者删除）。</p>
+</li>
+<li><p>禁止扩展</p>
+<p> 禁止一个对象添加新属性并保留已有属性：</p>
+<p> Object.preventExtensions(myObject);</p>
+</li>
+<li><p>密封</p>
+<p> 禁止添加新属性并且不可删除、重新配置已有的属性。</p>
+<p> 即在一个现有对象上调用 Object.preventExtensions(..) 并把所有现有属性标记为 configurable:false 。</p>
+<p> Object.seal(myObject);</p>
+</li>
+<li><p>冻结</p>
+<p> 禁止添加新属性并且不可修改、删除、重新配置已有属性。</p>
+<p> 即在一个现有对象上调用 Object.seal(..) 并把所有“数据访问”属性标记为 writable:false。</p>
+<p> Object.freeze(myObject);</p>
+</li>
+</ol>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>可以使用@@iterator对象和它的next()方法遍历数据值（而非属性名）。</p>
+<h2 id="part4、-混合对象类"><a href="#part4、-混合对象类" class="headerlink" title="part4、 混合对象类"></a>part4、 混合对象类</h2><p>显式混入（包含寄生式继承）、隐式混入。</p>
+<p>javascript里的类与其他语言的类完全不同，并且本身不提供”多重继承”这个功能。</p>
+<h2 id="part5、-原型"><a href="#part5、-原型" class="headerlink" title="part5、 原型"></a>part5、 原型</h2><p>js中其实不存在真正的类，也不存在通过复制类生成的实例。js中的“类”其实是“差异继承”，即创建的时候声明某些特殊的属性，然后其他的属性都通过委托行为去原型里查找。 js中通过“类”生成“实例”，其实是将两个对象关联起来。</p>
+<p>如果向 [[Prototype]] 链上层已经存在的属性([[Put]])赋值，不一定会触发屏蔽。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>所有函数都可以成为构造函数。只不过有new关键词的时候，函数调用会变成“构造函数调用”。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2019/02/17/books/js_you_dont_know/" data-id="ck2jtvp1j0015qvg9vd2n2f8t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/studyWebpack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/webpack/studyWebpack/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.643Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/webpack/">webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/webpack/studyWebpack/">webpack入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="为什么要使用webpack"><a href="#为什么要使用webpack" class="headerlink" title="为什么要使用webpack"></a>为什么要使用webpack</h2><p>worse environment</p>
+<ul>
+<li><p>假设你在页面中引入了外部script文件（即不是自己编写的文件），如jquery，当jquery链接失效或者引入顺序错误，那么整个页面就不会正常使用。</p>
+</li>
+<li><p>假设你引入了一个依赖，但是从未使用，这样加载大量不必要的代码显然是不科学的。</p>
+</li>
+</ul>
+<p>通过说明模块的依赖关系，webpack可以构建依赖关系图，然后根据此图生成优化的bundle，让脚本可以以正确顺序运行。此时，未使用的依赖不会被包含在bundle中。</p>
+<h2 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h2><p>webpack将所有文件（包括css、html、scss等等）都当做模块，但是webpack只识别js。</p>
+<p>Loaders 将这些文件转化为模块，这样webpack才可以将它们加入依赖视图。</p>
+<p>因此Loaders主要有两个作用：</p>
+<ul>
+<li><p>通过特定的loader识别需要转化的文件</p>
+</li>
+<li><p>转化文件，这样才能将它们加入依赖视图。</p>
+</li>
+</ul>
+<p>示例：</p>
+<pre><code>const config = {
+  entry: &apos;./path/to/my/entry/file.js&apos;,
+  output: {
+    path: path.resolve(__dirname, &apos;dist&apos;),
+    filename: &apos;my-first-webpack.bundle.js&apos;
+  },
+  module: {
+    rules: [
+      {test: /\.(js|jsx)$/, use: &apos;babel-loader&apos;}
+    ]
+  }
+};
+module.exports = config;
+</code></pre><p>在module.rules下设置loader，示例中的loader只有一个，它的意思是：</p>
+<p>“嗨webpack，当你在require()/import声明中遇到文件后缀为.js或者.jsx的文件时，先使用（use）babel-loader转化这个文件，再将其添加到bundle中。</p>
+<p><a href="https://webpack.js.org/concepts/loaders/" target="_blank" rel="noopener">添加loaders的三种方法</a></p>
+<h2 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h2><p>插件可以帮助你管理webpack的compile流程，比loader强大得多。</p>
+<p>插件是webpack的核心。webpack本身的构建体系和你在webpack配置中使用的插件是同一个插件体系。插件可以提供loader所不能提供的其他任何功能。（They also serve the purpose of doing anything else that a loader cannot do.）</p>
+<p>添加plugin有两个方法，一个是通过配置文件，一个是通过Node API。</p>
+<p>在webpack源码中还有很多自由添加plugin的示例。</p>
+<p><a href="https://webpack.js.org/concepts/plugins/" target="_blank" rel="noopener">添加plugin的方法</a></p>
+<p>学习资料：</p>
+<p><a href="https://webpack.js.org/concepts/" target="_blank" rel="noopener">webpack2官方教程</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/webpack/studyWebpack/" data-id="ck2jtvp2z003wqvg9qzj4g2o5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/hot_module_and_reload" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/webpack/hot_module_and_reload/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.642Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/webpack/">webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>zelda项目突然有一天就不支持在dev环境下热刷新了。</p>
+<p>可能是因为zelda经历了一次项目文件的重构，不知道把什么写掉了（可是我确实不记得见过或者修改过关于热更新热加载的代码）。</p>
+<p>曾经修了一下午无果，google出的方案也都失效，就放弃了。</p>
+<p>今天上午因为后台挂了，没有办法写需求，突然想起来我还可以fix这个问题。这次运气很好，换了关键词（可能上次搜索时钻牛角尖了）就搜到了解决方案。</p>
+<p>目前在zelda中，要想实现热刷新热加载，需要以下3个条件：</p>
+<ol>
+<li>dev环境下每个入口处添加“webpack-hot-middleware/client?reload=true”,即</li>
+</ol>
+<pre><code>webpack.config.js={
+    entry:{
+      entry1:[entry1.js,&quot;webpack-hot-middleware/client?reload=true&quot;],
+      entry2:[entry2.js,&quot;webpack-hot-middleware/client?reload=true&quot;],
+    }
+}
+</code></pre><ol start="2">
+<li><p>在webpack配置中添加plugin插件new webpack.HotModuleReplacementPlugin()。</p>
+</li>
+<li><p>在Express实例中添加中间件’webpack-hot-middleware’。</p>
+</li>
+</ol>
+<p>终于解决了，开心。o(<em>￣▽￣</em>)ブ </p>
+<p>原来是少了第一条，因此虽然代码已经热更新了，但是页面没有刷新。感谢写文章的大佬(上次查了好多问题和文章都没写第一条，生气)。</p>
+<p>参考链接：</p>
+<ol>
+<li><a href="https://godbasin.github.io/2017/08/19/webpack-multi-project-6-hot-reload/" target="_blank" rel="noopener">webpack多页面配置6–热加载刷新</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/webpack/hot_module_and_reload/" data-id="ck2jtvp2v003oqvg9ygjyhycy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/some_webpack_plugins" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/webpack/some_webpack_plugins/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.642Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/webpack/">webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>webpack最强大的应该就是插件了。目前存在的插件数量众多，使用的方法和适用场景也是纷繁复杂。在此记录一下使用插件过程中碰到的一些问题。</p>
+<h2 id="babel-polyfill-amp-amp-babel-runtime"><a href="#babel-polyfill-amp-amp-babel-runtime" class="headerlink" title="babel-polyfill &amp;&amp; babel-runtime"></a>babel-polyfill &amp;&amp; babel-runtime</h2><p>不班门弄斧了，直接贴链接吧。</p>
+<p>参考链接：</p>
+<ol>
+<li><a href="https://segmentfault.com/q/1010000005596587" target="_blank" rel="noopener">babel的polyfill和runtime的区别</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/webpack/some_webpack_plugins/" data-id="ck2jtvp2r003gqvg9cu78d45a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/how_to_write_a_plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/webpack/how_to_write_a_plugin/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.642Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/webpack/">webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="How-to-write-a-plugin"><a href="#How-to-write-a-plugin" class="headerlink" title="How to write a plugin"></a>How to write a plugin</h1><p>如何写一个webpack插件（译）</p>
+<hr>
+<h3 id="Compiler-and-Compilation"><a href="#Compiler-and-Compilation" class="headerlink" title="Compiler and Compilation"></a>Compiler and Compilation</h3><p>####Compiler:</p>
+<p>Compiler对象代表整个配置好的webpack环境。这个对象在webpack启动时构建一次，并且配置好了options、loaders、plugins等操作设置。 </p>
+<p>当将插件应用于webpack环境中时，这个插件将接收这个compiler的引用。利用compiler来访问主要的webpack环境。</p>
+<h4 id="Compilation"><a href="#Compilation" class="headerlink" title="Compilation:"></a>Compilation:</h4><p>一个compilation对象代表a single build of versioned assets. 当运行webpack development middleware时，每次文件改变被监测到时，都会创建一个新的compilation，因此产生新的一组编译好的资源。 </p>
+<p>Compilation可以提供模块资源的当前状态、编译后的assets、改变的文件和被监视的依赖。<br>compilation还提供许多回调点，插件可以执行自定义操作。</p>
+<h4 id="基本的插件结构"><a href="#基本的插件结构" class="headerlink" title="基本的插件结构"></a>基本的插件结构</h4><p>插件是在原型上有apply方法的实例对象。apply方法在安装这个插件时，被webpack的compiler调用一次。apply方法会接收到webpack compiler的引用，这能访问到compiler的回调。</p>
+<p>参考链接：</p>
+<ol>
+<li><a href="https://github.com/webpack/docs/wiki/how-to-write-a-plugin" target="_blank" rel="noopener">how to write a plugin</a></li>
+<li><a href="https://github.com/webpack/webpack/blob/master/lib/Compiler.js" target="_blank" rel="noopener">compiler.js</a></li>
+<li><a href="https://github.com/webpack/webpack/blob/master/lib/Compilation.js" target="_blank" rel="noopener">Compilation.js</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/webpack/how_to_write_a_plugin/" data-id="ck2jtvp2x003sqvg9l9d3ejmf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plugin/">plugin</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue/style_guide" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/vue/style_guide/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.641Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/vue/style_guide/">vue的官方风格指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>个人从官方文档整理和翻译。</p>
+<h2 id="A-Essential"><a href="#A-Essential" class="headerlink" title="A:Essential"></a>A:Essential</h2><ol>
+<li><p>Multi-word component names </p>
+<p> 组件名应该为多个单词，除了根组件app components</p>
+<p> reason: This prevents conflicts with existing and future HTML elements, since all HTML elements are a single word.</p>
+</li>
+<li><p>Component data must be a function (anywhere except on new Vue).</p>
+</li>
+<li><p>Prop definitions should be as detailed as possible.</p>
+<p> prop定义越详细越好，至少要注明类型</p>
+<pre><code>// Even better!
+props: {
+  status: {
+    type: String,
+    required: true,
+    validator: function (value) {
+      return [
+        &apos;syncing&apos;,
+        &apos;synced&apos;,
+        &apos;version-conflict&apos;,
+        &apos;error&apos;
+      ].indexOf(value) !== -1
+    }
+  }
+}
+</code></pre></li>
+<li><p>Always use key with v-for</p>
+<p> reason: <a href="https://vuejs.org/v2/style-guide/index.html#Keyed-v-for-essential" target="_blank" rel="noopener">detailed explanation</a></p>
+<p> 让vue能够精准操作，使v-for下的dom元素的行为可预测。</p>
+</li>
+<li><p>Component style scoping(any components except App component)</p>
+<p>solution: </p>
+<ol>
+<li><p>use the ‘scoped’ attribute</p>
+<pre><code>&lt;style scoped&gt;
+
+&lt;/style&gt;            
+</code></pre></li>
+<li><p>use CSS modules</p>
+<pre><code>&lt;style module&gt;
+
+&lt;/style&gt;
+</code></pre></li>
+<li>use BEM convention</li>
+</ol>
+</li>
+<li><p>Private property names</p>
+<p> 请一直使用’$_’前缀为plugin、mixin等扩展的自定义私有属性命名。并且为了避免与其他人的代码产生冲突，还需要使用命名空间。（比如：$_yourPluginName_property）</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Private-property-names-essential" target="_blank" rel="noopener">详细解释</a></p>
+<pre><code>var myGreatMixin = {
+  // ...
+  methods: {
+    $_myGreatMixin_update: function () {
+      // ...
+    }
+  }
+}
+</code></pre></li>
+</ol>
+<h2 id="B-Strongly-Recommended-Improving-Readability"><a href="#B-Strongly-Recommended-Improving-Readability" class="headerlink" title="B: Strongly Recommended(Improving Readability)"></a>B: Strongly Recommended(Improving Readability)</h2><p>多为组件的命名：命名方式，前缀，命名顺序</p>
+<ol>
+<li><p>Component files</p>
+<p> each component should be in its own file.</p>
+<p> reason: This helps you to more quickly find a component when you need to edit it or review how to use it.</p>
+</li>
+<li><p>Single-file component filename casing</p>
+<p> .vue文件的命名问题。并没有明白为什么因为存在大小写不敏感的系统就推荐大驼峰命名法。</p>
+<p> 另外，用短横线命名的方法称为kebab(烤肉串)命名法，还挺形象（笑）。</p>
+</li>
+<li><p>Base components names</p>
+<p> 为了应用定制的基础组件，都需要一个特定的前缀，例如<code>Base,App或者V</code></p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Base-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation</a>:</p>
+<p> These components lay the foundation for consistent styling and behavior in your application. 这些组件为你的应用中的样式和行为一致性奠定了基础。</p>
+<p> They may <strong>only</strong> contain:</p>
+<ul>
+<li>html elements</li>
+<li>ohter Base-prefixed components, and</li>
+<li><p>3rd-party UI components</p>
+<p>But they’ll <strong>never</strong> contain global state(e.g. from a Vuex store)</p>
+<p>这些组件的名称通常包含他们所包装的元素，例如BaseButton, BaseTable，除非没有其特定目的的元素，如BaseIcon</p>
+<p>advantages:</p>
+</li>
+<li><p>编辑器按照字母表对你的component进行排序时，你的base components总是会放在一起，让它们更容易被识别。</p>
+</li>
+<li>由于components应该一直以多个单词命名，这样就可以帮你少想一个前缀单词，不用再随便找一个单词给简单的components取名了。</li>
+<li><p>因为这些组件会被经常用，你可能希望让他们能够全局引用而非从四散的角落里引用。前缀结合webpack让这个可以实现。（SPA感觉挺实用的，zelda不行。zelda是多个小型spa的集合，不一定每次都需要所有的base components，所以不能全局注册所有的base components，目前还是用bable-import-plugin按需引入比较好。）</p>
+<pre><code>components/
+|- BaseButton.vue
+|- BaseTable.vue
+|- BaseIcon.vue
+</code></pre></li>
+</ul>
+</li>
+<li><p>single-instance component names</p>
+<p> 那些只允许存在一个active实例的组件，应该以 <code>The</code> 作为命名前缀，表示这里只能存在一个。例如 TheHeader, TheSideBar, TheFooter</p>
+<p> 在每个页面都只使用一次的component才被成为single-instance component。 这种component从来不接受任何props,因为他们虽为app特制，但是不受app上下文的影响。</p>
+<p> 如果你发现它们需要添加props，那他们就成为了每个页面只用一次的可复用的组件。</p>
+</li>
+<li><p>Tightly coupled component names</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Tightly-coupled-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation</a></p>
+<p> 子组件如果与父组件紧密耦合，那么子组件的名称应该以父组件的名称作为前缀。这样既可以证明子组件与父组件之间存在耦合关系，也可以让编辑器在按照字母表排序时，让这些组件放在一起。例如</p>
+<pre><code>components/
+|- TodoList.vue
+|- TodoListItem.vue
+|- TodoListItemButton.vue
+</code></pre></li>
+<li><p>Order of words in components names</p>
+<p> components names should start with highest-level(often most general) words and end with descriptive modifying words.</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Order-of-words-in-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation:</a></p>
+<p> you may be wondering:</p>
+<p> <code>why would we force component names to use less natural language?</code></p>
+<p> 在自然英语里，形容词和其他修饰词通常会出现在名词之前，特殊情况下需要连接词，例如：</p>
+<ul>
+<li>coffee <code>with</code> milk</li>
+<li>soup <code>with</code> the day</li>
+<li><p>Visitor <code>to</code> the museum</p>
+<p>如果你愿意，你肯定可以把这些连接词加到组件名称里，但是顺序依然很重要。</p>
+<p>命名示例：</p>
+<p>最高级别的前缀应该是与app的上下文相关的。你的app需要一个搜索表单，那么这一系列组件的命名最高前缀应该是search。</p>
+<p>  //bad<br>  components/<br>  |- ClearSearchButton.vue<br>  |- ExcludeFromSearchInput.vue<br>  |- LaunchOnStartupCheckbox.vue<br>  |- RunSearchButton.vue<br>  |- SearchInput.vue<br>  |- TermsCheckbox.vue</p>
+<p>  //good<br>  components/<br>  |- SearchButtonClear.vue<br>  |- SearchButtonRun.vue<br>  |- SearchInputQuery.vue<br>  |- SearchInputExcludeGlob.vue<br>  |- SettingsCheckboxTerms.vue<br>  |- SettingsCheckboxLaunchOnStartup.vue</p>
+<p>你可能会考虑将search的component放在一个文件夹里，将setting的component放在另一个文件夹里，但是我们建议在一个庞大的app（组件数超过100）里才这么做。原因如下：</p>
+<ul>
+<li>在通常情况下，浏览嵌套的文件夹比浏览单个的components文件夹花费更多时间。</li>
+<li>命名冲突会导致在代码编辑器难以快速定位某一个特定的component。</li>
+<li>重构会更加困难。因为find-and-replace通常不足以更新一个移动后组件的引用。(Refactoring becomes more difficult, because find-and-replace often isn’t sufficient to update relative references to a moved component.)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Self-closing components</p>
+<p> 在single-file components(.vue文件),string templates 和jsx中，没有内容的组件应该自闭合，除了 DOM templates（即html文件）.</p>
+<p> Components that self-close communicate that they not only have no content, but are <strong>meant</strong> to have no content.即在减少代码量的同时，告诉其他人这个组件里面没有内容（插槽？）。</p>
+<p> 不在DOM templates里使用自闭合是因为html不支持官方空元素以外的自闭合。所以只有在dom处理之前，先让vue处理一波，才可以使用这个建议。</p>
+</li>
+<li><p>Components name casing in templates</p>
+<p> 在大多数项目中，组件应该在single-file components和string templates中使用大驼峰命名法，在DOM templates中用kebab-case（烤肉串命名法？）。或者一直使用烤肉串命名法。</p>
+<p> 大驼峰在以下几点优于烤肉串：</p>
+<ul>
+<li>编辑器可以自动补全，因为js也常用大驼峰。</li>
+<li>大驼峰在视觉上与普通的html元素的差异大于烤肉串的。大驼峰有两个大写字母，烤肉串就一个短横线。（差异性更大吗？emmmmmm…可能吧）</li>
+<li><p>如果在你的模板里用了非Vue自制组件，比如一个web component,大驼峰能保证你的Vue组件清晰可见。</p>
+<p>unfortunately, 因为html对大小写不敏感，所以在DOM templates里必须使用烤肉串。</p>
+<p>需要注意的是： 如果你已经使用了很多kebab，保持html的一致性以及整个项目的风格统一比以上几个优点重要多了。因此在所有地方都用烤肉串命名法也是可以接受的。</p>
+</li>
+</ul>
+</li>
+<li><p>Component name casing in js/jsx</p>
+<p> js和jsx中应该一直用Pascal，vue.component注册的全局组件应该用kebab。</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Component-name-casing-in-JS-JSX-strongly-recommended" target="_blank" rel="noopener">detailed explanation：</a><br> js中，pascal常用于类名或原型命名，或者说，任何能有不同实例的对象。Vue组件也可以有实例，因此它也可以用pascal。有个附加的优点，在jsx里用pascal可以让阅读代码的人更容易区分组件和html元素。</p>
+<p> 为全局注册的组件使用kebab-case的原因如下：</p>
+<ul>
+<li>在js中很少使用全局组件，因此遵守js的约定没多大意义。</li>
+<li>这些应用程序总是包含许多DOM模板，其中必须使用kebab-case。（哪些应用？）</li>
+</ul>
+</li>
+<li><p>Full-word components names</p>
+<p>Components names should prefer full words over abbreviations.</p>
+<p>The autocompletion in editors make the cost of writing longer names very low, while the clarity they provide is invaluable. Uncommon abbreviations, in particular, should always be avoided.</p>
+<p>编辑器中的自动完成让写更长的名称的成本非常低，而它们提供的清晰度是无价的。尤其应该避免不寻常的缩写。</p>
+<pre><code>//bad
+components/
+|- SdSettings.vue
+|- UProfOpts.vue
+
+//good
+components/
+|- StudentDashboardSettings.vue
+|- UserProfileOptions.vue
+</code></pre></li>
+<li><p>Prop name casing</p>
+<p>Prop names should always use camelCase during declaration, but kebab-case in templates and jsx.</p>
+<p>We are simply following the convention of each language. Within js, camelCase is more natural. Within html, kebab-case is.</p>
+<pre><code>//good
+props: {
+  greetingText: String
+}
+&lt;WelcomeMessage greeting-text=&quot;hi&quot;/&gt;
+</code></pre></li>
+<li><p>Multi-attribute elements</p>
+<p>elements with multiple attributes should span multiple lines, with one attribute per line.</p>
+<p>reason: It’s easy to read.</p>
+<pre><code>// good
+&lt;MyComponent
+  foo=&quot;a&quot;
+  bar=&quot;b&quot;
+  baz=&quot;c&quot;
+/&gt;
+</code></pre><p>拿一个页面测试了一下，用这种标准能够让属性看的更清楚，但是让元素之间的层级关系变得不好辨认了。</p>
+</li>
+<li><p>Simple expressions in templates</p>
+<p>Component templates should only include simple expressions, with more complex expression refactored into computed properties or methods.</p>
+</li>
+<li><p>Simple computed properties</p>
+<p>Complex computed properties should be split into as many simpler properties as possible.</p>
+<p><a href="https://vuejs.org/v2/style-guide/index.html#Simple-computed-properties-strongly-recommended" target="_blank" rel="noopener">detailed explanation:</a></p>
+<ul>
+<li>easier to test</li>
+<li>easier to read</li>
+<li>more adaptable to changing requirements</li>
+</ul>
+</li>
+</ol>
+<pre><code>//bad
+computed: {
+  price: function () {
+    var basePrice = this.manufactureCost / (1 - this.profitMargin)
+    return (
+      basePrice -
+      basePrice * (this.discountPercent || 0)
+    )
+  }
+}
+
+//good
+computed: {
+  basePrice: function () {
+    return this.manufactureCost / (1 - this.profitMargin)
+  },
+  discount: function () {
+    return this.basePrice * (this.discountPercent || 0)
+  },
+  finalPrice: function () {
+    return this.basePrice - this.discount
+  }
+}
+</code></pre><ol start="15">
+<li><p>Quoted attribute values</p>
+<p>Non-empty HTML attributes values should always be inside quotes(single or double, whichever is not used in js). 为什么要用js不用的那个引号呢？</p>
+</li>
+<li><p>Directive shorthands</p>
+<p>Directive shorthands should be used always or never.</p>
+<p>Directive shorthands include <code>:</code> for<code>v-bind:</code> and <code>@</code> for <code>v-on:</code>.</p>
+</li>
+</ol>
+<h2 id="C-Recommended-Minimizing-Arbitrary-Choices-and-Cognitive-Overhead"><a href="#C-Recommended-Minimizing-Arbitrary-Choices-and-Cognitive-Overhead" class="headerlink" title="C: Recommended(Minimizing Arbitrary Choices and Cognitive Overhead)"></a>C: Recommended(Minimizing Arbitrary Choices and Cognitive Overhead)</h2><ol>
+<li><p>Component/instance options order</p>
+<p> components/instance options should be ordered consistently.</p>
+<p> This is the default order from Vue for components options.</p>
+<ol>
+<li><p>Side effects (trigger effects outside the component)</p>
+<ul>
+<li>el</li>
+</ul>
+</li>
+<li><p>Global Awareness(require knowledge beyond the component)</p>
+<ul>
+<li>name</li>
+<li>parent </li>
+</ul>
+</li>
+<li><p>Component Type(changes the type of component)</p>
+<ul>
+<li>functional</li>
+</ul>
+</li>
+<li><p>Template Modifiers(changes the way templates are compiled)</p>
+<ul>
+<li>delimiters</li>
+<li>comments</li>
+</ul>
+</li>
+<li><p>Template Dependencies(assets used in the template)</p>
+<ul>
+<li>components</li>
+<li>directives</li>
+<li>filters</li>
+</ul>
+</li>
+<li><p>Composition(merge properties into the options)</p>
+<ul>
+<li>extends</li>
+<li>mixins</li>
+</ul>
+</li>
+<li><p>Interface(the interface to the component)</p>
+<ul>
+<li>inheritAttrs</li>
+<li>model</li>
+<li>props/propsData</li>
+</ul>
+</li>
+<li><p>Local State(local reactive properties)</p>
+<ul>
+<li>data</li>
+<li>computed</li>
+</ul>
+</li>
+<li><p>Events(callback triggered by reactive events)</p>
+<ul>
+<li>watch</li>
+<li>Lifecycle Events(in the order they are called)</li>
+</ul>
+</li>
+<li><p>Non-Reactive Properties(instance properties independent of the reactivity system)</p>
+<ul>
+<li>methods</li>
+</ul>
+</li>
+<li><p>Rendering(the declarative description of the component output)</p>
+<ul>
+<li>template/ render</li>
+<li>renderError</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Element attribute order       </p>
+<p> The attributes of elements(including components) should be ordered consistently.</p>
+<ol>
+<li><p>Definition(provides the component options)</p>
+<ul>
+<li>is</li>
+</ul>
+</li>
+<li><p>List Rendering(creates multiple variations of the same element)</p>
+<ul>
+<li>v-for</li>
+</ul>
+</li>
+<li><p>Conditionals(whether the element is rendered/shown)</p>
+<ul>
+<li>v-if</li>
+<li>v-else-if</li>
+<li>v-else</li>
+<li>v-show</li>
+<li>v-cloak</li>
+</ul>
+</li>
+<li><p>Render Modifiers(changes the way the element renders)</p>
+<ul>
+<li>v-pre</li>
+<li>v-once</li>
+</ul>
+</li>
+<li><p>Global Awareness(requires knowledge beyond the component)</p>
+<ul>
+<li>id</li>
+</ul>
+</li>
+<li><p>Unique Attributes(attributes that require unique values)</p>
+<ul>
+<li>ref</li>
+<li>key</li>
+<li>slot</li>
+</ul>
+</li>
+<li><p>Two-Way Binding(combining binding and events)</p>
+<ul>
+<li>v-model</li>
+</ul>
+</li>
+<li><p>Other Attributes(all unspecified bound &amp; unbound attributes)</p>
+</li>
+<li><p>Events(component event listeners)</p>
+<ul>
+<li>v-on</li>
+</ul>
+</li>
+<li><p>Content(overrides the content of the element)</p>
+<ul>
+<li>v-html</li>
+<li>v-text</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Empty lines in component/instance options</p>
+<p> Make code easy to read.</p>
+</li>
+<li><p>Single-file component top-level element order</p>
+<p> Single-file components should always order <code>template</code>, <code>script</code>, and <code>style</code> tags consistently, <strong>with \<style> last</strong>, because at least one of the other two is always necessary.</p>
+</li>
+</ol>
+<h2 id="D-Use-With-Caution-Potentially-Dangerous-Pattens"><a href="#D-Use-With-Caution-Potentially-Dangerous-Pattens" class="headerlink" title="D: Use With Caution(Potentially Dangerous Pattens)"></a>D: Use With Caution(Potentially Dangerous Pattens)</h2><ol>
+<li><p>v-if/v-if-else/v-else without key</p>
+<p> It’s usually best to use key with v-if + v-else, if they are the same element type (e.g. both \<div> elements).</p>
+</li>
+<li><p>Element selectors with scoped</p>
+<p> Element selectors should be avoided with scoped.</p>
+<p> reason: Large numbers of element selectors are slow.</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Element-selectors-with-scoped-use-with-caution">detailed explanation</a></p>
+<pre><code>//bad
+&lt;template&gt;
+  &lt;button&gt;X&lt;/button&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+button {
+  background-color: red;
+}
+&lt;/style&gt;
+
+//good
+&lt;template&gt;
+  &lt;button class=&quot;btn btn-close&quot;&gt;X&lt;/button&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+.btn-close {
+  background-color: red;
+}
+&lt;/style&gt;
+</code></pre></li>
+<li><p>Implicit parent-child communication</p>
+<p> <code>An ideal Vue application is props down, events up.</code></p>
+<p> Beware: <code>do not be seduced into trading simplicity</code> (being able to understand the flow of your state)<code>for short-term convenience</code> (writing less code).</p>
+</li>
+<li><p>Non-flux state management</p>
+<p>Vuex should be preferred for global state management, instead of this.$root or a global event bus. </p>
+</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Vue的官方风格指导A-C主要是为提高Vue的可读性而设计，D是稍微提升程序的性能和稳健性。</p>
+<p>可读性的提升大致有以下几个方面：</p>
+<ul>
+<li><p>命名。</p>
+<p>  这篇style-guild通读下来，发现有不少条目都在讲命名，组件的命名形式、命名规则等等。一个好的命名可以解释该组件的作用、与其他组件之间的耦合关系、方便编辑器查找等等。</p>
+</li>
+<li><p>顺序。</p>
+<p>  包括属性的书写顺序，options的书写顺序，命名的单词顺序等。</p>
+</li>
+<li><p>代码风格。</p>
+<p>  比如使用自闭合，属性换行等。</p>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://vuejs.org/v2/style-guide/index.html">vue官方风格指南</a></li>
+</ol>
+<h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><p><strong>Priority A Rules: Essential</strong></p>
+<p>Multi-word component names</p>
+<p>Component data</p>
+<p>Prop definitions</p>
+<p>Keyed v-for</p>
+<p>Component style scoping</p>
+<p>Private property names</p>
+<p><strong>Priority B Rules: Strongly Recommended</strong></p>
+<p>Component files</p>
+<p>Single-file component filename casing</p>
+<p>Base component names</p>
+<p>Single-instance component names</p>
+<p>Tightly coupled component names</p>
+<p>Order of words in component names</p>
+<p>Self-closing components</p>
+<p>Component name casing in templates</p>
+<p>Component name casing in JS/JSX</p>
+<p>Full-word component names</p>
+<p>Prop name casing</p>
+<p>Multi-attribute elements</p>
+<p>Simple expressions in templates</p>
+<p>Simple computed properties</p>
+<p>Quoted attribute values</p>
+<p>Directive shorthands</p>
+<p><strong>Priority C Rules: Recommended</strong></p>
+<p>Component/instance options order</p>
+<p>Element attribute order</p>
+<p>Empty lines in component/instance options</p>
+<p>Single-file component top-level element order</p>
+<p><strong>Priority D Rules: Use with Caution</strong></p>
+<p>v-if/v-if-else/v-else without key</p>
+<p>Element selectors with scoped</p>
+<p>Implicit parent-child communication</p>
+<p>Non-flux state management</p>
+</style></strong></p></li></ol>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/vue/style_guide/" data-id="ck2jtvp2t003kqvg9961jqkee" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/style-guide/">style guide</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue/study_vue_deep1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/vue/study_vue_deep1/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.640Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/vue/study_vue_deep1/">深入学习vue -- 如何监听data变化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本次学习core/Observer/index.js core/Observer/array.js</p>
+<p>以下简称为index.js和array.js</p>
+<h3 id="1、基础原理："><a href="#1、基础原理：" class="headerlink" title="1、基础原理："></a>1、基础原理：</h3><h4 id="a-访问器属性"><a href="#a-访问器属性" class="headerlink" title="a) 访问器属性"></a>a) 访问器属性</h4><p>对象属性分为两种，一种是数据属性，另一种是访问器属性。平常使用的属性都是数据属性。例如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.a = <span class="number">5</span>; <span class="comment">//a为数据属性。</span></span><br></pre></td></tr></table></figure>    
+<p>访问器属性不能直接定义，需要用Object.defineProperty()来定义。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用js高程的例子</span></span><br><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">    _year : <span class="number">2004</span>, <span class="comment">//"_year"是数据属性</span></span><br><span class="line">    edition : <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">"year"</span>, &#123; <span class="comment">//"year"是访问器属性</span></span><br><span class="line">    <span class="keyword">get</span>: function()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._year;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function(newValue)&#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>._year = newValue;</span><br><span class="line">            <span class="keyword">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">book.year = <span class="number">2005</span>; <span class="comment">//此时访问的是访问器属性"year"</span></span><br><span class="line">alert(book.edition); <span class="comment">//2</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>   
+<p>vue利用了访问器属性来实现数据监听。因为Object.defineProperty()是ES5实现的api，且无法shim，因此vue不支持ie8及以下浏览器。</p>
+<p>相关api：Object.getOwnPropertyDescriptor (访问器属性、数据属性都能读到)</p>
+<h4 id="b-继承数组"><a href="#b-继承数组" class="headerlink" title="b) 继承数组"></a>b) 继承数组</h4><p>Vue通过<strong>寄生组合式继承</strong>方式来继承数组，以改写数组的一系列方法，方便数组元素变动时能够监听。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line"><span class="keyword">const</span> arrayProto = <span class="built_in">Array</span>.prototype </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> arrayMethods = <span class="built_in">Object</span>.create(arrayProto)</span><br><span class="line"></span><br><span class="line"><span class="comment">//改写  'push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse' 方法以监听增加的元素。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>   
+<p>在Observer里改写Array类型的value的原型，使其指向arrayMethods.。</p>
+<p>在实现了<strong>proto</strong>属性的浏览器里，可以直接将value的<strong>proto</strong>改写为arrayMethods，以实现数组继承（protoAugment）。</p>
+<p>在没有实现<strong>proto</strong>属性的浏览器里，只能将改写后的方法作为不可枚举的属性定义到value上（copyAugment）。</p>
+<p>参考资料:</p>
+<ol>
+<li><a href="http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/" target="_blank" rel="noopener">How ECMAScript 5 still does not allow to subclass array</a></li>
+<li>js高程</li>
+</ol>
+<h3 id="2、代码实现："><a href="#2、代码实现：" class="headerlink" title="2、代码实现："></a>2、代码实现：</h3><p>Observer简略流程图(可能并不标准)</p>
+<p><img src="/images/vue/Observer.png" alt></p>
+<h3 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h3><p>index.js主要对传入的数据进行改造监听。它会将数据属性转化为对应的访问器属性，以达到数据成为响应式的目的。</p>
+<p>array.js主要改造Array的方法。</p>
+<p>可以看出，vue对Array和Object的处理方式是不一样的。</p>
+<p>对于Array，vue改写了它的原型，改造了它的方法。当调用改变元素数量或顺序的方法时，新增元素能够被监听并且通知依赖它的数据等能够更新。</p>
+<p>对于Object，vue将遍历它的property并且将可修改的属性转化为访问器属性，因此在访问该属性值时可以设置依赖等，在设置该属性值时可以触发依赖更新。如果property的值为Object,那么将继续observe该property的值。</p>
+<p>这是data能够成为响应式的基础。</p>
+<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><ol>
+<li><a href="https://github.com/vuejs/vue/tree/706c67d1d013577fdbfab258bca78557419cba7c" target="_blank" rel="noopener">vue早期版本</a></li>
+<li><a href="https://github.com/vuejs/vue/tree/0cc8c27a3543b63677f1ac947d404bcda47b26e2" target="_blank" rel="noopener">vue近期版本</a> </li>
+<li><a href="https://github.com/youngwind/blog" target="_blank" rel="noopener">youngwind的blog</a></li>
+<li>《JavaScript高级程序设计》</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/vue/study_vue_deep1/" data-id="ck2jtvp2o0038qvg9v2yfh0qj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authority/">authority</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/authority/" style="font-size: 10px;">authority</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/04/react/Q&A/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/01/other/have-a-taste/">技术尝鲜</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/10/other/study-reg/">正则表达式学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/03/articles/article/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/30/books/javaScript_design_patterns_and_development_practices/">JavaScript设计模式与开发实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

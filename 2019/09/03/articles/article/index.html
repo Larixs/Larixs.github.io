@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="博文记录 实例解析防抖动（Debouncing）和节流阀（Throttling）  debounce: 连续（即两次触发间隔较短）多次（任意多次）触发同一事件，只执行一次函数。可最先执行，也可最后执行。  throttle: 一段时间内，如果有多次事件触发，只执行一次函数。  throttle与debounce的区别： throttle有时间段的限制，假如连续触发次数够多、连续时间够长，那debo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Larix&#39;s blog">
+<meta property="og:url" content="http://larixs.github.io/2019/09/03/articles/article/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="博文记录 实例解析防抖动（Debouncing）和节流阀（Throttling）  debounce: 连续（即两次触发间隔较短）多次（任意多次）触发同一事件，只执行一次函数。可最先执行，也可最后执行。  throttle: 一段时间内，如果有多次事件触发，只执行一次函数。  throttle与debounce的区别： throttle有时间段的限制，假如连续触发次数够多、连续时间够长，那debo">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-09-03T03:45:09.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Larix&#39;s blog">
+<meta name="twitter:description" content="博文记录 实例解析防抖动（Debouncing）和节流阀（Throttling）  debounce: 连续（即两次触发间隔较短）多次（任意多次）触发同一事件，只执行一次函数。可最先执行，也可最后执行。  throttle: 一段时间内，如果有多次事件触发，只执行一次函数。  throttle与debounce的区别： throttle有时间段的限制，假如连续触发次数够多、连续时间够长，那debo">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-articles/article" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/03/articles/article/" class="article-date">
+  <time datetime="2019-09-03T03:45:09.717Z" itemprop="datePublished">2019-09-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="博文记录"><a href="#博文记录" class="headerlink" title="博文记录"></a>博文记录</h2><ul>
+<li><p><a href="https://jinlong.github.io/2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/" target="_blank" rel="noopener">实例解析防抖动（Debouncing）和节流阀（Throttling）</a></p>
+<p> debounce: 连续（即两次触发间隔较短）多次（任意多次）触发同一事件，只执行一次函数。可最先执行，也可最后执行。</p>
+<p> throttle: 一段时间内，如果有多次事件触发，只执行一次函数。</p>
+<p> throttle与debounce的区别： throttle有时间段的限制，假如连续触发次数够多、连续时间够长，那debounce只会执行一次函数，throttle会执行多次。</p>
+</li>
+</ul>
+<ul>
+<li><p><a href="http://lodash.think2011.net/custom-builds" target="_blank" rel="noopener">定制lodash</a></p>
+<p>  步骤： 安装lodash-cli -&gt; 通过lodash的不同命令定制lodash.js。</p>
+</li>
+<li><p><a href="https://juejin.im/post/5bd07157f265da0ad221cd19" target="_blank" rel="noopener">使用CSS自定义属性构建骨架屏</a></p>
+<p>  骨架屏的实现方案之一： css (background-image + 自定义变量) 或考虑(:empty选择器 + 伪元素)。</p>
+</li>
+<li><p><a href="https://juejin.im/post/5bd052aff265da0a857ab850" target="_blank" rel="noopener">前端组件设计–位运算的妙用</a></p>
+<p>  组件的解耦设计与巧用位运算表示多项选择（只有是或否两种选择，这样才可以用二进制的位运算）结果。</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/45111890" target="_blank" rel="noopener">深入浏览器的事件循环 (GDD@2018)</a></p>
+<p>  macrotask(如setTimeout), requestAnimationFrame, microtask(如Promise.then)的执行流程。</p>
+</li>
+<li><p><a href="https://juejin.im/post/5bdbb3406fb9a022752c319e" target="_blank" rel="noopener">ES6的Symbol竟然那么强大，面试中的加分点啊</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive" target="_blank" rel="noopener">Symbol.toPrimitive–mdn</a></p>
+<p>  symbol： 通过Symbol.for创建的symbol会进入全局注册表，每次创建之前会先去表里查找；对象可以修改其[Symbol.toPrimitive]来修改获取其值的函数，有点类似于修改valueOf和toString(通过hint值判断需要转换的类型)。</p>
+</li>
+<li><p><a href="https://github.com/ProtoTeam/blog/blob/master/201709/3.md" target="_blank" rel="noopener">跨页面通信</a></p>
+<p>  页面间通信:</p>
+<p>  1、 window.open(搭配postMessage) / iframe 通信,</p>
+<p>  2、 localStorage(浏览器，同域名同端口）。</p>
+<p>  3、 sessionStorage(浏览器，同域名同端口同一会话）。从当前页面新开(window.open)的页面，会copy一份当前页面的sessionStorage，但父子页面之间sessionStorage变化不互通。</p>
+<p>  4、 cookie。不推荐使用，因为会弄脏cookie数据并且每次发送请求时有多余的内容。</p>
+<p>  5、 <a href="https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/BroadcastChannel" target="_blank" rel="noopener">BroadcastChannel</a>。与localStorage类似，生命周期更短，但<a href="https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/BroadcastChannel#Browser_compatibility" target="_blank" rel="noopener">兼容性</a>更差。</p>
+<p>  6、 <a href="https://developer.mozilla.org/en-US/search?q=SharedWorker" target="_blank" rel="noopener">SharedWorker</a>。不是专门用来通信的，但也可以实现跨页面通信。</p>
+<p>  7、 server。 tab被激活时请求服务器端数据；Websocket。</p>
+</li>
+<li><p><a href="http://taobaofed.org/blog/2018/10/31/a-tag/" target="_blank" rel="noopener">WebComponent和Polymer</a></p>
+</li>
+<li><p><a href="http://taobaofed.org/blog/2016/01/14/nodejs-memory-leak-analyze/" target="_blank" rel="noopener">记一次 Node.js 应用内存暴涨分析</a></p>
+<p>  zelda-nuxt本地测试环境日益卡顿，竟然卡到我还没动手它就自己崩溃了。并不知道是为何导致的node内存泄漏，因为框架被包装太多层了：nuxt -&gt; backpack -&gt; webpack -&gt; …。没有太多时间去探究zelda-nuxt的病因，只能先简单粗暴地在node_modules/.bin的backpack执行程序中增大了node的最大内存。</p>
+<p>  zelda-nuxt的崩溃，个人猜测是日益增多的业务代码导致测试环境的热更新占用越来越多的内存而导致的崩溃。不过这与我对热更新的印象不符，热更新不应该是每次只更新一部分代码，与总代码量无关吗？（只是瞎猜，还没实际去研究热更新机制）</p>
+<p>  这篇文章提到了一种可能导致内存泄漏的原因：使用vm（virtual machine)时重复创建了释放速度很慢的变量，占用大量内存导致node程序崩溃。</p>
+<p>  第一次读这种node和v8知识点比较多的文章，质量对我这种小白来说挺不错的。</p>
+</li>
+<li><p><a href="https://github.com/livoras/blog/issues/13" target="_blank" rel="noopener">深度剖析：如何实现一个 Virtual DOM 算法</a></p>
+<p>  简单介绍了一下虚拟DOM的实现：用js对象模拟DOM树 -&gt; 发生变化时找出差异 -&gt; 差异更新到真实DOM树上。</p>
+<p>  其中差异对比算法类似于最小编辑距离（动态规划问题，时间复杂度O(m*n)），但做了相应的优化，让算法时间复杂度降到O(max(m,n))。具体实现在相关链接<a href="https://zhuanlan.zhihu.com/p/27437595" target="_blank" rel="noopener">合格前端系列第五弹-Virtual Dom &amp;&amp; Diff</a>里有提到。</p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解</a></p>
+<p>  介绍了一些跨域资源共享（Cross-origin resource sharing）里常用的头信息。</p>
+</li>
+<li><p>REST(REpresentational State Transfer), 表现层状态转移</p>
+<p>  REST是一种设计风格，可以用来设计api的名称等。简单来说：</p>
+<p>  URL里原则上只使用名词表示资源所属位置，用HTTP（GET,POST,DELETE,DETC,PATCH）方法去描述操作。并且使用HTTP Status Code传递Server的状态信息，例如200为成功，500为Server内部错误。</p>
+<p>  例如：</p>
+<pre><code>GET /v1/zoos: v1版本,列出所有动物园
+POST /v2/zoos  v2版本，新建一个动物园
+DELETE /v2/zoos v2版本，删除一个动物园
+</code></pre><p>  优点：</p>
+<ul>
+<li>提供一套统一的接口为不同端(web，ios，android, …)提供相同的服务。</li>
+<li><p>URL语义化，能快速了解api作用。</p>
+<p>缺点：</p>
+</li>
+<li><p>批量删除？</p>
+</li>
+<li><p>http动词太少</p>
+<p>相关引申：</p>
+</li>
+<li><p>RESTful api的一种特点： HATEOAS, Hypermedia as the engine of application state, 超媒体即应用状态引擎。返回结果中除了得到资源本身以外，还附带连向其他api的地址（具有连通性），使得用户不用查文档也知道下一步应该做什么。<a href="https://api.github.com/" target="_blank" rel="noopener">github示例</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>可以用到前端路由设计里来吗？
+
+参考：
+    - [怎样用通俗的语言解释REST，以及RESTful？](https://www.zhihu.com/question/28557115)
+    - [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
+    - [不要被名字吓到-RESTful、HATEOAS、Spring boot之整合](https://www.jianshu.com/p/65b9e54dee7d)
+</code></pre><ul>
+<li><p>DOM的attribute和property</p>
+<p>  简单来说，DOM作为js对象在生成的时候就会存在的属性是property，其他的成为就是attribute(也称特性)。</p>
+<p>  property可以通过DOM节点直接访问，它是js对象(DOM在js中就是一个对象)的一个属性值。attribute放在了DOM对象的attributes里，也可以通过API getAttribute去访问。</p>
+<p> 以<code>&lt;input id=&quot;the-input&quot; type=&quot;foo&quot; value=&quot;Name:&quot;&gt;</code>为例子，文章提到了property对于attribute的映射关系：</p>
+<ul>
+<li>pure reflected: 对property的操作都会反映到attribute。读写property就是读写attribute。例如id。</li>
+<li>not pure reflected: property是有限制的值，例如是枚举值。写入property会如实写入attribute，但是property自身会做相应的处理，导致读取property和读取attribute的值是不一样的。例如type=”foo”, 读取attribute为”foo”，但是读取property是”text”。</li>
+<li>does not reflected: 完全不存在映射关系。例如input的value， 假设输入框后来输入了”test”，这时读取property的value是”test”,但是attribute的value还是写在DOM上的”Name:”。无论input输入什么值，property的value都不会影响attribute的value。但是如果修改attribute的value就会写入property的value。</li>
+<li><p>以上都是同名的情况。也存在非同名的property、attribute有映射关系。例如property的className和attribute的class就是pure reflected。</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/6003819/what-is-the-difference-between-properties-and-attributes-in-html#answer-6004028" target="_blank" rel="noopener">What is the difference between properties and attributes in HTML?</a></li>
+<li><a href="https://www.cnblogs.com/elcarim5efil/p/4698980.html" target="_blank" rel="noopener">DOM 中 Property 和 Attribute 的区别</a></li>
+<li><a href="https://www.zhihu.com/question/30111950" target="_blank" rel="noopener">attribute和property在英语里有什么区别?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings#%E5%B8%A6%E6%A0%87%E7%AD%BE%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2" target="_blank" rel="noopener">带标签的模板字符串</a></p>
+<pre><code>function myFun(strings, p1, p2){
+    console.log(strings); // [&apos;this is a &apos;, &apos; test &apos;, &apos;&apos;]
+    console.log(p1); // &apos;interesting&apos;
+    console.log(p2); // &apos;!&apos;
+    return &apos;hello world&apos; + p2;
+}
+const p1 = &apos;interesting&apos;, p2 = &apos;!&apos;;
+console.log(myFun`this is a ${p1} test ${p2}`) // &apos;hello world!&apos;
+</code></pre><p>  标签函数可以用来处理模板字符串。不然我还真不知道该怎么去取模板字符串的各部分。</p>
+</li>
+<li><p><a href="https://developers.google.com/web/fundamentals/" target="_blank" rel="noopener">谷歌开发者文档</a></p>
+</li>
+</ul>
+<p>看帖子看到的，之前都没有了解过这个文档。涉及的优化知识挺多的，应该仔细阅读一下。</p>
+<ul>
+<li><p><a href="https://juejin.im/post/5cfe4e8a6fb9a07ec63b09a4" target="_blank" rel="noopener">富文本原理了解一下?</a></p>
+</li>
+<li><p><a href="https://juejin.im/post/5b7efb2ee51d45388b6af96c#heading-18" target="_blank" rel="noopener">H5唤起APP指南(附开源唤端库)</a></p>
+</li>
+</ul>
+<p>检查是否成功唤起</p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;a @click.prevent=&quot;testApp(&apos;weixin://&apos;)&quot; class=&quot;dl-btn&quot; id=&quot;download&quot;&gt;打开微信&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { Toast } from &apos;baseComponents&apos;;
+
+export default {
+  data() {
+    return {
+      timer: 0
+    };
+  },
+  methods: {
+    testApp(url) {
+      document.addEventListener(
+        &apos;visibilitychange&apos;,
+        this.visibilityChangeHandler,
+        false
+      );
+      this.timer = setTimeout(() =&gt; {
+        if (!document.hidden) {
+          Toast(&apos;唤醒微信超时，请检查是否已安装微信&apos;);
+        }
+      }, 2000);
+      window.location.href = url;
+    },
+    visibilityChangeHandler() {
+      if (document.visibilityState === &apos;visible&apos;) {
+        clearTimeout(this.timer);
+        document.removeEventListener(
+          &apos;visibilitychange&apos;,
+          this.visibilityChangeHandler,
+          false
+        );
+      }
+    }
+  }
+};
+</code></pre><ul>
+<li><a href="https://zh-hans.reactjs.org/blog/2016/07/13/mixins-considered-harmful.html" target="_blank" rel="noopener">Mixins Considered Harmful</a></li>
+</ul>
+<p>为了解决在组件间复用代码的问题，react团队首先推出了mixins来解决这个问题。但是react发布三年后在，情况变了，mixins导致的问题也日渐凸显。文章提出了不同情况下比mixins更优的解决方案。</p>
+<ol>
+<li>性能优化： 一些性能优化的方式已经有现成的库，不用再自己用mixins写了，例如ShouldComponentUpdate里的浅比较</li>
+<li>订阅和副作用：HOC(高阶组件)</li>
+<li>相似的渲染逻辑： 提成一个公用组件</li>
+<li>上下文：在context稳定之前，建议使用HOC对使用context数据的组件隐藏context的消费行为（将context的使用与子组件解耦）。</li>
+<li>公用的工具函数： 提成一个普通的js模块引入</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2019/09/03/articles/article/" data-id="ck2jtvp1b000sqvg9mt9yxley" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/10/other/study-reg/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          正则表达式学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/08/30/books/javaScript_design_patterns_and_development_practices/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaScript设计模式与开发实践</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authority/">authority</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/authority/" style="font-size: 10px;">authority</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/04/react/Q&A/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/01/other/have-a-taste/">技术尝鲜</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/10/other/study-reg/">正则表达式学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/03/articles/article/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/30/books/javaScript_design_patterns_and_development_practices/">JavaScript设计模式与开发实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

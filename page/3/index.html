@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Larix&#39;s blog">
+<meta property="og:url" content="http://larixs.github.io/page/3/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Larix&#39;s blog">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-vue/study_vue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/vue/study_vue/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.640Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/vue/study_vue/">学习vue</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基础语法篇"><a href="#基础语法篇" class="headerlink" title="基础语法篇"></a>基础语法篇</h3><ul>
+<li><p>el表示监听范围</p>
+<pre><code>new Vue({
+    el: &apos;#app&apos;,
+    data: {
+        message: &apos;Hello Vue.js!&apos;
+         }    
+});// app内的元素被监听， app本身不被监听。只能对app内的元素使用v语法
+</code></pre></li>
+<li><p>track-by没看懂</p>
+</li>
+<li><p>less中/deep/ (vue-loader特性)需要与scope搭配使用</p>
+</li>
+</ul>
+<h3 id="表单篇"><a href="#表单篇" class="headerlink" title="表单篇"></a>表单篇</h3><ul>
+<li><p>多选框 </p>
+<p>  v-model是数据来源，vue是中间管道，可以进行数据处理，checkedNames | json 是数据终点。</p>
+</li>
+</ul>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;jack&quot; value=&quot;Jack&quot;     v-model=&quot;checkedNames&quot;&gt;
+    &lt;label for=&quot;jack&quot;&gt;Jack&lt;/label&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;john&quot; value=&quot;John&quot;     v-model=&quot;checkedNames&quot;&gt;
+    &lt;label for=&quot;john&quot;&gt;John&lt;/label&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;mike&quot; value=&quot;Mike&quot;     v-model=&quot;checkedNames&quot;&gt;
+    &lt;label for=&quot;mike&quot;&gt;Mike&lt;/label&gt;
+    &lt;br&gt;
+    &lt;span&gt;Checked names: {{ checkedNames | 	json }}&lt;/span&gt;
+&lt;/div&gt;
+</code></pre><p>   js:</p>
+<pre><code>new Vue({
+   el: &apos;#app&apos;,
+   data: {
+         checkedNames: []
+   }
+ });
+</code></pre><ul>
+<li>动态设置checkbox的值</li>
+</ul>
+<pre><code>&lt;input
+  type=&quot;checkbox&quot;
+  v-model=&quot;toggle&quot;
+  v-bind:true-value=&quot;a&quot;
+  v-bind:false-value=&quot;b&quot;&gt;//toggle不需要在data里设置
+</code></pre><ul>
+<li>将option的value设置为对象</li>
+</ul>
+<pre><code> &lt;select v-model=&quot;selected&quot;&gt;
+  &lt;!-- 对象字面量 --&gt;
+  &lt;option v-bind:value=&quot;{ number: 123 }&quot;&gt;123&lt;/option&gt;
+&lt;/select&gt;
+
+
+
+    // 当选中时
+typeof vm.selected // -&gt; &apos;object&apos;
+vm.selected.number // -&gt; 123
+</code></pre><ul>
+<li><p>表单项参数特性</p>
+<ul>
+<li><p>lazy：在默认情况下，v-model 在input 事件中同步输入框值与数据，可以添加一个特性 lazy，从而改到在 change 事件中同步。</p>
+</li>
+<li><p>number ：如果想自动将用户的输入转为 Number 类型（如果原值的转换结果为 NaN 则返回原值），可以添加一个特性 number。</p>
+</li>
+<li><p>debounce ：debounce 设置一个最小的延时，在每次敲击之后延时同步输入框的值与数据。如果每次更新都要进行高耗操作（例如在输入提示中 Ajax 请求），它较为有用。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="具体问题"><a href="#具体问题" class="headerlink" title="具体问题"></a>具体问题</h3><h4 id="Vue-extend-object"><a href="#Vue-extend-object" class="headerlink" title="Vue.extend(object)"></a>Vue.extend(object)</h4><p>混合是一种灵活的分布式复用 Vue 组件的方式。混合对象可以包含任意组件选项。以组件使用混合对象时，所有混合对象的选项将被混入该组件本身的选项。</p>
+<p>Vue.extend()的参数是object。其中，object的mixins属性是可以包含多个自定义混合对象的数组，object中也可以包含任意组件选项。object里的属性之间会相互混合。混合之后的object再与该组件本身的选项混合。</p>
+<p>不管是object内的混合，还是object与组件之间的混合，在默认情况下都遵守下面的混合策略:</p>
+<ul>
+<li><p>函数之间的混合：（例如钩子函数）同名函数混合成一个数组，都会被调用。</p>
+</li>
+<li><p>对象之间的混合：（例如methods） 同名对象将会混合成一个对象。当对象的键名有冲突时，如果是在object内部，则取靠后的键值对；如果是在object与组件之间，则取组件的键值对。</p>
+</li>
+</ul>
+<p>以上的策略成为默认混合策略。除了默认混合策略，还有配合全局变量optionMergeStrategies使用的<a href="https://cn.vuejs.org/v2/guide/mixins.html#自定义选项混合策略" target="_blank" rel="noopener">自定义混合策略</a>。</p>
+<h4 id="Vue-nextTick-callback"><a href="#Vue-nextTick-callback" class="headerlink" title="Vue.nextTick(callback)"></a>Vue.nextTick(callback)</h4><p>Vue异步执行DOM更新。和浏览器开队列攒任务来渲染页面类似，Vue观察到数据有变化的时候，会开启一个队列进行缓冲。缓冲减少了不必要的计算和多余的DOM操作。一个队列循环称为一个tick。Vue.nextTick()即是在本次tick完成之后、下一个tick之前（？）就调用。</p>
+<p>在组件内使用时，不需要用全局Vue，使用this.$nextTick()就可调用，并且回调函数中的this将自动指向当前Vue实例。</p>
+<h4 id="具名slot-作用域插槽"><a href="#具名slot-作用域插槽" class="headerlink" title="具名slot + 作用域插槽"></a>具名slot + 作用域插槽</h4><p>具名slot通过名称来控制外部组件的插入。同一个名称的slot可以在该组件里多处放置，最后渲染时，同名的slot渲染相同的东西。当引入作用域插槽时，同名的slot都引入同一个template，不过会根据传入props的情况来根据同一个template渲染不同的内容出来。</p>
+<p>例如：</p>
+<p>parents.vue</p>
+<pre><code>&lt;div&gt;
+  &lt;child :items=&quot;items&quot;&gt;
+    &lt;template slot=&quot;item&quot; scope=&quot;itemInfo&quot;&gt;
+      &lt;item config=&quot;content&quot; :info=&quot;itemInfo.info&quot;/&gt;
+    &lt;/template&gt;
+  &lt;/child&gt;
+&lt;/div&gt;
+</code></pre><p>把所有child.vue传入slot的参数都集合到itemInfo这个对象里，然后把itemInfo.info作为<item>的info传入。</item></p>
+<p>child.vue</p>
+<pre><code>&lt;ul&gt;
+  &lt;div v-for=&quot;item in items&quot; class=&quot;item-div&quot;&gt;
+    &lt;slot name=&quot;item&quot; :info=&quot;item&quot;&gt; &lt;!-- itemInfo.info = item --&gt;
+    &lt;/slot&gt;
+  &lt;/div&gt;
+&lt;/ul&gt;
+</code></pre><p>child为slot传入参数info。结合parents</p>
+<p>item.vue</p>
+<pre><code>&lt;div&gt;
+  {{info[config]}}
+&lt;/div&gt;
+</code></pre><hr>
+<h4 id="如何将-函数-第三方库-全局注册到vue上"><a href="#如何将-函数-第三方库-全局注册到vue上" class="headerlink" title="如何将 函数/第三方库 全局注册到vue上"></a>如何将 函数/第三方库 全局注册到vue上</h4><p><strong>简单粗暴的方式</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> moment <span class="keyword">from</span> <span class="string">'moment'</span>;</span><br><span class="line">    </span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$moment'</span>, &#123; <span class="attr">value</span>: moment &#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>优雅一点的方式–Vue的plugin</strong></p>
+<p><em>moment.js</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> moment <span class="keyword">from</span> <span class="string">'moment'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install: <span class="function"><span class="keyword">function</span>(<span class="params">Vue</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$moment'</span>, &#123; <span class="attr">value</span>: moment &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>entry.js</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> MomentPlugin <span class="keyword">from</span> <span class="string">'./moment.js'</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(MomentPlugin);</span><br></pre></td></tr></table></figure>
+<p>注册之后，</p>
+<p>在.vue的script里，可以通过vue.$moment或者this.$moment访问到moment。</p>
+<p>在.vue的template里的 &#123;&#123; expression &#125;&#125; 中，也可以直接访问$moment。</p>
+<p>例如</p>
+<pre><code>&lt;p&gt;{{ $moment().format("HH:mm") }}&lt;/p&gt;
+</code></pre><p>会直接输出当前时间</p>
+<p>参考资料</p>
+<ol>
+<li><a href="https://github.com/dwqs/blog/issues/51" target="_blank" rel="noopener">[译]如何在 Vue.js 中使用第三方库</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/vue/study_vue/" data-id="ck2jtvp2i002zqvg9b8pxy6dm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue/study_vue_deep2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/vue/study_vue_deep2/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.640Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/vue/study_vue_deep2/">深入学习vue -- 依赖的收集、触发、和更新</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本次学习core/Observer/dep.js, core/Observer/watcher.js，</p>
+<p>以下简称为dep.js和watcher.js</p>
+<h3 id="1、基础原理："><a href="#1、基础原理：" class="headerlink" title="1、基础原理："></a>1、基础原理：</h3><h4 id="a-静态成员"><a href="#a-静态成员" class="headerlink" title="a) 静态成员"></a>a) 静态成员</h4><p>在早期文章<a href="../ES6/static.md">静态成员(class,static)</a>中有较为详细的笔记。</p>
+<p>笔记总结如下：</p>
+<ol>
+<li>静态成员包括静态属性和静态方法。</li>
+<li>ES2015只规定了静态方法，没有规定静态属性。ES2017有静态属性的提案。目前babel已支持转码。</li>
+<li>静态成员是作为类的属性而存在的，它可以被子类继承，但不可以被实例继承及访问。</li>
+<li>静态成员只能通过类名访问。</li>
+</ol>
+<p>在dep.js里，类Dep就有个静态属性target。在dep.js及src/core/observer/index.js都可以看到，访问target都是通过Dep.target这个类名本身去访问的，没有通过dep(dep = new Dep())去访问。</p>
+<p>在dep.js里Evan You的注释提到， target表示当前正在计算的目标watcher。target是全局唯一的，因为在任何时间都只有一个watcher会被计算。应该是出于此考虑，所以Evan You将其注册为Dep的静态属性，这样还可以全局访问（猜测，不负任何责任(●’◡’●)）。</p>
+<p>target对应的还有一个targetStack。targetStack及将一系列需要处理的target储存入栈。</p>
+<h3 id="2、代码实现"><a href="#2、代码实现" class="headerlink" title="2、代码实现:"></a>2、代码实现:</h3><h4 id="a-何时进行依赖收集，何时通知依赖更新"><a href="#a-何时进行依赖收集，何时通知依赖更新" class="headerlink" title="a) 何时进行依赖收集，何时通知依赖更新"></a>a) 何时进行依赖收集，何时通知依赖更新</h4><p>Dep作为各Observer的订阅中心，里面保存着订阅该Observer变化的watcher。</p>
+<p>在两个地方会生成新的dep，一个是在Observer的constructor里，一个是在defineReactive里（代码位于core/observer/index.js）。</p>
+<p>defineReactive生成的dep是键名的dep，Observer生成的dep是键值的dep。</p>
+<p>例如监听 obj = { a: 1 }</p>
+<p>obj = {} 时，defineReactive生成的dep去触发依赖更新， obj.a = 2时由Observer生成的dep去触发更新。</p>
+<p>数组变化触发依赖更新写在vue改写的数组方法里(core/observer/array.js)。非数组触发依赖更新在defineReactive的set里。</p>
+<p>所有数据收集依赖的地方放在了defineReactive的get里。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dep.depend() <span class="comment">//添加当前Dep.target到dep的订阅名单里</span></span><br></pre></td></tr></table></figure>  
+<p>刚开始我还有点疑惑，看起来数组没有进行依赖收集，因为当Observer的接收的值类型为数组时，根本不会进入defineReactive。后面仔细一看，发现后面还有一句<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">childOb.dep.depend()</span><br></pre></td></tr></table></figure><br>数组的依赖收集就是在这里，通过其父对象使用此句进行收集。因为数组永远是作为某个对象的property被访问的（最开始的数据data一定是个对象，不存在一开始访问的数据的类型就是数组这种情况）。</p>
+<p>如图所示：</p>
+<p><img src="/images/vue/Observer + dep.png" alt></p>
+<hr>
+<h4 id="b-如何进行依赖收集"><a href="#b-如何进行依赖收集" class="headerlink" title="b) 如何进行依赖收集"></a>b) 如何进行依赖收集</h4><p>在a）的结尾里提到了数组是如何进行依赖收集的。不过这里存在一个问题，当对一个类型为Object的数据进行依赖收集时，其父对象已经用childOb.dep.depend()为该对象添加依赖，到这个对象时，自己又会执行一遍dep.depend(),这样就有两次依赖收集了。本小节记录的内容之一就是vue如何处理依赖收集中的问题。</p>
+<p>dep.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dep</span></span>&#123; </span><br><span class="line"></span><br><span class="line">  addSub (sub: Watcher) &#123;</span><br><span class="line">    <span class="keyword">this</span>.subs.push(sub)</span><br><span class="line">  &#125;</span><br><span class="line">  depend () &#123;</span><br><span class="line">    <span class="keyword">if</span> (Dep.target) &#123;</span><br><span class="line">      Dep.target.addDep(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   </p>
+<p>watcher.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Wathcer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  addDep (dep: Dep) &#123;</span><br><span class="line">    <span class="keyword">const</span> id = dep.id</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.newDepIds.has(id)) &#123;</span><br><span class="line">      <span class="keyword">this</span>.newDepIds.add(id)</span><br><span class="line">      <span class="keyword">this</span>.newDeps.push(dep)</span><br><span class="line">      <span class="keyword">if</span> (!<span class="keyword">this</span>.depIds.has(id)) &#123;</span><br><span class="line">        dep.addSub(<span class="keyword">this</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   </p>
+<p>综合两个文件可以看出，其实dep.depend()的意思为<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(Dep.target)&#123;</span><br><span class="line">    <span class="keyword">const</span> id = dep.id</span><br><span class="line">    <span class="keyword">if</span> (!watcher.newDepIds.has(id)) &#123;</span><br><span class="line">      watcher.newDepIds.add(id)</span><br><span class="line">      watcher.newDeps.push(dep)</span><br><span class="line">      <span class="keyword">if</span> (!watcher.depIds.has(id)) &#123;</span><br><span class="line">        dep.addSub(watcher)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>   </p>
+<p>每个dep都有不同的id。当Dep.target存在时，如果是新的dep，那么会将该watcher添加到dep的订阅名单里，否则跳过。这就解决了重复收集的问题。这里的newDepIds和depIds都使用了新的数据类型Set.</p>
+<p>newDepIds和depIds的联系和区别:</p>
+<p>在初始的时候，newDepIds和depIds是一致的。在第一次cleanupDeps之后，depIds为newDepIds的值，newDepIds清空，从此开始newDepIds作为depIds的子集存在，保存从上一次cleanupDeps之后到目前为止新添加的dep的id。</p>
+<h4 id="c-通知依赖更新，并更新依赖关系"><a href="#c-通知依赖更新，并更新依赖关系" class="headerlink" title="c) 通知依赖更新，并更新依赖关系"></a>c) 通知依赖更新，并更新依赖关系</h4><p>在a)的图中可以看出，当数据发生变化时，会调用dep.notify()来通知依赖更新。dep.notify()即遍历订阅者，并通知每个订阅者自己更新(update)。</p>
+<p>流程图：</p>
+<p><img src="/images/vue/Watcher.update.png" alt></p>
+<hr>
+<p>Evan You的注释：</p>
+<p>dep.js: A dep is an observable that can have multiple directives subscribing to it. 指令？？</p>
+<p>watcher.js：A watcher parses an expression, collects dependencies, and fires callback when the expression value changes. This is used for both the $watch() api and directives. 用于$watch和directives(?)。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/vue/study_vue_deep2/" data-id="ck2jtvp2q003dqvg9utqva6zo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue/how_to_study_vue_deep" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/vue/how_to_study_vue_deep/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.639Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/vue/how_to_study_vue_deep/">vue源码学习日记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="2017-10-18"><a href="#2017-10-18" class="headerlink" title="2017/10/18"></a>2017/10/18</h3><p>vue逐渐成为成熟而庞大的库，想去深入学习vue的源码，有点棘手，就像直接拿着榴莲一样，浑圆多刺无从下口。</p>
+<p>如果硬啃源码的话，那么肯定会花费很长时间去囫囵吞枣，一遍是读不懂的，因为各个文件直接的相互依赖关系多，第一遍不仅难读还一定明白精髓，因此还得翻过来读第二遍。</p>
+<p>如果看博客的话，有些我想了解的点可能没有被博主写出来，不够细致印象也不会够深刻。</p>
+<p>现在我是边看源码边看博客，先大致浏览一下博客，在看源码的时候如果遇到了博主讲的东西，再停下来细细比较。源码我选择较新的版本，当前（2017/10/18）的最新版本是2.5，那我选择了2.3的源码进行阅读。2.0以前的源码，我觉得没必要阅读，因为已经跨了一个大版本了，就算把1.x的源码研究透彻，但是经过2.x的代码更迭，说不定就不适用了。这样实行了一段时间，发现效率还是很低。因为看源码中有些不理解的地方，博客也没有讲，各个类的作用以及之间的关系对我来说犹如一团乱麻。比如watcher类存放在哪儿，它的作用是什么，我现在也读不明白。可能是我的原因，是我读的不太细致，但是带给我的挫败感实在太强了，我需要换一个阅读源码的办法。</p>
+<p>vue/core下的文件大多包含了一个大类，我想尝试先把每个大类的作用记下来，相互之间的引用关系通过画图表示，懂的自己看，不懂的看博客，这样可能会有个mind map了。<br>先把core/observer一堆东西搞明白吧。┑(￣Д ￣)┍</p>
+<p>撸起袖子就是干。(ง •_•)ง</p>
+<h3 id="2017-10-30"><a href="#2017-10-30" class="headerlink" title="2017/10/30"></a>2017/10/30</h3><p>18号的方案是有效的。继续用。</p>
+<h3 id="2017-10-31"><a href="#2017-10-31" class="headerlink" title="2017/10/31"></a>2017/10/31</h3><p>今天在学习dep.js时，反反复复的忽视了几次Dep的静态变量。从读源码开始就一直想搞明白Dep.target是啥，不明白它的调用方式以及用途。看见时仅仅只知道它是静态变量，却没有想到去深究这个静态变量的语法和特性。还是今天突然想起去看一眼之前做过的关于静态变量的笔记，才恍然大悟。</p>
+<p>这说明一是我对原来学习过的东西印象不够深刻，二是我看见没有掌握的东西竟然没有想到去深究它。大误。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/vue/how_to_study_vue_deep/" data-id="ck2jtvp2k0032qvg98c4fcl2c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ssr/ssr" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/ssr/ssr/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.638Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ssr/">ssr</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/ssr/ssr/">SSR(Server-Side Rendering) + vue</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司最近的pc站要用SSR了，陆哥先行学习了一把，我也得跟着学一学，不然咋开发呢。（听说天津下雪了而北京就只是冷而已</p>
+<h2 id="什么是SSR"><a href="#什么是SSR" class="headerlink" title="什么是SSR"></a>什么是SSR</h2><p>Q1：服务器端渲染的是哪一部分，服务器怎么知道它该渲染哪一部分，那剩下的部分会以什么形式返回给客户端呢？</p>
+<p>A:  服务器端只渲染在服务器端写好的vue部分，渲染出来的字符串，通过模板html里的</p>
+<pre><code>&lt;!--vue-ssr-outlet--&gt;
+</code></pre><p>确定字符串被插入的位置。然后服务器返回模板加字符串之后的结果给客户端。</p>
+<p>Q2：服务器端是什么时候渲染呢，接到请求才开始渲染，还是预先会渲染好，然后一直储存呢？</p>
+<h2 id="SSR的优缺点"><a href="#SSR的优缺点" class="headerlink" title="SSR的优缺点"></a>SSR的优缺点</h2><p>SSR Introduction再三强调，要确认SSR是否是符合自己需求的，要慎重选择。这侧面说明SSR的缺点在某些方面的影响会很大。</p>
+<p>优点：</p>
+<ol>
+<li>利于SEO。搜索引擎不会等待网页完全完成才开始爬取，通过ajax请求返回的内容就有可能不被搜索引擎的爬虫爬取。如果服务器端能直接返回带有内容的网页，那肯定是利于SEO的。</li>
+<li>更快的展示内容(time-to-content)。在网络环境或者设备较差的情况下，能更快展示内容，提高用户体验。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>开发环境受限。</li>
+<li>构建和部署会有更多要求。</li>
+<li>服务器端负载加大。</li>
+</ol>
+<p>如果SSR带来的优势并不大，那用SSR就是overkill。（Introduction着重提了使用者是否看重time-to-content)。</p>
+<p>就公司的pc站而言，利于seo听起来不错，尤其是用于资讯页和产品页。time-to-content并不是很重要。SSR的缺点目前还不了解，不知道会带来多大负担。</p>
+<h2 id="编写通用代码"><a href="#编写通用代码" class="headerlink" title="编写通用代码"></a>编写通用代码</h2><p>编写在客户端和服务器端都能运行的代码的注意事项：</p>
+<ol>
+<li><p>响应式对象在服务器上，大部分情况下是多余的。</p>
+<p> 因为服务器端在渲染之前就已经预取数据了，这时就不需要响应式对象了。</p>
+</li>
+<li><p>生命钩子的变化。</p>
+<p> 由于没有动态更新，所以只有<strong>beforeCreate</strong>和<strong>created</strong>会被调用。</p>
+<p> 因此会带来全局副作用的事件也不要往beforeCreate和created里放，应该放在beforeMount或者mounted。例如在created里setInterval，而在beforeDestroy里清除setInterval，这在服务端是行不通的，服务器压根不调beforeDestroy，意味着setInterval并不会清除。（为啥mounted都不调用了呢？难道vue是一口气把所有字符串都编译出来？并不是先编译子组件字符串，然后把子组件字符串插入父组件？）</p>
+</li>
+<li><p>平台的API变化。</p>
+<p> 在服务器端，你是访问不到window或者document等全局对象的。很简单，就是因为渲染的环境不同。</p>
+<p> 因此最好将平台API的实现放在一个通用api里，或者找一个库来做这件事。譬如axios，它为服务器端和客户端提供的接口名称都是一样的。</p>
+<p> 对于浏览器端的api，常用的解决办法就是把他们放在只有浏览器才能访问到的lifecycle hooks里。</p>
+</li>
+<li><p>自定义指令</p>
+<p> 多数自定义指令直接操作DOM，但这样在SSR里就会报错。目前有两种解决方法(ssr introduction)：</p>
+<ol>
+<li>推荐使用组件作为抽象机制，并运行在「虚拟 DOM 层级(Virtual-DOM level)」（例如，使用渲染函数(render function)）</li>
+<li>如果你有一个自定义指令，但是不是很容易替换为组件，则可以在创建服务器 renderer 时，使用 directives 选项所提供”服务器端版本(server-side version)”</li>
+</ol>
+</li>
+</ol>
+<h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><ol>
+<li><p>避免状态单例(singleton)</p>
+<p>在node.js里生成的实例应该避免生成共享的实例(除非你真的确认它应该共享)。因为node.js会长期运行，一旦生成了实例，不主动销毁的话，它就会一直存在内存里。例如服务器端返回的vue根实例就不应该是单例，因为服务器需要在每次收到请求时都返回新的实例，否则容易造成状态和请求的交叉污染。</p>
+<p>解决办法：工厂模式产生实例。</p>
+</li>
+</ol>
+<h2 id="路由和代码分割"><a href="#路由和代码分割" class="headerlink" title="路由和代码分割"></a>路由和代码分割</h2><p>router：</p>
+<ol>
+<li>避免stateful singleton</li>
+<li>要等router的异步组件和钩子都准备好之后，服务器端才能返回html。</li>
+</ol>
+<p>code-splitting:</p>
+<p>代码分割和懒加载能帮助你在首屏加载时减少下载的资源数，提升加载效率。关键就是“加载你所需要的东西”。</p>
+<p>不管在客户端还是服务端，都有必要用router.onReady，因为router一定要提前(ahead of time)加载路由组件，以便正确调用组件钩子。</p>
+<h2 id="Data-Pre-Fetching-and-State"><a href="#Data-Pre-Fetching-and-State" class="headerlink" title="Data Pre-Fetching and State"></a>Data Pre-Fetching and State</h2><p>SSR中，在进行渲染进程之前，需要预取数据。而客户端在取数据的时候，也应该取到一样的数据。</p>
+<p>caveats:</p>
+<ol>
+<li>在路由组件里负责预取数据的函数，是拿不到this的。因为取数据的时候，组件还没有被实例化。</li>
+</ol>
+<h2 id="Problems-with-Basic-SSR"><a href="#Problems-with-Basic-SSR" class="headerlink" title="Problems with Basic SSR"></a>Problems with Basic SSR</h2><p>基础的SSR无法热更新，Node.js本身也不支持source map。 gg思密达，每次修改服务器端的代码都得重启一次。</p>
+<p>为了解决热更新的问题， vue-server-renderer提供一个名为createBundleRenderer的API。</p>
+<h2 id="20180315-技术分享"><a href="#20180315-技术分享" class="headerlink" title="20180315 技术分享"></a>20180315 技术分享</h2><p>昨天陆哥做了一次ssr的技术分享，引发了非常多的讨论，主要在于以下几点:</p>
+<ol>
+<li>ssr的优势是seo和一些time-to-content的加速，但是劣势就是需要服务器提前渲染，这对服务器压力较大，且相对于传统spa来说，能够缓存的东西就更少了。 ssr的优势是否能完全抵消劣势？</li>
+<li>学长提出的，关于node层面的东西，例如node层无cookie处理头，node该如何抗住大量访问？（个人对这个问题还有点感兴趣）</li>
+<li>time-to-content的加速主要在于node层面与服务器通信比终端与服务器通信更快。 但是在首屏加载时，如果api返回过慢，那么ssr的页面则会白屏直到服务器端渲染完毕并返回，而spa页面至少可以返回一个带loading的基础页面。</li>
+<li>spa的seo问题比较严重。</li>
+</ol>
+<p>个人的疑问：</p>
+<ol>
+<li>ssr带来的服务器压力有大，怎么计算服务器能够承受的极限? 虽然说可以用钱买服务器，钱能解决的问题都不是问题，可是没有任何测试会令我有一丝不安。</li>
+<li>ssr有办法做到缓存吗，有什么样的缓存机制? 能承担多少缓存？</li>
+<li>node作为服务器中间层可能带来的问题。关于node我了解的实在是太少了。</li>
+<li>seo需要的信息量究竟有多大? tdk不能满足吗？</li>
+</ol>
+<h2 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h2><p>页面级别的缓存：</p>
+<p>用<a href="https://www.nginx.com/blog/benefits-of-microcaching-nginx/" target="_blank" rel="noopener">micro-caching</a>可以做页面级别的缓存。</p>
+<p>是否进行页面缓存，在node层面的server里去判断和处理。</p>
+<p>适用范围： 对于不同用户及不同状态都展示同样内容的页面。</p>
+<p>——————————</p>
+<p>组件级别的缓存：</p>
+<p>用<a href="https://github.com/isaacs/node-lru-cache" target="_blank" rel="noopener">lur-cache</a>可以做组件级别的缓存。</p>
+<p>是否进行组件缓存，是通过组件的<strong>serverCacheKey</strong>进行判断。需要进行缓存的组件，必须要有一个独一无二的name。当<br>serverCacheKey的值是一样的，则使用缓存，否则重新渲染。一些静态组件可以让serverCacheKey返回一个常量。</p>
+<p>适用范围：</p>
+<ol>
+<li>子组件不依赖全局状态</li>
+<li>子组件对渲染context没有副作用。</li>
+</ol>
+<h2 id="nuxt-js"><a href="#nuxt-js" class="headerlink" title="nuxt.js"></a>nuxt.js</h2><p>The Nuxt.js is similar to <a href="https://zeit.co/blog/next" target="_blank" rel="noopener">Next.js</a></p>
+<p>参考链接：</p>
+<p>1.<a href="https://ssr.vuejs.org/en/" target="_blank" rel="noopener">SSR Introduction</a><br>2.<a href="https://nuxtjs.org/guide" target="_blank" rel="noopener">Nuxt.js</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/ssr/ssr/" data-id="ck2jtvp2h002vqvg963qm0p5b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-redux/redux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/redux/redux/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.637Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/redux/">redux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/redux/redux/">redux学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="三大原则"><a href="#三大原则" class="headerlink" title="三大原则"></a>三大原则</h3><ul>
+<li>单一数据源。   整个应用的state被储存在一棵object tree中，并且这个object tree只存在于唯一一个store中。</li>
+<li>state是只读的。 唯一改变state的方法就是触发action。</li>
+<li>使用纯函数来执行修改。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">store(object tree)--&gt;App:(nextState) update</span><br><span class="line">Note left of store(object tree):reducer(preState,action)-&gt;nextState</span><br></pre></td></tr></table></figure>
+<p>q：action是谁发送的？</p>
+<p>###Actions</p>
+<p>action只负责描述<strong>事件变化</strong>。</p>
+<p>actions是store <strong>唯一</strong>的数据来源。由application通过store.dispatch() 方法发给store。<br>action需要尽量小。</p>
+<p>###Action Creators (action创建函数)<br>不包含dispatch，只负责返回action。</p>
+<p>###Reducers</p>
+<p>reducer负责决定<strong>app的state该如何更新</strong>。</p>
+<p>reducer(previousState,action) =&gt; newState</p>
+<p>首先解释“纯净”的意思：只要传入的参数相同、返回计算得到的值一定相同。</p>
+<p>为了保持reducer的纯净，永远不要在reducer里做以下操作：</p>
+<ul>
+<li>修改arguments</li>
+<li>调用不纯净的函数，例如Date.now()、Math.random()</li>
+<li>执行有副作用（哪些副作用？）的函数，例如API请求和路由跳转</li>
+</ul>
+<p>reducer一定要保持纯净。<strong>只要传入参数相同，返回计算得到的下一个state就一定相同。没有特殊情况、没有副作用，没有api请求，没有变量修改，单纯执行计算。</strong></p>
+<p>tips：</p>
+<ul>
+<li>不要修改state。可以用object.assign({}，state,action)来返回新的state，但是千万不要修改state。</li>
+<li>在default情况下返回旧的state，避免未知action引起的错误。</li>
+</ul>
+<p>###Store</p>
+<p>Store的职责：</p>
+<ul>
+<li>保存应用的state</li>
+<li>提供getState()方法访问state</li>
+<li>提供dispatch方法更新state</li>
+<li>通过subscribe(listener)注册监听器(监听啥？）</li>
+<li>通过subscribe(listener)的返回函数来注销监听器</li>
+</ul>
+<h3 id="Data-Flow-（strict-unidirectional-data-flow"><a href="#Data-Flow-（strict-unidirectional-data-flow" class="headerlink" title="Data Flow （strict unidirectional data flow )"></a>Data Flow （strict unidirectional data flow )</h3><p><strong>严格的单向数据流</strong></p>
+<p>数据的生命周期：</p>
+<ol>
+<li>调用store.dispatch(action)</li>
+<li>store调用你之前赋给它的reducer函数</li>
+<li>根reducer应该将多个子reducer的输出合并为一个单一的state树</li>
+<li>store存储根reducer返回的整个state树。</li>
+</ol>
+<p><strong>异步API</strong></p>
+<p>异步API需要三种action:</p>
+<ul>
+<li>一种通知reducer请求开始的action</li>
+</ul>
+<p>切换state的isFetching标志</p>
+<ul>
+<li>一种通知reducer请求成功的action</li>
+</ul>
+<p>reducer可能会把接受到的新数据合并到state中,并重置isFetching</p>
+<ul>
+<li>一种通知reducer请求失败的action</li>
+</ul>
+<p>可能（？）会重置isFetching</p>
+<p>tip：请求数据的action最好不要和UI的特定事件耦合到一起。随着应用变得复杂，不仅仅是UI事件需要请求数据，有些用户操作（比如，预加载最流行的 subreddit，或者一段时间后自动刷新过期数据）后需要马上请求数据，路由变化时也可能需要请求数据。因此在开始的时候就将数据请求的action与其他action分开创建是一个明智的做法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/redux/redux/" data-id="ck2jtvp2f002tqvg9hbt6n7h2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/cssmodule" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/react/cssmodule/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.636Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/react/">react</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/react/cssmodule/">css模块化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSSModule-css模块化"><a href="#CSSModule-css模块化" class="headerlink" title="CSSModule  css模块化"></a>CSSModule  css模块化</h1><pre><code>传统的css提倡与html分离开，便于管理且可移植性强。
+react的css提倡模块化管理,将css嵌入到js中，这样不会污染到全局。
+</code></pre><h3 id="如何实现："><a href="#如何实现：" class="headerlink" title="如何实现："></a>如何实现：</h3><p>参考链接：<a href="http://blog.csdn.net/kun5706947/article/details/52596766" target="_blank" rel="noopener">http://blog.csdn.net/kun5706947/article/details/52596766</a></p>
+<h4 id="1-使用style-loader和css-loader将css嵌入到js中"><a href="#1-使用style-loader和css-loader将css嵌入到js中" class="headerlink" title="1.使用style-loader和css-loader将css嵌入到js中"></a>1.使用style-loader和css-loader将css嵌入到js中</h4><p>webpack提供两个工具处理样式表，css-loader 和 style-loader，二者处理的任务不同，css-loader使你能够使用类似@import 和 url(…)的方法实现 require()的功能,style-loader将所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入webpack打包后的JS文件中。</p>
+<h4 id="2-使用CSS-modules处理，避免全局污染"><a href="#2-使用CSS-modules处理，避免全局污染" class="headerlink" title="2.使用CSS modules处理，避免全局污染"></a>2.使用CSS modules处理，避免全局污染</h4><p>CSS modules 的技术就意在把JS的模块化思想带入CSS中来，通过CSS模块，所有的类名，动画名默认都只作用于当前模块。<br>Webpack从一开始就对CSS模块化提供了支持，在CSS loader中进行配置后，你所需要做的一切就是把”modules“传递都所需要的地方，然后就可以直接把CSS的类名传递到组件的代码中，且这样做只对当前组件有效，不必担心在不同的模块中具有相同的类名可能会造成的问题。</p>
+<h3 id="初学踩坑"><a href="#初学踩坑" class="headerlink" title="初学踩坑"></a>初学踩坑</h3><p>1.在react组件内引入css时，组件中的className需要通过引入的样式来声明，如果直接声明，那么css中相应的样式就不会起效。<br>原因: css modules为了防止全局污染，会把css文件中的类名换为hash值，即原类名不存在，只能通过相应的hash值取得样式。</p>
+<p>比如：</p>
+<p>在ListItem中引入style，在控制台中输出style是这样的：</p>
+<p><a href="http://img.blog.csdn.net/20161126172051636" target="_blank" rel="noopener">style的输出</a></p>
+<p>userImg是一个类名，它在js中最后被替换为’_1Mg9kL_n3wNMjzfPVvifCV’，userImg不再存在。如果在组件中写userImg的话，那最终是没有对应的样式的。因此我们只能通过sytle.userImg取得’_1Mg9kL_n3wNMjzfPVvifCV’来获取相应的样式。</p>
+<pre><code>//wrong
+import style from &apos;./ListItem.css&apos;;
+
+class ListItem extends React.Component{
+    render(){
+        var msg = this.props.msg;
+        return(
+            &lt;li&gt;
+                &lt;div className=&apos;userImg&apos;&gt;
+                    &lt;img src={msg.img}/&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        );
+    }
+}
+
+//right
+import style from &apos;./ListItem.css&apos;;
+
+class ListItem extends React.Component{
+    render(){
+        var msg = this.props.msg;
+        return(
+            &lt;li&gt;
+                &lt;div className={style.userImg}&gt;
+                    &lt;img src={msg.img}/&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        );
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/react/cssmodule/" data-id="ck2jtvp2c002nqvg9x9juj09c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css-module/">css module</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/react" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/react/react/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.636Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/react/">react</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/react/react/">react学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>While this.props is set up by React itself and this.state has a special meaning, you are free to add additional fields to the class manually if you need to store something that is not used for the visual output.</p>
+<h1 id="getting-started-入门"><a href="#getting-started-入门" class="headerlink" title="getting started 入门"></a>getting started 入门</h1><h2 id="reactive-updates"><a href="#reactive-updates" class="headerlink" title="reactive updates"></a>reactive updates</h2><ul>
+<li><p>应该认为props在组件内部是不可变的，即，永远不要给this.props赋值。</p>
+</li>
+<li><p>React的组件非常简单，他们都是一些简单的函数，以props和state作为参数，来渲染出HTML。（限制：React组件只能渲染出一个节点。如果你想渲染出多个节点，那么他们必须包含在一个单节点内被渲染）。</p>
+</li>
+</ul>
+<h2 id="JSX-in-depth-深入学习JSX"><a href="#JSX-in-depth-深入学习JSX" class="headerlink" title="JSX in depth 深入学习JSX"></a>JSX in depth 深入学习JSX</h2><ul>
+<li><p>JSX中的class和for属性被替换为className,htmlFor</p>
+</li>
+<li><p><a href="http://reactjs.cn/react/docs/jsx-in-depth.html" target="_blank" rel="noopener">Namespaced Components</a>:将子组件作为父组件的属性进行保存</p>
+</li>
+</ul>
+<p>本来繁琐的代码</p>
+<pre><code>// Awkward block of variable declarations
+var Form = MyFormComponent;
+var FormRow = Form.Row;
+var FormLabel = Form.Label;
+var FormInput = Form.Input;
+
+var App = (
+  &lt;Form&gt;
+    &lt;FormRow&gt;
+      &lt;FormLabel /&gt;
+      &lt;FormInput /&gt;
+    &lt;/FormRow&gt;
+  &lt;/Form&gt;
+);
+</code></pre><p>目的代码：</p>
+<pre><code>var Form = MyFormComponent;
+
+var App = (
+  &lt;Form&gt;
+    &lt;Form.Row&gt;
+      &lt;Form.Label /&gt;
+      &lt;Form.Input /&gt;
+    &lt;/Form.Row&gt;
+  &lt;/Form&gt;
+);
+</code></pre><p>使用Namespaced Components：</p>
+<pre><code>var MyFormComponent = React.createClass({ ... });
+
+MyFormComponent.Row = React.createClass({ ... });
+MyFormComponent.Label = React.createClass({ ... });
+MyFormComponent.Input = React.createClass({ ... });
+</code></pre><p>#state</p>
+<h2 id="Using-State-Correctly-正确使用state（其实是讲setState的使用场景）"><a href="#Using-State-Correctly-正确使用state（其实是讲setState的使用场景）" class="headerlink" title="Using State Correctly  正确使用state（其实是讲setState的使用场景）"></a>Using State Correctly  正确使用state（其实是讲setState的使用场景）</h2><p>There are three things you should know about setState().</p>
+<p>###1.Do Not Modify State Directly 不要直接修改state</p>
+<pre><code>// Wrong
+this.state.comment = &apos;Hello&apos;;
+
+// Correct
+this.setState({comment: &apos;Hello&apos;});
+</code></pre><p>###2.State Updates May Be Asynchronous       state可能是异步更新</p>
+<p>React may batch multiple setState() calls into a single update for performance.</p>
+<p>Because this.props and this.state may be updated asynchronously, you should not rely on their values for calculating the next state.</p>
+<pre><code>// Wrong
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+
+// Correct
+this.setState((prevState, props) =&gt; ({
+  counter: prevState.counter + props.increment
+}));
+</code></pre><p>###3.State Updates are Merged   state通过合并来更新</p>
+<p>When you call setState(), React merges the object you provide into the current state.</p>
+<p>#lifeCircle</p>
+<p>init: componentsWillMount -&gt;render -&gt;componentsDidMount</p>
+<p>re-render: componentsWillReceiveProps -&gt; ShouldComponentsUpdate -&gt; ComponentsWillUpdate -&gt; render -&gt;ComponentsDidUpdate</p>
+<p>#Handling Events</p>
+<h2 id="difference-from-document-elements"><a href="#difference-from-document-elements" class="headerlink" title="difference from document elements"></a>difference from document elements</h2><p> you cannot return false to prevent default behavior in React. You must call preventDefault explicitly.<br> You must call preventDefault explicitly.</p>
+<p>#KEY<br>Keys only make sense in the context of the surrounding array.</p>
+<h3 id="不应该在根元素上设置key，要在使用时设置key。"><a href="#不应该在根元素上设置key，要在使用时设置key。" class="headerlink" title="不应该在根元素上设置key，要在使用时设置key。"></a>不应该在根元素上设置key，要在使用时设置key。</h3><p><a href="https://facebook.github.io/react/docs/lists-and-keys.html" target="_blank" rel="noopener">https://facebook.github.io/react/docs/lists-and-keys.html</a></p>
+<h3 id="Keys-Must-Only-Be-Unique-Among-Siblings"><a href="#Keys-Must-Only-Be-Unique-Among-Siblings" class="headerlink" title="Keys Must Only Be Unique Among Siblings"></a>Keys Must Only Be Unique Among Siblings</h3><p>Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique.</p>
+<p>#propTypes 属性校验器</p>
+<p>es5写法：</p>
+<pre><code>var NewDom = React.createClass({
+
+getDefaultProps: function() {//设置默认属性
+   return {title:&apos;133&apos;};
+},
+
+propTypes: {
+   title:React.PropTypes.string,
+},//属性校验器，表示必须是string
+
+render: function() {
+
+   return &lt;div&gt;{this.props.title}&lt;/div&gt;;
+
+}
+});
+</code></pre><p>es6写法：</p>
+<pre><code>class NewDom extends React.Component{
+
+  render() {
+      return &lt;div &gt;1{this.props.title}&lt;/div&gt;;
+  }
+
+}
+
+NewDom.propTypes={//属性校验器，表示该属性必须是bool，否则报错
+  title: React.PropTypes.bool,
+}
+NewDom.defaultProps={title:&apos;133&apos;};//设置默认属性
+</code></pre><p>es7写法（babel支持）：</p>
+<p>//放在class内使用static定义静态属性，静态属性是其本身的属性，即class.propname，实例是否会继承有待测试。</p>
+<pre><code>class NewDom extends React.Components {
+    static propTypes = {
+        title:React.PropTypes.bool
+    }
+}
+
+(感谢贤哥指正）
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/react/react/" data-id="ck2jtvp2e002pqvg9xspxgi2x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-other/study-Array" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/other/study-Array/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.635Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/other/study-Array/">学习数组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Array-of-ES2015"><a href="#1-Array-of-ES2015" class="headerlink" title="1. Array.of    (ES2015)"></a>1. Array.of    (ES2015)</h3><p>Array.of用于创造一个新的数组实例,类似于Array().区别在于只传一个参数的时候,Array()会解析为数组的个数,Array.of()会解析为只有一个元素的数组,其元素值为参数值。</p>
+<pre><code>Array.of(1); //[1]
+Array.of(1,2,3) //[1,2,3]
+</code></pre><h3 id="2-类数组转数组的方法-不包含ES2015及以上的方法"><a href="#2-类数组转数组的方法-不包含ES2015及以上的方法" class="headerlink" title="2.类数组转数组的方法(不包含ES2015及以上的方法)"></a>2.类数组转数组的方法(不包含ES2015及以上的方法)</h3><pre><code>- Array.apply(null,divs)
+- Array.prototype.slice.call(divs)/.apply(divs)
+- Array.prototype.concat.apply([],divs)
+- Array.prototype.map.call(divs,function(item){return item})
+</code></pre><h3 id="3-生成密集数组的方法-不包含ES2015及以上的方法"><a href="#3-生成密集数组的方法-不包含ES2015及以上的方法" class="headerlink" title="3.生成密集数组的方法(不包含ES2015及以上的方法)"></a>3.生成密集数组的方法(不包含ES2015及以上的方法)</h3><pre><code>- Array.apply(null,{length:100})
+</code></pre><h3 id="4-数组的every-some-filter-map-forEach-方法-只能被已经赋值的数组元素调用。未赋值的数组元素或者已经被删除的数组元素不能调用这些方法。"><a href="#4-数组的every-some-filter-map-forEach-方法-只能被已经赋值的数组元素调用。未赋值的数组元素或者已经被删除的数组元素不能调用这些方法。" class="headerlink" title="4.数组的every(),some(),filter(),map(),forEach()方法,只能被已经赋值的数组元素调用。未赋值的数组元素或者已经被删除的数组元素不能调用这些方法。"></a>4.数组的every(),some(),filter(),map(),forEach()方法,只能被已经赋值的数组元素调用。未赋值的数组元素或者已经被删除的数组元素不能调用这些方法。</h3><h3 id="5-初始化数组-不包含ES2015及以上的方法"><a href="#5-初始化数组-不包含ES2015及以上的方法" class="headerlink" title="5.初始化数组(不包含ES2015及以上的方法)"></a>5.初始化数组(不包含ES2015及以上的方法)</h3><pre><code>- Array(100).join(&apos; &apos;).split(&apos;&apos;).map(function(){return 0})
+- Array.apply(null,{length:100}).map(function(){return 0})
+</code></pre><h3 id="6-Array-push-unshift-concat-slice-可通过apply或者call应用到类数组对象上。"><a href="#6-Array-push-unshift-concat-slice-可通过apply或者call应用到类数组对象上。" class="headerlink" title="6.Array(),push(),unshift(),concat(),slice()可通过apply或者call应用到类数组对象上。"></a>6.Array(),push(),unshift(),concat(),slice()可通过apply或者call应用到类数组对象上。</h3><blockquote>
+<p>2是接收类数组对象,返回数组对象。<br>3正是利用了2这一点,用类数组对象{length:100}生成了密集数组。<br>5是在4的限制下进行的。首先要生成密集数组,然后才能调用map方法。</p>
+</blockquote>
+<h3 id="7-Array的toString-方法在Object的toString方法上被改写了。"><a href="#7-Array的toString-方法在Object的toString方法上被改写了。" class="headerlink" title="7.Array的toString()方法在Object的toString方法上被改写了。"></a>7.Array的toString()方法在Object的toString方法上被改写了。</h3><p>数组调用toString()方法时,会使数组的每一个元素都调用其toString()方法,再用join()方法将其连接起来。join()的默认参数是’,’</p>
+<pre><code>[&apos;a&apos;,&apos;1&apos;,{b:&apos;b&apos;},[&apos;c&apos;,&apos;1&apos;,{b:&apos;d&apos;}]].toString()//&quot;a,1,[object Object],c,1,[object Object]&quot;
+</code></pre><p>‘a’.toString()=&gt;a , ‘1’.toString()=&gt;’1’ , {b:’b’}.toString()=&gt;[object Object]</p>
+<p>[‘c’,’1’,{b:’d’}].toString() =&gt; ‘c,1,[object Object]’</p>
+<h3 id="8-Array的join-方法会先调用toString-方法再调用join-。"><a href="#8-Array的join-方法会先调用toString-方法再调用join-。" class="headerlink" title="8.Array的join()方法会先调用toString()方法再调用join()。"></a>8.Array的join()方法会先调用toString()方法再调用join()。</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/other/study-Array/" data-id="ck2jtvp28002hqvg998a9nrnb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-other/how_to_write_a_great_component" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/other/how_to_write_a_great_component/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.635Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/other/how_to_write_a_great_component/">如何写一个好组件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>进公司以来，零零散散的学了react、vue，偶有需求要做，写的组件更是少了。</p>
+<p>现在想蹭着学长的项目，给他的项目重构一下，目前要重构的第一个大组件就是筛选条件——Filter组件。这个大组件会包含当前页面的所有筛选条件。</p>
+<p>第一次重构后的情况并不理想，使用者需要给的配置项太多，联动子组件的逻辑代码也放在了父组件里去做，没有提供一个切入组件的hook。</p>
+<p>经陆哥和学长提点，目前认为一个好的大组件，对于使用者来说，需要有以下几个特征（最后修改时间：20171106）：</p>
+<ol>
+<li>尽可能简洁的配置文件。配置文件尽可能简洁，意味着在大组件内部需要更多的默认项。例如默认的disable、size、type、hook。设置了大量的默认项之后，可以让基础的配置简洁很多。</li>
+<li>使用起来尽量简单。比如联动子组件的逻辑可以放在config里面，这样在父组件中只需要传入config、处理结果变化即可，功能简单代码简洁。</li>
+<li>高灵活性。例如可以通过传入hook去处理每个筛选项最终传出来的值，而非在Filter里面自己默默的处理过了还不提供切入的接口。</li>
+<li>除了hook，配置也可以将函数作为参数。</li>
+</ol>
+<p>对于大组件内部代码，或者对于大组件的维护者来说，代码需要有以下特征（最后修改时间：20170907）：</p>
+<ol>
+<li>开放-封闭原则。如果增加筛选组件，那么不需要修改原来可以正常使用的代码，只需要增添相关代码即可。</li>
+<li>取个好名字。不管是给这个大组件本身，还是props，还是函数名称，取个好名字非常重要。vue的命名方式参考<a href="../Vue/style-guide.md">Vue风格指南</a>。</li>
+</ol>
+<p>如何组织代码（最后修改时间：20171106）：</p>
+<ol>
+<li>涉及到有顺序的东西，尽量留存顺序的可变动性。使用v-for通过某种配置数组去循环生成，比在template里直接写死组件的顺序好。对于vue来讲，循环不同组件时，在数组里保存顺序后，使用 v-for 加 component搭配is 使用效果不错。</li>
+</ol>
+<p>对于目前菜菜的我来说，坚信一定有更好的解决方案，不要随便想到一个方案就开始做，要多动脑多比较。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/other/how_to_write_a_great_component/" data-id="ck2jtvp1y001zqvg9z8b2z5sn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/component/">component</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nodejs/study_nodejs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/04/nodejs/study_nodejs/" class="article-date">
+  <time datetime="2018-11-04T01:56:57.634Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/nodejs/study_nodejs/">学习nodejs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h3 id="事件驱动"><a href="#事件驱动" class="headerlink" title="事件驱动"></a>事件驱动</h3><p>node.js 是事件驱动的。</p>
+<p>php：任何时候当有请求进入的时候，网页服务器（例如Apache）就为这一请求新建一个进程，并且开始从头到尾执行相应的PHP脚本。</p>
+<p><strong>node.js: 单线程。</strong> 先为某个事件传入回调函数，当有相应事件发生时就调用这个函数。它通过事件轮询来实现并行操作。假如在某一个回调函数中被阻塞，其他事件也得不到处理。因此node.js需要尽可能避免阻塞操作，并且多使用非阻塞操作。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://www.nodebeginner.org/index-zh-cn.html" target="_blank" rel="noopener">Node入门</a></li>
+</ol>
+<hr>
+<h3 id="exports-与-module-exports"><a href="#exports-与-module-exports" class="headerlink" title="exports 与 module.exports"></a>exports 与 module.exports</h3><p>foo.js</p>
+<pre><code>const circle = require(&apos;./circle.js&apos;);
+console.log(`The area of a circle of radius 4 is ${circle.area(4)}`);
+</code></pre><p>circle.js(与foo.js在同一级目录下)</p>
+<pre><code>const { PI } = Math;
+
+exports.area = (r) =&gt; PI * r ** 2;
+
+exports.circumference = (r) =&gt; 2 * PI * r;
+</code></pre><ul>
+<li>exports = module.exports = {}</li>
+<li>circle.js中，为exports对象添加了area、circumference属性，导出exports对象（本质是module.exports）。</li>
+<li>circle.js中的变量是私有的。例如PI。</li>
+<li>当你希望输出的模块不是一个对象，而是类、数组、函数等等，可以使用module.exports输出。</li>
+<li>当module.exports和exports同时有输出时，以module.exports的为准。因为module.exports和exports引用的是同一个对象，nodejs最终以module.exports为准。</li>
+</ul>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://nodejs.org/dist/latest-v8.x/docs/api/modules.html" target="_blank" rel="noopener">modules | nodejs</a></li>
+<li><a href="http://weizhifeng.net/node-js-exports-vs-module-exports.html" target="_blank" rel="noopener">Node.js中exports与module.exports的区别</a></li>
+</ol>
+<hr>
+<h3 id="require的解析路径"><a href="#require的解析路径" class="headerlink" title="require的解析路径"></a>require的解析路径</h3><p>require支持斜杠”/“或者盘符”c:”开头的绝对路径，也支持”./“开头的相对路径。</p>
+<p>require还支持另外一种路径，写法类似于require(“module”)。这种写法，node会按照一下规则解析路径，直到找到模块的位置为止：</p>
+<ol>
+<li><p>寻找内置模块</p>
+<p>如果传递给require函数的是NodeJS内置模块名称，不做路径解析，直接返回内部模块的导出对象，例如require(‘fs’)。</p>
+</li>
+<li><p>寻找node_modules目录</p>
+<p>例如某个模块的绝对路径是/home/user/hello.js，在该模块中使用require(‘foo/bar’)方式加载模块时，则NodeJS依次尝试使用以下路径。</p>
+<pre><code>/home/user/node_modules/foo/bar         //同级目录
+/home/node_modules/foo/bar              //上一级目录
+/node_modules/foo/bar                   //根目录
+</code></pre><p>从例子中可以看出，nodejs会从当前同级目录下开始寻找，在没找到的情况下逐级往上寻找，直到找到模块或者寻找到根目录为止。</p>
+</li>
+<li><p>NODE_PATH环境变量</p>
+<p> 与PATH环境变量类似，NodeJS允许通过NODE_PATH环境变量来指定额外的模块搜索路径。NODE_PATH环境变量中包含一到多个目录路径，路径之间在Linux下使用:分隔，在Windows下使用;分隔。例如定义了以下NODE_PATH环境变量：</p>
+<p>NODE_PATH=/home/user/lib:/home/lib</p>
+<p>当使用require(‘foo/bar’)的方式加载模块时，则NodeJS依次尝试以下路径。</p>
+<pre><code>/home/user/lib/foo/bar
+
+/home/lib/foo/bar
+</code></pre></li>
+</ol>
+<p>参考链接：</p>
+<ol>
+<li><a href="http://nqdeng.github.io/7-days-nodejs/#2.1" target="_blank" rel="noopener">7天学会nodejs–模块路径解析规则</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2018/11/04/nodejs/study_nodejs/" data-id="ck2jtvp200021qvg9h4miwxd7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authority/">authority</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/authority/" style="font-size: 10px;">authority</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/04/react/Q&A/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/01/other/have-a-taste/">技术尝鲜</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/10/other/study-reg/">正则表达式学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/03/articles/article/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/30/books/javaScript_design_patterns_and_development_practices/">JavaScript设计模式与开发实践</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
