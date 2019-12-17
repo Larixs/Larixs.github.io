@@ -9,11 +9,11 @@
 <meta name="keywords" content="study notes,reg">
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式学习笔记">
-<meta property="og:url" content="http://larixs.github.io/2019/10/10/other/study-reg/index.html">
+<meta property="og:url" content="http://larixs.github.io/2019/12/03/other/study-reg/index.html">
 <meta property="og:site_name" content="Larix&#39;s blog">
 <meta property="og:description" content="1.对某个字符进行匹配 按匹配范围进行分类   普通字符（如a）：普通字符本身（a）  特殊字符（如. 和 \）: \特殊字符 （如 \ . 和 \ \ , -(连字符) 字符不需要被转译）  空白字符(非打印字符):  \f : 换页符 \n : 换行符   多个字符中的一个  字符集(如匹配a或者s或者d) : [asd] 字符集合区间(如匹配数字0~9) :   [0-9]  //完全等同于">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-10-10T02:16:55.774Z">
+<meta property="og:updated_time" content="2019-12-03T08:45:47.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式学习笔记">
 <meta name="twitter:description" content="1.对某个字符进行匹配 按匹配范围进行分类   普通字符（如a）：普通字符本身（a）  特殊字符（如. 和 \）: \特殊字符 （如 \ . 和 \ \ , -(连字符) 字符不需要被转译）  空白字符(非打印字符):  \f : 换页符 \n : 换行符   多个字符中的一个  字符集(如匹配a或者s或者d) : [asd] 字符集合区间(如匹配数字0~9) :   [0-9]  //完全等同于">
@@ -71,8 +71,8 @@
       <div class="outer">
         <section id="main"><article id="post-other/study-reg" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/10/10/other/study-reg/" class="article-date">
-  <time datetime="2019-10-10T02:16:55.774Z" itemprop="datePublished">2019-10-10</time>
+    <a href="/2019/12/03/other/study-reg/" class="article-date">
+  <time datetime="2019-12-03T08:45:47.600Z" itemprop="datePublished">2019-12-03</time>
 </a>
     
   <div class="article-category">
@@ -209,12 +209,12 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
 <p>看了书之后，发现回溯引用就是将子表达式化作变量，按照出现顺序通过 \1 \2 … 进行调用，同一子表达式匹配出的字符串应该是一样的，比如子表达式1匹配到了sat,则后续\1处的调用也必须匹配sat。</p>
 <p>例子：</p>
 <p><code>/(foo) (bar) \1 \2/  // 这个正则表达式能匹配上&quot;foo bar foo bar&quot;，用两个括号分别记住前两个单词，再用\1 \2表示匹配和捕获1(在此是&#39;foo&#39;)、捕获2(在此是&#39;bar&#39;)一样的字符串。 \1 \2用于正则表达式的匹配环节，$1 $2用于正则表达式的替换环节。</code></p>
-<h2 id="6-断言"><a href="#6-断言" class="headerlink" title="6.断言"></a>6.断言</h2><h3 id="先行断言-x-y"><a href="#先行断言-x-y" class="headerlink" title="先行断言 x(?=y)"></a>先行断言 x(?=y)</h3><p>匹配’x’，仅当’x’后面跟着’y’。这叫先行断言。</p>
+<h2 id="6-断言-条件匹配"><a href="#6-断言-条件匹配" class="headerlink" title="6.断言(条件匹配)"></a>6.断言(条件匹配)</h2><h3 id="先行断言-x-y"><a href="#先行断言-x-y" class="headerlink" title="先行断言 x(?=y)"></a>先行断言 x(?=y)</h3><p>匹配’x’，仅当’x’后面跟着’y’。这叫先行断言。</p>
 <p>例子：</p>
 <p><code>/Jack(?=Sprat|Frost)/  // 匹配‘Jack’仅仅当它后面跟着&#39;Sprat&#39;或者是‘Frost’。但是‘Sprat’和‘Frost’都不是匹配结果的一部分。</code></p>
 <h3 id="后行断言-lt-y-x"><a href="#后行断言-lt-y-x" class="headerlink" title="后行断言 (?&lt;=y)x"></a>后行断言 (?&lt;=y)x</h3><p>匹配’x’，仅当’x’前面是’y’。这叫后行断言。</p>
 <p><code>/(?&lt;=Jack|Tom)Sprat/  // 匹配‘ Sprat ’仅仅当它前面是&#39;Jack&#39;或者是‘Tom’。但是‘Jack’和‘Tom’都不是匹配结果的一部分。</code></p>
-<h3 id="反向-先行断言-x-y"><a href="#反向-先行断言-x-y" class="headerlink" title="反向(?)先行断言 x(?!y)"></a>反向(?)先行断言 x(?!y)</h3><p>匹配’x’,仅当’x’后面是’y’</p>
+<h3 id="反向-先行断言-x-y"><a href="#反向-先行断言-x-y" class="headerlink" title="反向(?)先行断言 x(?!y)"></a>反向(?)先行断言 x(?!y)</h3><p>匹配’x’,仅当’x’后面不是’y’</p>
 <h3 id="反向-后行断言-lt-y-x"><a href="#反向-后行断言-lt-y-x" class="headerlink" title="反向(?)后行断言 (?&lt;!y)x"></a>反向(?)后行断言 (?&lt;!y)x</h3><p>匹配’x’,仅当’x’前面不是’y’</p>
 <h3 id="7-正则表达式小书上还有些东西，没用过也没看过"><a href="#7-正则表达式小书上还有些东西，没用过也没看过" class="headerlink" title="7. 正则表达式小书上还有些东西，没用过也没看过"></a>7. 正则表达式小书上还有些东西，没用过也没看过</h3><p>等真正需要的时候再学吧，不然又忘了</p>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><ol>
@@ -224,7 +224,7 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2019/10/10/other/study-reg/" data-id="ck2jtvp2a002jqvg9fza2ev6u" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2019/12/03/other/study-reg/" data-id="ck2jtvp2a002jqvg9fza2ev6u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reg/">reg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
@@ -235,17 +235,17 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
     
 <nav id="article-nav">
   
-    <a href="/2019/11/01/other/have-a-taste/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/06/python/The-abc/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          技术尝鲜
+          python基础
         
       </div>
     </a>
   
   
-    <a href="/2019/09/03/articles/article/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/11/04/react/Q&A/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title"></div>
     </a>
@@ -263,7 +263,7 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
     </div>
   </div>
 
@@ -273,7 +273,7 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authority/">authority</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authority/">authority</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li></ul>
     </div>
   </div>
 
@@ -283,7 +283,7 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/authority/" style="font-size: 10px;">authority</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/authority/" style="font-size: 10px;">authority</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
     </div>
   </div>
 
@@ -292,7 +292,7 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
     </div>
   </div>
 
@@ -305,23 +305,23 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
       <ul>
         
           <li>
+            <a href="/2019/12/17/webpack/webpack4-tapable/">webpack4-tapable</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/13/other/have-a-taste/">技术尝鲜</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/06/python/The-abc/">python基础</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/03/other/study-reg/">正则表达式学习笔记</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/04/react/Q&A/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/01/other/have-a-taste/">技术尝鲜</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/10/other/study-reg/">正则表达式学习笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/03/articles/article/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/30/books/javaScript_design_patterns_and_development_practices/">JavaScript设计模式与开发实践</a>
           </li>
         
       </ul>

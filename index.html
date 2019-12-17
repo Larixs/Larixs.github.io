@@ -66,50 +66,86 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-react/Q&amp;A" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-webpack/webpack4-tapable" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/04/react/Q&A/" class="article-date">
-  <time datetime="2019-11-04T02:43:45.441Z" itemprop="datePublished">2019-11-04</time>
+    <a href="/2019/12/17/webpack/webpack4-tapable/" class="article-date">
+  <time datetime="2019-12-17T09:13:37.150Z" itemprop="datePublished">2019-12-17</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/webpack/">webpack</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/17/webpack/webpack4-tapable/">webpack4-tapable</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="react学习的Q-amp-A"><a href="#react学习的Q-amp-A" class="headerlink" title="react学习的Q&amp;A"></a>react学习的Q&amp;A</h1><p>此篇Q&amp;A仅为我本人关于reactjs学习的自问自答，不涉及其他react的衍生库。Answer可能有错处，所以每次看的时候需勤加思考。</p>
-<h2 id="高级指引"><a href="#高级指引" class="headerlink" title="高级指引"></a>高级指引</h2><h3 id="为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？"><a href="#为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？" class="headerlink" title="为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？"></a>为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？</h3><p>常规函数和class组件不会将ref且props的参数，类似的还有key。forwardRef方法可以收到ref参数，然后将它重命名作为props参数传到被包裹的组件上。（那这个和直接将ref重命名传入被包裹的组件有什么区别吗？forwardRef能想到的优点就是使用者可以直接用ref，更符合直觉，而不用记住并使用重命名，重命名的过程交给组件的维护者。）</p>
-<h2 id="HOOk"><a href="#HOOk" class="headerlink" title="HOOk"></a>HOOk</h2><h3 id="react为什么设计了HOOK？"><a href="#react为什么设计了HOOK？" class="headerlink" title="react为什么设计了HOOK？"></a>react为什么设计了HOOK？</h3><ul>
-<li>相关联的函数被迫拆分到各生命钩子里完成，例如监听器的设置和清除，不够清晰。</li>
-<li>class的写法不够友好，状态逻辑难以复用</li>
-</ul>
-<p>参考： <a href="https://juejin.im/post/5dbbdbd5f265da4d4b5fe57d" target="_blank" rel="noopener">React Hooks 详解（近 1w 字）+ 项目实战</a></p>
-<h3 id="读取state时，其值为何被固定在它被创建的那次渲染中？"><a href="#读取state时，其值为何被固定在它被创建的那次渲染中？" class="headerlink" title="读取state时，其值为何被固定在它被创建的那次渲染中？"></a>读取state时，其值为何被固定在它被创建的那次渲染中？</h3><p>官方hooks的FAQ中提到一个问题，<a href="https://zh-hans.reactjs.org/docs/hooks-faq.html#why-am-i-seeing-stale-props-or-state-inside-my-function" target="_blank" rel="noopener">为什么我会在我的函数中看到陈旧的 props 和 state ？</a>。我不太理解props为何会看到陈旧的，只能归为是父组件的state是陈旧的，这个state作为子组件的props，导致子组件的props是陈旧的。这样的话，其实只有一个问题，就是state是陈旧的。</p>
-<p>官方解释中提到一句，<b>组件内部的任何函数，包括事件处理函数和 effect，都是从它被创建的那次渲染中被「看到」的</b>。没有看过react源码，只是根据<a href="https://zh-hans.reactjs.org/docs/hooks-faq.html#how-does-react-associate-hook-calls-with-components" target="_blank" rel="noopener">官网给出的概念</a>来理解useState的原理。在初始时，useState创建一个变量存到react的”记忆单元格”里，每次更新时，如果已经有这个变量，则返回一个此变量的复制（值类型复制值，对象类型进行一次深拷贝?）值，否则进行初始化。react的hook组件就是一个函数，每次更新的时候都会重新执行一遍，内部定义的回调函数或者异步函数会重新创建一份，由于js的闭包性质，导致这些函数使用的都是此时的state值，不会因为后续state的更改而影响函数所使用的值。</p>
-<h3 id="为什么用useState来保存需要渲染的变量，而不是useRef"><a href="#为什么用useState来保存需要渲染的变量，而不是useRef" class="headerlink" title="为什么用useState来保存需要渲染的变量，而不是useRef?"></a>为什么用useState来保存需要渲染的变量，而不是useRef?</h3><p>经测试，useRef每次返回的都是同一个对象，当current改变时，不会触发组件的更新。使用useState是因为返回的值里有重新设置值的函数，当state值改变时，使用那个函数重新赋值会触发视图的重新更新。</p>
-<h3 id="如何既使用connect-又使用React-forwardRef来包装组件？"><a href="#如何既使用connect-又使用React-forwardRef来包装组件？" class="headerlink" title="如何既使用connect,又使用React.forwardRef来包装组件？"></a>如何既使用connect,又使用React.forwardRef来包装组件？</h3><pre><code>function Components({forwardRef, ...restProps}){
-    /**
-    *   组件实现细节
-    */
-    return (
-        &lt;div ref={forwardRef}&gt;
-            {/*具体实现*/}
-        &lt;/div&gt;
-    )
+        <p>阅读webpack源码，你能轻松发现Compiler里注册了大量hooks，他们都是使用了tapable进行管理。</p>
+<p><a href="https://github.com/webpack/tapable" target="_blank" rel="noopener">tapable官方网址</a></p>
+<p>compiler结合tapable管理钩子函数的最简流程如下：</p>
+<p>生成一个compiler实例 -> 在这个实例上用tapable的tap方法在相应的钩子上挂载函数 -> 开始compiler的生命周期，并执行对应生命周期上挂载的所有钩子函数</p>
+<pre><code>const { SyncHook } = require(&apos;tapable&apos;);
+
+class Compiler {
+  constructor() {
+    this.hooks = {
+      life: new SyncHook([&apos;compilation&apos;]), 
+      // 声明一个类型为SyncHook、名字为life的hook。
+      // &apos;compilation&apos;是调用hook时会传入的形参。
+    };
+  }
+
+  run() {
+    this.hooks.life.call(&apos;I\&apos;m running!&apos;); 
+    // 以&quot;I&apos;m running&quot;作为真实参数传入挂载到life钩子上的所有函数并运行
+  }
+
 }
 
-const ConnectedComponents = connect()(Components)
-export default React.forwardRef((props, ref)=&gt;{
-    return &lt;ConnectedComponents {...props} forwardRef={ref} /&gt;
-});
-</code></pre>
+function createCompiler({ plugin }) {
+  const compiler = new Compiler();
+  if (typeof plugin === &apos;function&apos;) {
+    myPlugin(compiler);
+  }
+  return compiler;
+}
+
+const myPlugin = function(compiler) {
+  compiler.hooks.life.tap(&apos;plugin1&apos;, str =&gt; console.log(`plugin111: ${str}`));
+  compiler.hooks.life.tap(&apos;plugin2&apos;, str =&gt; console.log(`plugin222: ${str}`));
+};
+const myCompiler = new createCompiler({ plugin: myPlugin });
+
+myCompiler.run();
+
+// 生成compiler 
+// -&gt; 在life上挂载了plugin1、plugin2函数
+// -&gt; 执行compiler.run，触发life，将&apos;I\&apos;m running!&apos;作为参数传入plugin1、plugin2
+</code></pre><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://segmentfault.com/a/1190000017420937" target="_blank" rel="noopener">这才是官方的tapable中文文档</a></li>
+<li><a href="http://www.imooc.com/article/260336" target="_blank" rel="noopener">显微镜下的webpack4：灵魂tapable，终于搞懂钩子系列！</a></li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2019/11/04/react/Q&A/" data-id="ck2jtvp27002eqvg93z0tv7hz" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2019/12/17/webpack/webpack4-tapable/" data-id="ck49nhzp7000126g9a734htdg" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
     </footer>
   </div>
   
@@ -119,8 +155,8 @@ export default React.forwardRef((props, ref)=&gt;{
   
     <article id="post-other/have-a-taste" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/01/other/have-a-taste/" class="article-date">
-  <time datetime="2019-11-01T08:42:55.472Z" itemprop="datePublished">2019-11-01</time>
+    <a href="/2019/12/13/other/have-a-taste/" class="article-date">
+  <time datetime="2019-12-13T05:58:11.806Z" itemprop="datePublished">2019-12-13</time>
 </a>
     
   <div class="article-category">
@@ -135,7 +171,7 @@ export default React.forwardRef((props, ref)=&gt;{
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/01/other/have-a-taste/">技术尝鲜</a>
+      <a class="article-title" href="/2019/12/13/other/have-a-taste/">技术尝鲜</a>
     </h1>
   
 
@@ -155,13 +191,13 @@ export default React.forwardRef((props, ref)=&gt;{
 <h3 id="Highcharts"><a href="#Highcharts" class="headerlink" title="Highcharts"></a>Highcharts</h3><p>能力方面：仅svg绘图。主要以提供配置项的方式生成图表。配置项结构清晰。由于是svg绘图，在定制样式的时候，除了库提供的配置，还是可以通过寻找对应svg元素来改变样式。</p>
 <p>文档方面：文档结构清晰，易于搜索。部分配置项还提供在线示例，方便理解和试用，这点非常赞。</p>
 <p>另：某些延伸版本是需要收费的（例如Highstocks）?</p>
-<h3 id="ECharts"><a href="#ECharts" class="headerlink" title="ECharts"></a>ECharts</h3><p>能力方面：仅canvas绘图。主要以提供配置项的方式生成图表。由于是canvas绘图，在定制样式方面，除了库提供的配置，没有办法修改样式。在使用过程中还发现了一些bug，例如想生成一个（不同类型数据）重叠的柱状图，在特定窗口大小下，本应该重叠的柱子会发生错位。</p>
+<h3 id="ECharts"><a href="#ECharts" class="headerlink" title="ECharts"></a>ECharts</h3><p>能力方面：支持canvas和svg绘图。主要以提供配置项的方式生成图表。在使用过程中发现了一些bug，例如想生成一个（不同类型数据）重叠的柱状图，在特定窗口大小下，本应该重叠的柱子会发生错位。</p>
 <p>文档方面：文档结构清晰，配置项并没有按照字母顺序排列，但是有提供搜索功能。可能是文档更新不及时的缘故，某些配置项并没有按照文档描述那样运行。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2019/11/01/other/have-a-taste/" data-id="ck2jtvp26002bqvg91hxhsl75" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2019/12/13/other/have-a-taste/" data-id="ck2jtvp26002bqvg91hxhsl75" class="article-share-link">Share</a>
       
       
     </footer>
@@ -171,10 +207,60 @@ export default React.forwardRef((props, ref)=&gt;{
 
 
   
+    <article id="post-python/The-abc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/06/python/The-abc/" class="article-date">
+  <time datetime="2019-12-06T03:57:24.293Z" itemprop="datePublished">2019-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/06/python/The-abc/">python基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为什么要学python？</p>
+<p>仅仅是想了解世界多一点。</p>
+<hr>
+<p>与js的不同之处</p>
+<ol>
+<li>执行二元操作符（例如加号）时，如果操作符前后的数据类型不同：js会先做隐式类型转换再进行运算；python会直接报错，需要显示的转换类型才能正确运算。</li>
+<li></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2019/12/06/python/The-abc/" data-id="ck49nhzp3000026g95d9ijci8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-other/study-reg" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/10/10/other/study-reg/" class="article-date">
-  <time datetime="2019-10-10T02:16:55.774Z" itemprop="datePublished">2019-10-10</time>
+    <a href="/2019/12/03/other/study-reg/" class="article-date">
+  <time datetime="2019-12-03T08:45:47.600Z" itemprop="datePublished">2019-12-03</time>
 </a>
     
   <div class="article-category">
@@ -189,7 +275,7 @@ export default React.forwardRef((props, ref)=&gt;{
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/10/other/study-reg/">正则表达式学习笔记</a>
+      <a class="article-title" href="/2019/12/03/other/study-reg/">正则表达式学习笔记</a>
     </h1>
   
 
@@ -311,12 +397,12 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
 <p>看了书之后，发现回溯引用就是将子表达式化作变量，按照出现顺序通过 \1 \2 … 进行调用，同一子表达式匹配出的字符串应该是一样的，比如子表达式1匹配到了sat,则后续\1处的调用也必须匹配sat。</p>
 <p>例子：</p>
 <p><code>/(foo) (bar) \1 \2/  // 这个正则表达式能匹配上&quot;foo bar foo bar&quot;，用两个括号分别记住前两个单词，再用\1 \2表示匹配和捕获1(在此是&#39;foo&#39;)、捕获2(在此是&#39;bar&#39;)一样的字符串。 \1 \2用于正则表达式的匹配环节，$1 $2用于正则表达式的替换环节。</code></p>
-<h2 id="6-断言"><a href="#6-断言" class="headerlink" title="6.断言"></a>6.断言</h2><h3 id="先行断言-x-y"><a href="#先行断言-x-y" class="headerlink" title="先行断言 x(?=y)"></a>先行断言 x(?=y)</h3><p>匹配’x’，仅当’x’后面跟着’y’。这叫先行断言。</p>
+<h2 id="6-断言-条件匹配"><a href="#6-断言-条件匹配" class="headerlink" title="6.断言(条件匹配)"></a>6.断言(条件匹配)</h2><h3 id="先行断言-x-y"><a href="#先行断言-x-y" class="headerlink" title="先行断言 x(?=y)"></a>先行断言 x(?=y)</h3><p>匹配’x’，仅当’x’后面跟着’y’。这叫先行断言。</p>
 <p>例子：</p>
 <p><code>/Jack(?=Sprat|Frost)/  // 匹配‘Jack’仅仅当它后面跟着&#39;Sprat&#39;或者是‘Frost’。但是‘Sprat’和‘Frost’都不是匹配结果的一部分。</code></p>
 <h3 id="后行断言-lt-y-x"><a href="#后行断言-lt-y-x" class="headerlink" title="后行断言 (?&lt;=y)x"></a>后行断言 (?&lt;=y)x</h3><p>匹配’x’，仅当’x’前面是’y’。这叫后行断言。</p>
 <p><code>/(?&lt;=Jack|Tom)Sprat/  // 匹配‘ Sprat ’仅仅当它前面是&#39;Jack&#39;或者是‘Tom’。但是‘Jack’和‘Tom’都不是匹配结果的一部分。</code></p>
-<h3 id="反向-先行断言-x-y"><a href="#反向-先行断言-x-y" class="headerlink" title="反向(?)先行断言 x(?!y)"></a>反向(?)先行断言 x(?!y)</h3><p>匹配’x’,仅当’x’后面是’y’</p>
+<h3 id="反向-先行断言-x-y"><a href="#反向-先行断言-x-y" class="headerlink" title="反向(?)先行断言 x(?!y)"></a>反向(?)先行断言 x(?!y)</h3><p>匹配’x’,仅当’x’后面不是’y’</p>
 <h3 id="反向-后行断言-lt-y-x"><a href="#反向-后行断言-lt-y-x" class="headerlink" title="反向(?)后行断言 (?&lt;!y)x"></a>反向(?)后行断言 (?&lt;!y)x</h3><p>匹配’x’,仅当’x’前面不是’y’</p>
 <h3 id="7-正则表达式小书上还有些东西，没用过也没看过"><a href="#7-正则表达式小书上还有些东西，没用过也没看过" class="headerlink" title="7. 正则表达式小书上还有些东西，没用过也没看过"></a>7. 正则表达式小书上还有些东西，没用过也没看过</h3><p>等真正需要的时候再学吧，不然又忘了</p>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><ol>
@@ -326,11 +412,63 @@ str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2019/10/10/other/study-reg/" data-id="ck2jtvp2a002jqvg9fza2ev6u" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2019/12/03/other/study-reg/" data-id="ck2jtvp2a002jqvg9fza2ev6u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reg/">reg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
 
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/Q&amp;A" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/04/react/Q&A/" class="article-date">
+  <time datetime="2019-11-04T02:53:41.604Z" itemprop="datePublished">2019-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="react学习的Q-amp-A"><a href="#react学习的Q-amp-A" class="headerlink" title="react学习的Q&amp;A"></a>react学习的Q&amp;A</h1><p>此篇Q&amp;A仅为我本人关于reactjs学习的自问自答，不涉及其他react的衍生库。Answer可能有错处，所以每次看的时候需勤加思考。</p>
+<h2 id="高级指引"><a href="#高级指引" class="headerlink" title="高级指引"></a>高级指引</h2><h3 id="为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？"><a href="#为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？" class="headerlink" title="为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？"></a>为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？</h3><p>常规函数和class组件不会将ref且props的参数，类似的还有key。forwardRef方法可以收到ref参数，然后将它重命名作为props参数传到被包裹的组件上。（那这个和直接将ref重命名传入被包裹的组件有什么区别吗？forwardRef能想到的优点就是使用者可以直接用ref，更符合直觉，而不用记住并使用重命名，重命名的过程交给组件的维护者。）</p>
+<h2 id="HOOk"><a href="#HOOk" class="headerlink" title="HOOk"></a>HOOk</h2><h3 id="react为什么设计了HOOK？"><a href="#react为什么设计了HOOK？" class="headerlink" title="react为什么设计了HOOK？"></a>react为什么设计了HOOK？</h3><ul>
+<li>相关联的函数被迫拆分到各生命钩子里完成，例如监听器的设置和清除，不够清晰。</li>
+<li>class的写法不够友好，状态逻辑难以复用</li>
+<li>函数组件想维护状态时，不用再强行转换成class组件</li>
+</ul>
+<p>参考： <a href="https://juejin.im/post/5dbbdbd5f265da4d4b5fe57d" target="_blank" rel="noopener">React Hooks 详解（近 1w 字）+ 项目实战</a></p>
+<h3 id="读取state时，其值为何被固定在它被创建的那次渲染中？"><a href="#读取state时，其值为何被固定在它被创建的那次渲染中？" class="headerlink" title="读取state时，其值为何被固定在它被创建的那次渲染中？"></a>读取state时，其值为何被固定在它被创建的那次渲染中？</h3><p>官方hooks的FAQ中提到一个问题，<a href="https://zh-hans.reactjs.org/docs/hooks-faq.html#why-am-i-seeing-stale-props-or-state-inside-my-function" target="_blank" rel="noopener">为什么我会在我的函数中看到陈旧的 props 和 state ？</a>。我不太理解props为何会看到陈旧的，只能归为是父组件的state是陈旧的，这个state作为子组件的props，导致子组件的props是陈旧的。这样的话，其实只有一个问题，就是state是陈旧的。</p>
+<p>官方解释中提到一句，<b>组件内部的任何函数，包括事件处理函数和 effect，都是从它被创建的那次渲染中被「看到」的</b>。没有看过react源码，只是根据<a href="https://zh-hans.reactjs.org/docs/hooks-faq.html#how-does-react-associate-hook-calls-with-components" target="_blank" rel="noopener">官网给出的概念</a>来理解useState的原理。在初始时，useState创建一个变量存到react的”记忆单元格”里，每次更新时，如果已经有这个变量，则返回一个此变量的复制（值类型复制值，对象类型进行一次深拷贝?）值，否则进行初始化。react的hook组件就是一个函数，每次更新的时候都会重新执行一遍，内部定义的回调函数或者异步函数会重新创建一份，由于js的闭包性质，导致这些函数使用的都是此时的state值，不会因为后续state的更改而影响函数所使用的值。</p>
+<h3 id="为什么用useState来保存需要渲染的变量，而不是useRef"><a href="#为什么用useState来保存需要渲染的变量，而不是useRef" class="headerlink" title="为什么用useState来保存需要渲染的变量，而不是useRef?"></a>为什么用useState来保存需要渲染的变量，而不是useRef?</h3><p>经测试，useRef每次返回的都是同一个对象，当current改变时，不会触发组件的更新。使用useState是因为返回的值里有重新设置值的函数，当state值改变时，使用那个函数重新赋值会触发视图的重新更新。</p>
+<h3 id="如何既使用connect-又使用React-forwardRef来包装组件？"><a href="#如何既使用connect-又使用React-forwardRef来包装组件？" class="headerlink" title="如何既使用connect,又使用React.forwardRef来包装组件？"></a>如何既使用connect,又使用React.forwardRef来包装组件？</h3><pre><code>function Components({forwardRef, ...restProps}){
+    /**
+    *   组件实现细节
+    */
+    return (
+        &lt;div ref={forwardRef}&gt;
+            {/*具体实现*/}
+        &lt;/div&gt;
+    )
+}
+
+const ConnectedComponents = connect()(Components)
+export default React.forwardRef((props, ref)=&gt;{
+    return &lt;ConnectedComponents {...props} forwardRef={ref} /&gt;
+});
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2019/11/04/react/Q&A/" data-id="ck2jtvp27002eqvg93z0tv7hz" class="article-share-link">Share</a>
+      
+      
     </footer>
   </div>
   
@@ -1312,154 +1450,6 @@ console.log( curriedSum(1)(2)(3) ); // 6
 
 
   
-    <article id="post-other/https" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/13/other/https/" class="article-date">
-  <time datetime="2019-06-13T01:20:43.389Z" itemprop="datePublished">2019-06-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/other/">other</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/13/other/https/">https</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="HTTP的缺点"><a href="#HTTP的缺点" class="headerlink" title="HTTP的缺点"></a>HTTP的缺点</h2><ul>
-<li>内容使用明文通信，可能会被窃听</li>
-<li>无法验证报文的完整性，可能会被篡改</li>
-<li>不确认对方的身份，可能会遭遇伪装</li>
-</ul>
-<h2 id="HTTPS的相应措施"><a href="#HTTPS的相应措施" class="headerlink" title="HTTPS的相应措施"></a>HTTPS的相应措施</h2><h3 id="针对内容使用明文通信，采用SSL对整个通信线路进行加密处理。"><a href="#针对内容使用明文通信，采用SSL对整个通信线路进行加密处理。" class="headerlink" title="针对内容使用明文通信，采用SSL对整个通信线路进行加密处理。"></a>针对内容使用明文通信，采用SSL对整个通信线路进行加密处理。</h3><p>HTTPS是在SSL(secure socket layer)建立的安全线路上进行http通信。SSL后来演化成TLS(transport layer security)。</p>
-<p>SSL建立连接时采用公开秘钥加密。公开秘钥加密使用一对非对称的秘钥，一把叫私钥，一把叫公钥。私钥不能让任何人知道，公钥可以随意发布。 发送报文的一方，使用对方的公钥进行加密，当对方收到用公钥加密的报文后，使用自己的私钥进行解密。</p>
-<p>在建立链接后，为了提升处理速度，之后建立的报文交换使用共享秘钥加密方式。共享秘钥加密就是加密解密用同一个秘钥。</p>
-<h3 id="针对通信身份无法确认，利用SSL提供的证书认证判别对方的身份。"><a href="#针对通信身份无法确认，利用SSL提供的证书认证判别对方的身份。" class="headerlink" title="针对通信身份无法确认，利用SSL提供的证书认证判别对方的身份。"></a>针对通信身份无法确认，利用SSL提供的证书认证判别对方的身份。</h3><p>在加密的时候提到，SSL建立的时候采用公开秘钥加密。新问题又出现了，怎么认证公钥是否是正确的呢？</p>
-<p>为了解决公钥认证的问题，可以由数字证书认证机构(CA, Certificate Authority)和相关机构颁发的公钥证书。数字证书机构一般是客户端和服务器都可信赖的第三方机构。</p>
-<p>首先，服务器的运营人员先向数字证书机构提出公钥的申请，机构在判明身份后，会对已申请的公钥做数字签名（像是盖公章）及分配，并将其放入公钥证书。</p>
-<p>服务器会将这份公钥证书发送给客户端。客户端接受到证书后，对数字签名（公章）进行验证，如果验证成功，可以证明：1. 证书是由信赖的机构发布的。2. 服务器端的这个公钥是值得信赖的。</p>
-<p>随后客户端就可以用这个认证过的公钥对报文进行加密，发送到服务器端。</p>
-<h3 id="针对无法验证报文的正确性"><a href="#针对无法验证报文的正确性" class="headerlink" title="针对无法验证报文的正确性"></a>针对无法验证报文的正确性</h3><p>在通信的流程中，应用层发送数据时会附加MAC( message authentication code )报文摘要。MAC能查知报文是否遭到篡改，从而保护报文的完整性。</p>
-<h3 id="HTTPS的缺点"><a href="#HTTPS的缺点" class="headerlink" title="HTTPS的缺点"></a>HTTPS的缺点</h3><ul>
-<li>加密通信会消耗更多的CPU和内存资源</li>
-<li>要钱</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2019/06/13/other/https/" data-id="ck2jtvp240028qvg9yvztm0d2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-debug/2019_04_26_debug" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/13/debug/2019_04_26_debug/" class="article-date">
-  <time datetime="2019-06-13T01:20:43.389Z" itemprop="datePublished">2019-06-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/13/debug/2019_04_26_debug/">记一次线上内存泄漏debug</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题出现："><a href="#问题出现：" class="headerlink" title="问题出现："></a>问题出现：</h3><p>4.24早上一来，老入就让我看zelda-nuxt的使用内存，我一看就惊了</p>
-<p><img src="images/debug/20190426_01.png" alt></p>
-<p>圈红的左侧是以往的内存使用情况，有轻微的内存泄漏，曲线以一个非常缓慢的速度增长。但是红圈附近，从4.23上午十点左右开始，内存使用率激增。由于使用了pm2进程守护，内存到一定值的时候，整个node服务器会重启，这才能把不断攀升的内存给降下来。后来就陷入了涨内存-》到阈值-》重启-》涨内存-》到阈值-》重启的循环，形成了一个尖锐的锯齿图。</p>
-<p>这个图有个特点就是非常的规律，也没有随不同时间不同访问量的变化而变化。</p>
-<p>整个人是懵圈的，数十个页面，上百个组件，稳定运行了那么久，怎么突然就内存大量溢出了呢？</p>
-<h3 id="问题筛查："><a href="#问题筛查：" class="headerlink" title="问题筛查："></a>问题筛查：</h3><ol>
-<li><p>是否是前端上线代码造成的？</p>
-<p> 不是。前端4.23及以后没有上线过新代码，也没有node_modules的包更新。</p>
-</li>
-<li><p>是否是后端上线代码造成的？</p>
-<p> 不是。后端上的东西没有影响。</p>
-</li>
-</ol>
-<h3 id="尝试方案："><a href="#尝试方案：" class="headerlink" title="尝试方案："></a>尝试方案：</h3><p>首先让老入搭了一个线上测试环境（用线上代码和线上数据库但是不对外开放）并每5s访问一次首页，成功复现了这个问题，并且开始监控这台服务器的性能。然后开始各种尝试（三人并发解决，有方向了就一起调试）：</p>
-<ul>
-<li><p>使用process.memoryUsage不停打印使用的内存。</p>
-<p>  失败。由于打印出来的都是点，很难看出趋势，也没太明白那些值代表的意义。</p>
-</li>
-<li><p>使用heapdump打印node内存快照</p>
-<p>  失败。由于项目比较大，每打印一次既要消耗服务器cpu又要占用大量文件内存，而且打印出来的东西太多太杂，很难看懂。甚至可能因为快照太大，chrome调试器崩溃了。我们也很崩溃。</p>
-</li>
-<li><p>使用easy-monitor查看运行服务器的node内存，并分析泄漏点。</p>
-<p>  失败。同heapdump。因为esay-monitor的原理也和heapdump类似，所以项目过大导致它收集、分析处理非常慢，经常都崩溃，可以说一次都没正常打印过。不过靠这个在只有框架（去掉了页面和组件）的情况下，找到了一个小的泄露点。</p>
-</li>
-<li><p>试图在自己的电脑上搭建实时查看自己起的前端测试服务器内存。</p>
-<p>  失败。我尝试过和线上一样的搭配，但是因为环境问题，比较难实现。然后又用highstocks加上node把内存情况写入json，大致监听了process.memoryUsage的情况。还没用太久，小v就已经定位到泄漏点了。</p>
-</li>
-<li><p>一步一步屏蔽代码，缩小问题范围。</p>
-<p>  成功。小v靠着查看任务管理器的内存情况，先去掉其他页面，只保留首页，然后一步步屏蔽测试定位到泄漏点。这种调试方式非常缓慢，因为需要不停访问页面来让服务器泄漏，这需要一定的时间。但是这种方式生效了。要是我，可能坚持不了这么调试，实在是复杂又费时。所以在此给小v点个赞~</p>
-</li>
-</ul>
-<h3 id="最终原因："><a href="#最终原因：" class="headerlink" title="最终原因："></a>最终原因：</h3><p>在首页的一个视频组件里，created函数写了一个setInterval。当视频为直播时，开始执行定时器。问题在于执行之后却没有相应的清除操作。由于服务器端渲染是会执行created钩子函数的，所以在有直播的时候，服务器端每次被访问都会生成一个无法被终止的定时器。是一个非常经典的内存泄漏（因为考虑到整个项目已经稳定运行很久了，我还信誓旦旦地和淳哥说我们没有可能这么用，脸好疼）。</p>
-<p>问题的突然爆发就是因为4.23日上午十点左右新增了首页的直播视频。之所以原来没有发现内存泄漏，要么就是有直播的时候我们还没有开始监控内存使用情况，要么就是一直没碰到直播视频。</p>
-<h3 id="复盘："><a href="#复盘：" class="headerlink" title="复盘："></a>复盘：</h3><p>如果当时多想那么一点，或者多做那么一点，也许会早点发现。那哪些操作可能会提前找到问题呢？</p>
-<ol>
-<li><p>突然出现的bug，除了和最近上线的代码有关，也可能和突然出现的数据有关。所以应该在公司里询问当天上线（已问）或者开展、推广的活动，在更大的范围内寻求帮助。一定是那天有什么东西变化导致了性能的突变。 虽然当时询问过后端有无上线的东西，但是没有获得什么线索。其实应该扩大范围，不局限于最近修改代码的方向上，在全公司问一下，如果当时有人提到当天上午十点增加了直播视频，那我们应该能尽早定位到问题。</p>
-</li>
-<li><p>问题本应可以分解。已知首页会复现问题的情况下，应该缩小问题范围，把其他与首页无关的东西都注释掉，然后再查更具体的问题。其实也有动态规划的思想在里面，把全项目范围的bug降级为首页的bug，再降级到更小的层次。</p>
-</li>
-<li><p>了解process.memoryUsage里的参数。最开始测试的时候只关注了heapUsed，没有关注rrs。这次内存泄漏没有导致heapUsed的增长，而我刚开始测试的时候只关注了heapUsed。要是能再了解一点，结合泄漏图十分说不定可以快点想起来</p>
-</li>
-<li><p>zelda-nuxt的配置项让我有些迷茫，经常都浪费了大把的时间在测试配置项上，至今我也没有启动起线下前端build环境+线上后端的配置。应该再深入了解一下这些配置项都是怎么揉到项目里的。</p>
-</li>
-</ol>
-<p>最后再放一张正常运行的内存图，开心地下班回家过只有一天的周末了~</p>
-<p><img src="images/debug/20190426_02.png" alt></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2019/06/13/debug/2019_04_26_debug/" data-id="ck2jtvp1k0018qvg9owyevixb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -1473,7 +1463,7 @@ console.log( curriedSum(1)(2)(3) ); // 6
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
     </div>
   </div>
 
@@ -1483,7 +1473,7 @@ console.log( curriedSum(1)(2)(3) ); // 6
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authority/">authority</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authority/">authority</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li></ul>
     </div>
   </div>
 
@@ -1493,7 +1483,7 @@ console.log( curriedSum(1)(2)(3) ); // 6
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/authority/" style="font-size: 10px;">authority</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/authority/" style="font-size: 10px;">authority</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
     </div>
   </div>
 
@@ -1502,7 +1492,7 @@ console.log( curriedSum(1)(2)(3) ); // 6
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
     </div>
   </div>
 
@@ -1515,23 +1505,23 @@ console.log( curriedSum(1)(2)(3) ); // 6
       <ul>
         
           <li>
+            <a href="/2019/12/17/webpack/webpack4-tapable/">webpack4-tapable</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/13/other/have-a-taste/">技术尝鲜</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/06/python/The-abc/">python基础</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/03/other/study-reg/">正则表达式学习笔记</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/04/react/Q&A/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/01/other/have-a-taste/">技术尝鲜</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/10/other/study-reg/">正则表达式学习笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/03/articles/article/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/30/books/javaScript_design_patterns_and_development_practices/">JavaScript设计模式与开发实践</a>
           </li>
         
       </ul>
