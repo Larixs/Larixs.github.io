@@ -1,6 +1,6 @@
 ---
 title: 文件权限相关及linux操作
-tags: [linux, authority]
+tags: [linux]
 categories: linux
 ---
 
