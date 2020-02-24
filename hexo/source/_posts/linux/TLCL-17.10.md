@@ -295,4 +295,29 @@ commands:
  
  - some special permissions(pdf-123).
  
-   
+## 10. Processes
+
+commands:
+- ps: Report a snapshot of current processes(pdf-134).
+- top: Display tasks to view processes dynamically(pdf-136).
+- jobs: List active jobs that have been launched from our terminal(pdf-140).
+- bg: Place a job in the background(pdf-141).
+- fg: Place a job in the foreground(pdf-140).
+- kill: Send a signal to process(pdf-142).
+    
+    kill \[-signal(pdf-142)] PID
+     
+- killall: Kill processes by name(pdf-145).
+- shutdown: shutdown or reboot the system（pdf-146).
+- &: Putting a process in the background(pdf-139).
+- other commands: pstree, vmstat, xload, tload(pdf-147)
+
+How a Process Works(keywords):
+- init(pdf-133)
+- parent process and child process(pdf-133)
+- process ID (pdf-134)
+- STAT: process states(pdf-135)
+- stopping(pausing) a process(pdf-141)
+- signals: Signals are one of several ways that the operating system communicates with programs.(pdf-142)
+
+## 11. The Environment
