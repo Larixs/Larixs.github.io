@@ -321,3 +321,29 @@ How a Process Works(keywords):
 - signals: Signals are one of several ways that the operating system communicates with programs.(pdf-142)
 
 ## 11. The Environment
+
+commands:
+- printenv: Print part or all of the environment(pdf-150).
+- set: Set shell options(pdf-151).
+- export: Export environment to subsequently executed programs.
+- alias: create an alias for a command.
+
+startup files for login shell sessions(pdf-153):
+
+|File|Contents|
+|----|----|
+|/etc/profile| a global configuration script that applies to all users.|
+|~/.bash_profile|a user's personal startup file. Can be used to extend or override settings in the global configuration.|
+|~/.bash_login|if ~/.bash_profile is not found, bash attempts to read this script.|
+|~/.profile|If neither ~/.bash_profile nor ~/.bash_login is found, bash attempts to read this file. This is the default in Debian-based distributions, such as Ubuntu.|
+
+Non-login shell sessions read the following startup files(pdf-154):
+
+|Files|Contents|
+|----|----|
+|/etc/bash.bashrc|A global configuration script that applies to all users.|
+|~/.bashrc|A user's personal startup file. Can be used to extend or override the settings in the global configuration script.|
+
+other:
+- which files should we modify(pdf-156)
+- activating our changes(pdf-161)
