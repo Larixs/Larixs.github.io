@@ -347,3 +347,76 @@ Non-login shell sessions read the following startup files(pdf-154):
 other:
 - which files should we modify(pdf-156)
 - activating our changes(pdf-161)
+
+## 12. a gentle introduction to vi (pdf-162)
+
+why we should learn vi:
+- vi is always available.
+- vi is lightweight and fast.
+
+commands of vim:
+- when vi starts up, it begins in `command mode`.(In vim documentation, command mode is called `normal mode`)
+- return command mode: Esc
+- exit: `:q` , `:q!`(force to exit)
+- enter insert mode: `i`
+- ex command: `:`(In vim documentation, command mode is called `command mode`)
+
+A subset of cursor movement keys(pdf-167):
+
+|key|moves the cursor|
+|----|----|
+|0(zero)| To the beginning of the current line.|
+|^| To the first non-whitespace character on the current line.|
+|$|To the end of the current line|
+|w|To the beginning of the next word or punctuation character.|
+|W|To the beginning of the next word, ignoring punctuation character.|
+|b|To the beginning of the previous word or punctuation character.|
+|B|To the beginning of the previous word, ignoring punctuation character.|
+|numberG|To line `number`. For example, 1G moves to the first line of the file.|
+|G|To the last line of the file.|
+ 
+ basic editing:
+ 
+|key|usage|
+|----|----|
+|u|Undo a change.|
+|A|Appending text. It moves the cursor to the end of the line before starting insert mode(pdf-169).|
+|o|Open a line below the current line.(pdf-169)|
+|O|Open a line above the current line.(pdf-169)|
+|x|Deletes the current character.|
+|numberx|Deletes the current character and the next (number-1) characters.|
+|dd|Deletes the current line.|
+|numberdd|Deletes the current line and the next (number-1) lines.|
+|dw|Deletes from the current cursor position to the beginning of the next word.|
+|numberdw|Repeat number times `dw`|
+|d$|Deletes from the current cursor location to the end of the current line.|
+|d0|Deletes from the current cursor location to the beginning of the line.|
+|d^|Deletes from the current cursor location to the first non-whitespace charater in the line|
+|dG|Deletes from the current line to the ened of the file.|
+|dnumberG|Deletes from the current line to the number-th line of the file.|
+|d|Cuts text.|
+|p|Paste the contents of the buffer after the cursor|
+|P|Paste the contents before the cursor.|
+|y|"Yank"(copy) text in much the same way the `d` command is used to cut text.|
+|yy|Copies the current line.|
+|5yy|Copies the current line and the next four lines.|
+|yW|Copies from the current cursor position to the beginning of the next word|
+|y$|Copies from the current cursor position to the end of the current line.|
+|y0|Copies from the current cursor location to the beginning of the line.|
+|y^|Copies from the current cursor location to the first non-whitespace character in the line.|
+|yG|Copies from the current line to the end of the file.|
+|y20G|Copies from the current line to the twentieth line of the file.|
+|J|Join one line with the one below it.|
+|f|Searches a line and moves the cursor to the next instance of a specified character. `fa` would move the cursor to the next occurrence of the character "a" within the current line.|
+|/|Searches a word or phrase in the entire file(pdf-173).This works the same way as less program. vi allows the use of regular expressions.|
+|:|vi uses ex command to perform search-and-replace operations over a range of lines or the entire file.(pdf-174) `:%s/Line/line/g` means changing the word "Line" to "line" for the entire file. Adding "c" to the end of the command will specify a substitution command with user confirmation. Replace Confirmation Keys is in pdf-175.|
+|:n|Switches from one file to the next(pdf-177)|
+|:N|Switches from one file to previous file use.|
+|:buffers| Displaies a list of the files at the bottom of the display.|
+|:buffer 2|Switches to the second file in the list that buffers shows.|
+|:e filename|Openes an additional file to our current editing session.|
+|:r filename|Inserts the specified file before the cursor position.|
+|:w|Save edited files.|
+|:w filename|Saves an alternate version as specified files.|
+
+## 13. customizing the prompt
