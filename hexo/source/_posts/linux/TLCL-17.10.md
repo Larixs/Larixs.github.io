@@ -420,3 +420,59 @@ A subset of cursor movement keys(pdf-167):
 |:w filename|Saves an alternate version as specified files.|
 
 ## 13. customizing the prompt
+
+Escape codes used in shell prompts:
+
+|sequence|value displayed|
+|\a|ASCII bell.|
+|\d|Current date in day, month, date format.|
+|\h|Hostname of the local machine minus the trailing domain name.|
+|\H|Full hostname|
+|\j|Number of jobs running in the current shell session.|
+|\l|Name of the current terminal device.|
+|\n|A new line character.|
+|\r|A carriage return.|
+|\s|Name of the shell program.|
+|\t|Current time in 24 hour hours:minutes:seconds format.|
+|\T|current time in 12 hour format.|
+|\@|Current time in 12 hour AM/PM format.|
+|\A|Current time in 24 hour hours:minutes format|
+|\u|Username of the current user.|
+|\v|Version number of the shell.|
+|\V|Version and release numbers of the shell.|
+|\w|Name of the current working directory.|
+|\W|Last part of the current working directory name.|
+|\!|History number of the current command.|
+|\#|Number of commands entered during this shell session.|
+|\$|This displays a "$" character unless we have superuser privileges. in that case, it displays a "#" instead.|
+|\[|Singals the start of a series of one or more non-printing characters.This is used to embed non-printing control characters which manipulate the terminal emulator in some way, such as moving the cursor or changing text colors.|
+|\]|Signals the end of a non-printing character sequence.|
+
+adding color(pdf-185)
+ 
+moving the cursor(pdf-188)
+
+## 14. package management
+
+The basic unit of software in a packaging system is the `package file`.
+
+## 15. storage media
+
+commands:
+
+- mount: Mount a file system.(pdf-204)
+- umount: unmount a file system.(pdf-206)
+- fsck: check and repair a file system.(pdf-215)
+- fdisk: partition table manipulator.(pdf-211)
+- mkfs: create a file system.(pdf-214)
+- fdformat: format a floppy disk.(pdf-216)
+- dd: write block oriented data directly to a device.(pdf-216)
+- genisoimage(mkisofs): create an ISO 9660 image file.(pdf-218)
+- wodim(cdreord): write data to optical storage media.（pdf-219)
+- md5sum: calculate an MD5 checksum.(pdf-220)
+
+file system table: /etc/fstab (pdf-203)
+
+Linux storage device names (pdf-209)
+
+## 16. networking
