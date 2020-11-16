@@ -199,3 +199,9 @@
 
 
 
+- [微服务](https://tech.meituan.com/2018/09/06/fe-tiny-spa.html)
+  
+我没太明白这里面的微服务为什么优于spa，
+因为里面的几个子项目相互独立可以分开打包？意味着可以使用不同的技术栈？
+
+- [JS 计算字符串所占字节数](http://www.alloyteam.com/2013/12/js-calculate-the-number-of-bytes-occupied-by-a-string/)
