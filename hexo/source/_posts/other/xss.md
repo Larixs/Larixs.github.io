@@ -22,8 +22,8 @@ XSS就是把我的代码注入到你的代码里，把你口袋里的钱放到�
 
     举个简单🌰，攻击者在某文章评论区里输入了````<script>alert('hello fish')</script>````，网站没有过滤就直接将这段代码提交到了服务器。受害者在访问这个文章时，服务器下发这条评论，服务器和网站又双叒没有过滤并且直接渲染，受害者就收到了这个小小的攻击。
 2. Reflected XSS: 当用户输入的全部或者部分内容会成为网络请求返回数据的一部分，如果没有经过安全处理就直接渲染造成的攻击属于此列。如果将注入行为拼接到url上，受害者点开时，网站在这种不设防的情况下直接执行请求返回，导致被注入攻击。利用这种漏洞构成url发送给受害者来点击，是很多钓鱼(phishing，音同fishing🐟，谐音梗扣钱)方案的核心。
-3. DOM Based XSS: 基于DOM的XSS攻击，从源头读取数据到渲染具体DOM过程中被攻击。例如从query中读取数据，不经过处理的恶意字符串被document.write直接渲染到页面上。
-    举个简单🌰，就是这次业务中发现的漏洞：页面从query中读取userName后，经过一系列拼接处理，直接用vue的v-html语法直接进行渲染，导致如果userName的值为````<script>alert('you idiot')</script>````，那么不仅侮辱性极强，伤害也很大。
+3. DOM Based XSS: 基于DOM的XSS攻击，利用数据从源头读取到渲染具体DOM过程中不设防造成的攻击。例如从url中的search部分读取数据渲染到页面上，如果不做任何处理，search里携带的恶意字符串可以被document.write直接渲染到页面上。
+    举个简单🌰，就是这次业务中发现的漏洞：页面从search中读取name后，经过一系列拼接处理，直接用vue的v-html语法直接进行渲染，导致如果name的值为````<script>alert('you idiot')</script>````，那么不仅侮辱性极强，伤害也很大。
 
 后来发现XSS可能由以上几种重叠组成，又延伸出一种分类：
 1. Server XSS: 非法数据来源于服务端返回，页面无脑执行里面嵌入的脚本。
@@ -38,9 +38,10 @@ XSS就是把我的代码注入到你的代码里，把你口袋里的钱放到�
 >
 >This is in contrast to other XSS attacks (stored or reflected), wherein the attack payload is placed in the response page (due to a server side flaw).
 
-翻译一下：服务端返回的页面没有问题，但是页面自己执行了代码修改了自己的内容，被攻击的时候导致运行不如预期。
+翻译一下：服务端返回的页面和数据都没有问题，但是页面自己执行了代码修改了自己的内容，如果在执行过程中被注入了恶意代码，那页面运行肯定不符合预期了。
 
-DOM Based XSS的防御原则
+DOM Based XSS的防御原则：
+页面在读取数据修改自己的内容时，如果涉及到直接修改DOM元素(document.write, innerHTML)，除非是完全信任的数据源，否则一定要经过过滤才渲染。
 
 HTML、HTML attribute, URL, 和CSS都可以在JS执行上下文中被触达和修改。
 
