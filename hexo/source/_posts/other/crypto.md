@@ -8,8 +8,8 @@ categories: other
 2. SM2
    公钥加密，私钥解密。同一个公钥加密同一段明文可以产生不同的密文，可能是有时间因子在里面。密文前缀为04时表示为非压缩密文。
 3. SM4
-4. 为什么已经有SM2了，还要使用SM4加密
-   SM4加解密比SM2更快。
+4. 为什么已经有SM2了，还要使用SM4加密？
+   答：因为SM4加解密比SM2更快。使用SM4对密文加密速度比SM2更快，然后使用SM2对SM4秘钥进行加密，这样就又有SM2的加密效果。
 
 [Base64的编码与解码](https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/Base64_encoding_and_decoding)
 [Base64编码与URLEncode的简介](https://blog.csdn.net/qq_40414209/article/details/100639230)
