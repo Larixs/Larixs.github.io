@@ -205,3 +205,5 @@
 因为里面的几个子项目相互独立可以分开打包？意味着可以使用不同的技术栈？
 
 - [JS 计算字符串所占字节数](http://www.alloyteam.com/2013/12/js-calculate-the-number-of-bytes-occupied-by-a-string/)
+
+- [Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
