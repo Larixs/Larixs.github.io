@@ -207,3 +207,20 @@
 - [JS 计算字符串所占字节数](http://www.alloyteam.com/2013/12/js-calculate-the-number-of-bytes-occupied-by-a-string/)
 
 - [Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
+
+rebase目前看起来有两种用法：
+1. 基于其他分支rebase，把其他分支的commit合过来，并且把本分支的commit拼接到其他分支commit的末尾，在拼接过程中可以修改本分支此次合并的commit。
+
+使用代码类似于：(-i进入修改模式)
+
+    git checkout feature
+    git rebase -i main
+
+2. 基于本分支rebase，可以修改本分支某个commit后的所有commit。
+
+使用代码类似于：（-i进入修改模式）
+
+    git checkout feature
+    git rebase -i HEAD~2 // rebase最后两个commit
+
+千万千万不要在公共分支上做rebase操作，自己的分支可以瞎搞，但是公共分支多人维护瞎搞会出事的。“add my changes to what John has already done.”
