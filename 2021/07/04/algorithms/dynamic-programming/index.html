@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>动态规划学习笔记 | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文仅为个人学习笔记，欢迎指正、评论。 介绍R.Bellman从1955年开始系统地研究动态规划方法，为这个领域奠定了坚实的数学基础。1957年出版了他的名著《Dynamic Programming》，这是该领域的第一本著作。距今（2019）已经62年。 动态规划（Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划学习笔记">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/algorithms/dynamic-programming/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="本文仅为个人学习笔记，欢迎指正、评论。 介绍R.Bellman从1955年开始系统地研究动态规划方法，为这个领域奠定了坚实的数学基础。1957年出版了他的名著《Dynamic Programming》，这是该领域的第一本著作。距今（2019）已经62年。 动态规划（Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/climbing-stairs.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/summary-climb.jpg">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/cutting-steel-example.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/first-cut.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/first-cut2.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/cutting-steel-recursive.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/cutting-steel-recursive-tree.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/cutting-steel-recursive.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/cutting-steel-recursive-tree-colored.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/cutting-steel-recursive-tree-memorized.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/summary-cut.jpg">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/no-weight-longest-path-problem.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/no-weight-longest-path-problem2.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/sub-problem-overlampping1.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/sub-problem-overlampping2.png">
+<meta property="og:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/sub-problem-overlampping2.png">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动态规划学习笔记">
+<meta name="twitter:description" content="本文仅为个人学习笔记，欢迎指正、评论。 介绍R.Bellman从1955年开始系统地研究动态规划方法，为这个领域奠定了坚实的数学基础。1957年出版了他的名著《Dynamic Programming》，这是该领域的第一本著作。距今（2019）已经62年。 动态规划（Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相">
+<meta name="twitter:image" content="http://larixs.github.io/images/algorithms/dynamic_programming/climbing-stairs.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-algorithms/dynamic-programming" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/algorithms/dynamic-programming/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.730Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/算法-algorithms/">算法 algorithms</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      动态规划学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文仅为个人学习笔记，欢迎指正、评论。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>R.Bellman从1955年开始系统地研究动态规划方法，为这个领域奠定了坚实的数学基础。1957年出版了他的名著《Dynamic Programming》，这是该领域的第一本著作。距今（2019）已经62年。</p>
+<p>动态规划（Dynamic programming，简称DP）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。(dynamic programming 中的”programming”指的是一种表格法，并非编写计算机程序)</p>
+<p>分治法通常将问题划分为互不相交的子问题，递归求解子问题，再将他们的解组合起来。</p>
+<p>与分治法不同的是，动态规划应用于子问题重叠的情况，即不同的子问题具有公共的子子问题。动态规划对每个子子问题只求解一次，把结果保存到一个表格(programming)当中，避免了像分治法一样不断重复计算。</p>
+<p>动态规划方法通常用来求解最优化问题,重点寻找最优值，而非所有最优解。</p>
+<p>最优值：最优化的结果的值，例如商旅问题里的最短路径的值。</p>
+<p>最优解：能构造最优值的解决方案，例如商旅问题里达到最短路径的行路方案。</p>
+<h2 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h2><p>以下示例都不止一种解法，本文里只讲动态规划的解法。</p>
+<h3 id="爬楼梯问题"><a href="#爬楼梯问题" class="headerlink" title="爬楼梯问题"></a><a href="https://leetcode-cn.com/problems/climbing-stairs/" target="_blank" rel="noopener">爬楼梯问题</a></h3><p>习题来自leetcode.</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a><strong>问题</strong></h4><p>假设你正在爬楼梯。需要 n (n是一个正整数)阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？(必须正好到达楼顶）</p>
+<p>写一个程序，输入为n，输出为n阶楼梯对应的方法总数。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a><strong>示例</strong></h4><p>当n=2，返回2，方法有：1步+1步; 2步;<br>当n=3，返回3，方法有：1步+1步+1步; 1步+2步; 2步+1步;<br>当n=4，返回5，方法有：1步+1步+1步+1步; 1步+1步+2步; 1步+2步+1步; 2步+1步+1步; 2步+2步;</p>
+<h4 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a><strong>动态规划求解</strong></h4><p>有n阶楼梯时，令C(n)为所有可以爬到楼顶的方法的总数，即C(n)为n阶爬楼梯问题的解。</p>
+<p>由题已知，n &gt; 0, C(1) = 1，C(2) = 2</p>
+<p>现在来讨论n&gt;2时，n阶楼梯的解</p>
+<p><img src="/images/algorithms/dynamic_programming/climbing-stairs.png" alt></p>
+<p>图中表示了爬n阶楼梯的两种情况，一种是最后一次选择跨两步，一种是最后一次选择跨一步。（刻画一个最优解的结构特征）</p>
+<p>选择最后一次跨两步的时候，之前还有n-2阶台阶。由于n-2阶台阶怎么爬与最后一次无关，所以在这种情况下，n阶台阶可以看成n-2阶楼梯问题的任一爬法 + 最后一次爬两阶。那么n-2阶楼梯有多少种解法，此种情况下的n阶楼梯就是多少种解法，即最后一次爬两阶时，n阶楼梯的解法有C(n-2)种。</p>
+<p>同理，选择最后一次跨一步的时候，n阶台阶可以看成n-1阶楼梯问题的任一爬法 + 最后一次爬一阶，此种情况下n阶楼梯的解法就是n-1阶的解法C(n-1)。</p>
+<p>由于以上两种情况加起来就是所有的情况，所以n阶的解法等于n-1阶的解法加n-2阶的解法。公式就是C(n) = C(n-1) + C(n-2)，是一个典型的斐波那契数列。（递归地定义最优解的值）</p>
+<p>斐波那契数列是有计算公式的，可以直接利用公式求解。但是我们现在学习动态规划，就先假装不知道这个公式，利用动态规划的思想去求解。</p>
+<p>定义一个数组dp, dp[i]表示i阶爬楼梯问题的解。</p>
+<pre><code>const dp = []; // 储存子问题最优解的表格
+</code></pre><p>现在已知初始条件</p>
+<pre><code>dp[1] = 1;
+dp[2] = 2;
+</code></pre><p>根据递归公式可得</p>
+<pre><code>dp[i] = dp[i-1] + dp[i-2]
+</code></pre><p>递归公式加上初始条件和循环，得到整体的程序</p>
+<pre><code>var climbStairs = function(n) {
+    const dp = new Array(n+1);
+    // 假设dp[0] = 1，令dp[2] = dp[1] + dp[0],这样就构造了一个完整的斐波那契数列
+    dp[0] = dp[1] = 1;
+    for(let i = 2; i &lt;= n; i++){
+        // 计算最优解的值，通常采用自底向上（从最小的子问题开始求解）的方法。
+        dp[i] = dp[i-1] + dp[i-2];
+    }
+    return dp[n];
+}
+</code></pre><p>可能有人会注意到，其实每次计算dp[i]只用到了dp[i-1]、dp[i-2]这两个值，可以考虑只用两个变量储存之前的计算结果，每次更新对应的两个值就可以了。这是可以的，就当做另外的习题做一做吧。</p>
+<p>至此，爬楼梯问题就通过动态规划解决啦，算法时间复杂度为O(n),空间复杂度为O(n)(如果只更新两个值，那空间复杂度为O(1))。</p>
+<h3 id="通常按以下步骤来设计一个动态规划算法："><a href="#通常按以下步骤来设计一个动态规划算法：" class="headerlink" title="通常按以下步骤来设计一个动态规划算法："></a>通常按以下步骤来设计一个动态规划算法：</h3><ol>
+<li>刻画一个最优解的结构特征。</li>
+<li>递归地定义最优解的值。</li>
+<li>计算最优解的值，通常采用自底向上（从最小的子问题开始求解）的方法。</li>
+<li><p>利用计算出的信息构造出一个最优解（如果只需要最优值、不需要最优解，可忽略此步骤）。</p>
+<p><img src="/images/algorithms/dynamic_programming/summary-climb.jpg" alt></p>
+</li>
+</ol>
+<h3 id="钢铁的最优切割问题"><a href="#钢铁的最优切割问题" class="headerlink" title="钢铁的最优切割问题"></a>钢铁的最优切割问题</h3><p>习题及解题思路来自《算法导论》。</p>
+<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a><strong>问题</strong></h4><p>假设出售一段长度为i的钢条的价格为Pi(i = 1,2,3,…)，钢条的长度为整数，给出了一个价格表的样例：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">长度i</th>
+<th style="text-align:left">1</th>
+<th style="text-align:left">2</th>
+<th style="text-align:left">3</th>
+<th style="text-align:left">4</th>
+<th style="text-align:left">5</th>
+<th style="text-align:left">6</th>
+<th style="text-align:left">7</th>
+<th style="text-align:left">8</th>
+<th style="text-align:left">9</th>
+<th style="text-align:left">10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">价格pi</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left">17</td>
+<td style="text-align:left">17</td>
+<td style="text-align:left">20</td>
+<td style="text-align:left">24</td>
+<td style="text-align:left">30</td>
+</tr>
+</tbody>
+</table>
+<p>现在给定一段长度为n英寸的钢条和如上的价格表，求钢条切割方案，使得销售收益 r<sub>n</sub> 最大。注意，不切割的方案有可能是收益最大的方案。</p>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a><strong>示例</strong></h4><p><img src="/images/algorithms/dynamic_programming/cutting-steel-example.png" alt></p>
+<p>当n = 4时，包括不切割的方案在内，一共有八种切割方案。如图所示，图中数字代表该段钢条的价格。其中将钢条切成两段2英寸的钢条的方案总收益最高，为10。</p>
+<p>r<sub>1</sub> = 1</p>
+<p>r<sub>2</sub> = 5</p>
+<p>r<sub>3</sub> = 8</p>
+<p>r<sub>4</sub> = 10</p>
+<p>r<sub>5</sub> = 13</p>
+<p>…</p>
+<h4 id="动态规划求解-1"><a href="#动态规划求解-1" class="headerlink" title="动态规划求解"></a><strong>动态规划求解</strong></h4><h5 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a><strong>问题分析</strong></h5><p>当钢条长度为n时，将钢条水平放置。</p>
+<p><img src="/images/algorithms/dynamic_programming/first-cut.png" alt></p>
+<p>从左往右计量下刀位置，假设切第一刀，第一刀的位置范围是[1,n]，为n表示不切割。长度为0时，钢条价值为0。</p>
+<p><img src="/images/algorithms/dynamic_programming/first-cut2.png" alt></p>
+<p>第一刀左边的钢条长度为i，这段钢条不再切割，其价值为p<sub>i</sub>；第一刀右边的钢条长度为n-i, 可切割，其价值为r<sub>n-i</sub>。</p>
+<p>只要遍历所有第一刀（包括不切）的情况,找到其中的最大值，就能找到此时钢条的最优切割方案 r<sub>n</sub>。</p>
+<p>现在我们可以得到公式：</p>
+<p><img src="/images/algorithms/dynamic_programming/cutting-steel-recursive.png" alt></p>
+<h5 id="朴素的递归算法"><a href="#朴素的递归算法" class="headerlink" title="朴素的递归算法"></a><strong>朴素的递归算法</strong></h5><p>有了这个递推公式，我们就可以实现一个递推算法：</p>
+<pre><code>function cut_recursive(p, n) {
+    if(n===0){
+        return 0;
+    }
+    let q = Number.NEGATIVE_INFINITY;
+    for(let i = 1; i &lt;= n; i++) {
+        q = Math.max(q, p[i]+ cut_recursive(p, n-i));
+    }
+    return q;
+}
+</code></pre><p>现在来考察一下这个递推算法的复杂度</p>
+<p><img src="/images/algorithms/dynamic_programming/cutting-steel-recursive-tree.png" alt></p>
+<p>上图里树的每一个节点代表一次递归，节点的数字代表当前cut_recursive的参数n，n是钢条长度。其子节点为当前递归为了解决问题需要再次调用的递归及参数n。例如根节点4，表示本次递归的钢条长度为4，为了解决这个问题，还需要通过递归求解钢条长度为3、钢条长度为2、钢条长度为1、钢条长度为0的问题。</p>
+<p>图中的树有2<sup>4</sup>=16个节点。可以证明（此处略）为了解决长度为n的钢铁切割问题，生成的递归树一共有2<sup>n</sup>个节点，代表调用了2<sup>n</sup>次递归函数。随着n增大，算法递归的数量呈指数型增长。</p>
+<h5 id="朴素递归算法-备忘"><a href="#朴素递归算法-备忘" class="headerlink" title="朴素递归算法+备忘"></a><strong>朴素递归算法+备忘</strong></h5><p>我们在问题分析里，找到了具有最优子结构的分解方式，以及相应的递推公式，这已经完成了动态规划的重要部分：刻画最优解的结构特征和递归的定义最优解的值。我们可以接着上面的分解方式来完成接下来的动态规划求解。</p>
+<p>现在已知递归方程式：</p>
+<p><img src="/images/algorithms/dynamic_programming/cutting-steel-recursive.png" alt></p>
+<p>仔细观察递归树可以发现，有些节点是不断重复的：</p>
+<p><img src="/images/algorithms/dynamic_programming/cutting-steel-recursive-tree-colored.png" alt></p>
+<p>将相同问题进行同色着色处理，其实要解决的非重复问题只有5个，大多数都是递归过程中不断求解重复的问题。</p>
+<p>假如我们安排一下计算的顺序，将计算过的结果保存下来，再遇到相同的子问题时，可以直接使用计算好的值，不必再重新计算。因此：</p>
+<blockquote>
+<p>动态规划方法中，会付出额外的内存空间来节省计算时间，是典型的时空权衡（time-memory trade-off)。</p>
+</blockquote>
+<p>动态规划一般有两种保存结果的实现方法：</p>
+<p>第一种是<strong>带备忘的自顶向下法</strong>。自顶向下法可以用递归实现，加上保存计算结果的备忘即可。在朴素的递归算法里，只要稍微修改一下，求值时先检查备忘里是否已经有计算好的值，如果有，直接使用计算好的值，否则进入下一层递归。</p>
+<p>第二种是<strong>自底向上法</strong>。自底向上法是预先求出小问题的解，再通过小问题的解构成大问题的解。</p>
+<pre><code>// 第一种：带备忘的自顶向下法
+function memory_cut(p, n) {
+    let r = new Array(n+1).fill(Number.NEGATIVE_INFINITY);
+    return memory_cut_recursive(p, n, r)
+}
+function memory_cut_recursive(p, n, r) {
+    if(r[n] &gt;= 0){
+        // 检查是否存在计算过的值
+        return r[n];
+    }
+    // 没有计算过则按正常流程计算
+    if(n===0){
+        return 0;
+    }
+    let q = Number.NEGATIVE_INFINITY;
+    for(let i = 1; i &lt;= n; i++) {
+        q = Math.max(q, p[i]+ memory_cut_recursive(p, n-i, r));
+    }
+    return q;
+}
+</code></pre><p>在原来递归算法的基础上加上备忘就实现了第一种方法。现在的递归调用树情况：</p>
+<p><img src="/images/algorithms/dynamic_programming/cutting-steel-recursive-tree-memorized.png" alt></p>
+<p>图中带五角星的节点在递归过程中直接返回了之前的计算结果。可以看到，现在已经减少了许多不必要的计算过程，生成的递归树一共有(n*(n+1)/2) + 1个节点。与原来的算法相比，已经从2<sup>n</sup>这种指数级别的递归数量降至多项式n<sup>2</sup>级别。</p>
+<p>现在实现第二种：</p>
+<pre><code>// 第二种：自底向上
+function buttom_up_cut(p, n) {
+    const dp = new Array(n+1);
+    dp[0] = 0;
+    for(let i = 1; i &lt;= n; i++){
+        // 从规模小的问题开始求解
+        let q = Number.NEGATIVE_INFINITY;
+        for(let j = 1; j &lt;= i; j++){
+            // 求解规模为i的问题时，可以直接使用比i规模更小的子问题的结果dp[i-j]
+            q = Math.max(q, p[j] + dp[i - j]);
+        }
+        dp[i] = q;
+    }
+    return dp[n];
+}
+</code></pre><p>自底向上的方案的思想就是先求出小规模问题，在求解大规模问题时，就可以直接使用之前计算储存好的结果。</p>
+<p>两种方案的时间复杂度是相近的，空间复杂度均为O(n)。但是由于自底向上的方案没有调用递归函数的开销，所以一般倾向于使用自底向上的方案。</p>
+<h3 id="通常按以下步骤来设计一个动态规划算法（再来一次）："><a href="#通常按以下步骤来设计一个动态规划算法（再来一次）：" class="headerlink" title="通常按以下步骤来设计一个动态规划算法（再来一次）："></a>通常按以下步骤来设计一个动态规划算法（再来一次）：</h3><ol>
+<li>刻画一个最优解的结构特征。</li>
+<li>递归地定义最优解的值。</li>
+<li>计算最优解的值，通常采用自底向上（从最小的子问题开始求解）的方法。</li>
+<li><p>利用计算出的信息构造出一个最优解（如果只需要最优值、不需要最优解，可忽略此步骤）。</p>
+<p><img src="/images/algorithms/dynamic_programming/summary-cut.jpg" alt></p>
+</li>
+</ol>
+<h2 id="动态规划原理"><a href="#动态规划原理" class="headerlink" title="动态规划原理"></a>动态规划原理</h2><p>怎么判断一个问题能否用动态规划去解决呢？《算法导论》一书上提到适合的场景应该具有的两个要素：<code>最优子结构和子问题重叠</code>。</p>
+<h3 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h3><p>大问题的最优解可以由其分裂出的子问题的最优解推导得到，就称该问题具有最优子结构。</p>
+<p>例如爬楼梯问题，n阶楼梯的最优解由子问题n-1阶、子问题n-2阶的最优解推导得到。</p>
+<p>刻画最优解的结构时，分裂出的子问题之间应该是<code>无关</code>的，否则此种子结构不能用于动态规划。</p>
+<p>无关的意思： 子问题 M 如何构成其最优解不会影响子问题 N 如何构成最优解，则子问题 M 与子问题 N 无关。</p>
+<p>举一个子问题相关的例子。求无权最长路程（无环）：假设u为起点，v为终点，求u到v的最长路径（无环）。位置如下图所示：</p>
+<p><img src="/images/algorithms/dynamic_programming/no-weight-longest-path-problem.png" alt></p>
+<p>假如将原问题u-&gt;v拆分为子问题1 u-&gt;w和子问题2 w-&gt;v，想要通过求两个子问题的最长路径来求得u-&gt;v的最长路径时，就会出现一些问题：</p>
+<p>如果不考虑其他子问题如何求解，直接求解自己的最长路径时：</p>
+<p>u-&gt;w的最长路径是u-&gt;t-&gt;w, w-&gt;v的最长路径是 w-&gt;t-&gt;v，出现了一个闭环w-&gt;t-&gt;w</p>
+<p><img src="/images/algorithms/dynamic_programming/no-weight-longest-path-problem2.png" alt></p>
+<p>所以求解子问题2 w-&gt;v时，必须考虑子问题1用到了哪些点，子问题1用过的点就不能再用了。子问题2就与子问题1相关了。这种子结构划分不适合用动态规划求解。</p>
+<h3 id="子问题重叠"><a href="#子问题重叠" class="headerlink" title="子问题重叠"></a>子问题重叠</h3><p>在动态规划的递归过程中，如果会反复地求解相同的子问题，而不是一直生成新的子问题，这样就称为最优化问题具有重叠子问题特性。</p>
+<p>动态规划会把每一个子问题的解都存在一张表里，这样在求解重复子问题的时候，就能直接查表，时间代价为常量。动态规划虽然付出了额外的空间，但是时间上的提升可能是巨大的，是典型的时空权衡。</p>
+<p>子问题重叠性质与子问题无关并不矛盾，它们描述的是不同层面的性质。以钢铁切割问题为例，求解长度为4的钢铁切割问题时，需要考虑到第一次切割后是1+3的情况</p>
+<p><img src="/images/algorithms/dynamic_programming/sub-problem-overlampping1.png" alt></p>
+<p>子问题1为长度1的钢铁切割，子问题2为长度为3的钢铁切割。这两个子问题是无关的，第一个子钢铁怎么切割与第二个钢铁怎么切割无关。</p>
+<p>而求解子问题2时，会进一步拆分子问题，出现子子问题1（长度为1的钢铁切割）、子子问题2（长度为2的钢铁切割）。此时子子问题1和子问题1是同一个问题。 此时该结构就有重叠的子问题。</p>
+<p><img src="/images/algorithms/dynamic_programming/sub-problem-overlampping2.png" alt></p>
+<h2 id="经典示例"><a href="#经典示例" class="headerlink" title="经典示例"></a>经典示例</h2><h3 id="编辑距离"><a href="#编辑距离" class="headerlink" title="编辑距离"></a><a href="https://leetcode-cn.com/problems/edit-distance/" target="_blank" rel="noopener">编辑距离</a></h3><p>题目描述来自leetcode</p>
+<p><strong>问题</strong></p>
+<p>给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数。</p>
+<p>你可以对一个单词进行如下三种操作：</p>
+<ul>
+<li>插入一个字符</li>
+<li>删除一个字符</li>
+<li>替换一个字符</li>
+</ul>
+<p><strong>示例</strong></p>
+<p>输入: word1 = “horse”, word2 = “ros”</p>
+<p>输出: 3</p>
+<p>解释:</p>
+<p>horse -&gt; rorse (将 ‘h’ 替换为 ‘r’)</p>
+<p>rorse -&gt; rose (删除 ‘r’)</p>
+<p>rose -&gt; ros (删除 ‘e’)</p>
+<p><strong>动态规划求解</strong></p>
+<p>本例不做详细的分析了，直接给出结构特征和递归方程式：</p>
+<p>M为可以操作的字符串，N为目标字符串</p>
+<p>m[i]包含字符串M中第1到第i个字符的子字符串（字符位置从1开始计数），n[j]包含字符串N中第1到第j个字符的子字符串，令dp[i][j]为m[i]与n[j]的最小编辑距离。</p>
+<p><img src="/images/algorithms/dynamic_programming/sub-problem-overlampping2.png" alt></p>
+<p>第一种情况是当M[i]与N[j]的字符相同时，不需要进行任何操作，所以dp[i][j] = dp[i-1][j-1]</p>
+<p>第二种情况是当M[i]与N[j]字符不相同时，可能会进行三种操作：</p>
+<ul>
+<li>在M[i-1]后，增加一个和N[j]一样的字符，则dp[i-1][j] = dp[i-1][j-1] + 1，即dp[i][j] = dp[i][j-1] + 1。</li>
+<li>删除M[i]，则dp[i][j-1] = dp[i-1][j-1] + 1。 替换一下参数，即dp[i][j] = dp[i-1][j] + 1。</li>
+<li>直接将M[i]替换为N[j]字符，则dp[i][j] = dp[i-1][j-1] + 1。</li>
+</ul>
+<p>三种操作中，操作数最小的为dp[i][j]的编辑距离。</p>
+<p><strong>延伸</strong></p>
+<p>《算法导论》第15章的习题15-5里有操作步骤更为复杂的编辑距离问题。编辑距离问题是DNA序列对齐问题的推广。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>动态规划的核心其实是找到具有<strong>最优子结构</strong>的特征，以及可以由子问题最优解构造问题最优解的<strong>递归方程式</strong>。只要找到这些，加上<strong>备忘</strong>的使用，就可以将一个看起来很复杂需要遍历的问题，转化为多项式时间的带备忘的递归问题。</p>
+<p>本文只是个人学习的心得体会，涉及的范围不够广和深，相当于一篇入门介绍。鉴于自己是初学者，可能理解不够到位，若有错漏欢迎指出！</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>&lt;&lt;算法导论&gt;&gt; 中文第三版 (强烈推荐,思路和表达都很清晰，本文的大部分理论知识都来自此书)</li>
+<li>leetcode</li>
+<li><a href="https://www.zhihu.com/question/23995189/answer/35324479" target="_blank" rel="noopener">什么是动态规划（Dynamic Programming）？动态规划的意义是什么？</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/algorithms/dynamic-programming/" data-id="clivn5s17000eml6p15vdx2cj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/ES6/static/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          静态成员(class,static)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/algorithms/sort/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">排序</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

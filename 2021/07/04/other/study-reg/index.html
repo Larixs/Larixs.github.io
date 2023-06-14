@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>正则表达式学习笔记 | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.对某个字符进行匹配 按匹配范围进行分类   普通字符（如a）：普通字符本身（a）  特殊字符（如. 和 \）: \特殊字符 （如 \ . 和 \ \ , -(连字符) 字符不需要被转译）  空白字符(非打印字符):  \f : 换页符 \n : 换行符   多个字符中的一个  字符集(如匹配a或者s或者d) : [asd] 字符集合区间(如匹配数字0~9) :   [0-9]  //完全等同于">
+<meta name="keywords" content="study notes,reg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式学习笔记">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/other/study-reg/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="1.对某个字符进行匹配 按匹配范围进行分类   普通字符（如a）：普通字符本身（a）  特殊字符（如. 和 \）: \特殊字符 （如 \ . 和 \ \ , -(连字符) 字符不需要被转译）  空白字符(非打印字符):  \f : 换页符 \n : 换行符   多个字符中的一个  字符集(如匹配a或者s或者d) : [asd] 字符集合区间(如匹配数字0~9) :   [0-9]  //完全等同于">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.737Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式学习笔记">
+<meta name="twitter:description" content="1.对某个字符进行匹配 按匹配范围进行分类   普通字符（如a）：普通字符本身（a）  特殊字符（如. 和 \）: \特殊字符 （如 \ . 和 \ \ , -(连字符) 字符不需要被转译）  空白字符(非打印字符):  \f : 换页符 \n : 换行符   多个字符中的一个  字符集(如匹配a或者s或者d) : [asd] 字符集合区间(如匹配数字0~9) :   [0-9]  //完全等同于">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-other/study-reg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/other/study-reg/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.737Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正则表达式学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-对某个字符进行匹配"><a href="#1-对某个字符进行匹配" class="headerlink" title="1.对某个字符进行匹配"></a>1.对某个字符进行匹配</h2><p><strong> 按匹配范围进行分类 </strong></p>
+<ul>
+<li><p>普通字符（如a）：普通字符本身（a）</p>
+</li>
+<li><p>特殊字符（如. 和 \）: \特殊字符 （如 \ . 和 \ \ , -(连字符) 字符不需要被转译）</p>
+</li>
+<li><p>空白字符(非打印字符):</p>
+<ul>
+<li>\f : 换页符</li>
+<li>\n : 换行符</li>
+</ul>
+</li>
+<li><p>多个字符中的一个</p>
+<ul>
+<li>字符集(如匹配a或者s或者d) : [asd]</li>
+<li><p>字符集合区间(如匹配数字0~9) :</p>
+<p>  [0-9]  //完全等同于[0123456789]</p>
+<p>  [A-Z]</p>
+<p>  [a-z]</p>
+<p>  [A-z] //匹配ASCII字符A到z的所有字母,不常用,包含[、^等其他字符</p>
+</li>
+<li><p>多个字符区间：</p>
+<p>  [A-Za-z0-9]</p>
+</li>
+<li><p>匹配特定类别：</p>
+<p>  \d:任何一个数字</p>
+<p>  \D:任何一个非（数字）</p>
+<p>  \w:字母、数字、下划线</p>
+<p>  \W: 非（字母、数字、下划线）</p>
+<p>  \s:空白字符</p>
+<p>  \S:非空白字符</p>
+</li>
+</ul>
+</li>
+<li>取非匹配: [^0-9] //匹配不上数字的字符</li>
+<li>匹配除换行符之外的任何单个字符：.</li>
+<li><p>或操作符 |。 ‘x|y’匹配’x’或者’y’。</p>
+<p>  例如：</p>
+<p>  <code>/green|red/ //匹配“green apple”中的‘green’和“red apple”中的‘red’</code><br>  <code>/gree(n|r)ed/ //匹配&#39;greened&#39;或&#39;greered&#39;</code></p>
+</li>
+</ul>
+<h2 id="2-对字符进行重复匹配"><a href="#2-对字符进行重复匹配" class="headerlink" title="2.对字符进行重复匹配"></a>2.对字符进行重复匹配</h2><ul>
+<li><p>匹配一个或多个字符： +</p>
+<p>  例子：</p>
+<p>  a+  //匹配一个或连续多个a</p>
+<p>  \w+ //匹配一个或连续多个字母数字字符</p>
+<p>  [0-9]+ //匹配一个或多个数字</p>
+</li>
+<li><p>匹配零个或多个字符： *</p>
+<p>  用法和 + 完全一样。</p>
+</li>
+<li><p>匹配零个或一个字符 ： ？<br>  用法同上。</p>
+</li>
+<li><p>指定重复的次数</p>
+<ul>
+<li>精确的值 [0-9]{6}  //重复出现六个数字</li>
+<li>闭合区间 \d{2,4} //数字最多重复4次，最少重复两次</li>
+<li>半开半闭区间 \d{3,} //至少重复3次</li>
+</ul>
+</li>
+<li><p>懒惰型元字符</p>
+<p>  这是个非常有意思的概念。*，+都是尽可能多的匹配，但是存在一种情况是需要尽可能少的匹配，因此引入懒惰型元字符的概念。懒惰型元字符就是匹配尽可能少的字符。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>贪婪型元字符</th>
+<th>懒惰型元字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>*?</td>
+</tr>
+<tr>
+<td>+</td>
+<td>+?</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>{n,}?</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-位置匹配"><a href="#3-位置匹配" class="headerlink" title="3. 位置匹配"></a>3. 位置匹配</h2><ul>
+<li><p>单词 边界： \b   //用于匹配一个单词的开始或者结尾</p>
+<p>  \bcat\b  //只匹配cat单词</p>
+<p>  \bcat //匹配以cat开头的单词</p>
+<p>  cat\b  //匹配以cat结尾的单词</p>
+</li>
+<li><p>非单词 边界： \B //匹配前或后不是单词边界的符号</p>
+<p>  \B-\B  //匹配color - coded ，不匹配 nine-digit</p>
+</li>
+<li><p>字符串边界： ^ （字符串开头） $ （字符串结尾）</p>
+</li>
+<li><p>分行匹配模式： (?m) //将行分隔符当做字符串分隔符对待，因此^ $还会匹配行分隔符</p>
+</li>
+</ul>
+<h2 id="4-子表达式"><a href="#4-子表达式" class="headerlink" title="4.子表达式"></a>4.子表达式</h2><h3 id="捕获括号"><a href="#捕获括号" class="headerlink" title="捕获括号"></a>捕获括号</h3><p>把一个子表达式当做一个独立的元素使用。子表达式需用（）(称为捕获括号)括起来。</p>
+<p>例子：</p>
+<p><code>(\d{1,3}\.){3}\d{1,3}  // 子表达式\d{1,3}\.重复三次，可以匹配ip地址如10.125.19.211</code></p>
+<p><code>(19|20)\d{2} // 匹配19或者20开始的四位数</code></p>
+<h3 id="非捕获括号-x"><a href="#非捕获括号-x" class="headerlink" title="非捕获括号 (?:x)"></a>非捕获括号 (?:x)</h3><p>匹配’x’但是不记住匹配项。</p>
+<pre><code>const reg1 = /(?:foo)/;
+const reg2 = /(foo)/;
+const str = &apos;foo&apos;;
+str.replace(reg1, &apos;$1&apos;) // &apos;$1&apos; 捕获但是没有记住，所以$1没有值
+str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以$1有值
+</code></pre><h2 id="5-回溯引用"><a href="#5-回溯引用" class="headerlink" title="5.回溯引用"></a>5.回溯引用</h2><p>回溯引用多用来替换字符串。<del>不知道这在js里怎么写。</del></p>
+<p>看了书之后，发现回溯引用就是将子表达式化作变量，按照出现顺序通过 \1 \2 … 进行调用，同一子表达式匹配出的字符串应该是一样的，比如子表达式1匹配到了sat,则后续\1处的调用也必须匹配sat。</p>
+<p>例子：</p>
+<p><code>/(foo) (bar) \1 \2/  // 这个正则表达式能匹配上&quot;foo bar foo bar&quot;，用两个括号分别记住前两个单词，再用\1 \2表示匹配和捕获1(在此是&#39;foo&#39;)、捕获2(在此是&#39;bar&#39;)一样的字符串。 \1 \2用于正则表达式的匹配环节，$1 $2用于正则表达式的替换环节。</code></p>
+<h2 id="6-断言-条件匹配"><a href="#6-断言-条件匹配" class="headerlink" title="6.断言(条件匹配)"></a>6.断言(条件匹配)</h2><h3 id="先行断言-x-y"><a href="#先行断言-x-y" class="headerlink" title="先行断言 x(?=y)"></a>先行断言 x(?=y)</h3><p>匹配’x’，仅当’x’后面跟着’y’。这叫先行断言。</p>
+<p>例子：</p>
+<p><code>/Jack(?=Sprat|Frost)/  // 匹配‘Jack’仅仅当它后面跟着&#39;Sprat&#39;或者是‘Frost’。但是‘Sprat’和‘Frost’都不是匹配结果的一部分。</code></p>
+<h3 id="后行断言-lt-y-x"><a href="#后行断言-lt-y-x" class="headerlink" title="后行断言 (?&lt;=y)x"></a>后行断言 (?&lt;=y)x</h3><p>匹配’x’，仅当’x’前面是’y’。这叫后行断言。</p>
+<p><code>/(?&lt;=Jack|Tom)Sprat/  // 匹配‘ Sprat ’仅仅当它前面是&#39;Jack&#39;或者是‘Tom’。但是‘Jack’和‘Tom’都不是匹配结果的一部分。</code></p>
+<h3 id="反向-先行断言-x-y"><a href="#反向-先行断言-x-y" class="headerlink" title="反向(?)先行断言 x(?!y)"></a>反向(?)先行断言 x(?!y)</h3><p>匹配’x’,仅当’x’后面不是’y’</p>
+<h3 id="反向-后行断言-lt-y-x"><a href="#反向-后行断言-lt-y-x" class="headerlink" title="反向(?)后行断言 (?&lt;!y)x"></a>反向(?)后行断言 (?&lt;!y)x</h3><p>匹配’x’,仅当’x’前面不是’y’</p>
+<h3 id="7-正则表达式小书上还有些东西，没用过也没看过"><a href="#7-正则表达式小书上还有些东西，没用过也没看过" class="headerlink" title="7. 正则表达式小书上还有些东西，没用过也没看过"></a>7. 正则表达式小书上还有些东西，没用过也没看过</h3><p>等真正需要的时候再学吧，不然又忘了</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener">正则表达式-javascript|mdn</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/other/study-reg/" data-id="clivn5s250031ml6pdcffszik" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reg/">reg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/ssr/ssr_practice/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SSR实践
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/python/The-abc/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

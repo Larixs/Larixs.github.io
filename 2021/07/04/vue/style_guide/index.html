@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>vue的官方风格指南 | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="个人从官方文档整理和翻译。 A:Essential Multi-word component names   组件名应该为多个单词，除了根组件app components  reason: This prevents conflicts with existing and future HTML elements, since all HTML elements are a single word">
+<meta name="keywords" content="style guide">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue的官方风格指南">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/vue/style_guide/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="个人从官方文档整理和翻译。 A:Essential Multi-word component names   组件名应该为多个单词，除了根组件app components  reason: This prevents conflicts with existing and future HTML elements, since all HTML elements are a single word">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue的官方风格指南">
+<meta name="twitter:description" content="个人从官方文档整理和翻译。 A:Essential Multi-word component names   组件名应该为多个单词，除了根组件app components  reason: This prevents conflicts with existing and future HTML elements, since all HTML elements are a single word">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue/style_guide" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/vue/style_guide/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.739Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue的官方风格指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>个人从官方文档整理和翻译。</p>
+<h2 id="A-Essential"><a href="#A-Essential" class="headerlink" title="A:Essential"></a>A:Essential</h2><ol>
+<li><p>Multi-word component names </p>
+<p> 组件名应该为多个单词，除了根组件app components</p>
+<p> reason: This prevents conflicts with existing and future HTML elements, since all HTML elements are a single word.</p>
+</li>
+<li><p>Component data must be a function (anywhere except on new Vue).</p>
+</li>
+<li><p>Prop definitions should be as detailed as possible.</p>
+<p> prop定义越详细越好，至少要注明类型</p>
+<pre><code>// Even better!
+props: {
+  status: {
+    type: String,
+    required: true,
+    validator: function (value) {
+      return [
+        &apos;syncing&apos;,
+        &apos;synced&apos;,
+        &apos;version-conflict&apos;,
+        &apos;error&apos;
+      ].indexOf(value) !== -1
+    }
+  }
+}
+</code></pre></li>
+<li><p>Always use key with v-for</p>
+<p> reason: <a href="https://vuejs.org/v2/style-guide/index.html#Keyed-v-for-essential" target="_blank" rel="noopener">detailed explanation</a></p>
+<p> 让vue能够精准操作，使v-for下的dom元素的行为可预测。</p>
+</li>
+<li><p>Component style scoping(any components except App component)</p>
+<p>solution: </p>
+<ol>
+<li><p>use the ‘scoped’ attribute</p>
+<pre><code>&lt;style scoped&gt;
+
+&lt;/style&gt;            
+</code></pre></li>
+<li><p>use CSS modules</p>
+<pre><code>&lt;style module&gt;
+
+&lt;/style&gt;
+</code></pre></li>
+<li>use BEM convention</li>
+</ol>
+</li>
+<li><p>Private property names</p>
+<p> 请一直使用’$_’前缀为plugin、mixin等扩展的自定义私有属性命名。并且为了避免与其他人的代码产生冲突，还需要使用命名空间。（比如：$_yourPluginName_property）</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Private-property-names-essential" target="_blank" rel="noopener">详细解释</a></p>
+<pre><code>var myGreatMixin = {
+  // ...
+  methods: {
+    $_myGreatMixin_update: function () {
+      // ...
+    }
+  }
+}
+</code></pre></li>
+</ol>
+<h2 id="B-Strongly-Recommended-Improving-Readability"><a href="#B-Strongly-Recommended-Improving-Readability" class="headerlink" title="B: Strongly Recommended(Improving Readability)"></a>B: Strongly Recommended(Improving Readability)</h2><p>多为组件的命名：命名方式，前缀，命名顺序</p>
+<ol>
+<li><p>Component files</p>
+<p> each component should be in its own file.</p>
+<p> reason: This helps you to more quickly find a component when you need to edit it or review how to use it.</p>
+</li>
+<li><p>Single-file component filename casing</p>
+<p> .vue文件的命名问题。并没有明白为什么因为存在大小写不敏感的系统就推荐大驼峰命名法。</p>
+<p> 另外，用短横线命名的方法称为kebab(烤肉串)命名法，还挺形象（笑）。</p>
+</li>
+<li><p>Base components names</p>
+<p> 为了应用定制的基础组件，都需要一个特定的前缀，例如<code>Base,App或者V</code></p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Base-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation</a>:</p>
+<p> These components lay the foundation for consistent styling and behavior in your application. 这些组件为你的应用中的样式和行为一致性奠定了基础。</p>
+<p> They may <strong>only</strong> contain:</p>
+<ul>
+<li>html elements</li>
+<li>ohter Base-prefixed components, and</li>
+<li><p>3rd-party UI components</p>
+<p>But they’ll <strong>never</strong> contain global state(e.g. from a Vuex store)</p>
+<p>这些组件的名称通常包含他们所包装的元素，例如BaseButton, BaseTable，除非没有其特定目的的元素，如BaseIcon</p>
+<p>advantages:</p>
+</li>
+<li><p>编辑器按照字母表对你的component进行排序时，你的base components总是会放在一起，让它们更容易被识别。</p>
+</li>
+<li>由于components应该一直以多个单词命名，这样就可以帮你少想一个前缀单词，不用再随便找一个单词给简单的components取名了。</li>
+<li><p>因为这些组件会被经常用，你可能希望让他们能够全局引用而非从四散的角落里引用。前缀结合webpack让这个可以实现。（SPA感觉挺实用的，zelda不行。zelda是多个小型spa的集合，不一定每次都需要所有的base components，所以不能全局注册所有的base components，目前还是用bable-import-plugin按需引入比较好。）</p>
+<pre><code>components/
+|- BaseButton.vue
+|- BaseTable.vue
+|- BaseIcon.vue
+</code></pre></li>
+</ul>
+</li>
+<li><p>single-instance component names</p>
+<p> 那些只允许存在一个active实例的组件，应该以 <code>The</code> 作为命名前缀，表示这里只能存在一个。例如 TheHeader, TheSideBar, TheFooter</p>
+<p> 在每个页面都只使用一次的component才被成为single-instance component。 这种component从来不接受任何props,因为他们虽为app特制，但是不受app上下文的影响。</p>
+<p> 如果你发现它们需要添加props，那他们就成为了每个页面只用一次的可复用的组件。</p>
+</li>
+<li><p>Tightly coupled component names</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Tightly-coupled-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation</a></p>
+<p> 子组件如果与父组件紧密耦合，那么子组件的名称应该以父组件的名称作为前缀。这样既可以证明子组件与父组件之间存在耦合关系，也可以让编辑器在按照字母表排序时，让这些组件放在一起。例如</p>
+<pre><code>components/
+|- TodoList.vue
+|- TodoListItem.vue
+|- TodoListItemButton.vue
+</code></pre></li>
+<li><p>Order of words in components names</p>
+<p> components names should start with highest-level(often most general) words and end with descriptive modifying words.</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Order-of-words-in-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation:</a></p>
+<p> you may be wondering:</p>
+<p> <code>why would we force component names to use less natural language?</code></p>
+<p> 在自然英语里，形容词和其他修饰词通常会出现在名词之前，特殊情况下需要连接词，例如：</p>
+<ul>
+<li>coffee <code>with</code> milk</li>
+<li>soup <code>with</code> the day</li>
+<li><p>Visitor <code>to</code> the museum</p>
+<p>如果你愿意，你肯定可以把这些连接词加到组件名称里，但是顺序依然很重要。</p>
+<p>命名示例：</p>
+<p>最高级别的前缀应该是与app的上下文相关的。你的app需要一个搜索表单，那么这一系列组件的命名最高前缀应该是search。</p>
+<p>  //bad<br>  components/<br>  |- ClearSearchButton.vue<br>  |- ExcludeFromSearchInput.vue<br>  |- LaunchOnStartupCheckbox.vue<br>  |- RunSearchButton.vue<br>  |- SearchInput.vue<br>  |- TermsCheckbox.vue</p>
+<p>  //good<br>  components/<br>  |- SearchButtonClear.vue<br>  |- SearchButtonRun.vue<br>  |- SearchInputQuery.vue<br>  |- SearchInputExcludeGlob.vue<br>  |- SettingsCheckboxTerms.vue<br>  |- SettingsCheckboxLaunchOnStartup.vue</p>
+<p>你可能会考虑将search的component放在一个文件夹里，将setting的component放在另一个文件夹里，但是我们建议在一个庞大的app（组件数超过100）里才这么做。原因如下：</p>
+<ul>
+<li>在通常情况下，浏览嵌套的文件夹比浏览单个的components文件夹花费更多时间。</li>
+<li>命名冲突会导致在代码编辑器难以快速定位某一个特定的component。</li>
+<li>重构会更加困难。因为find-and-replace通常不足以更新一个移动后组件的引用。(Refactoring becomes more difficult, because find-and-replace often isn’t sufficient to update relative references to a moved component.)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Self-closing components</p>
+<p> 在single-file components(.vue文件),string templates 和jsx中，没有内容的组件应该自闭合，除了 DOM templates（即html文件）.</p>
+<p> Components that self-close communicate that they not only have no content, but are <strong>meant</strong> to have no content.即在减少代码量的同时，告诉其他人这个组件里面没有内容（插槽？）。</p>
+<p> 不在DOM templates里使用自闭合是因为html不支持官方空元素以外的自闭合。所以只有在dom处理之前，先让vue处理一波，才可以使用这个建议。</p>
+</li>
+<li><p>Components name casing in templates</p>
+<p> 在大多数项目中，组件应该在single-file components和string templates中使用大驼峰命名法，在DOM templates中用kebab-case（烤肉串命名法？）。或者一直使用烤肉串命名法。</p>
+<p> 大驼峰在以下几点优于烤肉串：</p>
+<ul>
+<li>编辑器可以自动补全，因为js也常用大驼峰。</li>
+<li>大驼峰在视觉上与普通的html元素的差异大于烤肉串的。大驼峰有两个大写字母，烤肉串就一个短横线。（差异性更大吗？emmmmmm…可能吧）</li>
+<li><p>如果在你的模板里用了非Vue自制组件，比如一个web component,大驼峰能保证你的Vue组件清晰可见。</p>
+<p>unfortunately, 因为html对大小写不敏感，所以在DOM templates里必须使用烤肉串。</p>
+<p>需要注意的是： 如果你已经使用了很多kebab，保持html的一致性以及整个项目的风格统一比以上几个优点重要多了。因此在所有地方都用烤肉串命名法也是可以接受的。</p>
+</li>
+</ul>
+</li>
+<li><p>Component name casing in js/jsx</p>
+<p> js和jsx中应该一直用Pascal，vue.component注册的全局组件应该用kebab。</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Component-name-casing-in-JS-JSX-strongly-recommended" target="_blank" rel="noopener">detailed explanation：</a><br> js中，pascal常用于类名或原型命名，或者说，任何能有不同实例的对象。Vue组件也可以有实例，因此它也可以用pascal。有个附加的优点，在jsx里用pascal可以让阅读代码的人更容易区分组件和html元素。</p>
+<p> 为全局注册的组件使用kebab-case的原因如下：</p>
+<ul>
+<li>在js中很少使用全局组件，因此遵守js的约定没多大意义。</li>
+<li>这些应用程序总是包含许多DOM模板，其中必须使用kebab-case。（哪些应用？）</li>
+</ul>
+</li>
+<li><p>Full-word components names</p>
+<p>Components names should prefer full words over abbreviations.</p>
+<p>The autocompletion in editors make the cost of writing longer names very low, while the clarity they provide is invaluable. Uncommon abbreviations, in particular, should always be avoided.</p>
+<p>编辑器中的自动完成让写更长的名称的成本非常低，而它们提供的清晰度是无价的。尤其应该避免不寻常的缩写。</p>
+<pre><code>//bad
+components/
+|- SdSettings.vue
+|- UProfOpts.vue
+
+//good
+components/
+|- StudentDashboardSettings.vue
+|- UserProfileOptions.vue
+</code></pre></li>
+<li><p>Prop name casing</p>
+<p>Prop names should always use camelCase during declaration, but kebab-case in templates and jsx.</p>
+<p>We are simply following the convention of each language. Within js, camelCase is more natural. Within html, kebab-case is.</p>
+<pre><code>//good
+props: {
+  greetingText: String
+}
+&lt;WelcomeMessage greeting-text=&quot;hi&quot;/&gt;
+</code></pre></li>
+<li><p>Multi-attribute elements</p>
+<p>elements with multiple attributes should span multiple lines, with one attribute per line.</p>
+<p>reason: It’s easy to read.</p>
+<pre><code>// good
+&lt;MyComponent
+  foo=&quot;a&quot;
+  bar=&quot;b&quot;
+  baz=&quot;c&quot;
+/&gt;
+</code></pre><p>拿一个页面测试了一下，用这种标准能够让属性看的更清楚，但是让元素之间的层级关系变得不好辨认了。</p>
+</li>
+<li><p>Simple expressions in templates</p>
+<p>Component templates should only include simple expressions, with more complex expression refactored into computed properties or methods.</p>
+</li>
+<li><p>Simple computed properties</p>
+<p>Complex computed properties should be split into as many simpler properties as possible.</p>
+<p><a href="https://vuejs.org/v2/style-guide/index.html#Simple-computed-properties-strongly-recommended" target="_blank" rel="noopener">detailed explanation:</a></p>
+<ul>
+<li>easier to test</li>
+<li>easier to read</li>
+<li>more adaptable to changing requirements</li>
+</ul>
+</li>
+</ol>
+<pre><code>//bad
+computed: {
+  price: function () {
+    var basePrice = this.manufactureCost / (1 - this.profitMargin)
+    return (
+      basePrice -
+      basePrice * (this.discountPercent || 0)
+    )
+  }
+}
+
+//good
+computed: {
+  basePrice: function () {
+    return this.manufactureCost / (1 - this.profitMargin)
+  },
+  discount: function () {
+    return this.basePrice * (this.discountPercent || 0)
+  },
+  finalPrice: function () {
+    return this.basePrice - this.discount
+  }
+}
+</code></pre><ol start="15">
+<li><p>Quoted attribute values</p>
+<p>Non-empty HTML attributes values should always be inside quotes(single or double, whichever is not used in js). 为什么要用js不用的那个引号呢？</p>
+</li>
+<li><p>Directive shorthands</p>
+<p>Directive shorthands should be used always or never.</p>
+<p>Directive shorthands include <code>:</code> for<code>v-bind:</code> and <code>@</code> for <code>v-on:</code>.</p>
+</li>
+</ol>
+<h2 id="C-Recommended-Minimizing-Arbitrary-Choices-and-Cognitive-Overhead"><a href="#C-Recommended-Minimizing-Arbitrary-Choices-and-Cognitive-Overhead" class="headerlink" title="C: Recommended(Minimizing Arbitrary Choices and Cognitive Overhead)"></a>C: Recommended(Minimizing Arbitrary Choices and Cognitive Overhead)</h2><ol>
+<li><p>Component/instance options order</p>
+<p> components/instance options should be ordered consistently.</p>
+<p> This is the default order from Vue for components options.</p>
+<ol>
+<li><p>Side effects (trigger effects outside the component)</p>
+<ul>
+<li>el</li>
+</ul>
+</li>
+<li><p>Global Awareness(require knowledge beyond the component)</p>
+<ul>
+<li>name</li>
+<li>parent </li>
+</ul>
+</li>
+<li><p>Component Type(changes the type of component)</p>
+<ul>
+<li>functional</li>
+</ul>
+</li>
+<li><p>Template Modifiers(changes the way templates are compiled)</p>
+<ul>
+<li>delimiters</li>
+<li>comments</li>
+</ul>
+</li>
+<li><p>Template Dependencies(assets used in the template)</p>
+<ul>
+<li>components</li>
+<li>directives</li>
+<li>filters</li>
+</ul>
+</li>
+<li><p>Composition(merge properties into the options)</p>
+<ul>
+<li>extends</li>
+<li>mixins</li>
+</ul>
+</li>
+<li><p>Interface(the interface to the component)</p>
+<ul>
+<li>inheritAttrs</li>
+<li>model</li>
+<li>props/propsData</li>
+</ul>
+</li>
+<li><p>Local State(local reactive properties)</p>
+<ul>
+<li>data</li>
+<li>computed</li>
+</ul>
+</li>
+<li><p>Events(callback triggered by reactive events)</p>
+<ul>
+<li>watch</li>
+<li>Lifecycle Events(in the order they are called)</li>
+</ul>
+</li>
+<li><p>Non-Reactive Properties(instance properties independent of the reactivity system)</p>
+<ul>
+<li>methods</li>
+</ul>
+</li>
+<li><p>Rendering(the declarative description of the component output)</p>
+<ul>
+<li>template/ render</li>
+<li>renderError</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Element attribute order       </p>
+<p> The attributes of elements(including components) should be ordered consistently.</p>
+<ol>
+<li><p>Definition(provides the component options)</p>
+<ul>
+<li>is</li>
+</ul>
+</li>
+<li><p>List Rendering(creates multiple variations of the same element)</p>
+<ul>
+<li>v-for</li>
+</ul>
+</li>
+<li><p>Conditionals(whether the element is rendered/shown)</p>
+<ul>
+<li>v-if</li>
+<li>v-else-if</li>
+<li>v-else</li>
+<li>v-show</li>
+<li>v-cloak</li>
+</ul>
+</li>
+<li><p>Render Modifiers(changes the way the element renders)</p>
+<ul>
+<li>v-pre</li>
+<li>v-once</li>
+</ul>
+</li>
+<li><p>Global Awareness(requires knowledge beyond the component)</p>
+<ul>
+<li>id</li>
+</ul>
+</li>
+<li><p>Unique Attributes(attributes that require unique values)</p>
+<ul>
+<li>ref</li>
+<li>key</li>
+<li>slot</li>
+</ul>
+</li>
+<li><p>Two-Way Binding(combining binding and events)</p>
+<ul>
+<li>v-model</li>
+</ul>
+</li>
+<li><p>Other Attributes(all unspecified bound &amp; unbound attributes)</p>
+</li>
+<li><p>Events(component event listeners)</p>
+<ul>
+<li>v-on</li>
+</ul>
+</li>
+<li><p>Content(overrides the content of the element)</p>
+<ul>
+<li>v-html</li>
+<li>v-text</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Empty lines in component/instance options</p>
+<p> Make code easy to read.</p>
+</li>
+<li><p>Single-file component top-level element order</p>
+<p> Single-file components should always order <code>template</code>, <code>script</code>, and <code>style</code> tags consistently, <strong>with \<style> last</strong>, because at least one of the other two is always necessary.</p>
+</li>
+</ol>
+<h2 id="D-Use-With-Caution-Potentially-Dangerous-Pattens"><a href="#D-Use-With-Caution-Potentially-Dangerous-Pattens" class="headerlink" title="D: Use With Caution(Potentially Dangerous Pattens)"></a>D: Use With Caution(Potentially Dangerous Pattens)</h2><ol>
+<li><p>v-if/v-if-else/v-else without key</p>
+<p> It’s usually best to use key with v-if + v-else, if they are the same element type (e.g. both \<div> elements).</p>
+</li>
+<li><p>Element selectors with scoped</p>
+<p> Element selectors should be avoided with scoped.</p>
+<p> reason: Large numbers of element selectors are slow.</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Element-selectors-with-scoped-use-with-caution">detailed explanation</a></p>
+<pre><code>//bad
+&lt;template&gt;
+  &lt;button&gt;X&lt;/button&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+button {
+  background-color: red;
+}
+&lt;/style&gt;
+
+//good
+&lt;template&gt;
+  &lt;button class=&quot;btn btn-close&quot;&gt;X&lt;/button&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+.btn-close {
+  background-color: red;
+}
+&lt;/style&gt;
+</code></pre></li>
+<li><p>Implicit parent-child communication</p>
+<p> <code>An ideal Vue application is props down, events up.</code></p>
+<p> Beware: <code>do not be seduced into trading simplicity</code> (being able to understand the flow of your state)<code>for short-term convenience</code> (writing less code).</p>
+</li>
+<li><p>Non-flux state management</p>
+<p>Vuex should be preferred for global state management, instead of this.$root or a global event bus. </p>
+</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Vue的官方风格指导A-C主要是为提高Vue的可读性而设计，D是稍微提升程序的性能和稳健性。</p>
+<p>可读性的提升大致有以下几个方面：</p>
+<ul>
+<li><p>命名。</p>
+<p>  这篇style-guild通读下来，发现有不少条目都在讲命名，组件的命名形式、命名规则等等。一个好的命名可以解释该组件的作用、与其他组件之间的耦合关系、方便编辑器查找等等。</p>
+</li>
+<li><p>顺序。</p>
+<p>  包括属性的书写顺序，options的书写顺序，命名的单词顺序等。</p>
+</li>
+<li><p>代码风格。</p>
+<p>  比如使用自闭合，属性换行等。</p>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://vuejs.org/v2/style-guide/index.html">vue官方风格指南</a></li>
+</ol>
+<h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><p><strong>Priority A Rules: Essential</strong></p>
+<p>Multi-word component names</p>
+<p>Component data</p>
+<p>Prop definitions</p>
+<p>Keyed v-for</p>
+<p>Component style scoping</p>
+<p>Private property names</p>
+<p><strong>Priority B Rules: Strongly Recommended</strong></p>
+<p>Component files</p>
+<p>Single-file component filename casing</p>
+<p>Base component names</p>
+<p>Single-instance component names</p>
+<p>Tightly coupled component names</p>
+<p>Order of words in component names</p>
+<p>Self-closing components</p>
+<p>Component name casing in templates</p>
+<p>Component name casing in JS/JSX</p>
+<p>Full-word component names</p>
+<p>Prop name casing</p>
+<p>Multi-attribute elements</p>
+<p>Simple expressions in templates</p>
+<p>Simple computed properties</p>
+<p>Quoted attribute values</p>
+<p>Directive shorthands</p>
+<p><strong>Priority C Rules: Recommended</strong></p>
+<p>Component/instance options order</p>
+<p>Element attribute order</p>
+<p>Empty lines in component/instance options</p>
+<p>Single-file component top-level element order</p>
+<p><strong>Priority D Rules: Use with Caution</strong></p>
+<p>v-if/v-if-else/v-else without key</p>
+<p>Element selectors with scoped</p>
+<p>Implicit parent-child communication</p>
+<p>Non-flux state management</p>
+</style></strong></p></li></ol>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/vue/style_guide/" data-id="clivn5s2j0048ml6phoijj7c0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/style-guide/">style guide</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/vue/study_vue_deep1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          深入学习vue -- 如何监听data变化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/redux/redux/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">redux学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

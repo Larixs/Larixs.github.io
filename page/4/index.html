@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Larix&#39;s blog">
+<meta property="og:url" content="http://larixs.github.io/page/4/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Larix&#39;s blog">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-layout/wap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/layout/wap/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.734Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/layout/wap/">移动端响应式布局</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="像素篇"><a href="#像素篇" class="headerlink" title="像素篇"></a>像素篇</h3><h4 id="物理像素-physical-pixel"><a href="#物理像素-physical-pixel" class="headerlink" title="物理像素(physical pixel)"></a>物理像素(physical pixel)</h4><p>显示设备中一个最微小的物理部件。</p>
+<h4 id="ppi-pixel-per-inch"><a href="#ppi-pixel-per-inch" class="headerlink" title="ppi(pixel per inch)"></a>ppi(pixel per inch)</h4><p>屏幕每英寸所存在的物理像素。</p>
+<h4 id="设备独立像素-density-independent-pixel"><a href="#设备独立像素-density-independent-pixel" class="headerlink" title="设备独立像素(density-independent pixel)"></a>设备独立像素(density-independent pixel)</h4><p>设备独立像素也称为密度无关像素，可以认为是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说CSS像素)，然后由相关系统转换为物理像素。</p>
+<h4 id="逻辑像素-device-point"><a href="#逻辑像素-device-point" class="headerlink" title="逻辑像素(device point)"></a>逻辑像素(device point)</h4><p>为了调和距离不一致导致的差异，所有设备根据距离，透视缩放到一个相等水平的观看距离之后得到的尺寸，是一个抽象的概念。</p>
+<h4 id="CSS像素-device-independent-pixel，简称DIPs"><a href="#CSS像素-device-independent-pixel，简称DIPs" class="headerlink" title="CSS像素(device-independent pixel，简称DIPs)"></a>CSS像素(device-independent pixel，简称DIPs)</h4><h4 id="设备像素比-device-pixel-ratio"><a href="#设备像素比-device-pixel-ratio" class="headerlink" title="设备像素比(device pixel ratio)"></a>设备像素比(device pixel ratio)</h4><p>设备像素比简称为dpr，其定义了物理像素和设备独立像素的对应关系。它的值可以按下面的公式计算得到：</p>
+<pre><code>设备像素比 ＝ 物理像素 / 设备独立像素
+</code></pre><p>css中2px<em>2px的元素，在实际设备（dpr=2）上，是有4\</em>4=16个物理像素点来显示</p>
+<p>（原来的理解好像有误，综合后面对不同dpr设置不同font-size的代码来看，在dpr=1和dpr=2的设备上，2px控制的都是两个像素点，但是dpr=2的像素点更多更密集，让dpr=2上的2px小于dpr=1的2px。因此在dpr=2的设备上，需要4px，才能和dpr=1上的2px效果一样。</p>
+<p>有个疑惑的地方，我用chrome的dpr去测试同一个页面，同一个font-size，dpr=3和dpr=2的表现是一样的。是chrome的调试环境有问题，还是我测试的不对呢？）</p>
+<h4 id="initial-scale-缩放比例："><a href="#initial-scale-缩放比例：" class="headerlink" title="initial-scale  缩放比例："></a>initial-scale  缩放比例：</h4><p>  \&lt;meta name=”viewport” content=”initial-scale=2.0,width=device-width”></p>
+<p>  缩放比例为2.0，这会使页面放大到设备尺寸两倍显示</p>
+<h4 id="viewport-视窗："><a href="#viewport-视窗：" class="headerlink" title="viewport 视窗："></a>viewport 视窗：</h4><p>简单理解，viewport是严格等于浏览器的窗口。</p>
+<p>pc端：viewport就是浏览器窗口的宽度高度。</p>
+<p>移动端： 因为视口太窄，所以提供了两个viewport ：可见的visual viewport(what you can see,a portion of layout viewport)和布局的layout viewport（all the web, the size and shape never change）。</p>
+<p>###单位篇</p>
+<h4 id="1-rem-font-size-of-the-root-element"><a href="#1-rem-font-size-of-the-root-element" class="headerlink" title="1.rem (font size of the root element)"></a>1.rem (font size of the root element)</h4><p>rem是以根元素html的font-size为基准来做计算的。</p>
+<h4 id="2-px（pixel）"><a href="#2-px（pixel）" class="headerlink" title="2.px（pixel）"></a>2.px（pixel）</h4><p>像素是相对于显示器屏幕分辨率而言的。</p>
+<h3 id="代码篇"><a href="#代码篇" class="headerlink" title="代码篇"></a>代码篇</h3><h4 id="1-动态设置meta"><a href="#1-动态设置meta" class="headerlink" title="1.动态设置meta"></a>1.动态设置meta</h4><p>\<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js">\</script></p>
+<p>这个js文件动态改写了meta标签，为不同的设备设置不同的data-dpr、font-size属性。</p>
+<h4 id="2-根据不同的dpr，（将rem转化为不同的px值？）"><a href="#2-根据不同的dpr，（将rem转化为不同的px值？）" class="headerlink" title="2.根据不同的dpr，（将rem转化为不同的px值？）"></a>2.根据不同的dpr，（将rem转化为不同的px值？）</h4><p>方案1 使用sublime Text3的cssREM插件</p>
+<p>方案2 使用sass的函数和混合宏（可是并没有根据不同的dpr转化不同的px呀）</p>
+<p>方案3 npm工具px2rem 这个会根据不同的dpr转化为不同的px</p>
+<h4 id="3-描述性文本字号一般不通过rem做适配，通过不同的dpr来设置字号大小"><a href="#3-描述性文本字号一般不通过rem做适配，通过不同的dpr来设置字号大小" class="headerlink" title="3.描述性文本字号一般不通过rem做适配，通过不同的dpr来设置字号大小"></a>3.描述性文本字号一般不通过rem做适配，通过不同的dpr来设置字号大小</h4><p>文本使用px单位，但会根据不同的dpr设置不同的字号大小。如：</p>
+<pre><code>div {
+    width: 1rem;
+    height: 0.4rem;
+    font-size: 12px; // 默认写上dpr为1的    fontSize
+}
+[data-dpr=&quot;2&quot;] div {
+    font-size: 24px;
+}
+[data-dpr=&quot;3&quot;] div {
+    font-size: 36px;
+}
+</code></pre><p>可使用sass的混合宏</p>
+<pre><code>@mixin font-dpr($font-size){
+    font-size: $font-size;
+
+    [data-dpr=&quot;2&quot;] &amp; {
+        font-size: $font-size * 2;
+    }
+
+    [data-dpr=&quot;3&quot;] &amp; {
+        font-size: $font-size * 3;
+    }
+}
+</code></pre><h4 id="学习链接："><a href="#学习链接：" class="headerlink" title="学习链接："></a>学习链接：</h4><p><a href="http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html" target="_blank" rel="noopener">使用Flexible实现手淘H5页面的终端适配</a></p>
+<p><a href="http://www.w3cplus.com/css3/define-font-size-with-css3-rem" target="_blank" rel="noopener">css3的rem设置字体大小</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/layout/wap/" data-id="clivn5s1t001yml6pd5ey3j46" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/responsive/">responsive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wap/">wap</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux/TLCL-17.10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/linux/TLCL-17.10/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.734Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/linux/TLCL-17.10/">TLCL-17.10手册简要笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h2><p>command -options arguments</p>
+<h2 id="1-what-is-the-shell"><a href="#1-what-is-the-shell" class="headerlink" title="1. what is the shell"></a>1. what is the shell</h2><p>terminal: give us access to the shell.</p>
+<p>shell prompt: [username@machinename ~]$.  if the last character of the prompt is ‘#’ instead of ‘$’, it means the terminal session has superuser privileges.</p>
+<p>simple commands:</p>
+<ul>
+<li>date</li>
+<li>cal:  calendar</li>
+<li>df: the current amount of free space on your disk drivers.</li>
+<li>free: display the amount of free memory.(does not exist in mac’s terminal)</li>
+<li>exit: ending a terminal session</li>
+</ul>
+<h2 id="2-Navigation"><a href="#2-Navigation" class="headerlink" title="2. Navigation"></a>2. Navigation</h2><p> Linux’s files are organised in a tree-like pattern of directories</p>
+<p>commands:</p>
+<ul>
+<li>pwd: print name of current working directory</li>
+<li><p>cd: change directory</p>
+<ul>
+<li>cd: to your home directory</li>
+<li>cd -: to the previous working directory</li>
+<li>cd ~use_name: to the home directory of user ‘who’</li>
+</ul>
+</li>
+<li><p>ls: list directory contents</p>
+<ul>
+<li>ls -a: show all files including the hidden files, which begin with a period.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Exploring-The-System"><a href="#3-Exploring-The-System" class="headerlink" title="3. Exploring The System"></a>3. Exploring The System</h2><p>commands: </p>
+<ul>
+<li>ls: list directory contents<ul>
+<li>ls: see a list of files and subdirectories contained in the current working directory.</li>
+<li>ls dir1: see a list of files and subdirectories contained in the dir1.</li>
+<li>ls dir1 dir2: like run <code>ls dir1</code> first and then run <code>ls dir2</code> .</li>
+<li>ls -options: pdf-p15</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>file: determine file type</li>
+<li>less: view text file contents. (pdf-p43)</li>
+</ul>
+<h2 id="4-Manipulating-Files-And-Directories"><a href="#4-Manipulating-Files-And-Directories" class="headerlink" title="4. Manipulating Files And Directories"></a>4. Manipulating Files And Directories</h2><p>wildcards: special characters to select files’ name based on patterns of characters.</p>
+<table>
+<thead>
+<tr>
+<th>wildcard</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>matches any characters.</td>
+</tr>
+<tr>
+<td>?</td>
+<td>matches any <code>single</code> character.</td>
+</tr>
+<tr>
+<td>[characters]</td>
+<td>matches any <code>single</code> character that is a member of the set characters.</td>
+</tr>
+<tr>
+<td>[!characters]</td>
+<td>matches any <code>single</code> character that is <code>not</code> a member of the set characters.</td>
+</tr>
+<tr>
+<td>[[:class:]]</td>
+<td>matches any character that is a member of the specified class.</td>
+</tr>
+</tbody>
+</table>
+<p>there are the most commonly used character classes.</p>
+<table>
+<thead>
+<tr>
+<th>character class</th>
+<th>meaning</th>
+<th>tip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[:alnum:]</td>
+<td>matches any alphanumeric character</td>
+<td>alnum = alpha + digit</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>matches any alphabetic character</td>
+<td>alpha = lower + upper ?</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>matches any numeric character</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>matches any lowercase letter</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>matches any uppercase letter</td>
+</tr>
+</tbody>
+</table>
+<p>commands:</p>
+<ul>
+<li><p>cp: copy files and directories.(pdf-p52)</p>
+<p>  if copy files to directory, the destination directory must exist.(I guess it may involve permission problems. when running copy commands, if commands created new directory, it’s confusing for new directory’s permission)</p>
+</li>
+<li>mv: move/rename files and directories.(pdf-p54)</li>
+<li>rm: remove files and directories. (pdf-p55)</li>
+<li>mkdir: create directories.</li>
+<li>ln: create hard and symbolic links. (pdf-p57)<ul>
+<li>ln file link: create a hard link</li>
+<li>ln -s item link: create a symbolic link where “item” is either a file or a directories.</li>
+</ul>
+</li>
+</ul>
+<h4 id="hard-links-pdf-57"><a href="#hard-links-pdf-57" class="headerlink" title="hard links (pdf-57)"></a>hard links (pdf-57)</h4><p>By default, every file has a single hard link that gives the file its name. when we create a hard link, we create an additional directory entry for a file. Hard links have two important limitations:</p>
+<ol>
+<li>A hard link cannot reference a file that is not on the same disk partition as the link itself.</li>
+<li>A hard link may not reference a directory.</li>
+</ol>
+<p>When a hard link is deleted, the link is removed but the contents of the file itself continue to exist(that is, its space is not deallocated) until all links to the file are deleted.</p>
+<h4 id="symbolic-links-pdf-58"><a href="#symbolic-links-pdf-58" class="headerlink" title="symbolic links (pdf-58)"></a>symbolic links (pdf-58)</h4><p>Symbolic links were created to overcome the limitation of hard links. Symbolic links work by creating a special type of file that contains a text pointer to the referenced file or directory. In this regard, they operate in much the same way as a Windows shortcut though of course, they predate the Windows feature by many years.</p>
+<p>when you delete a symbolic link, only the link is deleted, not the file itself. If the file is deleted before the symbolic link, the link will continue to exist, but will point to nothing. In this case, the link is said to be <code>broken</code>.</p>
+<h2 id="5-working-with-commands"><a href="#5-working-with-commands" class="headerlink" title="5. working with commands"></a>5. working with commands</h2><p>commands:</p>
+<ul>
+<li>type: indicate how a command name is interpreted.</li>
+<li>which: Display which executable program will be executed.</li>
+<li>help: get help for shell builtins.</li>
+<li>man: display a command’s manual page.(pdf-p69)</li>
+<li>apropos: display a list of appropriate commands.</li>
+<li>info: display a command’s info entry.</li>
+<li>whatis: display a very brief description of a command.</li>
+<li>alias: create an alias for a command. (pdf-p74)</li>
+</ul>
+<h4 id="what-exactly-are-commands-pdf-p66"><a href="#what-exactly-are-commands-pdf-p66" class="headerlink" title="what exactly are commands(pdf-p66)"></a>what exactly are commands(pdf-p66)</h4><p>A command can be one of four different things(use type to identify):</p>
+<ol>
+<li><b>An executable program</b></li>
+<li><b>A command built in the shell itself</b></li>
+<li><b>A shell function</b></li>
+<li><b>An alias</b></li>
+</ol>
+<h2 id="6-redirection"><a href="#6-redirection" class="headerlink" title="6. redirection"></a>6. redirection</h2><p>commands:</p>
+<ul>
+<li>cat: concatenate files. (pdf-p82)</li>
+<li>sort: sort lines of text. (filters pdf-85)</li>
+<li>uniq: report or omit repeated lines. (filters pdf-85)</li>
+<li>grep: print lines matching a pattern. (pdf-86)</li>
+<li>wc: print newline, word, and byte counts for each line.(pdf-86)</li>
+<li>head: output the first part of a file. (pdf-87)</li>
+<li>tail: output the last part of a file. (pdf-87)<ul>
+<li><code>tail -f</code> continues to monitor the file and when new lines are appended, they immediately appear on the display, until you type <code>Ctrl-c</code>.</li>
+</ul>
+</li>
+<li>tee: read from standard input and write to standard output and files. It is useful for capturing a pipeline’s contents at an intermediate stage of processing. (pdf-p89)</li>
+</ul>
+<h4 id="redirecting-standard-output-pdf-p78"><a href="#redirecting-standard-output-pdf-p78" class="headerlink" title="redirecting standard output(pdf-p78)"></a>redirecting standard output(pdf-p78)</h4><p>We can use the “&gt;” redirection operator to change standard output to another file instead of the screen. For example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/bin &gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+<p>The results will overwrite ‘ls-output.txt’. But if there an error occurs, the error message won’t appear in the txt. Because ls program does not send its error messages to standard output. Instead, it sends its error messages to standard error.</p>
+<p>you can do this to truncate a file or create a new, empty file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; empty.txt</span><br></pre></td></tr></table></figure>
+<p>Using the “&gt;&gt;” operator will result in the output being appended to the file.If the file does not already exist, it is created just as though the “&gt;” operator had been used.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/bin &gt;&gt; ls-output.txt</span><br><span class="line">ls -l /usr/bin &gt;&gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+<p>repeated the command 2 times resulting in an output file 2 times as large. </p>
+<h4 id="redirecting-standard-error-pdf-p79"><a href="#redirecting-standard-error-pdf-p79" class="headerlink" title="redirecting standard error (pdf-p79)"></a>redirecting standard error (pdf-p79)</h4><p>To redirect standard error we must refer to its file descriptor:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr 2 &gt; ls-error.txt</span><br></pre></td></tr></table></figure>
+<h4 id="redirecting-standard-output-and-standard-error-to-one-file"><a href="#redirecting-standard-output-and-standard-error-to-one-file" class="headerlink" title="redirecting standard output and standard error to one file"></a>redirecting standard output and standard error to one file</h4><p>The traditional way, which works with old versions of the shell:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &gt; ls-output.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
+<p>The more streamlined method for performing this combined redirection:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &amp;&gt; ls-output.txt</span><br></pre></td></tr></table></figure></p>
+<p>Or you may also append the standard output and standard error streams to a single file like so:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &amp;&gt;&gt; ls-output.txt</span><br></pre></td></tr></table></figure></p>
+<h4 id="disposing-of-unwanted-output"><a href="#disposing-of-unwanted-output" class="headerlink" title="disposing of unwanted output"></a>disposing of unwanted output</h4><p>A special file called “dev/null” accepts input and does nothing with it.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr 2&gt; /dev/null</span><br></pre></td></tr></table></figure></p>
+<h4 id="redirecting-standard-input-pdf-83"><a href="#redirecting-standard-input-pdf-83" class="headerlink" title="redirecting standard input (pdf-83)"></a>redirecting standard input (pdf-83)</h4><p>use <code>cat</code> or <code>&lt;</code> can redirect standard input.</p>
+<h3 id="pipelines"><a href="#pipelines" class="headerlink" title="pipelines"></a>pipelines</h3><p>The ability of commands to read data from standard input and send to standard output is utilized by a shell feature called pipelines. Using the pipe operator “|”, the standard output of one command can be piped into standard input of another:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commands1 | commands2</span><br></pre></td></tr></table></figure>
+<p>The difference between “&gt;” and “|”(pdf-p84):</p>
+<p>The redirection operator connects a command with a file, while the pipeline operator connects the output of one command with the input of a second command.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">command1 &gt; file1</span><br><span class="line">command1 | command2</span><br></pre></td></tr></table></figure></p>
+<p>Sometimes something really bad will happen if:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command1 &gt; command2</span><br></pre></td></tr></table></figure></p>
+<h2 id="7-seeing-the-world-as-the-shell-sees-it"><a href="#7-seeing-the-world-as-the-shell-sees-it" class="headerlink" title="7. seeing the world as the shell sees it"></a>7. seeing the world as the shell sees it</h2><p>commands:</p>
+<ul>
+<li>echo: display a line of text.</li>
+</ul>
+<h4 id="expansion"><a href="#expansion" class="headerlink" title="expansion"></a>expansion</h4><p>Each time we type a command and press the enter key, <code>bash</code> performs several processes upon the text before it carries out our command. The process called expansion.</p>
+<ul>
+<li>pathname expansion *.html (pdf-p92)</li>
+<li>tilde expansion ~ (pdf-p93)</li>
+<li>arithmetic expansion $((2+2))(pdf-p94)</li>
+<li>brace expansion 2019-{01..12}(pdf-p95)</li>
+<li>parameter expansion $USER(pdf-p96)</li>
+<li>command substitution echo $(ls)(pdf-p97)</li>
+</ul>
+<h4 id="quotes"><a href="#quotes" class="headerlink" title="quotes"></a>quotes</h4><ul>
+<li>double quotes: If we place text inside double quotes, all the special characters used by the shell lose their special meaning and are treated as ordinary characters,exclude parameter expansion, arithmetic expansion and command substitution. Word-splitting is suppressed and embedded spaces become part of the arguments instead of delimiters.</li>
+<li>single quotes: If we need suppress all expansions, we use single quotes.</li>
+<li>escaping characters: Sometimes we only want to quote a single character. To do this, we can precede a character with a backslash, which in this context is called the <code>escape character</code>.(pdf-p101)</li>
+</ul>
+<h2 id="8-advanced-keyboard-tricks"><a href="#8-advanced-keyboard-tricks" class="headerlink" title="8. advanced keyboard tricks"></a>8. advanced keyboard tricks</h2><p>commands:</p>
+<ul>
+<li>clear: Clear the screen.</li>
+<li>history: Display the contents of the history list.</li>
+</ul>
+<p>cursor movement (pdf-p106 has all the commands. The commands below works well on my pc):</p>
+<ul>
+<li>Ctrl - a: move cursor to the beginning of the line.</li>
+<li>Ctrl - e: move cursor to the end of the line.</li>
+<li>Ctrl - l: Just do the same thing like <code>clear</code> commands does.</li>
+</ul>
+<p>cut and paste:</p>
+<ul>
+<li>Ctrl - k: kill text from cursor location to the end of line.</li>
+<li>Ctrl - u: kill text from cursor location to the begging of the line.</li>
+<li>Ctrl - y: Yank text from kill-ring and insert it at the cursor location.</li>
+</ul>
+<p>history expansion:</p>
+<ul>
+<li>![number]: [number] means a line number of the command in the history list. Bash will expand “!number” into the contents of number’th line in the history.</li>
+</ul>
+<h1 id="9-Permissions"><a href="#9-Permissions" class="headerlink" title="9. Permissions"></a>9. Permissions</h1><p>Operating systems in the Unix are not only multitasking systems, but also multi-user systems.Multi-user system means that more than one person  can be using computer at the same time.</p>
+<p>commands:</p>
+<ul>
+<li>id: Display user identity.</li>
+<li>chmod: Change a file’s mode(pdf-117). chmod supports octal notation(pdf-118) and symbolic notation(pdf-119)</li>
+<li>umask: Set the default file permissions(pdf-121). It use octal notation to express a mask of bits to be removed from a file’s mode attributes.</li>
+<li>su: Run a shell as another user(pdf-125).</li>
+<li>sudo: Execute a command as another user(pdf-126).</li>
+<li>chown: Change the owner and group owner of a file or directory(pdf-127).</li>
+<li>chgrp: In older versions of Unix, change a files’ group ownership(pdf-128).</li>
+<li>passwd: Change a user’s password.</li>
+<li><p>more commands: adduser, useradd, groupadd</p>
+<p>file types(the first character of the file attribute):</p>
+<ul>
+<li>-: A regular file.</li>
+<li>d: A directory.</li>
+<li>l: A symbolic link.</li>
+<li>c: A character special file.</li>
+<li>b: A block special file.</li>
+</ul>
+<p>file mode(nine characters of the file attribute):</p>
+<p>Permissions for the file’s owner, the file’s group owner, and anybody else.</p>
+<p>permission attributes:</p>
+<ul>
+<li><p>r(4): </p>
+<p>files: Allows a file to be opened and read.</p>
+<p>directories: Allows a directory’s content to be listed if the execute attribute is also set.</p>
+</li>
+<li><p>w(2): </p>
+<p>files: Allows a file to be written to or truncated. However the ability to delete or rename files is determined by directory attributes.</p>
+<p>directories: Allows files within a directory to be created, deleted, and renamed if the execute attribute is also set.</p>
+</li>
+<li><p>x(1): </p>
+<p>files: Allows a file to be treated as a program and executed.<br>Program files written in scripting languages must also be set as readable to be executed.</p>
+<p>directories: Allows a directory to be entered.</p>
+</li>
+<li><p>some special permissions(pdf-123).</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-Processes"><a href="#10-Processes" class="headerlink" title="10. Processes"></a>10. Processes</h2><p>commands:</p>
+<ul>
+<li>ps: Report a snapshot of current processes(pdf-134).</li>
+<li>top: Display tasks to view processes dynamically(pdf-136).</li>
+<li>jobs: List active jobs that have been launched from our terminal(pdf-140).</li>
+<li>bg: Place a job in the background(pdf-141).</li>
+<li>fg: Place a job in the foreground(pdf-140).</li>
+<li><p>kill: Send a signal to process(pdf-142).</p>
+<p>  kill [-signal(pdf-142)] PID</p>
+</li>
+<li><p>killall: Kill processes by name(pdf-145).</p>
+</li>
+<li>shutdown: shutdown or reboot the system（pdf-146).</li>
+<li>&amp;: Putting a process in the background(pdf-139).</li>
+<li>other commands: pstree, vmstat, xload, tload(pdf-147)</li>
+</ul>
+<p>How a Process Works(keywords):</p>
+<ul>
+<li>init(pdf-133)</li>
+<li>parent process and child process(pdf-133)</li>
+<li>process ID (pdf-134)</li>
+<li>STAT: process states(pdf-135)</li>
+<li>stopping(pausing) a process(pdf-141)</li>
+<li>signals: Signals are one of several ways that the operating system communicates with programs.(pdf-142)</li>
+</ul>
+<h2 id="11-The-Environment"><a href="#11-The-Environment" class="headerlink" title="11. The Environment"></a>11. The Environment</h2><p>commands:</p>
+<ul>
+<li>printenv: Print part or all of the environment(pdf-150).</li>
+<li>set: Set shell options(pdf-151).</li>
+<li>export: Export environment to subsequently executed programs.</li>
+<li>alias: create an alias for a command.</li>
+</ul>
+<p>startup files for login shell sessions(pdf-153):</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/profile</td>
+<td>a global configuration script that applies to all users.</td>
+</tr>
+<tr>
+<td>~/.bash_profile</td>
+<td>a user’s personal startup file. Can be used to extend or override settings in the global configuration.</td>
+</tr>
+<tr>
+<td>~/.bash_login</td>
+<td>if ~/.bash_profile is not found, bash attempts to read this script.</td>
+</tr>
+<tr>
+<td>~/.profile</td>
+<td>If neither ~/.bash_profile nor ~/.bash_login is found, bash attempts to read this file. This is the default in Debian-based distributions, such as Ubuntu.</td>
+</tr>
+</tbody>
+</table>
+<p>Non-login shell sessions read the following startup files(pdf-154):</p>
+<table>
+<thead>
+<tr>
+<th>Files</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/bash.bashrc</td>
+<td>A global configuration script that applies to all users.</td>
+</tr>
+<tr>
+<td>~/.bashrc</td>
+<td>A user’s personal startup file. Can be used to extend or override the settings in the global configuration script.</td>
+</tr>
+</tbody>
+</table>
+<p>other:</p>
+<ul>
+<li>which files should we modify(pdf-156)</li>
+<li>activating our changes(pdf-161)</li>
+</ul>
+<h2 id="12-a-gentle-introduction-to-vi-pdf-162"><a href="#12-a-gentle-introduction-to-vi-pdf-162" class="headerlink" title="12. a gentle introduction to vi (pdf-162)"></a>12. a gentle introduction to vi (pdf-162)</h2><p>why we should learn vi:</p>
+<ul>
+<li>vi is always available.</li>
+<li>vi is lightweight and fast.</li>
+</ul>
+<p>commands of vim:</p>
+<ul>
+<li>when vi starts up, it begins in <code>command mode</code>.(In vim documentation, command mode is called <code>normal mode</code>)</li>
+<li>return command mode: Esc</li>
+<li>exit: <code>:q</code> , <code>:q!</code>(force to exit)</li>
+<li>enter insert mode: <code>i</code></li>
+<li>ex command: <code>:</code>(In vim documentation, command mode is called <code>command mode</code>)</li>
+</ul>
+<p>A subset of cursor movement keys(pdf-167):</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>moves the cursor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0(zero)</td>
+<td>To the beginning of the current line.</td>
+</tr>
+<tr>
+<td>^</td>
+<td>To the first non-whitespace character on the current line.</td>
+</tr>
+<tr>
+<td>$</td>
+<td>To the end of the current line</td>
+</tr>
+<tr>
+<td>w</td>
+<td>To the beginning of the next word or punctuation character.</td>
+</tr>
+<tr>
+<td>W</td>
+<td>To the beginning of the next word, ignoring punctuation character.</td>
+</tr>
+<tr>
+<td>b</td>
+<td>To the beginning of the previous word or punctuation character.</td>
+</tr>
+<tr>
+<td>B</td>
+<td>To the beginning of the previous word, ignoring punctuation character.</td>
+</tr>
+<tr>
+<td>numberG</td>
+<td>To line <code>number</code>. For example, 1G moves to the first line of the file.</td>
+</tr>
+<tr>
+<td>G</td>
+<td>To the last line of the file.</td>
+</tr>
+</tbody>
+</table>
+<p> basic editing:</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>Undo a change.</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Appending text. It moves the cursor to the end of the line before starting insert mode(pdf-169).</td>
+</tr>
+<tr>
+<td>o</td>
+<td>Open a line below the current line.(pdf-169)</td>
+</tr>
+<tr>
+<td>O</td>
+<td>Open a line above the current line.(pdf-169)</td>
+</tr>
+<tr>
+<td>x</td>
+<td>Deletes the current character.</td>
+</tr>
+<tr>
+<td>numberx</td>
+<td>Deletes the current character and the next (number-1) characters.</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>Deletes the current line.</td>
+</tr>
+<tr>
+<td>numberdd</td>
+<td>Deletes the current line and the next (number-1) lines.</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>Deletes from the current cursor position to the beginning of the next word.</td>
+</tr>
+<tr>
+<td>numberdw</td>
+<td>Repeat number times <code>dw</code></td>
+</tr>
+<tr>
+<td>d$</td>
+<td>Deletes from the current cursor location to the end of the current line.</td>
+</tr>
+<tr>
+<td>d0</td>
+<td>Deletes from the current cursor location to the beginning of the line.</td>
+</tr>
+<tr>
+<td>d^</td>
+<td>Deletes from the current cursor location to the first non-whitespace charater in the line</td>
+</tr>
+<tr>
+<td>dG</td>
+<td>Deletes from the current line to the ened of the file.</td>
+</tr>
+<tr>
+<td>dnumberG</td>
+<td>Deletes from the current line to the number-th line of the file.</td>
+</tr>
+<tr>
+<td>d</td>
+<td>Cuts text.</td>
+</tr>
+<tr>
+<td>p</td>
+<td>Paste the contents of the buffer after the cursor</td>
+</tr>
+<tr>
+<td>P</td>
+<td>Paste the contents before the cursor.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>“Yank”(copy) text in much the same way the <code>d</code> command is used to cut text.</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>Copies the current line.</td>
+</tr>
+<tr>
+<td>5yy</td>
+<td>Copies the current line and the next four lines.</td>
+</tr>
+<tr>
+<td>yW</td>
+<td>Copies from the current cursor position to the beginning of the next word</td>
+</tr>
+<tr>
+<td>y$</td>
+<td>Copies from the current cursor position to the end of the current line.</td>
+</tr>
+<tr>
+<td>y0</td>
+<td>Copies from the current cursor location to the beginning of the line.</td>
+</tr>
+<tr>
+<td>y^</td>
+<td>Copies from the current cursor location to the first non-whitespace character in the line.</td>
+</tr>
+<tr>
+<td>yG</td>
+<td>Copies from the current line to the end of the file.</td>
+</tr>
+<tr>
+<td>y20G</td>
+<td>Copies from the current line to the twentieth line of the file.</td>
+</tr>
+<tr>
+<td>J</td>
+<td>Join one line with the one below it.</td>
+</tr>
+<tr>
+<td>f</td>
+<td>Searches a line and moves the cursor to the next instance of a specified character. <code>fa</code> would move the cursor to the next occurrence of the character “a” within the current line.</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Searches a word or phrase in the entire file(pdf-173).This works the same way as less program. vi allows the use of regular expressions.</td>
+</tr>
+<tr>
+<td>:</td>
+<td>vi uses ex command to perform search-and-replace operations over a range of lines or the entire file.(pdf-174) <code>:%s/Line/line/g</code> means changing the word “Line” to “line” for the entire file. Adding “c” to the end of the command will specify a substitution command with user confirmation. Replace Confirmation Keys is in pdf-175.</td>
+</tr>
+<tr>
+<td>:n</td>
+<td>Switches from one file to the next(pdf-177)</td>
+</tr>
+<tr>
+<td>:N</td>
+<td>Switches from one file to previous file use.</td>
+</tr>
+<tr>
+<td>:buffers</td>
+<td>Displaies a list of the files at the bottom of the display.</td>
+</tr>
+<tr>
+<td>:buffer 2</td>
+<td>Switches to the second file in the list that buffers shows.</td>
+</tr>
+<tr>
+<td>:e filename</td>
+<td>Openes an additional file to our current editing session.</td>
+</tr>
+<tr>
+<td>:r filename</td>
+<td>Inserts the specified file before the cursor position.</td>
+</tr>
+<tr>
+<td>:w</td>
+<td>Save edited files.</td>
+</tr>
+<tr>
+<td>:w filename</td>
+<td>Saves an alternate version as specified files.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-customizing-the-prompt"><a href="#13-customizing-the-prompt" class="headerlink" title="13. customizing the prompt"></a>13. customizing the prompt</h2><p>Escape codes used in shell prompts:</p>
+<p>|sequence|value displayed|<br>|\a|ASCII bell.|<br>|\d|Current date in day, month, date format.|<br>|\h|Hostname of the local machine minus the trailing domain name.|<br>|\H|Full hostname|<br>|\j|Number of jobs running in the current shell session.|<br>|\l|Name of the current terminal device.|<br>|\n|A new line character.|<br>|\r|A carriage return.|<br>|\s|Name of the shell program.|<br>|\t|Current time in 24 hour hours:minutes:seconds format.|<br>|\T|current time in 12 hour format.|<br>|\@|Current time in 12 hour AM/PM format.|<br>|\A|Current time in 24 hour hours:minutes format|<br>|\u|Username of the current user.|<br>|\v|Version number of the shell.|<br>|\V|Version and release numbers of the shell.|<br>|\w|Name of the current working directory.|<br>|\W|Last part of the current working directory name.|<br>|!|History number of the current command.|<br>|#|Number of commands entered during this shell session.|<br>|\$|This displays a “$” character unless we have superuser privileges. in that case, it displays a “#” instead.|<br>|[|Singals the start of a series of one or more non-printing characters.This is used to embed non-printing control characters which manipulate the terminal emulator in some way, such as moving the cursor or changing text colors.|<br>|]|Signals the end of a non-printing character sequence.|</p>
+<p>adding color(pdf-185)</p>
+<p>moving the cursor(pdf-188)</p>
+<h2 id="14-package-management"><a href="#14-package-management" class="headerlink" title="14. package management"></a>14. package management</h2><p>The basic unit of software in a packaging system is the <code>package file</code>.</p>
+<h2 id="15-storage-media"><a href="#15-storage-media" class="headerlink" title="15. storage media"></a>15. storage media</h2><p>commands:</p>
+<ul>
+<li>mount: Mount a file system.(pdf-204)</li>
+<li>umount: unmount a file system.(pdf-206)</li>
+<li>fsck: check and repair a file system.(pdf-215)</li>
+<li>fdisk: partition table manipulator.(pdf-211)</li>
+<li>mkfs: create a file system.(pdf-214)</li>
+<li>fdformat: format a floppy disk.(pdf-216)</li>
+<li>dd: write block oriented data directly to a device.(pdf-216)</li>
+<li>genisoimage(mkisofs): create an ISO 9660 image file.(pdf-218)</li>
+<li>wodim(cdreord): write data to optical storage media.（pdf-219)</li>
+<li>md5sum: calculate an MD5 checksum.(pdf-220)</li>
+</ul>
+<p>file system table: /etc/fstab (pdf-203)</p>
+<p>Linux storage device names (pdf-209)</p>
+<h2 id="16-networking"><a href="#16-networking" class="headerlink" title="16. networking"></a>16. networking</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/linux/TLCL-17.10/" data-id="clivn5s1u0022ml6pdu2e5sh4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux/auth" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/linux/auth/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.734Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/linux/auth/">文件权限相关及linux操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>权限数字：</p>
+<p>一共三位数字，第一位表示所有者的权限，第二位表示同组用户权限，第三位表示公共用户权限。</p>
+<p>读权限-r-4，写入权限-w-2，执行权限-x-1</p>
+<p>每位数等于各自用户权限数值相加。</p>
+<p>例如</p>
+<p>777： 4+2+1 4+2+1 4+2+1 即三种用户都拥有r,w,x权限</p>
+<p>644： 4+2 4 4 即所有者拥有rw权限，同组用户和公共用户只拥有r权限。</p>
+<hr>
+<p>ubuntu下修改权限</p>
+<p>chmod -R 权限数字 文件名</p>
+<hr>
+<p>查看权限：</p>
+<p>(sudo) ls -l 文件名</p>
+<p>__</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="http://blog.sina.com.cn/s/blog_690c53680101jp61.html" target="_blank" rel="noopener">Linux主机文件777，755，644权限详解</a></li>
+<li><a href="http://www.cnblogs.com/CgenJ/archive/2011/07/28/2119454.html" target="_blank" rel="noopener">Linux系统下如何查看及修改文件读写权限</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/linux/auth/" data-id="clivn5s1x002aml6pfgpjxkzj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-debug/2019_04_26_debug" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/debug/2019_04_26_debug/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/debug/2019_04_26_debug/">记一次线上内存泄漏debug</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题出现："><a href="#问题出现：" class="headerlink" title="问题出现："></a>问题出现：</h3><p>4.24早上一来，老入就让我看zelda-nuxt的使用内存，我一看就惊了</p>
+<p><img src="images/debug/20190426_01.png" alt></p>
+<p>圈红的左侧是以往的内存使用情况，有轻微的内存泄漏，曲线以一个非常缓慢的速度增长。但是红圈附近，从4.23上午十点左右开始，内存使用率激增。由于使用了pm2进程守护，内存到一定值的时候，整个node服务器会重启，这才能把不断攀升的内存给降下来。后来就陷入了涨内存-》到阈值-》重启-》涨内存-》到阈值-》重启的循环，形成了一个尖锐的锯齿图。</p>
+<p>这个图有个特点就是非常的规律，也没有随不同时间不同访问量的变化而变化。</p>
+<p>整个人是懵圈的，数十个页面，上百个组件，稳定运行了那么久，怎么突然就内存大量溢出了呢？</p>
+<h3 id="问题筛查："><a href="#问题筛查：" class="headerlink" title="问题筛查："></a>问题筛查：</h3><ol>
+<li><p>是否是前端上线代码造成的？</p>
+<p> 不是。前端4.23及以后没有上线过新代码，也没有node_modules的包更新。</p>
+</li>
+<li><p>是否是后端上线代码造成的？</p>
+<p> 不是。后端上的东西没有影响。</p>
+</li>
+</ol>
+<h3 id="尝试方案："><a href="#尝试方案：" class="headerlink" title="尝试方案："></a>尝试方案：</h3><p>首先让老入搭了一个线上测试环境（用线上代码和线上数据库但是不对外开放）并每5s访问一次首页，成功复现了这个问题，并且开始监控这台服务器的性能。然后开始各种尝试（三人并发解决，有方向了就一起调试）：</p>
+<ul>
+<li><p>使用process.memoryUsage不停打印使用的内存。</p>
+<p>  失败。由于打印出来的都是点，很难看出趋势，也没太明白那些值代表的意义。</p>
+</li>
+<li><p>使用heapdump打印node内存快照</p>
+<p>  失败。由于项目比较大，每打印一次既要消耗服务器cpu又要占用大量文件内存，而且打印出来的东西太多太杂，很难看懂。甚至可能因为快照太大，chrome调试器崩溃了。我们也很崩溃。</p>
+</li>
+<li><p>使用easy-monitor查看运行服务器的node内存，并分析泄漏点。</p>
+<p>  失败。同heapdump。因为esay-monitor的原理也和heapdump类似，所以项目过大导致它收集、分析处理非常慢，经常都崩溃，可以说一次都没正常打印过。不过靠这个在只有框架（去掉了页面和组件）的情况下，找到了一个小的泄露点。</p>
+</li>
+<li><p>试图在自己的电脑上搭建实时查看自己起的前端测试服务器内存。</p>
+<p>  失败。我尝试过和线上一样的搭配，但是因为环境问题，比较难实现。然后又用highstocks加上node把内存情况写入json，大致监听了process.memoryUsage的情况。还没用太久，小v就已经定位到泄漏点了。</p>
+</li>
+<li><p>一步一步屏蔽代码，缩小问题范围。</p>
+<p>  成功。小v靠着查看任务管理器的内存情况，先去掉其他页面，只保留首页，然后一步步屏蔽测试定位到泄漏点。这种调试方式非常缓慢，因为需要不停访问页面来让服务器泄漏，这需要一定的时间。但是这种方式生效了。要是我，可能坚持不了这么调试，实在是复杂又费时。所以在此给小v点个赞~</p>
+</li>
+</ul>
+<h3 id="最终原因："><a href="#最终原因：" class="headerlink" title="最终原因："></a>最终原因：</h3><p>在首页的一个视频组件里，created函数写了一个setInterval。当视频为直播时，开始执行定时器。问题在于执行之后却没有相应的清除操作。由于服务器端渲染是会执行created钩子函数的，所以在有直播的时候，服务器端每次被访问都会生成一个无法被终止的定时器。是一个非常经典的内存泄漏（因为考虑到整个项目已经稳定运行很久了，我还信誓旦旦地和淳哥说我们没有可能这么用，脸好疼）。</p>
+<p>问题的突然爆发就是因为4.23日上午十点左右新增了首页的直播视频。之所以原来没有发现内存泄漏，要么就是有直播的时候我们还没有开始监控内存使用情况，要么就是一直没碰到直播视频。</p>
+<h3 id="复盘："><a href="#复盘：" class="headerlink" title="复盘："></a>复盘：</h3><p>如果当时多想那么一点，或者多做那么一点，也许会早点发现。那哪些操作可能会提前找到问题呢？</p>
+<ol>
+<li><p>突然出现的bug，除了和最近上线的代码有关，也可能和突然出现的数据有关。所以应该在公司里询问当天上线（已问）或者开展、推广的活动，在更大的范围内寻求帮助。一定是那天有什么东西变化导致了性能的突变。 虽然当时询问过后端有无上线的东西，但是没有获得什么线索。其实应该扩大范围，不局限于最近修改代码的方向上，在全公司问一下，如果当时有人提到当天上午十点增加了直播视频，那我们应该能尽早定位到问题。</p>
+</li>
+<li><p>问题本应可以分解。已知首页会复现问题的情况下，应该缩小问题范围，把其他与首页无关的东西都注释掉，然后再查更具体的问题。其实也有动态规划的思想在里面，把全项目范围的bug降级为首页的bug，再降级到更小的层次。</p>
+</li>
+<li><p>了解process.memoryUsage里的参数。最开始测试的时候只关注了heapUsed，没有关注rrs。这次内存泄漏没有导致heapUsed的增长，而我刚开始测试的时候只关注了heapUsed。要是能再了解一点，结合泄漏图十分说不定可以快点想起来</p>
+</li>
+<li><p>zelda-nuxt的配置项让我有些迷茫，经常都浪费了大把的时间在测试配置项上，至今我也没有启动起线下前端build环境+线上后端的配置。应该再深入了解一下这些配置项都是怎么揉到项目里的。</p>
+</li>
+</ol>
+<p>最后再放一张正常运行的内存图，开心地下班回家过只有一天的周末了~</p>
+<p><img src="images/debug/20190426_02.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/debug/2019_04_26_debug/" data-id="clivn5s1l001bml6p9avmsx86" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/bfc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/layout/bfc/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/layout/bfc/">BFC (block formatting context)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>一个<strong>块格式化上下文（block formatting context）</strong> 是Web页面的可视化CSS渲染出的一部分。<code>它是块级盒布局出现的区域，也是浮动层元素进行交互的区域。</code></p>
+<h2 id="哪些情况会生成BFC"><a href="#哪些情况会生成BFC" class="headerlink" title="哪些情况会生成BFC"></a>哪些情况会生成BFC</h2><ol>
+<li>根元素</li>
+<li>浮动元素，即float属性不为none</li>
+<li>绝对定位元素，即position为absolute或fixed</li>
+<li>display为inline-block, table-cell, table-caption, flex, inline-flex</li>
+<li>overflow不为visible</li>
+</ol>
+<h2 id="布局规则"><a href="#布局规则" class="headerlink" title="布局规则"></a>布局规则</h2><ol>
+<li>内部的Box会在垂直方向，一个接一个地放置。</li>
+<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠</li>
+<li>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</li>
+<li>BFC的区域不会与float box重叠。</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
+<li>计算BFC的高度时，浮动元素也参与计算</li>
+</ol>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><p>方案1(非body)</p>
+<pre><code>.clearfix {
+    overflow: auto;
+ }
+</code></pre><p>方案2(非body)</p>
+<pre><code>.clearfix{
+    overflow:hidden;
+}
+</code></pre><p>可以看出，两个方案其实原理是一样的，都是利用了overflow不为visible时让该元素触发BFC，这样就应用了BFC的布局规则<code>计算BFC的高度时，浮动元素也参与计算</code></p>
+<h3 id="两列布局"><a href="#两列布局" class="headerlink" title="两列布局"></a>两列布局</h3><h4 id="左列不定宽，右列自适应"><a href="#左列不定宽，右列自适应" class="headerlink" title="左列不定宽，右列自适应"></a>左列不定宽，右列自适应</h4><p>html</p>
+<pre><code>&lt;div class=&quot;parent&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;
+        &lt;p&gt;left&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;
+        &lt;p&gt;right&lt;/p&gt;
+        &lt;p&gt;right&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>css</p>
+<pre><code>.left{
+    float: left;
+    width: 100px;
+    margin-right: 20px;    //形成20px的间隔
+}
+.right{
+    overflow: hidden; //通过设置overflow: hidden来触发BFC特性
+}
+</code></pre><p>原理如下：</p>
+<ol>
+<li>通常情况下，浮动元素的块状兄弟元素会无视浮动元素的位置，尽量占满一整行，这样该兄弟元素就会被浮动元素覆盖。</li>
+<li>若浮动元素的块状兄弟元素为BFC，则该兄弟元素不会占满一整行而导致部分内容被浮动元素遮住。而它会根据浮动元素的宽度，占据该行剩下的宽度，避免与浮动元素重叠。</li>
+<li>浮动元素与其块状BFC兄弟元素之间的margin可以生效，这将继续减少兄弟元素的宽度。</li>
+</ol>
+<p>其实主要用到了布局规则中的<code>BFC的区域不会与float box重叠。</code></p>
+<p>并不是一定要在.right上用overflow: hidden;，只要能让.right触发BFC就行。另外在IE6上也可以触发haslayout特性（推荐用*zoom: 1;）。</p>
+<p>由于.right的宽度是自动计算的，不需要设置任何与.left宽度相关的css，因此.left的宽度可以不固定（由内容盒子决定）。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context" target="_blank" rel="noopener">MDN BFC</a></li>
+<li><a href="http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html" target="_blank" rel="noopener">前端精选文摘：BFC 神奇背后的原理</a></li>
+<li><a href="https://segmentfault.com/a/1190000004424442" target="_blank" rel="noopener">两列自适应布局方案整理</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/layout/bfc/" data-id="clivn5s1n001gml6pqji8eemp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bfc/">bfc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/layout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/layout/layout/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/layout/layout/">CSS布局技巧汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSS布局"><a href="#CSS布局" class="headerlink" title="CSS布局"></a>CSS布局</h1><p>作为一名小白，在刚会制作网页的时候，遇到了不少问题。先把这些遇到的问题和解决方案总结一下，以后用时方便查找。</p>
+<h2 id="1-清除浮动"><a href="#1-清除浮动" class="headerlink" title="1. 清除浮动"></a>1. 清除浮动</h2><p>当子元素处于浮动状态时，因为子元素脱离了文档流，所以父元素的高度或宽度不能完全包含子元素，产生了溢出。此时父元素就需要清除浮动，让父元素的高度和宽度能与子元素的相匹配。<br>清除浮动的解决方案：</p>
+<p>解决方案1(非body)</p>
+<pre><code>.clearfix {
+    overflow: auto;
+ }
+</code></pre><p>解决方案2(非body)</p>
+<pre><code>.clearfix{
+    overflow:hidden;
+}
+</code></pre><p>解决方案3</p>
+<pre><code>.clearfix::after{
+    content:&apos;&apos;;
+    display:block;
+    clear:both;
+}
+</code></pre><h2 id="2-居中"><a href="#2-居中" class="headerlink" title="2. 居中"></a>2. 居中</h2><p>居中分为：</p>
+<ol>
+<li>水平居中</li>
+<li>垂直居中</li>
+<li>水平垂直居中</li>
+</ol>
+<p>####水平居中的方法：</p>
+<p>解决方案1(flex)</p>
+<pre><code>.father{
+    display:flex;
+    justify-content:center;
+}
+</code></pre><p>解决方案2(text-align)</p>
+<pre><code>.father{
+    text-align:center;
+}
+.children{
+    margin: 0 auto;//只要左右边距是auto就行了
+    width: 200px; //如果不设置width的话，看不出居中的效果
+}
+</code></pre><p>解决方案3(margin-left)</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    left:50%;
+    margin-left:-150px;//margin-left的绝对值设为width的一半
+    width:300px;
+}
+</code></pre><p>####垂直居中的方法：</p>
+<p>解决方案1(flex)</p>
+<pre><code>.father{
+    display:flex;
+      flex-direction:column;
+    justify-content:center;
+}
+</code></pre><p>解决方案2(margin-top)</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    top:50%;
+    margin-top:-100px;//margin-top的绝对值设为height的一半
+    height:200px;
+}
+</code></pre><h4 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h4><p>解决方案1（flex）</p>
+<pre><code>.father{
+    display:flex;
+}
+.children{
+    margin:auto;
+}
+</code></pre><p>解决方案2（margin）</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-100px;
+    width:200px;
+    height:400px;
+}
+</code></pre><h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p><a href="https://segmentfault.com/a/1190000002910324" target="_blank" rel="noopener">flex布局</a></p>
+<h2 id="3-自动编号（counter-increment）"><a href="#3-自动编号（counter-increment）" class="headerlink" title="3.自动编号（counter-increment）"></a>3.自动编号（counter-increment）</h2><p>利用counter-increment和counter实现自动标号</p>
+<hr>
+<pre><code>li{
+    counter-increment:item; //从0开始，每有一个li，则为计数器item+1
+}
+li::before{
+    content:counter(item); //取出计数器item的值
+}
+</code></pre><p>以上输出的是从1开始依次编号（1,2,3,4…）的li</p>
+<hr>
+<pre><code>li{
+    counter-increment:item+2; //从0开始每有一个li，则为计数器item+2
+}
+li::before{
+    content:counter(item); //取出计数器item的值
+}
+</code></pre><p>以上输出的是从2开始的偶数编号（2，4，6，8…）的li</p>
+<hr>
+<pre><code>h1{
+    counter-increment:chapter -1 section 2 part; //charpter-1，section+2，part+1；
+    }
+</code></pre><hr>
+<p>####参考链接：<br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment" target="_blank" rel="noopener">counter-increment MDN</a></p>
+<h2 id="4-段落文字左右两边对齐"><a href="#4-段落文字左右两边对齐" class="headerlink" title="4.段落文字左右两边对齐"></a>4.段落文字左右两边对齐</h2><h3 id="text-align-justify"><a href="#text-align-justify" class="headerlink" title="text-align:justify"></a>text-align:justify</h3><p>报纸一样的排版，每行的左右两边努力对齐</p>
+<h3 id="word-break-break-all"><a href="#word-break-break-all" class="headerlink" title="word-break:break-all"></a>word-break:break-all</h3><p>强行拆开一个单词</p>
+<h2 id="5-移动端去掉点击时的阴影"><a href="#5-移动端去掉点击时的阴影" class="headerlink" title="5.移动端去掉点击时的阴影"></a>5.移动端去掉点击时的阴影</h2><pre><code>*{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    /* For some Androids */
+}
+</code></pre><h2 id="6-HTML5、-media兼容ie8的做法"><a href="#6-HTML5、-media兼容ie8的做法" class="headerlink" title="6.HTML5、@media兼容ie8的做法"></a>6.HTML5、@media兼容ie8的做法</h2><pre><code>&lt;!-- html --&gt;
+   &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+ &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+  &lt;!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries  --&gt;
+  &lt;!--[if lt IE 9]&gt;
+  &lt;script src=&quot;//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;//cdn.bootcss.com/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;
+  &lt;![endif]--&gt;
+</code></pre><p>以上为html的代码，还需在css文件中增加以下代码</p>
+<pre><code>article,aside,dialog,footer,header,section,footer,nav,figure,menu{
+  display:block}
+</code></pre><ul>
+<li><p>\&lt;!–[if lt IE 9]&gt;是条件注释，IE以外的浏览器将会把它们看作是普通的注释而完全忽略它们。IE将会根据if条件来判断是否如解析普通的页面内容一样解析条件注释里的内容。条件注释是一种安全的区分IE浏览器版本的语法，且被认为是取代针对IE css hack的首选办法。</p>
+</li>
+<li><p>html5shiv解决html5的兼容性问题，respond解决响应式的问题。respond需要在css文件之后，但要尽早解析，避免出现闪屏。更多注意事项见<a href="https://github.com/scottjehl/Respond" target="_blank" rel="noopener">respond.js</a></p>
+</li>
+</ul>
+<h4 id="什么时候才能不兼容ie8呀-ie8烦死惹-摔"><a href="#什么时候才能不兼容ie8呀-ie8烦死惹-摔" class="headerlink" title="什么时候才能不兼容ie8呀,ie8烦死惹(摔!)"></a>什么时候才能不兼容ie8呀,ie8烦死惹(摔!)</h4><h2 id="7-css3多栏布局"><a href="#7-css3多栏布局" class="headerlink" title="7.css3多栏布局"></a>7.css3多栏布局</h2><ul>
+<li><p>column-width:200px; : 内容会分布在200px宽度的栏位中,视口尺寸变化时,浏览器会自动调整栏位数量。</p>
+</li>
+<li><p>column-count:3; :保持栏位数量不变而让栏位宽度根据视口调整。</p>
+</li>
+<li><p>column-gap:20px; :栏间距</p>
+</li>
+<li><p>column-rule: thin dotted #999;  :栏的分割线</p>
+</li>
+</ul>
+<h2 id="8-让li表现为横向菜单"><a href="#8-让li表现为横向菜单" class="headerlink" title="8.让li表现为横向菜单"></a>8.让li表现为横向菜单</h2><p>方案一 利用table布局</p>
+<pre><code>ul{
+  display:table-row;
+}
+li{
+  display:table-cell;
+}
+</code></pre><p>方案二 利用float布局,加清除浮动</p>
+<pre><code>ul{
+  margin:0;
+  padding:0;
+}
+
+.clearfix::after{
+  content:&quot;&quot;;
+  display:block;
+  clear:both;
+
+}
+li{
+  float:left;
+  list-style:none;
+}
+</code></pre><h2 id="9-三列布局"><a href="#9-三列布局" class="headerlink" title="9.三列布局"></a>9.三列布局</h2><p>双飞翼布局:<br>方案一 position:absolute;</p>
+<pre><code>html
+
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;right&lt;/div&gt;
+    &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;
+ &lt;/div&gt;
+
+
+css
+
+.container{
+  margin:0 100px 0 100px;
+  border:1px solid black;
+}
+
+.main{
+  width:100%;
+  height:200px;
+  border:1pxs solid blue;
+}
+.left{
+  position:absolute;
+  left:0;
+  width:100px;
+  height:200px;
+  border:1px solid red;
+}
+.right{
+  width:100px;
+  height:200px;
+  border:1px solid red;
+  position:absolute;
+  right:0;
+}
+</code></pre><p>方案二 display:flex</p>
+<pre><code>html
+
+&lt;div class=&quot;container&quot;&gt;
+   &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;
+   &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;
+   &lt;div class=&quot;right&quot;&gt;right&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+css
+
+.container{
+  border:1px solid red;
+  display:flex;
+  height:200px;
+
+}
+.container &gt; div{
+  border:1px solid black;
+}
+.left{
+  width:100px;
+}
+.right{
+  width:100px;
+}
+.main{
+  flex-basis:100%;/*   flex-grow:1; 也同样生效  */
+}
+</code></pre><h2 id="模糊特效"><a href="#模糊特效" class="headerlink" title="模糊特效"></a>模糊特效</h2><p>css3-filter</p>
+<pre><code>filter:blur(20px);
+</code></pre><p>filter对所有元素生效（在ff和chrome下试验过）</p>
+<p>filter还支持其他特效，如反色等等，丰富度较高。</p>
+<h2 id="子元素-height：100"><a href="#子元素-height：100" class="headerlink" title="子元素 height：100%"></a>子元素 height：100%</h2><p>当设置子元素高度为height:100%时，浏览器会寻找其父元素的高度。</p>
+<ul>
+<li><p>如果父元素指定了height值，如100px，则子元素能直接获得高度100px。</p>
+</li>
+<li><p>如果父元素的高度也是使用百分比，则找寻父元素的父元素高度，直到找到为止或者找到height为auto。</p>
+</li>
+<li><p>如果父元素的高度为height:auto,则子元素height:100%会被忽略，其height也是auto。</p>
+</li>
+</ul>
+<h2 id="多余的字添加省略号"><a href="#多余的字添加省略号" class="headerlink" title="多余的字添加省略号"></a>多余的字添加省略号</h2><pre><code>overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+</code></pre><h2 id="隐藏video的下载按钮"><a href="#隐藏video的下载按钮" class="headerlink" title="隐藏video的下载按钮"></a>隐藏video的下载按钮</h2><p>chrome</p>
+<pre><code>video::-internal-media-controls-download-button {
+  display:none; //似乎没有用
+}
+
+video::-webkit-media-controls-enclosure {
+  overflow:hidden; 
+}
+video::-webkit-media-controls-panel {
+  width: calc(100% + 10px); //就是把控制条拉长了，让下载按钮跑到屏幕外
+}
+</code></pre><h2 id="position-absolute-top-0-bottom-0"><a href="#position-absolute-top-0-bottom-0" class="headerlink" title="position:absolute top:0 bottom:0"></a>position:absolute top:0 bottom:0</h2><p>emmmm…很奇特的一个性质，当元素的样式为position:absolute时，如果设置了top:0,bottom:0，那么这个元素在不设height的情况下，高度为父元素的内容高度加padding-top padding-bottom。<br>在top:12px,bottom:12px的情况下，高度与上一种情况一样，只不过向下偏移12px。</p>
+<h2 id="webkit-animation-delay"><a href="#webkit-animation-delay" class="headerlink" title="-webkit-animation-delay"></a>-webkit-animation-delay</h2><p>场景:</p>
+<p>给同类名的不同节点设置不同的animation-delay，安卓机出现了兼容问题，需要使用-webkit-animation-delay。</p>
+<p>尝试1：</p>
+<p>在设置动画相关类名时，同时设置element.style.webkitAnimationDelay。</p>
+<p>结果：</p>
+<p>设置上了，但是不起作用。失败。</p>
+<p>尝试2:</p>
+<p>通过css的counter和css的calc结合，计算当前节点所需要的延时。</p>
+<p>结果：</p>
+<p>counter并不能和calc结合计算。哭泣。</p>
+<p>尝试3:</p>
+<p>通过sass的for循环生成不同的webkitAnimationDelay，总数只能写死。</p>
+<p>结果：</p>
+<p>因为文件结构不允许，失败。</p>
+<p>最终解决方案：</p>
+<p>在设置动画相关类名之<em>前</em>，先设置webkitAnimationDelay。应该是浏览器对于动画相关的时机不同的问题。</p>
+<p>在android的需要-webkit-兼容动画的浏览器上，必须于动画类名添加之前、动画开始之前设置webkitAnimationDelay。</p>
+<p>撒花完结。*★,°*:.☆(￣▽￣)/$:*.°★* 。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/layout/layout/" data-id="clivn5s1o001jml6pepgoph17" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/pixel_on_android" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/layout/pixel_on_android/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/layout/pixel_on_android/">安卓app里的px</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目前的项目android的app并不全是原生写的页面，大部分是访问h5页面。h5页面是根据视口宽度、利用rem做自适应，而原生写的页面是根据PPI(每英寸像素密度)来做自适应。</p>
+<p>h5写字体大小是用的虚拟像素，而原生写字体大小用的却是物理像素。</p>
+<p>因为双方做自适应的标准不同，因此做出来的页面之间样式并不统一。为了解决这个问题，最终决定h5去适应原生的方案。</p>
+<p>我之前并没有接触过安卓，导致首次沟通非常困难。挫败感很强，憋着一口气还是把这个搞明白了。</p>
+<h2 id="1-参数们"><a href="#1-参数们" class="headerlink" title="1. 参数们"></a>1. 参数们</h2><p>首先看下iphone的参数</p>
+<p><img src="/images/layout/iphone_screen_density.png" alt></p>
+<p>屏幕尺寸： 屏幕对角线长度</p>
+<p>分辨率(pt)： h5前端通过document.documentElement.clientWidth取得的视口宽度。</p>
+<p>Reader:  dpr ?</p>
+<p>分辨率(px)： 安卓前端读到的物理像素宽高。 width * height</p>
+<p>PPI： 每英寸像素密度。安卓前端通过PPI来计算当前屏幕该用多大字体。 PPI^2 = (width^2 + height^2) / 屏幕尺寸^2   这里的参数都是物理像素宽度(因为不会打开根符号，所以就这么写了）</p>
+<h2 id="2-安卓计算字体的方式"><a href="#2-安卓计算字体的方式" class="headerlink" title="2. 安卓计算字体的方式"></a>2. 安卓计算字体的方式</h2><p>安卓是以PPI值为160作为基准， 在PPI为 x 时，该屏幕设置的14号字(即前端意义上的font-size: 14px)为 (x / 160) * 14 + ‘px’</p>
+<h2 id="3-h5计算自适应字体的方式"><a href="#3-h5计算自适应字体的方式" class="headerlink" title="3. h5计算自适应字体的方式"></a>3. h5计算自适应字体的方式</h2><p>很简单，获取clientWidth，为html元素设置rem，rem随clientWidth的增大而增大。clientWidth获取到的是虚拟像素宽度。</p>
+<h2 id="4-差别与解决方案"><a href="#4-差别与解决方案" class="headerlink" title="4. 差别与解决方案"></a>4. 差别与解决方案</h2><p>差别：双方在做自适应时参考的变量不同。h5仅参考视口宽度，安卓参考了物理宽度和物理高度。</p>
+<p>解决方案： h5去适应安卓。h5用的都是虚拟像素，安卓用的是物理像素。安卓通过一些事件或方法，向前端的h5页面传递安卓取到的屏幕物理像素宽度deviceWidth，以及安卓里1虚拟像素所对应的物理像素androidPx。</p>
+<p>此时需要求的就是h5下如何将h5的1px所对应的物理像素和安卓下1px对应的物理像素相等。</p>
+<p>如果不做任何设置，h5下1px虚拟像素所对应的物理像素就是dpr的值。粗略的计算，dpr = deviceWidth / clientWidth 。（clientWidth是h5自己取到的视口宽度）</p>
+<p>公式： ( 1 <em> dpr </em> ratio )px = ( 1 * androidPx )</p>
+<p>即 dpr * ratio = androidPx</p>
+<p>即 deviceWidth /clientWidth  * ratio = androidPx</p>
+<p>即 ratio = androidPx * clientWidth / deviceWidth</p>
+<p>至此，就求出了h5所需的转化比率，只要在获取clientWidth计算rem时，为rem的计算结果乘上这个ratio，即可让h5的自适应效果与安卓的自适应效果大致相同。</p>
+<hr>
+<p>20180307</p>
+<p>重新调整了适配策略。</p>
+<p>前端在viewport的meta里加上 target-densitydpi = device-dpi。</p>
+<p>即  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover,target-densitydpi=device-dpi"></p>
+<p>1rem设为定值20px。</p>
+<p>安卓那边使用dp单位（原来使用sp单位）写页面。</p>
+<p>此时不用传参即可使原生页面和h5页面字体大小一致。</p>
+<p>参考链接：<br>1.<a href="https://stuff.mit.edu/afs/sipb/project/android/docs/guide/webapps/targeting.html" target="_blank" rel="noopener">Targeting Screens from Web Apps | Android Developers</a><br>1.<a href="http://blog.csdn.net/donkor_/article/details/77680042" target="_blank" rel="noopener">两分钟理解Android中PX、DP、SP的区别</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/layout/pixel_on_android/" data-id="clivn5s1p001mml6pgelrkm88" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/responsive" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/layout/responsive/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/layout/responsive/">学习响应式布局</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>响应式布局，即同一网页在不同设备上均能正常显示。</p>
+<p>目前学习到的有：</p>
+<h2 id="1-设置html字体大小。"><a href="#1-设置html字体大小。" class="headerlink" title="1. 设置html字体大小。"></a>1. 设置html字体大小。</h2><p>  各设备上体现的像素大小不一样，所以要对不同设备的字体大小进行动态设定。之前学长给了一段代码，适用于<strong>移动端</strong>的计算。代码如下：</p>
+<pre><code>(function (doc, win) {//屏幕自适应
+
+var docEl = doc.documentElement;
+
+  resizeEvt = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;;
+
+  recalc = function () {
+
+  var clientWidth = docEl.clientWidth;
+
+  if (!clientWidth) return;
+    docEl.style.fontSize = 50 * (clientWidth / 375) + &apos;px&apos;;
+  };
+
+   if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener(&apos;DOMContentLoaded&apos;, recalc, false);
+
+
+})(document, window);
+</code></pre><p>假如给的移动端的设计稿是750px，则按照这段代码，font-size = 50 * 750 / 375 + “px” =100px, 则1rem对应的就是100px。设计稿中的100px宽的元素，就可以用1rem表示其宽度，这样做出来的网页在750px的设备下显示最完美，其他设备虽然不够完美但也不会出太大差错。</p>
+<p>####参考网址：<a href="http://www.cnblogs.com/axl234/p/5156956.html" target="_blank" rel="noopener">移动端适配，font-size设置的思考</a></p>
+<p>###<strong>Question</strong>:</p>
+<ol>
+<li>移动端用这段代码没大问题，但是如果这个网页同时在pc端显示，按照之前的计算方法，将pc设计稿中的px单位换算成rem后，网页上的元素就会异常的大。因此，在我做bookcet网页时，通过媒体查询，写了两套样式：一套是pc端，度量单位为px；一套是wap端，度量单位为rem。第一次写同时响应pc和wap的页面,感觉并没有get到响应式的精髓？</li>
+<li>chrome允许的最小字体是12px。之前在网上搜索的时候，发现不少人用的是 html{ font-size:62.5%;}这种方式，将1rem对应的16px折合成10px来布局。我在chrome下尝试过这种设置方式，在浏览器自带的调试器下进行测量，发现1rem对应的是12px。如果设计稿给的是20px，按理来说应该设置为2rem,然后就会得到20px，但是在1rem对应12px的情况下，这只能得到24px。所以他们是怎么能得到正确布局的，是没尝试过就转载了，还是我的理解方式不对？</li>
+<li>initial-scale和font-size是如何配合的？当我的font-size设置为625%(1rem=100px)时，initial-scale设置为1，则在iPhone5se上画布特别大，导致元素也特别大。这个应该可以自己研究一下。</li>
+</ol>
+<h2 id="2-H5新标签picture的自适应"><a href="#2-H5新标签picture的自适应" class="headerlink" title="2.H5新标签picture的自适应"></a>2.H5新标签picture的自适应</h2><pre><code>&lt;picture&gt;
+  &lt;source srcset=&quot;img_smallflower.jpg&quot; media=&quot;(max-width: 400px)&quot;&gt;
+  &lt;source srcset=&quot;img_flowers.jpg&quot;&gt;
+  &lt;img src=&quot;img_flowers.jpg&quot; alt=&quot;Flowers&quot;&gt;
+&lt;/picture&gt;
+</code></pre><p>picture是h5标签，它想audio和video一样，可以设置多个source，第一个source是最佳的。还可以将css的媒体查询化为media属性进行设置。media是可选的。上面的代码意思即为，当视口（？）宽度小于400px时，显示第一张图片img_smallflower.jpg，除此之外显示第二张图片img_flowers.jpg。img是做平稳退化使用，当浏览器不支持picture标签时，使之可以退化为img标签。</p>
+<h2 id="3-如何在兼容ie8的情况下实现响应式布局"><a href="#3-如何在兼容ie8的情况下实现响应式布局" class="headerlink" title="3. 如何在兼容ie8的情况下实现响应式布局"></a>3. 如何在兼容ie8的情况下实现响应式布局</h2><p>这点在另外一篇经验总结<a href="layout.md">css布局</a>里的第五点提到了，使用respond.js进行兼容。(在《响应式web设计》里提到了Modernizr这个库,里面可以解决响应式布局的大部分问题。)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/layout/responsive/" data-id="clivn5s1r001sml6pb1img7zi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/responsive/">responsive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-books/js_you_dont_know" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/books/js_you_dont_know/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.732Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/books/">books</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/books/js_you_dont_know/">你不知道的Javascript</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="上卷-scope-amp-closures-amp-this-amp-object-prototypes"><a href="#上卷-scope-amp-closures-amp-this-amp-object-prototypes" class="headerlink" title="上卷 (scope &amp; closures &amp; this &amp; object prototypes)"></a>上卷 (scope &amp; closures &amp; this &amp; object prototypes)</h1><h2 id="part1-scope-and-closures"><a href="#part1-scope-and-closures" class="headerlink" title="part1, scope and closures"></a>part1, scope and closures</h2><h3 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h3><ol>
+<li>参与编译的部分：</li>
+</ol>
+<ul>
+<li>引擎： 从头到尾负责整个js程序的编译及执行过程。</li>
+<li>编译器： 负责语法分析及代码生成。</li>
+<li>作用域： 收集并维护所有声明的标识符（变量），确定当前执行的代码对这些标识符的访问权限。</li>
+</ul>
+<ol start="2">
+<li><p>遇到变量时的简要编译运行过程：</p>
+<p> <code>var a = 2;</code></p>
+<p> 编译器将程序分解并解析成一个抽象语法树（AST），遇到var a时，会先询问作用域是否有一个该名称的变量存在同一个作用域的<em>集合</em>中。如果有，则忽略该声明，继续进行编译，否则会要求作用域在当前作用域的<em>集合</em>中声明一个新的变量， 并命名为a。</p>
+<p> 引擎运行a = 2时，会先询问作用域变量是否存在，如果是，引擎就会使用这个变量，否则继续往上查找。</p>
+</li>
+<li><p>LHS、RHS</p>
+<p>获取变量的值使用的是RHS，为变量赋值（或者说是获得变量的指针？）是用的LHS。 函数声明不会触发LHS。在非严格模式下，LHS在作用域的顶层（即全局作用域）也找不到变量时，全局作用域会创建一个具有该名称的变量并返给引擎。</p>
+</li>
+</ol>
+<ol start="4">
+<li><p>作用域嵌套</p>
+<p> 引擎在当前作用域找不到对应变量时，就会继续向外层作用域查找，直到找到变量或者到达最外层作用域。</p>
+<p> 综合示例：</p>
+<pre><code>function test(str){  // 函数传参时有个隐形变量分配，触发LHS。
+    var a = str;  // 编译器在test作用域内声明变量a，引擎触发RHS查找str的值，触发LHS为变量a赋值。
+    b = a; // 因为没有var这个声明符，所以在编译器没有在test作用域内声明变量b。
+           // 引擎运行时，触发RHS查找a的值，触发LHS查找b。LHS在test作用域内没有找到b，便向外层查找，直到全局作用域。全局作用域也没有变量b，在非严格模式下，全局作用域创建了一个全局变量b，并返回给引擎。
+}
+
+test(&apos;hello world&apos;);  // RHS查找函数。
+console.log(b); // b &gt;&gt; &apos;hello world&apos;
+</code></pre></li>
+<li><p>欺骗词法</p>
+<p> 欺骗词法是指运行时“修改”（或者说欺骗）词法作用域，典型的有eval和with。</p>
+<p> 弊端：</p>
+<ul>
+<li>由于作用域的不确定性，影响编译器的优化。</li>
+<li>在严格模式下会限制或者禁止欺骗词法。</li>
+<li>代码可读性下降。</li>
+</ul>
+</li>
+<li><p>函数作用域与块作用域</p>
+<p> 定义不赘述。</p>
+<p> 注： for循环里如果for的循环变量是声明的let变量，则每次进入循环的时候，都会<strong>重新</strong>绑定到每一个迭代中。</p>
+<p> 加上闭包概念的典型示例：</p>
+<pre><code>for(let i = 1; i &lt;= 5; i++) {
+    setTimeout(function timer(){
+        console.log(i);
+    }, i*1000);
+} // 输出1,2,3,4,5
+
+for (var j = 1; j &lt;= 5; j++){
+    setTimeout(function timer(){
+        console.log(j);
+    }, j*1000);
+} // 输出6,6,6,6,6
+</code></pre></li>
+<li><p>提升</p>
+<ul>
+<li>函数声明会首先被提升。</li>
+<li><p>变量var存在变量声明提升，而let不存在变量声明提升。</p>
+<p>变量var声明提升示例：</p>
+<p>  console.log(a); // undefined<br>  var a;</p>
+<p>  console.log(c); // Uncaught ReferenceError: c is not defined;</p>
+<p>  console.log(b); // Uncaught ReferenceError: b is not defined;<br>  let b;</p>
+<p>原理：</p>
+</li>
+<li><p>编译器在读取<code>console.log(a); var a;</code>时，因为有var声明符，所以编译器会先在当前作用域创建一个变量a，值为undefined。引擎再读取时，存在该变量a，但是该变量取值为undefined。因此打印”undefined”。</p>
+</li>
+<li><code>console.log(c);</code>没有变量声明，编译器也不会提前创建一个相关变量，所以引擎使用时会找不到变量而报错。</li>
+<li>let声明符与var表现不同，没有提升的作用。</li>
+</ul>
+</li>
+</ol>
+<h3 id="closures"><a href="#closures" class="headerlink" title="closures"></a>closures</h3><p>   函数在定义时的词法作用域以外的地方被调用，且此时可以继续访问定义时的词法作用域，该行为称之为闭包。</p>
+<p>   示例</p>
+<pre><code>function foo(){
+    var a = 2;
+    function bar(){
+        console.log(a);
+    }
+    return bar;
+}
+var baz = foo();  // baz也是对bar函数的引用。
+baz(); // 2。通过闭包访问到了foo内部的变量a
+</code></pre><h2 id="part2-this"><a href="#part2-this" class="headerlink" title="part2, this"></a>part2, this</h2><p>this是在运行时进行绑定的，并不是在编写时绑定。this的上下文取决于函数调用时的各种条件，和函数声明的位置没有任何关系，只取决于函数的调用方式。</p>
+<ol>
+<li><p>默认绑定：<br> <strong>非严格模式</strong>下，this默认绑定到全局对象。严格模式下，全局对象无法使用默认绑定，this会绑定到undefined。</p>
+</li>
+<li><p>隐式绑定：<br> 当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象。</p>
+<p> 简单示例：</p>
+<pre><code>function foo() {
+    console.log( this.a );
+}
+var obj = {
+a: 2,
+foo: foo
+};
+obj.foo(); // 2
+</code></pre></li>
+<li><p>隐式丢失：<br> 当为一个绑定了上下文的函数创建一个新的别名时，此时通过新别名调用函数，可能会丢失this对象。注意，参数传递其实也是一种隐形赋值，所以函数在作为参数传递的过程中，容易丢失this对象而使用默认绑定。</p>
+<p> 简单示例：</p>
+<pre><code>function foo() {
+    console.log( this.a );
+}
+var obj = {
+    a: 2,
+    foo: foo
+};
+var bar = obj.foo; // 函数别名！
+var a = &quot;oops, global&quot;; // a 是全局对象的属性
+bar(); // &quot;oops, global&quot; // 丢失了绑定的obj上下文
+</code></pre></li>
+<li><p>显式绑定：</p>
+<ul>
+<li><p>硬绑定：call, apply, bind</p>
+</li>
+<li><p>api调用的”上下文”</p>
+<p>  简单示例：</p>
+<pre><code>function foo(el) {
+    console.log( el, this.id );
+}
+var obj = {
+    id: &quot;awesome&quot;
+}; // 调用 foo(..) 时把 this 绑定到 obj [1, 2, 3].forEach( foo, obj );
+// 1 awesome 2 awesome 3 awesome
+</code></pre></li>
+</ul>
+</li>
+<li><p>new 绑定</p>
+<p> javascript实际上不存在所谓的”构造函数”，只有对于函数的”构造调用”。</p>
+<p> 构造函数调用时的操作：</p>
+<ol>
+<li><p>创建一个全新对象。</p>
+</li>
+<li><p>对这个新对象执行”原型”连接。</p>
+</li>
+<li><p>函数里的this会指向这个新对象（原译文：’这个新对象会绑定到函数调用的this。’，感觉原译文有点奇怪，此项为自行理解的内容）。</p>
+</li>
+<li><p>执行函数。如果函数没有其他返回对象，那么new表达式中的函数调用会自动返回这个新对象。</p>
+</li>
+</ol>
+</li>
+<li><p>优先级</p>
+<p> new 绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
+</li>
+<li><p>箭头函数</p>
+<p> 箭头函数会捕获所在外部函数被调用时的当时环境，并绑定该环境的this。箭头函数的绑定无法被修改。</p>
+</li>
+</ol>
+<h2 id="part3-object"><a href="#part3-object" class="headerlink" title="part3, object"></a>part3, object</h2><p>对象的属性名永远都是字符串。如果使用了string(字面量)以外的其他值作为属性名，那它首先会使用该值的toString方法被转化成一个字符串。</p>
+<h3 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h3><ol>
+<li><p>创建对象常量：</p>
+<p> 结合属性描述符writable: false, configurable: false就可以创建一个真正的常量属性（无法修改、重定义或者删除）。</p>
+</li>
+<li><p>禁止扩展</p>
+<p> 禁止一个对象添加新属性并保留已有属性：</p>
+<p> Object.preventExtensions(myObject);</p>
+</li>
+<li><p>密封</p>
+<p> 禁止添加新属性并且不可删除、重新配置已有的属性。</p>
+<p> 即在一个现有对象上调用 Object.preventExtensions(..) 并把所有现有属性标记为 configurable:false 。</p>
+<p> Object.seal(myObject);</p>
+</li>
+<li><p>冻结</p>
+<p> 禁止添加新属性并且不可修改、删除、重新配置已有属性。</p>
+<p> 即在一个现有对象上调用 Object.seal(..) 并把所有“数据访问”属性标记为 writable:false。</p>
+<p> Object.freeze(myObject);</p>
+</li>
+</ol>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>可以使用@@iterator对象和它的next()方法遍历数据值（而非属性名）。</p>
+<h2 id="part4、-混合对象类"><a href="#part4、-混合对象类" class="headerlink" title="part4、 混合对象类"></a>part4、 混合对象类</h2><p>显式混入（包含寄生式继承）、隐式混入。</p>
+<p>javascript里的类与其他语言的类完全不同，并且本身不提供”多重继承”这个功能。</p>
+<h2 id="part5、-原型"><a href="#part5、-原型" class="headerlink" title="part5、 原型"></a>part5、 原型</h2><p>js中其实不存在真正的类，也不存在通过复制类生成的实例。js中的“类”其实是“差异继承”，即创建的时候声明某些特殊的属性，然后其他的属性都通过委托行为去原型里查找。 js中通过“类”生成“实例”，其实是将两个对象关联起来。</p>
+<p>如果向 [[Prototype]] 链上层已经存在的属性([[Put]])赋值，不一定会触发屏蔽。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>所有函数都可以成为构造函数。只不过有new关键词的时候，函数调用会变成“构造函数调用”。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/books/js_you_dont_know/" data-id="clivn5s1h000zml6p78hu3nxv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-books/smashing_nodejs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/books/smashing_nodejs/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.732Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/books/">books</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/books/smashing_nodejs/">了不起的node.js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="了不起的node-js"><a href="#了不起的node-js" class="headerlink" title="了不起的node.js"></a>了不起的node.js</h1><h3 id="Chapter-3-阻塞与非阻塞IO"><a href="#Chapter-3-阻塞与非阻塞IO" class="headerlink" title="Chapter 3 阻塞与非阻塞IO"></a>Chapter 3 阻塞与非阻塞IO</h3><p>Node为js引入了一个复杂的概念: 共享状态的并发。</p>
+<p>通俗讲，Node中，你需要对回调函数如何修改当前内存中的变量（状态）特别小心。此外，你还需要特别注意对错误的处理是否会潜在的修改这些状态。</p>
+<p>Node采用一个长期运行的进程；Node使用了事件轮询；Node是单线程的； </p>
+<hr>
+<p>本书没有看完。在Chapter 5的时候，让我看得十分恼火。</p>
+<p>例如有一小节讲“理解什么是流”，我并没有发现它讲什么是流、流有什么特征，只讲了哪些东西属于流，以及后来书中引入了一个用node写的读取文件夹和文件的示例，一开始就给出了一段不优雅的代码，我照着敲了一遍之后发现功能并不完整。接着书上就开始重构了？！可是这段重构不仅是把一些揉在一起的函数提出来，还在不断的完善功能。这根本不算重构，这就叫没写完的需求接着写好吧。而且重构的过程就是东改一点西加一点，没有明确的思路和计划，看的我晕头转向，最后仍然没有给出完整的整段代码。</p>
+<p>搞不懂这本书是教人写代码还是教人node。如果是教有基础的人学node，那这本书把重点放错了，没有放到node上。node讲的不清晰、不透彻、不广泛、不深入，例子也不是直接给出最优雅的写法，有非常多的代码注释和绕来绕去和node本身无关的优化思路。如果是教没基础的人学node…那还是先学js再来学node吧。</p>
+<p>综上，讲解浅显，例子讲解混乱，这本书十分不合我的胃口。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/books/smashing_nodejs/" data-id="clivn5s1j0013ml6p6k1ayr58" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

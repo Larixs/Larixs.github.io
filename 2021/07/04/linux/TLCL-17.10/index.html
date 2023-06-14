@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>TLCL-17.10手册简要笔记 | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="basiccommand -options arguments 1. what is the shellterminal: give us access to the shell. shell prompt: [username@machinename ~]$.  if the last character of the prompt is ‘#’ instead of ‘$’, it means">
+<meta name="keywords" content="study notes,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TLCL-17.10手册简要笔记">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/linux/TLCL-17.10/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="basiccommand -options arguments 1. what is the shellterminal: give us access to the shell. shell prompt: [username@machinename ~]$.  if the last character of the prompt is ‘#’ instead of ‘$’, it means">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TLCL-17.10手册简要笔记">
+<meta name="twitter:description" content="basiccommand -options arguments 1. what is the shellterminal: give us access to the shell. shell prompt: [username@machinename ~]$.  if the last character of the prompt is ‘#’ instead of ‘$’, it means">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux/TLCL-17.10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/linux/TLCL-17.10/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.734Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TLCL-17.10手册简要笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h2><p>command -options arguments</p>
+<h2 id="1-what-is-the-shell"><a href="#1-what-is-the-shell" class="headerlink" title="1. what is the shell"></a>1. what is the shell</h2><p>terminal: give us access to the shell.</p>
+<p>shell prompt: [username@machinename ~]$.  if the last character of the prompt is ‘#’ instead of ‘$’, it means the terminal session has superuser privileges.</p>
+<p>simple commands:</p>
+<ul>
+<li>date</li>
+<li>cal:  calendar</li>
+<li>df: the current amount of free space on your disk drivers.</li>
+<li>free: display the amount of free memory.(does not exist in mac’s terminal)</li>
+<li>exit: ending a terminal session</li>
+</ul>
+<h2 id="2-Navigation"><a href="#2-Navigation" class="headerlink" title="2. Navigation"></a>2. Navigation</h2><p> Linux’s files are organised in a tree-like pattern of directories</p>
+<p>commands:</p>
+<ul>
+<li>pwd: print name of current working directory</li>
+<li><p>cd: change directory</p>
+<ul>
+<li>cd: to your home directory</li>
+<li>cd -: to the previous working directory</li>
+<li>cd ~use_name: to the home directory of user ‘who’</li>
+</ul>
+</li>
+<li><p>ls: list directory contents</p>
+<ul>
+<li>ls -a: show all files including the hidden files, which begin with a period.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Exploring-The-System"><a href="#3-Exploring-The-System" class="headerlink" title="3. Exploring The System"></a>3. Exploring The System</h2><p>commands: </p>
+<ul>
+<li>ls: list directory contents<ul>
+<li>ls: see a list of files and subdirectories contained in the current working directory.</li>
+<li>ls dir1: see a list of files and subdirectories contained in the dir1.</li>
+<li>ls dir1 dir2: like run <code>ls dir1</code> first and then run <code>ls dir2</code> .</li>
+<li>ls -options: pdf-p15</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>file: determine file type</li>
+<li>less: view text file contents. (pdf-p43)</li>
+</ul>
+<h2 id="4-Manipulating-Files-And-Directories"><a href="#4-Manipulating-Files-And-Directories" class="headerlink" title="4. Manipulating Files And Directories"></a>4. Manipulating Files And Directories</h2><p>wildcards: special characters to select files’ name based on patterns of characters.</p>
+<table>
+<thead>
+<tr>
+<th>wildcard</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>matches any characters.</td>
+</tr>
+<tr>
+<td>?</td>
+<td>matches any <code>single</code> character.</td>
+</tr>
+<tr>
+<td>[characters]</td>
+<td>matches any <code>single</code> character that is a member of the set characters.</td>
+</tr>
+<tr>
+<td>[!characters]</td>
+<td>matches any <code>single</code> character that is <code>not</code> a member of the set characters.</td>
+</tr>
+<tr>
+<td>[[:class:]]</td>
+<td>matches any character that is a member of the specified class.</td>
+</tr>
+</tbody>
+</table>
+<p>there are the most commonly used character classes.</p>
+<table>
+<thead>
+<tr>
+<th>character class</th>
+<th>meaning</th>
+<th>tip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[:alnum:]</td>
+<td>matches any alphanumeric character</td>
+<td>alnum = alpha + digit</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>matches any alphabetic character</td>
+<td>alpha = lower + upper ?</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>matches any numeric character</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>matches any lowercase letter</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>matches any uppercase letter</td>
+</tr>
+</tbody>
+</table>
+<p>commands:</p>
+<ul>
+<li><p>cp: copy files and directories.(pdf-p52)</p>
+<p>  if copy files to directory, the destination directory must exist.(I guess it may involve permission problems. when running copy commands, if commands created new directory, it’s confusing for new directory’s permission)</p>
+</li>
+<li>mv: move/rename files and directories.(pdf-p54)</li>
+<li>rm: remove files and directories. (pdf-p55)</li>
+<li>mkdir: create directories.</li>
+<li>ln: create hard and symbolic links. (pdf-p57)<ul>
+<li>ln file link: create a hard link</li>
+<li>ln -s item link: create a symbolic link where “item” is either a file or a directories.</li>
+</ul>
+</li>
+</ul>
+<h4 id="hard-links-pdf-57"><a href="#hard-links-pdf-57" class="headerlink" title="hard links (pdf-57)"></a>hard links (pdf-57)</h4><p>By default, every file has a single hard link that gives the file its name. when we create a hard link, we create an additional directory entry for a file. Hard links have two important limitations:</p>
+<ol>
+<li>A hard link cannot reference a file that is not on the same disk partition as the link itself.</li>
+<li>A hard link may not reference a directory.</li>
+</ol>
+<p>When a hard link is deleted, the link is removed but the contents of the file itself continue to exist(that is, its space is not deallocated) until all links to the file are deleted.</p>
+<h4 id="symbolic-links-pdf-58"><a href="#symbolic-links-pdf-58" class="headerlink" title="symbolic links (pdf-58)"></a>symbolic links (pdf-58)</h4><p>Symbolic links were created to overcome the limitation of hard links. Symbolic links work by creating a special type of file that contains a text pointer to the referenced file or directory. In this regard, they operate in much the same way as a Windows shortcut though of course, they predate the Windows feature by many years.</p>
+<p>when you delete a symbolic link, only the link is deleted, not the file itself. If the file is deleted before the symbolic link, the link will continue to exist, but will point to nothing. In this case, the link is said to be <code>broken</code>.</p>
+<h2 id="5-working-with-commands"><a href="#5-working-with-commands" class="headerlink" title="5. working with commands"></a>5. working with commands</h2><p>commands:</p>
+<ul>
+<li>type: indicate how a command name is interpreted.</li>
+<li>which: Display which executable program will be executed.</li>
+<li>help: get help for shell builtins.</li>
+<li>man: display a command’s manual page.(pdf-p69)</li>
+<li>apropos: display a list of appropriate commands.</li>
+<li>info: display a command’s info entry.</li>
+<li>whatis: display a very brief description of a command.</li>
+<li>alias: create an alias for a command. (pdf-p74)</li>
+</ul>
+<h4 id="what-exactly-are-commands-pdf-p66"><a href="#what-exactly-are-commands-pdf-p66" class="headerlink" title="what exactly are commands(pdf-p66)"></a>what exactly are commands(pdf-p66)</h4><p>A command can be one of four different things(use type to identify):</p>
+<ol>
+<li><b>An executable program</b></li>
+<li><b>A command built in the shell itself</b></li>
+<li><b>A shell function</b></li>
+<li><b>An alias</b></li>
+</ol>
+<h2 id="6-redirection"><a href="#6-redirection" class="headerlink" title="6. redirection"></a>6. redirection</h2><p>commands:</p>
+<ul>
+<li>cat: concatenate files. (pdf-p82)</li>
+<li>sort: sort lines of text. (filters pdf-85)</li>
+<li>uniq: report or omit repeated lines. (filters pdf-85)</li>
+<li>grep: print lines matching a pattern. (pdf-86)</li>
+<li>wc: print newline, word, and byte counts for each line.(pdf-86)</li>
+<li>head: output the first part of a file. (pdf-87)</li>
+<li>tail: output the last part of a file. (pdf-87)<ul>
+<li><code>tail -f</code> continues to monitor the file and when new lines are appended, they immediately appear on the display, until you type <code>Ctrl-c</code>.</li>
+</ul>
+</li>
+<li>tee: read from standard input and write to standard output and files. It is useful for capturing a pipeline’s contents at an intermediate stage of processing. (pdf-p89)</li>
+</ul>
+<h4 id="redirecting-standard-output-pdf-p78"><a href="#redirecting-standard-output-pdf-p78" class="headerlink" title="redirecting standard output(pdf-p78)"></a>redirecting standard output(pdf-p78)</h4><p>We can use the “&gt;” redirection operator to change standard output to another file instead of the screen. For example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/bin &gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+<p>The results will overwrite ‘ls-output.txt’. But if there an error occurs, the error message won’t appear in the txt. Because ls program does not send its error messages to standard output. Instead, it sends its error messages to standard error.</p>
+<p>you can do this to truncate a file or create a new, empty file:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; empty.txt</span><br></pre></td></tr></table></figure>
+<p>Using the “&gt;&gt;” operator will result in the output being appended to the file.If the file does not already exist, it is created just as though the “&gt;” operator had been used.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/bin &gt;&gt; ls-output.txt</span><br><span class="line">ls -l /usr/bin &gt;&gt; ls-output.txt</span><br></pre></td></tr></table></figure>
+<p>repeated the command 2 times resulting in an output file 2 times as large. </p>
+<h4 id="redirecting-standard-error-pdf-p79"><a href="#redirecting-standard-error-pdf-p79" class="headerlink" title="redirecting standard error (pdf-p79)"></a>redirecting standard error (pdf-p79)</h4><p>To redirect standard error we must refer to its file descriptor:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr 2 &gt; ls-error.txt</span><br></pre></td></tr></table></figure>
+<h4 id="redirecting-standard-output-and-standard-error-to-one-file"><a href="#redirecting-standard-output-and-standard-error-to-one-file" class="headerlink" title="redirecting standard output and standard error to one file"></a>redirecting standard output and standard error to one file</h4><p>The traditional way, which works with old versions of the shell:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &gt; ls-output.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
+<p>The more streamlined method for performing this combined redirection:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &amp;&gt; ls-output.txt</span><br></pre></td></tr></table></figure></p>
+<p>Or you may also append the standard output and standard error streams to a single file like so:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr &amp;&gt;&gt; ls-output.txt</span><br></pre></td></tr></table></figure></p>
+<h4 id="disposing-of-unwanted-output"><a href="#disposing-of-unwanted-output" class="headerlink" title="disposing of unwanted output"></a>disposing of unwanted output</h4><p>A special file called “dev/null” accepts input and does nothing with it.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /bin/usr 2&gt; /dev/null</span><br></pre></td></tr></table></figure></p>
+<h4 id="redirecting-standard-input-pdf-83"><a href="#redirecting-standard-input-pdf-83" class="headerlink" title="redirecting standard input (pdf-83)"></a>redirecting standard input (pdf-83)</h4><p>use <code>cat</code> or <code>&lt;</code> can redirect standard input.</p>
+<h3 id="pipelines"><a href="#pipelines" class="headerlink" title="pipelines"></a>pipelines</h3><p>The ability of commands to read data from standard input and send to standard output is utilized by a shell feature called pipelines. Using the pipe operator “|”, the standard output of one command can be piped into standard input of another:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commands1 | commands2</span><br></pre></td></tr></table></figure>
+<p>The difference between “&gt;” and “|”(pdf-p84):</p>
+<p>The redirection operator connects a command with a file, while the pipeline operator connects the output of one command with the input of a second command.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">command1 &gt; file1</span><br><span class="line">command1 | command2</span><br></pre></td></tr></table></figure></p>
+<p>Sometimes something really bad will happen if:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command1 &gt; command2</span><br></pre></td></tr></table></figure></p>
+<h2 id="7-seeing-the-world-as-the-shell-sees-it"><a href="#7-seeing-the-world-as-the-shell-sees-it" class="headerlink" title="7. seeing the world as the shell sees it"></a>7. seeing the world as the shell sees it</h2><p>commands:</p>
+<ul>
+<li>echo: display a line of text.</li>
+</ul>
+<h4 id="expansion"><a href="#expansion" class="headerlink" title="expansion"></a>expansion</h4><p>Each time we type a command and press the enter key, <code>bash</code> performs several processes upon the text before it carries out our command. The process called expansion.</p>
+<ul>
+<li>pathname expansion *.html (pdf-p92)</li>
+<li>tilde expansion ~ (pdf-p93)</li>
+<li>arithmetic expansion $((2+2))(pdf-p94)</li>
+<li>brace expansion 2019-{01..12}(pdf-p95)</li>
+<li>parameter expansion $USER(pdf-p96)</li>
+<li>command substitution echo $(ls)(pdf-p97)</li>
+</ul>
+<h4 id="quotes"><a href="#quotes" class="headerlink" title="quotes"></a>quotes</h4><ul>
+<li>double quotes: If we place text inside double quotes, all the special characters used by the shell lose their special meaning and are treated as ordinary characters,exclude parameter expansion, arithmetic expansion and command substitution. Word-splitting is suppressed and embedded spaces become part of the arguments instead of delimiters.</li>
+<li>single quotes: If we need suppress all expansions, we use single quotes.</li>
+<li>escaping characters: Sometimes we only want to quote a single character. To do this, we can precede a character with a backslash, which in this context is called the <code>escape character</code>.(pdf-p101)</li>
+</ul>
+<h2 id="8-advanced-keyboard-tricks"><a href="#8-advanced-keyboard-tricks" class="headerlink" title="8. advanced keyboard tricks"></a>8. advanced keyboard tricks</h2><p>commands:</p>
+<ul>
+<li>clear: Clear the screen.</li>
+<li>history: Display the contents of the history list.</li>
+</ul>
+<p>cursor movement (pdf-p106 has all the commands. The commands below works well on my pc):</p>
+<ul>
+<li>Ctrl - a: move cursor to the beginning of the line.</li>
+<li>Ctrl - e: move cursor to the end of the line.</li>
+<li>Ctrl - l: Just do the same thing like <code>clear</code> commands does.</li>
+</ul>
+<p>cut and paste:</p>
+<ul>
+<li>Ctrl - k: kill text from cursor location to the end of line.</li>
+<li>Ctrl - u: kill text from cursor location to the begging of the line.</li>
+<li>Ctrl - y: Yank text from kill-ring and insert it at the cursor location.</li>
+</ul>
+<p>history expansion:</p>
+<ul>
+<li>![number]: [number] means a line number of the command in the history list. Bash will expand “!number” into the contents of number’th line in the history.</li>
+</ul>
+<h1 id="9-Permissions"><a href="#9-Permissions" class="headerlink" title="9. Permissions"></a>9. Permissions</h1><p>Operating systems in the Unix are not only multitasking systems, but also multi-user systems.Multi-user system means that more than one person  can be using computer at the same time.</p>
+<p>commands:</p>
+<ul>
+<li>id: Display user identity.</li>
+<li>chmod: Change a file’s mode(pdf-117). chmod supports octal notation(pdf-118) and symbolic notation(pdf-119)</li>
+<li>umask: Set the default file permissions(pdf-121). It use octal notation to express a mask of bits to be removed from a file’s mode attributes.</li>
+<li>su: Run a shell as another user(pdf-125).</li>
+<li>sudo: Execute a command as another user(pdf-126).</li>
+<li>chown: Change the owner and group owner of a file or directory(pdf-127).</li>
+<li>chgrp: In older versions of Unix, change a files’ group ownership(pdf-128).</li>
+<li>passwd: Change a user’s password.</li>
+<li><p>more commands: adduser, useradd, groupadd</p>
+<p>file types(the first character of the file attribute):</p>
+<ul>
+<li>-: A regular file.</li>
+<li>d: A directory.</li>
+<li>l: A symbolic link.</li>
+<li>c: A character special file.</li>
+<li>b: A block special file.</li>
+</ul>
+<p>file mode(nine characters of the file attribute):</p>
+<p>Permissions for the file’s owner, the file’s group owner, and anybody else.</p>
+<p>permission attributes:</p>
+<ul>
+<li><p>r(4): </p>
+<p>files: Allows a file to be opened and read.</p>
+<p>directories: Allows a directory’s content to be listed if the execute attribute is also set.</p>
+</li>
+<li><p>w(2): </p>
+<p>files: Allows a file to be written to or truncated. However the ability to delete or rename files is determined by directory attributes.</p>
+<p>directories: Allows files within a directory to be created, deleted, and renamed if the execute attribute is also set.</p>
+</li>
+<li><p>x(1): </p>
+<p>files: Allows a file to be treated as a program and executed.<br>Program files written in scripting languages must also be set as readable to be executed.</p>
+<p>directories: Allows a directory to be entered.</p>
+</li>
+<li><p>some special permissions(pdf-123).</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-Processes"><a href="#10-Processes" class="headerlink" title="10. Processes"></a>10. Processes</h2><p>commands:</p>
+<ul>
+<li>ps: Report a snapshot of current processes(pdf-134).</li>
+<li>top: Display tasks to view processes dynamically(pdf-136).</li>
+<li>jobs: List active jobs that have been launched from our terminal(pdf-140).</li>
+<li>bg: Place a job in the background(pdf-141).</li>
+<li>fg: Place a job in the foreground(pdf-140).</li>
+<li><p>kill: Send a signal to process(pdf-142).</p>
+<p>  kill [-signal(pdf-142)] PID</p>
+</li>
+<li><p>killall: Kill processes by name(pdf-145).</p>
+</li>
+<li>shutdown: shutdown or reboot the system（pdf-146).</li>
+<li>&amp;: Putting a process in the background(pdf-139).</li>
+<li>other commands: pstree, vmstat, xload, tload(pdf-147)</li>
+</ul>
+<p>How a Process Works(keywords):</p>
+<ul>
+<li>init(pdf-133)</li>
+<li>parent process and child process(pdf-133)</li>
+<li>process ID (pdf-134)</li>
+<li>STAT: process states(pdf-135)</li>
+<li>stopping(pausing) a process(pdf-141)</li>
+<li>signals: Signals are one of several ways that the operating system communicates with programs.(pdf-142)</li>
+</ul>
+<h2 id="11-The-Environment"><a href="#11-The-Environment" class="headerlink" title="11. The Environment"></a>11. The Environment</h2><p>commands:</p>
+<ul>
+<li>printenv: Print part or all of the environment(pdf-150).</li>
+<li>set: Set shell options(pdf-151).</li>
+<li>export: Export environment to subsequently executed programs.</li>
+<li>alias: create an alias for a command.</li>
+</ul>
+<p>startup files for login shell sessions(pdf-153):</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/profile</td>
+<td>a global configuration script that applies to all users.</td>
+</tr>
+<tr>
+<td>~/.bash_profile</td>
+<td>a user’s personal startup file. Can be used to extend or override settings in the global configuration.</td>
+</tr>
+<tr>
+<td>~/.bash_login</td>
+<td>if ~/.bash_profile is not found, bash attempts to read this script.</td>
+</tr>
+<tr>
+<td>~/.profile</td>
+<td>If neither ~/.bash_profile nor ~/.bash_login is found, bash attempts to read this file. This is the default in Debian-based distributions, such as Ubuntu.</td>
+</tr>
+</tbody>
+</table>
+<p>Non-login shell sessions read the following startup files(pdf-154):</p>
+<table>
+<thead>
+<tr>
+<th>Files</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/bash.bashrc</td>
+<td>A global configuration script that applies to all users.</td>
+</tr>
+<tr>
+<td>~/.bashrc</td>
+<td>A user’s personal startup file. Can be used to extend or override the settings in the global configuration script.</td>
+</tr>
+</tbody>
+</table>
+<p>other:</p>
+<ul>
+<li>which files should we modify(pdf-156)</li>
+<li>activating our changes(pdf-161)</li>
+</ul>
+<h2 id="12-a-gentle-introduction-to-vi-pdf-162"><a href="#12-a-gentle-introduction-to-vi-pdf-162" class="headerlink" title="12. a gentle introduction to vi (pdf-162)"></a>12. a gentle introduction to vi (pdf-162)</h2><p>why we should learn vi:</p>
+<ul>
+<li>vi is always available.</li>
+<li>vi is lightweight and fast.</li>
+</ul>
+<p>commands of vim:</p>
+<ul>
+<li>when vi starts up, it begins in <code>command mode</code>.(In vim documentation, command mode is called <code>normal mode</code>)</li>
+<li>return command mode: Esc</li>
+<li>exit: <code>:q</code> , <code>:q!</code>(force to exit)</li>
+<li>enter insert mode: <code>i</code></li>
+<li>ex command: <code>:</code>(In vim documentation, command mode is called <code>command mode</code>)</li>
+</ul>
+<p>A subset of cursor movement keys(pdf-167):</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>moves the cursor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0(zero)</td>
+<td>To the beginning of the current line.</td>
+</tr>
+<tr>
+<td>^</td>
+<td>To the first non-whitespace character on the current line.</td>
+</tr>
+<tr>
+<td>$</td>
+<td>To the end of the current line</td>
+</tr>
+<tr>
+<td>w</td>
+<td>To the beginning of the next word or punctuation character.</td>
+</tr>
+<tr>
+<td>W</td>
+<td>To the beginning of the next word, ignoring punctuation character.</td>
+</tr>
+<tr>
+<td>b</td>
+<td>To the beginning of the previous word or punctuation character.</td>
+</tr>
+<tr>
+<td>B</td>
+<td>To the beginning of the previous word, ignoring punctuation character.</td>
+</tr>
+<tr>
+<td>numberG</td>
+<td>To line <code>number</code>. For example, 1G moves to the first line of the file.</td>
+</tr>
+<tr>
+<td>G</td>
+<td>To the last line of the file.</td>
+</tr>
+</tbody>
+</table>
+<p> basic editing:</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>Undo a change.</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Appending text. It moves the cursor to the end of the line before starting insert mode(pdf-169).</td>
+</tr>
+<tr>
+<td>o</td>
+<td>Open a line below the current line.(pdf-169)</td>
+</tr>
+<tr>
+<td>O</td>
+<td>Open a line above the current line.(pdf-169)</td>
+</tr>
+<tr>
+<td>x</td>
+<td>Deletes the current character.</td>
+</tr>
+<tr>
+<td>numberx</td>
+<td>Deletes the current character and the next (number-1) characters.</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>Deletes the current line.</td>
+</tr>
+<tr>
+<td>numberdd</td>
+<td>Deletes the current line and the next (number-1) lines.</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>Deletes from the current cursor position to the beginning of the next word.</td>
+</tr>
+<tr>
+<td>numberdw</td>
+<td>Repeat number times <code>dw</code></td>
+</tr>
+<tr>
+<td>d$</td>
+<td>Deletes from the current cursor location to the end of the current line.</td>
+</tr>
+<tr>
+<td>d0</td>
+<td>Deletes from the current cursor location to the beginning of the line.</td>
+</tr>
+<tr>
+<td>d^</td>
+<td>Deletes from the current cursor location to the first non-whitespace charater in the line</td>
+</tr>
+<tr>
+<td>dG</td>
+<td>Deletes from the current line to the ened of the file.</td>
+</tr>
+<tr>
+<td>dnumberG</td>
+<td>Deletes from the current line to the number-th line of the file.</td>
+</tr>
+<tr>
+<td>d</td>
+<td>Cuts text.</td>
+</tr>
+<tr>
+<td>p</td>
+<td>Paste the contents of the buffer after the cursor</td>
+</tr>
+<tr>
+<td>P</td>
+<td>Paste the contents before the cursor.</td>
+</tr>
+<tr>
+<td>y</td>
+<td>“Yank”(copy) text in much the same way the <code>d</code> command is used to cut text.</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>Copies the current line.</td>
+</tr>
+<tr>
+<td>5yy</td>
+<td>Copies the current line and the next four lines.</td>
+</tr>
+<tr>
+<td>yW</td>
+<td>Copies from the current cursor position to the beginning of the next word</td>
+</tr>
+<tr>
+<td>y$</td>
+<td>Copies from the current cursor position to the end of the current line.</td>
+</tr>
+<tr>
+<td>y0</td>
+<td>Copies from the current cursor location to the beginning of the line.</td>
+</tr>
+<tr>
+<td>y^</td>
+<td>Copies from the current cursor location to the first non-whitespace character in the line.</td>
+</tr>
+<tr>
+<td>yG</td>
+<td>Copies from the current line to the end of the file.</td>
+</tr>
+<tr>
+<td>y20G</td>
+<td>Copies from the current line to the twentieth line of the file.</td>
+</tr>
+<tr>
+<td>J</td>
+<td>Join one line with the one below it.</td>
+</tr>
+<tr>
+<td>f</td>
+<td>Searches a line and moves the cursor to the next instance of a specified character. <code>fa</code> would move the cursor to the next occurrence of the character “a” within the current line.</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Searches a word or phrase in the entire file(pdf-173).This works the same way as less program. vi allows the use of regular expressions.</td>
+</tr>
+<tr>
+<td>:</td>
+<td>vi uses ex command to perform search-and-replace operations over a range of lines or the entire file.(pdf-174) <code>:%s/Line/line/g</code> means changing the word “Line” to “line” for the entire file. Adding “c” to the end of the command will specify a substitution command with user confirmation. Replace Confirmation Keys is in pdf-175.</td>
+</tr>
+<tr>
+<td>:n</td>
+<td>Switches from one file to the next(pdf-177)</td>
+</tr>
+<tr>
+<td>:N</td>
+<td>Switches from one file to previous file use.</td>
+</tr>
+<tr>
+<td>:buffers</td>
+<td>Displaies a list of the files at the bottom of the display.</td>
+</tr>
+<tr>
+<td>:buffer 2</td>
+<td>Switches to the second file in the list that buffers shows.</td>
+</tr>
+<tr>
+<td>:e filename</td>
+<td>Openes an additional file to our current editing session.</td>
+</tr>
+<tr>
+<td>:r filename</td>
+<td>Inserts the specified file before the cursor position.</td>
+</tr>
+<tr>
+<td>:w</td>
+<td>Save edited files.</td>
+</tr>
+<tr>
+<td>:w filename</td>
+<td>Saves an alternate version as specified files.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-customizing-the-prompt"><a href="#13-customizing-the-prompt" class="headerlink" title="13. customizing the prompt"></a>13. customizing the prompt</h2><p>Escape codes used in shell prompts:</p>
+<p>|sequence|value displayed|<br>|\a|ASCII bell.|<br>|\d|Current date in day, month, date format.|<br>|\h|Hostname of the local machine minus the trailing domain name.|<br>|\H|Full hostname|<br>|\j|Number of jobs running in the current shell session.|<br>|\l|Name of the current terminal device.|<br>|\n|A new line character.|<br>|\r|A carriage return.|<br>|\s|Name of the shell program.|<br>|\t|Current time in 24 hour hours:minutes:seconds format.|<br>|\T|current time in 12 hour format.|<br>|\@|Current time in 12 hour AM/PM format.|<br>|\A|Current time in 24 hour hours:minutes format|<br>|\u|Username of the current user.|<br>|\v|Version number of the shell.|<br>|\V|Version and release numbers of the shell.|<br>|\w|Name of the current working directory.|<br>|\W|Last part of the current working directory name.|<br>|!|History number of the current command.|<br>|#|Number of commands entered during this shell session.|<br>|\$|This displays a “$” character unless we have superuser privileges. in that case, it displays a “#” instead.|<br>|[|Singals the start of a series of one or more non-printing characters.This is used to embed non-printing control characters which manipulate the terminal emulator in some way, such as moving the cursor or changing text colors.|<br>|]|Signals the end of a non-printing character sequence.|</p>
+<p>adding color(pdf-185)</p>
+<p>moving the cursor(pdf-188)</p>
+<h2 id="14-package-management"><a href="#14-package-management" class="headerlink" title="14. package management"></a>14. package management</h2><p>The basic unit of software in a packaging system is the <code>package file</code>.</p>
+<h2 id="15-storage-media"><a href="#15-storage-media" class="headerlink" title="15. storage media"></a>15. storage media</h2><p>commands:</p>
+<ul>
+<li>mount: Mount a file system.(pdf-204)</li>
+<li>umount: unmount a file system.(pdf-206)</li>
+<li>fsck: check and repair a file system.(pdf-215)</li>
+<li>fdisk: partition table manipulator.(pdf-211)</li>
+<li>mkfs: create a file system.(pdf-214)</li>
+<li>fdformat: format a floppy disk.(pdf-216)</li>
+<li>dd: write block oriented data directly to a device.(pdf-216)</li>
+<li>genisoimage(mkisofs): create an ISO 9660 image file.(pdf-218)</li>
+<li>wodim(cdreord): write data to optical storage media.（pdf-219)</li>
+<li>md5sum: calculate an MD5 checksum.(pdf-220)</li>
+</ul>
+<p>file system table: /etc/fstab (pdf-203)</p>
+<p>Linux storage device names (pdf-209)</p>
+<h2 id="16-networking"><a href="#16-networking" class="headerlink" title="16. networking"></a>16. networking</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/linux/TLCL-17.10/" data-id="clivn5s1u0022ml6pdu2e5sh4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/layout/wap/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          移动端响应式布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/linux/auth/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">文件权限相关及linux操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

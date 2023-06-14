@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>DOM Based XSS和html字符编码 | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近发现页面有xss的安全性问题，我之前简单了解xss攻击是什么，但是细节还是不够清楚，借这个机会再重新学习梳理一下。 什么是XSS世界上有两种事很难，一个是把我的想法放进你的脑袋里，另一个是把你口袋里的钱放到我口袋里。XSS就是把我的代码注入到你的代码里，把你口袋里的钱放到我口袋里。 正经点，XSS就是向本可以被信任的良性网站注入恶意脚本，而网站因为一些疏忽执行了恶意脚本，从而对受害者为所欲为的">
+<meta name="keywords" content="study notes,xss,html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM Based XSS和html字符编码">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/other/xss/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="最近发现页面有xss的安全性问题，我之前简单了解xss攻击是什么，但是细节还是不够清楚，借这个机会再重新学习梳理一下。 什么是XSS世界上有两种事很难，一个是把我的想法放进你的脑袋里，另一个是把你口袋里的钱放到我口袋里。XSS就是把我的代码注入到你的代码里，把你口袋里的钱放到我口袋里。 正经点，XSS就是向本可以被信任的良性网站注入恶意脚本，而网站因为一些疏忽执行了恶意脚本，从而对受害者为所欲为的">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.737Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DOM Based XSS和html字符编码">
+<meta name="twitter:description" content="最近发现页面有xss的安全性问题，我之前简单了解xss攻击是什么，但是细节还是不够清楚，借这个机会再重新学习梳理一下。 什么是XSS世界上有两种事很难，一个是把我的想法放进你的脑袋里，另一个是把你口袋里的钱放到我口袋里。XSS就是把我的代码注入到你的代码里，把你口袋里的钱放到我口袋里。 正经点，XSS就是向本可以被信任的良性网站注入恶意脚本，而网站因为一些疏忽执行了恶意脚本，从而对受害者为所欲为的">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-other/xss" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/other/xss/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.737Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DOM Based XSS和html字符编码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近发现页面有xss的安全性问题，我之前简单了解xss攻击是什么，但是细节还是不够清楚，借这个机会再重新学习梳理一下。</p>
+<h2 id="什么是XSS"><a href="#什么是XSS" class="headerlink" title="什么是XSS"></a>什么是XSS</h2><p>世界上有两种事很难，一个是把我的想法放进你的脑袋里，另一个是把你口袋里的钱放到我口袋里。<br>XSS就是把我的代码注入到你的代码里，把你口袋里的钱放到我口袋里。</p>
+<p>正经点，XSS就是向本可以被信任的良性网站注入恶意脚本，而网站因为一些疏忽执行了恶意脚本，从而对受害者为所欲为的攻击。</p>
+<h2 id="XSS分类"><a href="#XSS分类" class="headerlink" title="XSS分类"></a>XSS分类</h2><p>参考<a href="https://owasp.org/www-community/Types_of_Cross-Site_Scripting" target="_blank" rel="noopener">Types of XSS</a>。</p>
+<p>最开始的分类：</p>
+<ol>
+<li><p>Stored XSS: 通常发生在需要在服务器里储存用户输入的场景，例如博客、评论区等，攻击者将恶意代码通过网页提交到服务器，在其他访问者访问相关页面时，如果不经过滤和处理的情况下直接渲染，可造成恶意注入。</p>
+<p> 举个简单🌰，攻击者在某文章评论区里输入了<figure class="highlight plain"><figcaption><span>fish')````，网站没有过滤就直接将这段代码提交到了服务器。受害者在访问这个文章时，服务器下发这条评论，服务器和网站又双叒没有过滤并且直接渲染，受害者就收到了这个小小的攻击。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">2. Reflected XSS: 当用户输入的全部或者部分内容会成为网络请求返回数据的一部分，如果没有经过安全处理就直接渲染造成的攻击属于此列。如果将注入行为拼接到url上，受害者点开时，网站在这种不设防的情况下直接执行请求返回，导致被注入攻击。利用这种漏洞构成url发送给受害者来点击，是很多钓鱼(phishing，音同fishing🐟，谐音梗扣钱)方案的核心。</span><br><span class="line">3. DOM Based XSS: 基于DOM的XSS攻击，利用数据从源头读取到渲染具体DOM过程中不设防造成的攻击。例如从url中的search部分读取数据渲染到页面上，如果不做任何处理，search里携带的恶意字符串可以被document.write直接渲染到页面上。</span><br><span class="line">    举个简单🌰，就是这次业务中发现的漏洞：页面从search中读取name后，经过一系列拼接处理，直接用vue的v-html语法直接进行渲染，导致如果name的值为````&lt;script&gt;alert(&apos;you idiot&apos;)&lt;/script&gt;````，那么不仅侮辱性极强，伤害也很大。</span><br><span class="line"></span><br><span class="line">后来发现XSS可能由以上几种重叠组成，又延伸出一种分类：</span><br><span class="line">1. Server XSS: 非法数据来源于服务端返回，页面无脑执行里面嵌入的脚本。</span><br><span class="line">2. Client XSS: 调用不安全的函数将没经过处理的数据直接渲染到页面上。</span><br><span class="line"></span><br><span class="line">此次发现的问题就是典型的DOM Based XSS，因此接下来对这个方向将多探讨一些。</span><br><span class="line"></span><br><span class="line">## DOM Based XSS防御</span><br><span class="line"></span><br><span class="line">### DOM Based XSS</span><br><span class="line">&gt;DOM Based XSS (or as it is called in some texts, “type-0 XSS”) is an XSS attack wherein the attack payload is executed as a result of modifying the DOM “environment” in the victim’s browser used by the original client side script, so that the client side code runs in an “unexpected” manner. That is, the page itself (the HTTP response that is) does not change, but the client side code contained in the page executes differently due to the malicious modifications that have occurred in the DOM environment.</span><br><span class="line">&gt;</span><br><span class="line">&gt;This is in contrast to other XSS attacks (stored or reflected), wherein the attack payload is placed in the response page (due to a server side flaw).</span><br><span class="line"></span><br><span class="line">翻译一下：服务端返回的页面和数据都没有问题，但是页面自己执行了代码修改了自己的内容，如果在执行过程中被注入了恶意代码，那页面运行肯定不符合预期了。</span><br><span class="line"></span><br><span class="line">DOM Based XSS的防御原则：</span><br><span class="line">页面在读取数据修改自己的内容时，如果涉及到直接修改DOM元素(document.write, innerHTML)，除非是完全信任的数据源，否则一定要经过过滤才渲染。</span><br><span class="line"></span><br><span class="line">HTML、HTML attribute, URL, 和CSS都可以在JS执行上下文中被触达和修改。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## HTML字符实体</span><br><span class="line"></span><br><span class="line">### HTML预留字符</span><br><span class="line">### 模糊的连结符</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">为了将一些HTML会解析的特殊字符用文本形式展示出来，HTML设计了字符引用([Character references](https://html.spec.whatwg.org/multipage/syntax.html#character-references))。</span><br><span class="line">这些字符必须`&amp;`开头, 紧接至少一位0-9a-zA-Z里的字符，最后以`;`结尾。字符分为以下三种：</span><br><span class="line">1. 十进制字符，如````&amp;#169;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>十六进制字符，如<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. 带命名的字符，如````&amp;copy;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<h2 id="其他类型的xss防御（简单介绍）"><a href="#其他类型的xss防御（简单介绍）" class="headerlink" title="其他类型的xss防御（简单介绍）"></a>其他类型的xss防御（简单介绍）</h2><p>目前常用的已知机制包含以下几种：</p>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener">CSP(Content-Security-Policy)</a>：</li>
+</ol>
+<p>CSP是被设计用来防止和减轻某些类型的攻击，例如xss和数据注入，它是完全向下兼容的，不支持它的浏览器会采用默认的同源策略。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>借用大佬的话，网络攻防是很复杂的，不仅是前端的问题，往往需要多端配合来防御攻击。但是前端要力所能及地去守护自己网站的安全。对于一些不安全的js方法和HTML属性（eval、document.write、innerHTML以及衍生出来的语法糖等），在使用之前要多思考是否有使用的必要，如果确实要使用，那一定要对数据进行过滤处理。千里之堤毁于蚁穴，对于网络安全，再小心也不为过。</p>
+<p>学习链接：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener">CSP(mdn)</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">Cross Site Scripting Prevention Cheat Sheet</a></li>
+<li><a href="https://owasp.org/www-community/attacks/xss/#stored-and-reflected-xss-attacks" target="_blank" rel="noopener">Cross Site Scripting (XSS)-owasp</a></li>
+<li><a href="https://owasp.org/www-community/Types_of_Cross-Site_Scripting" target="_blank" rel="noopener">Types of XSS</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">DOM based XSS Prevention Cheat Sheet</a></li>
+<li><a href="https://mathiasbynens.be/notes/ambiguous-ampersands" target="_blank" rel="noopener">Ambiguous ampersands</a></li>
+<li><a href="https://tech.bytedance.net/questions/6901645786388693005" target="_blank" rel="noopener">你们的系统是如何防范XSS攻击的？</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Entity" target="_blank" rel="noopener">Entity</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/other/xss/" data-id="clivn5s270037ml6px7s1vjjn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss/">xss</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/python/The-abc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          python基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/react/Q&A/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

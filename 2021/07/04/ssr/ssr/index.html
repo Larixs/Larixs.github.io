@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>SSR(Server-Side Rendering) + vue | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="公司最近的pc站要用SSR了，陆哥先行学习了一把，我也得跟着学一学，不然咋开发呢。（听说天津下雪了而北京就只是冷而已 什么是SSRQ1：服务器端渲染的是哪一部分，服务器怎么知道它该渲染哪一部分，那剩下的部分会以什么形式返回给客户端呢？ A:  服务器端只渲染在服务器端写好的vue部分，渲染出来的字符串，通过模板html里的 &amp;lt;!--vue-ssr-outlet--&amp;gt; 确定字符串被插入的">
+<meta name="keywords" content="study notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSR(Server-Side Rendering) + vue">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/ssr/ssr/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="公司最近的pc站要用SSR了，陆哥先行学习了一把，我也得跟着学一学，不然咋开发呢。（听说天津下雪了而北京就只是冷而已 什么是SSRQ1：服务器端渲染的是哪一部分，服务器怎么知道它该渲染哪一部分，那剩下的部分会以什么形式返回给客户端呢？ A:  服务器端只渲染在服务器端写好的vue部分，渲染出来的字符串，通过模板html里的 &amp;lt;!--vue-ssr-outlet--&amp;gt; 确定字符串被插入的">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSR(Server-Side Rendering) + vue">
+<meta name="twitter:description" content="公司最近的pc站要用SSR了，陆哥先行学习了一把，我也得跟着学一学，不然咋开发呢。（听说天津下雪了而北京就只是冷而已 什么是SSRQ1：服务器端渲染的是哪一部分，服务器怎么知道它该渲染哪一部分，那剩下的部分会以什么形式返回给客户端呢？ A:  服务器端只渲染在服务器端写好的vue部分，渲染出来的字符串，通过模板html里的 &amp;lt;!--vue-ssr-outlet--&amp;gt; 确定字符串被插入的">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ssr/ssr" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/ssr/ssr/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.738Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ssr/">ssr</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SSR(Server-Side Rendering) + vue
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司最近的pc站要用SSR了，陆哥先行学习了一把，我也得跟着学一学，不然咋开发呢。（听说天津下雪了而北京就只是冷而已</p>
+<h2 id="什么是SSR"><a href="#什么是SSR" class="headerlink" title="什么是SSR"></a>什么是SSR</h2><p>Q1：服务器端渲染的是哪一部分，服务器怎么知道它该渲染哪一部分，那剩下的部分会以什么形式返回给客户端呢？</p>
+<p>A:  服务器端只渲染在服务器端写好的vue部分，渲染出来的字符串，通过模板html里的</p>
+<pre><code>&lt;!--vue-ssr-outlet--&gt;
+</code></pre><p>确定字符串被插入的位置。然后服务器返回模板加字符串之后的结果给客户端。</p>
+<p>Q2：服务器端是什么时候渲染呢，接到请求才开始渲染，还是预先会渲染好，然后一直储存呢？</p>
+<h2 id="SSR的优缺点"><a href="#SSR的优缺点" class="headerlink" title="SSR的优缺点"></a>SSR的优缺点</h2><p>SSR Introduction再三强调，要确认SSR是否是符合自己需求的，要慎重选择。这侧面说明SSR的缺点在某些方面的影响会很大。</p>
+<p>优点：</p>
+<ol>
+<li>利于SEO。搜索引擎不会等待网页完全完成才开始爬取，通过ajax请求返回的内容就有可能不被搜索引擎的爬虫爬取。如果服务器端能直接返回带有内容的网页，那肯定是利于SEO的。</li>
+<li>更快的展示内容(time-to-content)。在网络环境或者设备较差的情况下，能更快展示内容，提高用户体验。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>开发环境受限。</li>
+<li>构建和部署会有更多要求。</li>
+<li>服务器端负载加大。</li>
+</ol>
+<p>如果SSR带来的优势并不大，那用SSR就是overkill。（Introduction着重提了使用者是否看重time-to-content)。</p>
+<p>就公司的pc站而言，利于seo听起来不错，尤其是用于资讯页和产品页。time-to-content并不是很重要。SSR的缺点目前还不了解，不知道会带来多大负担。</p>
+<h2 id="编写通用代码"><a href="#编写通用代码" class="headerlink" title="编写通用代码"></a>编写通用代码</h2><p>编写在客户端和服务器端都能运行的代码的注意事项：</p>
+<ol>
+<li><p>响应式对象在服务器上，大部分情况下是多余的。</p>
+<p> 因为服务器端在渲染之前就已经预取数据了，这时就不需要响应式对象了。</p>
+</li>
+<li><p>生命钩子的变化。</p>
+<p> 由于没有动态更新，所以只有<strong>beforeCreate</strong>和<strong>created</strong>会被调用。</p>
+<p> 因此会带来全局副作用的事件也不要往beforeCreate和created里放，应该放在beforeMount或者mounted。例如在created里setInterval，而在beforeDestroy里清除setInterval，这在服务端是行不通的，服务器压根不调beforeDestroy，意味着setInterval并不会清除。（为啥mounted都不调用了呢？难道vue是一口气把所有字符串都编译出来？并不是先编译子组件字符串，然后把子组件字符串插入父组件？）</p>
+</li>
+<li><p>平台的API变化。</p>
+<p> 在服务器端，你是访问不到window或者document等全局对象的。很简单，就是因为渲染的环境不同。</p>
+<p> 因此最好将平台API的实现放在一个通用api里，或者找一个库来做这件事。譬如axios，它为服务器端和客户端提供的接口名称都是一样的。</p>
+<p> 对于浏览器端的api，常用的解决办法就是把他们放在只有浏览器才能访问到的lifecycle hooks里。</p>
+</li>
+<li><p>自定义指令</p>
+<p> 多数自定义指令直接操作DOM，但这样在SSR里就会报错。目前有两种解决方法(ssr introduction)：</p>
+<ol>
+<li>推荐使用组件作为抽象机制，并运行在「虚拟 DOM 层级(Virtual-DOM level)」（例如，使用渲染函数(render function)）</li>
+<li>如果你有一个自定义指令，但是不是很容易替换为组件，则可以在创建服务器 renderer 时，使用 directives 选项所提供”服务器端版本(server-side version)”</li>
+</ol>
+</li>
+</ol>
+<h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><ol>
+<li><p>避免状态单例(singleton)</p>
+<p>在node.js里生成的实例应该避免生成共享的实例(除非你真的确认它应该共享)。因为node.js会长期运行，一旦生成了实例，不主动销毁的话，它就会一直存在内存里。例如服务器端返回的vue根实例就不应该是单例，因为服务器需要在每次收到请求时都返回新的实例，否则容易造成状态和请求的交叉污染。</p>
+<p>解决办法：工厂模式产生实例。</p>
+</li>
+</ol>
+<h2 id="路由和代码分割"><a href="#路由和代码分割" class="headerlink" title="路由和代码分割"></a>路由和代码分割</h2><p>router：</p>
+<ol>
+<li>避免stateful singleton</li>
+<li>要等router的异步组件和钩子都准备好之后，服务器端才能返回html。</li>
+</ol>
+<p>code-splitting:</p>
+<p>代码分割和懒加载能帮助你在首屏加载时减少下载的资源数，提升加载效率。关键就是“加载你所需要的东西”。</p>
+<p>不管在客户端还是服务端，都有必要用router.onReady，因为router一定要提前(ahead of time)加载路由组件，以便正确调用组件钩子。</p>
+<h2 id="Data-Pre-Fetching-and-State"><a href="#Data-Pre-Fetching-and-State" class="headerlink" title="Data Pre-Fetching and State"></a>Data Pre-Fetching and State</h2><p>SSR中，在进行渲染进程之前，需要预取数据。而客户端在取数据的时候，也应该取到一样的数据。</p>
+<p>caveats:</p>
+<ol>
+<li>在路由组件里负责预取数据的函数，是拿不到this的。因为取数据的时候，组件还没有被实例化。</li>
+</ol>
+<h2 id="Problems-with-Basic-SSR"><a href="#Problems-with-Basic-SSR" class="headerlink" title="Problems with Basic SSR"></a>Problems with Basic SSR</h2><p>基础的SSR无法热更新，Node.js本身也不支持source map。 gg思密达，每次修改服务器端的代码都得重启一次。</p>
+<p>为了解决热更新的问题， vue-server-renderer提供一个名为createBundleRenderer的API。</p>
+<h2 id="20180315-技术分享"><a href="#20180315-技术分享" class="headerlink" title="20180315 技术分享"></a>20180315 技术分享</h2><p>昨天陆哥做了一次ssr的技术分享，引发了非常多的讨论，主要在于以下几点:</p>
+<ol>
+<li>ssr的优势是seo和一些time-to-content的加速，但是劣势就是需要服务器提前渲染，这对服务器压力较大，且相对于传统spa来说，能够缓存的东西就更少了。 ssr的优势是否能完全抵消劣势？</li>
+<li>学长提出的，关于node层面的东西，例如node层无cookie处理头，node该如何抗住大量访问？（个人对这个问题还有点感兴趣）</li>
+<li>time-to-content的加速主要在于node层面与服务器通信比终端与服务器通信更快。 但是在首屏加载时，如果api返回过慢，那么ssr的页面则会白屏直到服务器端渲染完毕并返回，而spa页面至少可以返回一个带loading的基础页面。</li>
+<li>spa的seo问题比较严重。</li>
+</ol>
+<p>个人的疑问：</p>
+<ol>
+<li>ssr带来的服务器压力有大，怎么计算服务器能够承受的极限? 虽然说可以用钱买服务器，钱能解决的问题都不是问题，可是没有任何测试会令我有一丝不安。</li>
+<li>ssr有办法做到缓存吗，有什么样的缓存机制? 能承担多少缓存？</li>
+<li>node作为服务器中间层可能带来的问题。关于node我了解的实在是太少了。</li>
+<li>seo需要的信息量究竟有多大? tdk不能满足吗？</li>
+</ol>
+<h2 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h2><p>页面级别的缓存：</p>
+<p>用<a href="https://www.nginx.com/blog/benefits-of-microcaching-nginx/" target="_blank" rel="noopener">micro-caching</a>可以做页面级别的缓存。</p>
+<p>是否进行页面缓存，在node层面的server里去判断和处理。</p>
+<p>适用范围： 对于不同用户及不同状态都展示同样内容的页面。</p>
+<p>——————————</p>
+<p>组件级别的缓存：</p>
+<p>用<a href="https://github.com/isaacs/node-lru-cache" target="_blank" rel="noopener">lur-cache</a>可以做组件级别的缓存。</p>
+<p>是否进行组件缓存，是通过组件的<strong>serverCacheKey</strong>进行判断。需要进行缓存的组件，必须要有一个独一无二的name。当<br>serverCacheKey的值是一样的，则使用缓存，否则重新渲染。一些静态组件可以让serverCacheKey返回一个常量。</p>
+<p>适用范围：</p>
+<ol>
+<li>子组件不依赖全局状态</li>
+<li>子组件对渲染context没有副作用。</li>
+</ol>
+<h2 id="nuxt-js"><a href="#nuxt-js" class="headerlink" title="nuxt.js"></a>nuxt.js</h2><p>The Nuxt.js is similar to <a href="https://zeit.co/blog/next" target="_blank" rel="noopener">Next.js</a></p>
+<p>参考链接：</p>
+<p>1.<a href="https://ssr.vuejs.org/en/" target="_blank" rel="noopener">SSR Introduction</a><br>2.<a href="https://nuxtjs.org/guide" target="_blank" rel="noopener">Nuxt.js</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/ssr/ssr/" data-id="clivn5s2c003nml6p592umpji" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/react/react/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          react学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/ssr/ssr_practice/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SSR实践</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

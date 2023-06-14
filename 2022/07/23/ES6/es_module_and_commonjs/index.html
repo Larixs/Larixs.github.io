@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>ESModule和commonjs | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="许久没有更新博客了，最近写nodejs脚本的时候遇到了commonjs和ESModule的问题，正好之前用得稀里糊涂的，这次好好学习一下。 ES Module导出仅导出 named exports: 命名导出，每次可以导出一个或者多个。  default exports: 默认导出，每次只能存在一个。   以上两者可以混合导出。 1234567891011// 命名导出export const b">
+<meta name="keywords" content="study notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESModule和commonjs">
+<meta property="og:url" content="http://larixs.github.io/2022/07/23/ES6/es_module_and_commonjs/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="许久没有更新博客了，最近写nodejs脚本的时候遇到了commonjs和ESModule的问题，正好之前用得稀里糊涂的，这次好好学习一下。 ES Module导出仅导出 named exports: 命名导出，每次可以导出一个或者多个。  default exports: 默认导出，每次只能存在一个。   以上两者可以混合导出。 1234567891011// 命名导出export const b">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2022-07-23T11:26:37.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ESModule和commonjs">
+<meta name="twitter:description" content="许久没有更新博客了，最近写nodejs脚本的时候遇到了commonjs和ESModule的问题，正好之前用得稀里糊涂的，这次好好学习一下。 ES Module导出仅导出 named exports: 命名导出，每次可以导出一个或者多个。  default exports: 默认导出，每次只能存在一个。   以上两者可以混合导出。 1234567891011// 命名导出export const b">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ES6/es_module_and_commonjs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/07/23/ES6/es_module_and_commonjs/" class="article-date">
+  <time datetime="2022-07-23T06:39:39.342Z" itemprop="datePublished">2022-07-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ES6/">ES6</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ESModule和commonjs
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>许久没有更新博客了，最近写nodejs脚本的时候遇到了commonjs和ESModule的问题，正好之前用得稀里糊涂的，这次好好学习一下。</p>
+<h1 id="ES-Module"><a href="#ES-Module" class="headerlink" title="ES Module"></a>ES Module</h1><h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><h3 id="仅导出"><a href="#仅导出" class="headerlink" title="仅导出"></a>仅导出</h3><ul>
+<li><p>named exports: 命名导出，每次可以导出一个或者多个。</p>
+</li>
+<li><p>default exports: 默认导出，每次只能存在一个。</p>
+</li>
+</ul>
+<p>以上两者可以混合导出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 命名导出</span><br><span class="line">export const b = &apos;b&apos;</span><br><span class="line">// 默认导出</span><br><span class="line">export default &#123;</span><br><span class="line">  a: 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const c = &apos;c&apos;</span><br><span class="line">export &#123; c &#125;</span><br><span class="line"></span><br><span class="line">// 以上内容会合并导出，即导出为： &#123;b:&apos;b&apos;, c:&apos;c&apos;, default: &#123;a:1&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>更多示例可以直接去看<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" target="_blank" rel="noopener">mdn</a></p>
+<h3 id="重导出（re-exporting-aggregating"><a href="#重导出（re-exporting-aggregating" class="headerlink" title="重导出（re-exporting / aggregating)"></a>重导出（re-exporting / aggregating)</h3><p>算是一个导入再导出的一个语法糖吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export &#123;</span><br><span class="line">  default as function1,</span><br><span class="line">  function2,</span><br><span class="line">&#125; from &apos;bar.js&apos;;</span><br><span class="line"></span><br><span class="line">// 等价于</span><br><span class="line">import &#123; default as function1, function2 &#125; from &apos;bar.js&apos;;</span><br><span class="line">export &#123; function1, function2 &#125;;</span><br></pre></td></tr></table></figure>
+<p>然而这种语法是会报错的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export DefaultExport from &apos;bar.js&apos;; // Invalid</span><br></pre></td></tr></table></figure></p>
+<p>正确的语法应该是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export &#123; default as DefaultExport &#125; from &apos;bar.js&apos;; // valid</span><br></pre></td></tr></table></figure></p>
+<p>我猜是因为export 本身支持的export xxx这种语法必须是要导出一个对象，然而import xxx可能是任意类型，两者冲突了，所以从编译层面就不让这种语法生效会更好。</p>
+<h3 id="嵌入式脚本"><a href="#嵌入式脚本" class="headerlink" title="嵌入式脚本"></a>嵌入式脚本</h3><p>嵌入式脚本不可以使用export。</p>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ul>
+<li><p>import all exports: <code>import * as allVar</code>，所有导出内容，包含命名导出及默认导出。allVar会是一个对象，默认导出会作为allVar的key名为default对应的值。</p>
+</li>
+<li><p>import named exports: <code>import {var1, var2}</code>，引入命名导出的部分。没找到，对应的值就为undefined。个人觉得可以看做是”import all exports”的解构语法。</p>
+</li>
+<li><p>import default exports: <code>import defaultVar</code>，引入默认导出的部分。</p>
+</li>
+<li><p>import side effects: <code>import &quot;xxx./js&quot;</code>，仅运行这个js，可能是为了获取其副作用。 </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// test.js</span><br><span class="line">export const b = &apos;b&apos;     // 命名导出</span><br><span class="line">export default &#123;    // 默认导出</span><br><span class="line">  a: 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import &#123; b, default as _defaultModule &#125; from &apos;./test.js&apos;</span><br><span class="line">import defaultModule from &apos;./test.js&apos;</span><br><span class="line">import * as allModule from &apos;./test.js&apos;</span><br><span class="line"></span><br><span class="line">console.log(&apos;name export&apos;, b) // &apos;b&apos;</span><br><span class="line">console.log(&apos;default export&apos;, defaultModule) // &#123;a:1&#125;</span><br><span class="line">console.log(_defaultModule === defaultModule) // true</span><br><span class="line">console.log(&apos;all export&apos;, allModule) // &#123;b:&apos;b&apos;, default: &#123;a:1&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>一个之前老记错的case</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// test.js</span><br><span class="line">export default &#123;    // 默认导出</span><br><span class="line">  a: 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import &#123; a &#125; from &apos;./test.js&apos;</span><br><span class="line">console.log(&apos;name export&apos;, a) // undefined</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import defaultModule from &apos;./test.js&apos;</span><br><span class="line">import * as allModule from &apos;./test.js&apos;</span><br><span class="line">console.log(&apos;default export&apos;, defaultModule) // &#123;a:1&#125;</span><br><span class="line">console.log(&apos;all export&apos;, allModule) // &#123;default: &#123;a:1&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="嵌入式脚本-1"><a href="#嵌入式脚本-1" class="headerlink" title="嵌入式脚本"></a>嵌入式脚本</h3><p>嵌入式脚本引入modules时，需要在script上增加 type=”module”。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li><p>live bindings</p>
+<p>通过export在mdn上的解释，export导出的是live bindings，再根据其他文章综合判断，应该是引用的意思。即<strong>export导出的是引用</strong>。</p>
+<p>模块内的值更新了之后，所有使用export导出值的地方都能使用最新值。</p>
+</li>
+<li><p>read-only</p>
+<p>通过import在mdn上的解释，import使用的是通过export导出的<strong>不可修改的引用</strong>。</p>
+</li>
+<li><p>strict-mode</p>
+<p>被引入的模块都会以严格模式运行。</p>
+</li>
+<li><p>静态引入、动态引入</p>
+<p><code>import x from</code>这种语法有syntactic rigid，需要编译时置于顶部且无法做到动态引入加载。如果需要动态引入，则需要<code>import ()</code>语法。有趣的是，在mdn上，前者分类到了 <strong>Statements &amp; declarations</strong>, 后者分类到了 <strong>Expressions &amp; operators</strong>。这俩是根据什么分类的呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">true &amp;&amp; import test from &quot;./a.js&quot;;</span><br><span class="line">// SyntaxError: import can only be used in import() or import.meta</span><br><span class="line">// 这里应该是把import当成了动态引入而报错</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">const test = &#123;</span><br><span class="line">  a: 1</span><br><span class="line">&#125;;</span><br><span class="line">export default test;</span><br><span class="line">// 改动模块内部的值</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">  test.a = 2;</span><br><span class="line">&#125;, 1000);</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import test from &apos;./index.js&apos;</span><br><span class="line"></span><br><span class="line">/* live bindings */</span><br><span class="line">console.log(test) // &#123;a:1&#125;</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">  console.log(test) // &#123;a:2&#125;</span><br><span class="line">&#125;, 2000)</span><br><span class="line"></span><br><span class="line">/* read-only */</span><br><span class="line">test= &#123; a: 3 &#125; // 报错, Error: &quot;test&quot; is read-only.</span><br><span class="line"></span><br><span class="line">/* syntactically rigid */</span><br><span class="line">if(true)&#123;</span><br><span class="line">  import test from &apos;./index.js&apos; // 报错, SyntaxError: &apos;import&apos; and &apos;export&apos; may only appear at the top level</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="commonJS"><a href="#commonJS" class="headerlink" title="commonJS"></a>commonJS</h1><h2 id="导出-1"><a href="#导出-1" class="headerlink" title="导出"></a>导出</h2><p>在 Node.js 模块系统中，每个文件都被视为独立的模块。模块导入导出实际是由nodejs的<a href="http://nodejs.cn/api-v12/modules.html#modules_the_module_wrapper" target="_blank" rel="noopener">模块封装器</a>实现，通过为<code>module.exports</code>分配新的值来实现导出具体内容。</p>
+<p><code>module.exports</code>有个简写变量<code>exports</code>，其实就是个引用复制。exports作用域只限于模块文件内部。<br>原理类似于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// nodejs内部</span><br><span class="line">exports = module.exports</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;&#125;, &#123;&#125;</span><br><span class="line">console.log(exports === module.exports) // true</span><br></pre></td></tr></table></figure></p>
+<p>注意，nodejs实际导出的是module.exports，以下几种经典case单独看一下：</p>
+<p>case1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// ✅使用exports</span><br><span class="line">exports.a = xxx</span><br><span class="line">console.log(exports === module.exports) // true</span><br><span class="line"></span><br><span class="line">// ✅等价于</span><br><span class="line">module.exports.a = xxx</span><br></pre></td></tr></table></figure>
+<p>case2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// ✅这么写可以导出，最终导出的是&#123;a:&apos;1&apos;&#125;</span><br><span class="line">module.exports = &#123;a:&apos;1&apos;&#125;</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;&#125;, &#123;a:&apos;1&apos;&#125;</span><br><span class="line">console.log(exports === module.exports) // false</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// ❌不会将&#123;a:&apos;1&apos;&#125;导出，最终导出的是&#123;&#125;</span><br><span class="line">exports = &#123;a:&apos;1&apos;&#125;</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;a:&apos;1&apos;&#125;, &#123;&#125;</span><br><span class="line">console.log(exports === module.exports) // false</span><br></pre></td></tr></table></figure></p>
+<h2 id="引入-1"><a href="#引入-1" class="headerlink" title="引入"></a>引入</h2><p>通过require语法引入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// a是test.js里module.exports导出的部分</span><br><span class="line">const a = require(&apos;./test.js&apos;)</span><br></pre></td></tr></table></figure>
+<p>原理伪代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function require(/* ... */) &#123;</span><br><span class="line">  const module = &#123; exports: &#123;&#125; &#125;;</span><br><span class="line">  ((module, exports) =&gt; &#123;</span><br><span class="line">    // Module code here. In this example, define a function.</span><br><span class="line">    function someFunc() &#123;&#125;</span><br><span class="line">    exports = someFunc;</span><br><span class="line">    // At this point, exports is no longer a shortcut to module.exports, and</span><br><span class="line">    // this module will still export an empty default object.</span><br><span class="line">    module.exports = someFunc;</span><br><span class="line">    // At this point, the module will now export someFunc, instead of the</span><br><span class="line">    // default object.</span><br><span class="line">  &#125;)(module, module.exports);</span><br><span class="line">  return module.exports;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h2><h3 id="值拷贝"><a href="#值拷贝" class="headerlink" title="值拷贝"></a>值拷贝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// test.js</span><br><span class="line">let test = &#123;a:&apos;1&apos;&#125;</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">  test = &#123;a:&apos;2&apos;&#125;</span><br><span class="line">&#125;,1000)</span><br><span class="line">module.exports = test</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">const test1 = require(&apos;./test.js&apos;)</span><br><span class="line">console.log(test1) // &#123;a:1&#125;</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">  console.log(test1) // &#123;a:1&#125;</span><br><span class="line">&#125;,2000)</span><br></pre></td></tr></table></figure>
+<h1 id="ES-Module和-commonJS区别"><a href="#ES-Module和-commonJS区别" class="headerlink" title="ES Module和 commonJS区别"></a>ES Module和 commonJS区别</h1><ol>
+<li>语法</li>
+</ol>
+<p><code>exports</code>、<code>module.exports</code>和<code>require</code> 是<strong>Node.js模块系统</strong>关键字。</p>
+<p><code>export</code>、<code>export default</code>和<code>import</code> 则是<strong>ES6模块系统</strong>的关键字: </p>
+<ol start="2">
+<li>原理</li>
+</ol>
+<p><code>exports</code>、<code>module.exports</code>导出的模块为值复制。</p>
+<p><code>export</code>、<code>export default</code>为引用复制。 </p>
+<ol start="3">
+<li>时机</li>
+</ol>
+<p>ES Module静态加载是编译时确定，ES Module动态加载是运行时确定。</p>
+<p>CommonJS是运行时确定。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" target="_blank" rel="noopener">export-mdn</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank" rel="noopener">import-mdn</a></li>
+<li><a href="https://nodejs.org/dist/latest-v16.x/docs/api/modules.html" target="_blank" rel="noopener">nodejs-commonjs</a></li>
+<li><a href="https://juejin.cn/post/6938581764432461854" target="_blank" rel="noopener">聊聊什么是CommonJs和Es Module及它们的区别
+</a></li>
+<li><a href="https://blog.csdn.net/dwf_H/article/details/109720851" target="_blank" rel="noopener">ES Module和CommonJS的区别
+</a></li>
+</ul>
+<p>小小吐槽，英文文档表达的准确性不如mdn，node的中文文档翻译质量也emm。CSDN上有些关于node的文章，关于module.exports和exports部分讲的都是错的🤦‍♀️认真学习还是看官网比较好，其他作者的文章作为辅助用来梳理思路/复习</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2022/07/23/ES6/es_module_and_commonjs/" data-id="clivn5s1c000kml6psrf7dw5q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/07/04/webpack/hot_module_and_reload/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webpack热加载与热更新</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

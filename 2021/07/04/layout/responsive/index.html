@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>学习响应式布局 | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="响应式布局，即同一网页在不同设备上均能正常显示。 目前学习到的有： 1. 设置html字体大小。  各设备上体现的像素大小不一样，所以要对不同设备的字体大小进行动态设定。之前学长给了一段代码，适用于移动端的计算。代码如下： (function (doc, win) {//屏幕自适应  var docEl = doc.documentElement;    resizeEvt = &amp;apos;ori">
+<meta name="keywords" content="study notes,responsive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习响应式布局">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/layout/responsive/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="响应式布局，即同一网页在不同设备上均能正常显示。 目前学习到的有： 1. 设置html字体大小。  各设备上体现的像素大小不一样，所以要对不同设备的字体大小进行动态设定。之前学长给了一段代码，适用于移动端的计算。代码如下： (function (doc, win) {//屏幕自适应  var docEl = doc.documentElement;    resizeEvt = &amp;apos;ori">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习响应式布局">
+<meta name="twitter:description" content="响应式布局，即同一网页在不同设备上均能正常显示。 目前学习到的有： 1. 设置html字体大小。  各设备上体现的像素大小不一样，所以要对不同设备的字体大小进行动态设定。之前学长给了一段代码，适用于移动端的计算。代码如下： (function (doc, win) {//屏幕自适应  var docEl = doc.documentElement;    resizeEvt = &amp;apos;ori">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-layout/responsive" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/layout/responsive/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      学习响应式布局
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>响应式布局，即同一网页在不同设备上均能正常显示。</p>
+<p>目前学习到的有：</p>
+<h2 id="1-设置html字体大小。"><a href="#1-设置html字体大小。" class="headerlink" title="1. 设置html字体大小。"></a>1. 设置html字体大小。</h2><p>  各设备上体现的像素大小不一样，所以要对不同设备的字体大小进行动态设定。之前学长给了一段代码，适用于<strong>移动端</strong>的计算。代码如下：</p>
+<pre><code>(function (doc, win) {//屏幕自适应
+
+var docEl = doc.documentElement;
+
+  resizeEvt = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;;
+
+  recalc = function () {
+
+  var clientWidth = docEl.clientWidth;
+
+  if (!clientWidth) return;
+    docEl.style.fontSize = 50 * (clientWidth / 375) + &apos;px&apos;;
+  };
+
+   if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener(&apos;DOMContentLoaded&apos;, recalc, false);
+
+
+})(document, window);
+</code></pre><p>假如给的移动端的设计稿是750px，则按照这段代码，font-size = 50 * 750 / 375 + “px” =100px, 则1rem对应的就是100px。设计稿中的100px宽的元素，就可以用1rem表示其宽度，这样做出来的网页在750px的设备下显示最完美，其他设备虽然不够完美但也不会出太大差错。</p>
+<p>####参考网址：<a href="http://www.cnblogs.com/axl234/p/5156956.html" target="_blank" rel="noopener">移动端适配，font-size设置的思考</a></p>
+<p>###<strong>Question</strong>:</p>
+<ol>
+<li>移动端用这段代码没大问题，但是如果这个网页同时在pc端显示，按照之前的计算方法，将pc设计稿中的px单位换算成rem后，网页上的元素就会异常的大。因此，在我做bookcet网页时，通过媒体查询，写了两套样式：一套是pc端，度量单位为px；一套是wap端，度量单位为rem。第一次写同时响应pc和wap的页面,感觉并没有get到响应式的精髓？</li>
+<li>chrome允许的最小字体是12px。之前在网上搜索的时候，发现不少人用的是 html{ font-size:62.5%;}这种方式，将1rem对应的16px折合成10px来布局。我在chrome下尝试过这种设置方式，在浏览器自带的调试器下进行测量，发现1rem对应的是12px。如果设计稿给的是20px，按理来说应该设置为2rem,然后就会得到20px，但是在1rem对应12px的情况下，这只能得到24px。所以他们是怎么能得到正确布局的，是没尝试过就转载了，还是我的理解方式不对？</li>
+<li>initial-scale和font-size是如何配合的？当我的font-size设置为625%(1rem=100px)时，initial-scale设置为1，则在iPhone5se上画布特别大，导致元素也特别大。这个应该可以自己研究一下。</li>
+</ol>
+<h2 id="2-H5新标签picture的自适应"><a href="#2-H5新标签picture的自适应" class="headerlink" title="2.H5新标签picture的自适应"></a>2.H5新标签picture的自适应</h2><pre><code>&lt;picture&gt;
+  &lt;source srcset=&quot;img_smallflower.jpg&quot; media=&quot;(max-width: 400px)&quot;&gt;
+  &lt;source srcset=&quot;img_flowers.jpg&quot;&gt;
+  &lt;img src=&quot;img_flowers.jpg&quot; alt=&quot;Flowers&quot;&gt;
+&lt;/picture&gt;
+</code></pre><p>picture是h5标签，它想audio和video一样，可以设置多个source，第一个source是最佳的。还可以将css的媒体查询化为media属性进行设置。media是可选的。上面的代码意思即为，当视口（？）宽度小于400px时，显示第一张图片img_smallflower.jpg，除此之外显示第二张图片img_flowers.jpg。img是做平稳退化使用，当浏览器不支持picture标签时，使之可以退化为img标签。</p>
+<h2 id="3-如何在兼容ie8的情况下实现响应式布局"><a href="#3-如何在兼容ie8的情况下实现响应式布局" class="headerlink" title="3. 如何在兼容ie8的情况下实现响应式布局"></a>3. 如何在兼容ie8的情况下实现响应式布局</h2><p>这点在另外一篇经验总结<a href="layout.md">css布局</a>里的第五点提到了，使用respond.js进行兼容。(在《响应式web设计》里提到了Modernizr这个库,里面可以解决响应式布局的大部分问题。)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/layout/responsive/" data-id="clivn5s1r001sml6pb1img7zi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/responsive/">responsive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/layout/pixel_on_android/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          安卓app里的px
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/books/js_you_dont_know/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">你不知道的Javascript</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Larix&#39;s blog">
+<meta property="og:url" content="http://larixs.github.io/page/2/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Larix&#39;s blog">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-vue/style_guide" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/vue/style_guide/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.739Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/vue/style_guide/">vue的官方风格指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>个人从官方文档整理和翻译。</p>
+<h2 id="A-Essential"><a href="#A-Essential" class="headerlink" title="A:Essential"></a>A:Essential</h2><ol>
+<li><p>Multi-word component names </p>
+<p> 组件名应该为多个单词，除了根组件app components</p>
+<p> reason: This prevents conflicts with existing and future HTML elements, since all HTML elements are a single word.</p>
+</li>
+<li><p>Component data must be a function (anywhere except on new Vue).</p>
+</li>
+<li><p>Prop definitions should be as detailed as possible.</p>
+<p> prop定义越详细越好，至少要注明类型</p>
+<pre><code>// Even better!
+props: {
+  status: {
+    type: String,
+    required: true,
+    validator: function (value) {
+      return [
+        &apos;syncing&apos;,
+        &apos;synced&apos;,
+        &apos;version-conflict&apos;,
+        &apos;error&apos;
+      ].indexOf(value) !== -1
+    }
+  }
+}
+</code></pre></li>
+<li><p>Always use key with v-for</p>
+<p> reason: <a href="https://vuejs.org/v2/style-guide/index.html#Keyed-v-for-essential" target="_blank" rel="noopener">detailed explanation</a></p>
+<p> 让vue能够精准操作，使v-for下的dom元素的行为可预测。</p>
+</li>
+<li><p>Component style scoping(any components except App component)</p>
+<p>solution: </p>
+<ol>
+<li><p>use the ‘scoped’ attribute</p>
+<pre><code>&lt;style scoped&gt;
+
+&lt;/style&gt;            
+</code></pre></li>
+<li><p>use CSS modules</p>
+<pre><code>&lt;style module&gt;
+
+&lt;/style&gt;
+</code></pre></li>
+<li>use BEM convention</li>
+</ol>
+</li>
+<li><p>Private property names</p>
+<p> 请一直使用’$_’前缀为plugin、mixin等扩展的自定义私有属性命名。并且为了避免与其他人的代码产生冲突，还需要使用命名空间。（比如：$_yourPluginName_property）</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Private-property-names-essential" target="_blank" rel="noopener">详细解释</a></p>
+<pre><code>var myGreatMixin = {
+  // ...
+  methods: {
+    $_myGreatMixin_update: function () {
+      // ...
+    }
+  }
+}
+</code></pre></li>
+</ol>
+<h2 id="B-Strongly-Recommended-Improving-Readability"><a href="#B-Strongly-Recommended-Improving-Readability" class="headerlink" title="B: Strongly Recommended(Improving Readability)"></a>B: Strongly Recommended(Improving Readability)</h2><p>多为组件的命名：命名方式，前缀，命名顺序</p>
+<ol>
+<li><p>Component files</p>
+<p> each component should be in its own file.</p>
+<p> reason: This helps you to more quickly find a component when you need to edit it or review how to use it.</p>
+</li>
+<li><p>Single-file component filename casing</p>
+<p> .vue文件的命名问题。并没有明白为什么因为存在大小写不敏感的系统就推荐大驼峰命名法。</p>
+<p> 另外，用短横线命名的方法称为kebab(烤肉串)命名法，还挺形象（笑）。</p>
+</li>
+<li><p>Base components names</p>
+<p> 为了应用定制的基础组件，都需要一个特定的前缀，例如<code>Base,App或者V</code></p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Base-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation</a>:</p>
+<p> These components lay the foundation for consistent styling and behavior in your application. 这些组件为你的应用中的样式和行为一致性奠定了基础。</p>
+<p> They may <strong>only</strong> contain:</p>
+<ul>
+<li>html elements</li>
+<li>ohter Base-prefixed components, and</li>
+<li><p>3rd-party UI components</p>
+<p>But they’ll <strong>never</strong> contain global state(e.g. from a Vuex store)</p>
+<p>这些组件的名称通常包含他们所包装的元素，例如BaseButton, BaseTable，除非没有其特定目的的元素，如BaseIcon</p>
+<p>advantages:</p>
+</li>
+<li><p>编辑器按照字母表对你的component进行排序时，你的base components总是会放在一起，让它们更容易被识别。</p>
+</li>
+<li>由于components应该一直以多个单词命名，这样就可以帮你少想一个前缀单词，不用再随便找一个单词给简单的components取名了。</li>
+<li><p>因为这些组件会被经常用，你可能希望让他们能够全局引用而非从四散的角落里引用。前缀结合webpack让这个可以实现。（SPA感觉挺实用的，zelda不行。zelda是多个小型spa的集合，不一定每次都需要所有的base components，所以不能全局注册所有的base components，目前还是用bable-import-plugin按需引入比较好。）</p>
+<pre><code>components/
+|- BaseButton.vue
+|- BaseTable.vue
+|- BaseIcon.vue
+</code></pre></li>
+</ul>
+</li>
+<li><p>single-instance component names</p>
+<p> 那些只允许存在一个active实例的组件，应该以 <code>The</code> 作为命名前缀，表示这里只能存在一个。例如 TheHeader, TheSideBar, TheFooter</p>
+<p> 在每个页面都只使用一次的component才被成为single-instance component。 这种component从来不接受任何props,因为他们虽为app特制，但是不受app上下文的影响。</p>
+<p> 如果你发现它们需要添加props，那他们就成为了每个页面只用一次的可复用的组件。</p>
+</li>
+<li><p>Tightly coupled component names</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Tightly-coupled-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation</a></p>
+<p> 子组件如果与父组件紧密耦合，那么子组件的名称应该以父组件的名称作为前缀。这样既可以证明子组件与父组件之间存在耦合关系，也可以让编辑器在按照字母表排序时，让这些组件放在一起。例如</p>
+<pre><code>components/
+|- TodoList.vue
+|- TodoListItem.vue
+|- TodoListItemButton.vue
+</code></pre></li>
+<li><p>Order of words in components names</p>
+<p> components names should start with highest-level(often most general) words and end with descriptive modifying words.</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Order-of-words-in-component-names-strongly-recommended" target="_blank" rel="noopener">detailed explanation:</a></p>
+<p> you may be wondering:</p>
+<p> <code>why would we force component names to use less natural language?</code></p>
+<p> 在自然英语里，形容词和其他修饰词通常会出现在名词之前，特殊情况下需要连接词，例如：</p>
+<ul>
+<li>coffee <code>with</code> milk</li>
+<li>soup <code>with</code> the day</li>
+<li><p>Visitor <code>to</code> the museum</p>
+<p>如果你愿意，你肯定可以把这些连接词加到组件名称里，但是顺序依然很重要。</p>
+<p>命名示例：</p>
+<p>最高级别的前缀应该是与app的上下文相关的。你的app需要一个搜索表单，那么这一系列组件的命名最高前缀应该是search。</p>
+<p>  //bad<br>  components/<br>  |- ClearSearchButton.vue<br>  |- ExcludeFromSearchInput.vue<br>  |- LaunchOnStartupCheckbox.vue<br>  |- RunSearchButton.vue<br>  |- SearchInput.vue<br>  |- TermsCheckbox.vue</p>
+<p>  //good<br>  components/<br>  |- SearchButtonClear.vue<br>  |- SearchButtonRun.vue<br>  |- SearchInputQuery.vue<br>  |- SearchInputExcludeGlob.vue<br>  |- SettingsCheckboxTerms.vue<br>  |- SettingsCheckboxLaunchOnStartup.vue</p>
+<p>你可能会考虑将search的component放在一个文件夹里，将setting的component放在另一个文件夹里，但是我们建议在一个庞大的app（组件数超过100）里才这么做。原因如下：</p>
+<ul>
+<li>在通常情况下，浏览嵌套的文件夹比浏览单个的components文件夹花费更多时间。</li>
+<li>命名冲突会导致在代码编辑器难以快速定位某一个特定的component。</li>
+<li>重构会更加困难。因为find-and-replace通常不足以更新一个移动后组件的引用。(Refactoring becomes more difficult, because find-and-replace often isn’t sufficient to update relative references to a moved component.)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Self-closing components</p>
+<p> 在single-file components(.vue文件),string templates 和jsx中，没有内容的组件应该自闭合，除了 DOM templates（即html文件）.</p>
+<p> Components that self-close communicate that they not only have no content, but are <strong>meant</strong> to have no content.即在减少代码量的同时，告诉其他人这个组件里面没有内容（插槽？）。</p>
+<p> 不在DOM templates里使用自闭合是因为html不支持官方空元素以外的自闭合。所以只有在dom处理之前，先让vue处理一波，才可以使用这个建议。</p>
+</li>
+<li><p>Components name casing in templates</p>
+<p> 在大多数项目中，组件应该在single-file components和string templates中使用大驼峰命名法，在DOM templates中用kebab-case（烤肉串命名法？）。或者一直使用烤肉串命名法。</p>
+<p> 大驼峰在以下几点优于烤肉串：</p>
+<ul>
+<li>编辑器可以自动补全，因为js也常用大驼峰。</li>
+<li>大驼峰在视觉上与普通的html元素的差异大于烤肉串的。大驼峰有两个大写字母，烤肉串就一个短横线。（差异性更大吗？emmmmmm…可能吧）</li>
+<li><p>如果在你的模板里用了非Vue自制组件，比如一个web component,大驼峰能保证你的Vue组件清晰可见。</p>
+<p>unfortunately, 因为html对大小写不敏感，所以在DOM templates里必须使用烤肉串。</p>
+<p>需要注意的是： 如果你已经使用了很多kebab，保持html的一致性以及整个项目的风格统一比以上几个优点重要多了。因此在所有地方都用烤肉串命名法也是可以接受的。</p>
+</li>
+</ul>
+</li>
+<li><p>Component name casing in js/jsx</p>
+<p> js和jsx中应该一直用Pascal，vue.component注册的全局组件应该用kebab。</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Component-name-casing-in-JS-JSX-strongly-recommended" target="_blank" rel="noopener">detailed explanation：</a><br> js中，pascal常用于类名或原型命名，或者说，任何能有不同实例的对象。Vue组件也可以有实例，因此它也可以用pascal。有个附加的优点，在jsx里用pascal可以让阅读代码的人更容易区分组件和html元素。</p>
+<p> 为全局注册的组件使用kebab-case的原因如下：</p>
+<ul>
+<li>在js中很少使用全局组件，因此遵守js的约定没多大意义。</li>
+<li>这些应用程序总是包含许多DOM模板，其中必须使用kebab-case。（哪些应用？）</li>
+</ul>
+</li>
+<li><p>Full-word components names</p>
+<p>Components names should prefer full words over abbreviations.</p>
+<p>The autocompletion in editors make the cost of writing longer names very low, while the clarity they provide is invaluable. Uncommon abbreviations, in particular, should always be avoided.</p>
+<p>编辑器中的自动完成让写更长的名称的成本非常低，而它们提供的清晰度是无价的。尤其应该避免不寻常的缩写。</p>
+<pre><code>//bad
+components/
+|- SdSettings.vue
+|- UProfOpts.vue
+
+//good
+components/
+|- StudentDashboardSettings.vue
+|- UserProfileOptions.vue
+</code></pre></li>
+<li><p>Prop name casing</p>
+<p>Prop names should always use camelCase during declaration, but kebab-case in templates and jsx.</p>
+<p>We are simply following the convention of each language. Within js, camelCase is more natural. Within html, kebab-case is.</p>
+<pre><code>//good
+props: {
+  greetingText: String
+}
+&lt;WelcomeMessage greeting-text=&quot;hi&quot;/&gt;
+</code></pre></li>
+<li><p>Multi-attribute elements</p>
+<p>elements with multiple attributes should span multiple lines, with one attribute per line.</p>
+<p>reason: It’s easy to read.</p>
+<pre><code>// good
+&lt;MyComponent
+  foo=&quot;a&quot;
+  bar=&quot;b&quot;
+  baz=&quot;c&quot;
+/&gt;
+</code></pre><p>拿一个页面测试了一下，用这种标准能够让属性看的更清楚，但是让元素之间的层级关系变得不好辨认了。</p>
+</li>
+<li><p>Simple expressions in templates</p>
+<p>Component templates should only include simple expressions, with more complex expression refactored into computed properties or methods.</p>
+</li>
+<li><p>Simple computed properties</p>
+<p>Complex computed properties should be split into as many simpler properties as possible.</p>
+<p><a href="https://vuejs.org/v2/style-guide/index.html#Simple-computed-properties-strongly-recommended" target="_blank" rel="noopener">detailed explanation:</a></p>
+<ul>
+<li>easier to test</li>
+<li>easier to read</li>
+<li>more adaptable to changing requirements</li>
+</ul>
+</li>
+</ol>
+<pre><code>//bad
+computed: {
+  price: function () {
+    var basePrice = this.manufactureCost / (1 - this.profitMargin)
+    return (
+      basePrice -
+      basePrice * (this.discountPercent || 0)
+    )
+  }
+}
+
+//good
+computed: {
+  basePrice: function () {
+    return this.manufactureCost / (1 - this.profitMargin)
+  },
+  discount: function () {
+    return this.basePrice * (this.discountPercent || 0)
+  },
+  finalPrice: function () {
+    return this.basePrice - this.discount
+  }
+}
+</code></pre><ol start="15">
+<li><p>Quoted attribute values</p>
+<p>Non-empty HTML attributes values should always be inside quotes(single or double, whichever is not used in js). 为什么要用js不用的那个引号呢？</p>
+</li>
+<li><p>Directive shorthands</p>
+<p>Directive shorthands should be used always or never.</p>
+<p>Directive shorthands include <code>:</code> for<code>v-bind:</code> and <code>@</code> for <code>v-on:</code>.</p>
+</li>
+</ol>
+<h2 id="C-Recommended-Minimizing-Arbitrary-Choices-and-Cognitive-Overhead"><a href="#C-Recommended-Minimizing-Arbitrary-Choices-and-Cognitive-Overhead" class="headerlink" title="C: Recommended(Minimizing Arbitrary Choices and Cognitive Overhead)"></a>C: Recommended(Minimizing Arbitrary Choices and Cognitive Overhead)</h2><ol>
+<li><p>Component/instance options order</p>
+<p> components/instance options should be ordered consistently.</p>
+<p> This is the default order from Vue for components options.</p>
+<ol>
+<li><p>Side effects (trigger effects outside the component)</p>
+<ul>
+<li>el</li>
+</ul>
+</li>
+<li><p>Global Awareness(require knowledge beyond the component)</p>
+<ul>
+<li>name</li>
+<li>parent </li>
+</ul>
+</li>
+<li><p>Component Type(changes the type of component)</p>
+<ul>
+<li>functional</li>
+</ul>
+</li>
+<li><p>Template Modifiers(changes the way templates are compiled)</p>
+<ul>
+<li>delimiters</li>
+<li>comments</li>
+</ul>
+</li>
+<li><p>Template Dependencies(assets used in the template)</p>
+<ul>
+<li>components</li>
+<li>directives</li>
+<li>filters</li>
+</ul>
+</li>
+<li><p>Composition(merge properties into the options)</p>
+<ul>
+<li>extends</li>
+<li>mixins</li>
+</ul>
+</li>
+<li><p>Interface(the interface to the component)</p>
+<ul>
+<li>inheritAttrs</li>
+<li>model</li>
+<li>props/propsData</li>
+</ul>
+</li>
+<li><p>Local State(local reactive properties)</p>
+<ul>
+<li>data</li>
+<li>computed</li>
+</ul>
+</li>
+<li><p>Events(callback triggered by reactive events)</p>
+<ul>
+<li>watch</li>
+<li>Lifecycle Events(in the order they are called)</li>
+</ul>
+</li>
+<li><p>Non-Reactive Properties(instance properties independent of the reactivity system)</p>
+<ul>
+<li>methods</li>
+</ul>
+</li>
+<li><p>Rendering(the declarative description of the component output)</p>
+<ul>
+<li>template/ render</li>
+<li>renderError</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Element attribute order       </p>
+<p> The attributes of elements(including components) should be ordered consistently.</p>
+<ol>
+<li><p>Definition(provides the component options)</p>
+<ul>
+<li>is</li>
+</ul>
+</li>
+<li><p>List Rendering(creates multiple variations of the same element)</p>
+<ul>
+<li>v-for</li>
+</ul>
+</li>
+<li><p>Conditionals(whether the element is rendered/shown)</p>
+<ul>
+<li>v-if</li>
+<li>v-else-if</li>
+<li>v-else</li>
+<li>v-show</li>
+<li>v-cloak</li>
+</ul>
+</li>
+<li><p>Render Modifiers(changes the way the element renders)</p>
+<ul>
+<li>v-pre</li>
+<li>v-once</li>
+</ul>
+</li>
+<li><p>Global Awareness(requires knowledge beyond the component)</p>
+<ul>
+<li>id</li>
+</ul>
+</li>
+<li><p>Unique Attributes(attributes that require unique values)</p>
+<ul>
+<li>ref</li>
+<li>key</li>
+<li>slot</li>
+</ul>
+</li>
+<li><p>Two-Way Binding(combining binding and events)</p>
+<ul>
+<li>v-model</li>
+</ul>
+</li>
+<li><p>Other Attributes(all unspecified bound &amp; unbound attributes)</p>
+</li>
+<li><p>Events(component event listeners)</p>
+<ul>
+<li>v-on</li>
+</ul>
+</li>
+<li><p>Content(overrides the content of the element)</p>
+<ul>
+<li>v-html</li>
+<li>v-text</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Empty lines in component/instance options</p>
+<p> Make code easy to read.</p>
+</li>
+<li><p>Single-file component top-level element order</p>
+<p> Single-file components should always order <code>template</code>, <code>script</code>, and <code>style</code> tags consistently, <strong>with \<style> last</strong>, because at least one of the other two is always necessary.</p>
+</li>
+</ol>
+<h2 id="D-Use-With-Caution-Potentially-Dangerous-Pattens"><a href="#D-Use-With-Caution-Potentially-Dangerous-Pattens" class="headerlink" title="D: Use With Caution(Potentially Dangerous Pattens)"></a>D: Use With Caution(Potentially Dangerous Pattens)</h2><ol>
+<li><p>v-if/v-if-else/v-else without key</p>
+<p> It’s usually best to use key with v-if + v-else, if they are the same element type (e.g. both \<div> elements).</p>
+</li>
+<li><p>Element selectors with scoped</p>
+<p> Element selectors should be avoided with scoped.</p>
+<p> reason: Large numbers of element selectors are slow.</p>
+<p> <a href="https://vuejs.org/v2/style-guide/index.html#Element-selectors-with-scoped-use-with-caution">detailed explanation</a></p>
+<pre><code>//bad
+&lt;template&gt;
+  &lt;button&gt;X&lt;/button&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+button {
+  background-color: red;
+}
+&lt;/style&gt;
+
+//good
+&lt;template&gt;
+  &lt;button class=&quot;btn btn-close&quot;&gt;X&lt;/button&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+.btn-close {
+  background-color: red;
+}
+&lt;/style&gt;
+</code></pre></li>
+<li><p>Implicit parent-child communication</p>
+<p> <code>An ideal Vue application is props down, events up.</code></p>
+<p> Beware: <code>do not be seduced into trading simplicity</code> (being able to understand the flow of your state)<code>for short-term convenience</code> (writing less code).</p>
+</li>
+<li><p>Non-flux state management</p>
+<p>Vuex should be preferred for global state management, instead of this.$root or a global event bus. </p>
+</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Vue的官方风格指导A-C主要是为提高Vue的可读性而设计，D是稍微提升程序的性能和稳健性。</p>
+<p>可读性的提升大致有以下几个方面：</p>
+<ul>
+<li><p>命名。</p>
+<p>  这篇style-guild通读下来，发现有不少条目都在讲命名，组件的命名形式、命名规则等等。一个好的命名可以解释该组件的作用、与其他组件之间的耦合关系、方便编辑器查找等等。</p>
+</li>
+<li><p>顺序。</p>
+<p>  包括属性的书写顺序，options的书写顺序，命名的单词顺序等。</p>
+</li>
+<li><p>代码风格。</p>
+<p>  比如使用自闭合，属性换行等。</p>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://vuejs.org/v2/style-guide/index.html">vue官方风格指南</a></li>
+</ol>
+<h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><p><strong>Priority A Rules: Essential</strong></p>
+<p>Multi-word component names</p>
+<p>Component data</p>
+<p>Prop definitions</p>
+<p>Keyed v-for</p>
+<p>Component style scoping</p>
+<p>Private property names</p>
+<p><strong>Priority B Rules: Strongly Recommended</strong></p>
+<p>Component files</p>
+<p>Single-file component filename casing</p>
+<p>Base component names</p>
+<p>Single-instance component names</p>
+<p>Tightly coupled component names</p>
+<p>Order of words in component names</p>
+<p>Self-closing components</p>
+<p>Component name casing in templates</p>
+<p>Component name casing in JS/JSX</p>
+<p>Full-word component names</p>
+<p>Prop name casing</p>
+<p>Multi-attribute elements</p>
+<p>Simple expressions in templates</p>
+<p>Simple computed properties</p>
+<p>Quoted attribute values</p>
+<p>Directive shorthands</p>
+<p><strong>Priority C Rules: Recommended</strong></p>
+<p>Component/instance options order</p>
+<p>Element attribute order</p>
+<p>Empty lines in component/instance options</p>
+<p>Single-file component top-level element order</p>
+<p><strong>Priority D Rules: Use with Caution</strong></p>
+<p>v-if/v-if-else/v-else without key</p>
+<p>Element selectors with scoped</p>
+<p>Implicit parent-child communication</p>
+<p>Non-flux state management</p>
+</style></strong></p></li></ol>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/vue/style_guide/" data-id="clivn5s2j0048ml6phoijj7c0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/style-guide/">style guide</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-redux/redux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/redux/redux/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.738Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/redux/">redux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/redux/redux/">redux学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="三大原则"><a href="#三大原则" class="headerlink" title="三大原则"></a>三大原则</h3><ul>
+<li>单一数据源。   整个应用的state被储存在一棵object tree中，并且这个object tree只存在于唯一一个store中。</li>
+<li>state是只读的。 唯一改变state的方法就是触发action。</li>
+<li>使用纯函数来执行修改。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">store(object tree)--&gt;App:(nextState) update</span><br><span class="line">Note left of store(object tree):reducer(preState,action)-&gt;nextState</span><br></pre></td></tr></table></figure>
+<p>q：action是谁发送的？</p>
+<p>###Actions</p>
+<p>action只负责描述<strong>事件变化</strong>。</p>
+<p>actions是store <strong>唯一</strong>的数据来源。由application通过store.dispatch() 方法发给store。<br>action需要尽量小。</p>
+<p>###Action Creators (action创建函数)<br>不包含dispatch，只负责返回action。</p>
+<p>###Reducers</p>
+<p>reducer负责决定<strong>app的state该如何更新</strong>。</p>
+<p>reducer(previousState,action) =&gt; newState</p>
+<p>首先解释“纯净”的意思：只要传入的参数相同、返回计算得到的值一定相同。</p>
+<p>为了保持reducer的纯净，永远不要在reducer里做以下操作：</p>
+<ul>
+<li>修改arguments</li>
+<li>调用不纯净的函数，例如Date.now()、Math.random()</li>
+<li>执行有副作用（哪些副作用？）的函数，例如API请求和路由跳转</li>
+</ul>
+<p>reducer一定要保持纯净。<strong>只要传入参数相同，返回计算得到的下一个state就一定相同。没有特殊情况、没有副作用，没有api请求，没有变量修改，单纯执行计算。</strong></p>
+<p>tips：</p>
+<ul>
+<li>不要修改state。可以用object.assign({}，state,action)来返回新的state，但是千万不要修改state。</li>
+<li>在default情况下返回旧的state，避免未知action引起的错误。</li>
+</ul>
+<p>###Store</p>
+<p>Store的职责：</p>
+<ul>
+<li>保存应用的state</li>
+<li>提供getState()方法访问state</li>
+<li>提供dispatch方法更新state</li>
+<li>通过subscribe(listener)注册监听器(监听啥？）</li>
+<li>通过subscribe(listener)的返回函数来注销监听器</li>
+</ul>
+<h3 id="Data-Flow-（strict-unidirectional-data-flow"><a href="#Data-Flow-（strict-unidirectional-data-flow" class="headerlink" title="Data Flow （strict unidirectional data flow )"></a>Data Flow （strict unidirectional data flow )</h3><p><strong>严格的单向数据流</strong></p>
+<p>数据的生命周期：</p>
+<ol>
+<li>调用store.dispatch(action)</li>
+<li>store调用你之前赋给它的reducer函数</li>
+<li>根reducer应该将多个子reducer的输出合并为一个单一的state树</li>
+<li>store存储根reducer返回的整个state树。</li>
+</ol>
+<p><strong>异步API</strong></p>
+<p>异步API需要三种action:</p>
+<ul>
+<li>一种通知reducer请求开始的action</li>
+</ul>
+<p>切换state的isFetching标志</p>
+<ul>
+<li>一种通知reducer请求成功的action</li>
+</ul>
+<p>reducer可能会把接受到的新数据合并到state中,并重置isFetching</p>
+<ul>
+<li>一种通知reducer请求失败的action</li>
+</ul>
+<p>可能（？）会重置isFetching</p>
+<p>tip：请求数据的action最好不要和UI的特定事件耦合到一起。随着应用变得复杂，不仅仅是UI事件需要请求数据，有些用户操作（比如，预加载最流行的 subreddit，或者一段时间后自动刷新过期数据）后需要马上请求数据，路由变化时也可能需要请求数据。因此在开始的时候就将数据请求的action与其他action分开创建是一个明智的做法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/redux/redux/" data-id="clivn5s29003cml6pu8mgww87" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/react" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/react/react/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.738Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/react/">react</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/react/react/">react学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>While this.props is set up by React itself and this.state has a special meaning, you are free to add additional fields to the class manually if you need to store something that is not used for the visual output.</p>
+<h1 id="getting-started-入门"><a href="#getting-started-入门" class="headerlink" title="getting started 入门"></a>getting started 入门</h1><h2 id="reactive-updates"><a href="#reactive-updates" class="headerlink" title="reactive updates"></a>reactive updates</h2><ul>
+<li><p>应该认为props在组件内部是不可变的，即，永远不要给this.props赋值。</p>
+</li>
+<li><p>React的组件非常简单，他们都是一些简单的函数，以props和state作为参数，来渲染出HTML。（限制：React组件只能渲染出一个节点。如果你想渲染出多个节点，那么他们必须包含在一个单节点内被渲染）。</p>
+</li>
+</ul>
+<h2 id="JSX-in-depth-深入学习JSX"><a href="#JSX-in-depth-深入学习JSX" class="headerlink" title="JSX in depth 深入学习JSX"></a>JSX in depth 深入学习JSX</h2><ul>
+<li><p>JSX中的class和for属性被替换为className,htmlFor</p>
+</li>
+<li><p><a href="http://reactjs.cn/react/docs/jsx-in-depth.html" target="_blank" rel="noopener">Namespaced Components</a>:将子组件作为父组件的属性进行保存</p>
+</li>
+</ul>
+<p>本来繁琐的代码</p>
+<pre><code>// Awkward block of variable declarations
+var Form = MyFormComponent;
+var FormRow = Form.Row;
+var FormLabel = Form.Label;
+var FormInput = Form.Input;
+
+var App = (
+  &lt;Form&gt;
+    &lt;FormRow&gt;
+      &lt;FormLabel /&gt;
+      &lt;FormInput /&gt;
+    &lt;/FormRow&gt;
+  &lt;/Form&gt;
+);
+</code></pre><p>目的代码：</p>
+<pre><code>var Form = MyFormComponent;
+
+var App = (
+  &lt;Form&gt;
+    &lt;Form.Row&gt;
+      &lt;Form.Label /&gt;
+      &lt;Form.Input /&gt;
+    &lt;/Form.Row&gt;
+  &lt;/Form&gt;
+);
+</code></pre><p>使用Namespaced Components：</p>
+<pre><code>var MyFormComponent = React.createClass({ ... });
+
+MyFormComponent.Row = React.createClass({ ... });
+MyFormComponent.Label = React.createClass({ ... });
+MyFormComponent.Input = React.createClass({ ... });
+</code></pre><p>#state</p>
+<h2 id="Using-State-Correctly-正确使用state（其实是讲setState的使用场景）"><a href="#Using-State-Correctly-正确使用state（其实是讲setState的使用场景）" class="headerlink" title="Using State Correctly  正确使用state（其实是讲setState的使用场景）"></a>Using State Correctly  正确使用state（其实是讲setState的使用场景）</h2><p>There are three things you should know about setState().</p>
+<p>###1.Do Not Modify State Directly 不要直接修改state</p>
+<pre><code>// Wrong
+this.state.comment = &apos;Hello&apos;;
+
+// Correct
+this.setState({comment: &apos;Hello&apos;});
+</code></pre><p>###2.State Updates May Be Asynchronous       state可能是异步更新</p>
+<p>React may batch multiple setState() calls into a single update for performance.</p>
+<p>Because this.props and this.state may be updated asynchronously, you should not rely on their values for calculating the next state.</p>
+<pre><code>// Wrong
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+
+// Correct
+this.setState((prevState, props) =&gt; ({
+  counter: prevState.counter + props.increment
+}));
+</code></pre><p>###3.State Updates are Merged   state通过合并来更新</p>
+<p>When you call setState(), React merges the object you provide into the current state.</p>
+<p>#lifeCircle</p>
+<p>init: componentsWillMount -&gt;render -&gt;componentsDidMount</p>
+<p>re-render: componentsWillReceiveProps -&gt; ShouldComponentsUpdate -&gt; ComponentsWillUpdate -&gt; render -&gt;ComponentsDidUpdate</p>
+<p>#Handling Events</p>
+<h2 id="difference-from-document-elements"><a href="#difference-from-document-elements" class="headerlink" title="difference from document elements"></a>difference from document elements</h2><p> you cannot return false to prevent default behavior in React. You must call preventDefault explicitly.<br> You must call preventDefault explicitly.</p>
+<p>#KEY<br>Keys only make sense in the context of the surrounding array.</p>
+<h3 id="不应该在根元素上设置key，要在使用时设置key。"><a href="#不应该在根元素上设置key，要在使用时设置key。" class="headerlink" title="不应该在根元素上设置key，要在使用时设置key。"></a>不应该在根元素上设置key，要在使用时设置key。</h3><p><a href="https://facebook.github.io/react/docs/lists-and-keys.html" target="_blank" rel="noopener">https://facebook.github.io/react/docs/lists-and-keys.html</a></p>
+<h3 id="Keys-Must-Only-Be-Unique-Among-Siblings"><a href="#Keys-Must-Only-Be-Unique-Among-Siblings" class="headerlink" title="Keys Must Only Be Unique Among Siblings"></a>Keys Must Only Be Unique Among Siblings</h3><p>Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique.</p>
+<p>#propTypes 属性校验器</p>
+<p>es5写法：</p>
+<pre><code>var NewDom = React.createClass({
+
+getDefaultProps: function() {//设置默认属性
+   return {title:&apos;133&apos;};
+},
+
+propTypes: {
+   title:React.PropTypes.string,
+},//属性校验器，表示必须是string
+
+render: function() {
+
+   return &lt;div&gt;{this.props.title}&lt;/div&gt;;
+
+}
+});
+</code></pre><p>es6写法：</p>
+<pre><code>class NewDom extends React.Component{
+
+  render() {
+      return &lt;div &gt;1{this.props.title}&lt;/div&gt;;
+  }
+
+}
+
+NewDom.propTypes={//属性校验器，表示该属性必须是bool，否则报错
+  title: React.PropTypes.bool,
+}
+NewDom.defaultProps={title:&apos;133&apos;};//设置默认属性
+</code></pre><p>es7写法（babel支持）：</p>
+<p>//放在class内使用static定义静态属性，静态属性是其本身的属性，即class.propname，实例是否会继承有待测试。</p>
+<pre><code>class NewDom extends React.Components {
+    static propTypes = {
+        title:React.PropTypes.bool
+    }
+}
+
+(感谢贤哥指正）
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/react/react/" data-id="clivn5s2b003jml6pxkzpylo1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ssr/ssr" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/ssr/ssr/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.738Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ssr/">ssr</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/ssr/ssr/">SSR(Server-Side Rendering) + vue</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司最近的pc站要用SSR了，陆哥先行学习了一把，我也得跟着学一学，不然咋开发呢。（听说天津下雪了而北京就只是冷而已</p>
+<h2 id="什么是SSR"><a href="#什么是SSR" class="headerlink" title="什么是SSR"></a>什么是SSR</h2><p>Q1：服务器端渲染的是哪一部分，服务器怎么知道它该渲染哪一部分，那剩下的部分会以什么形式返回给客户端呢？</p>
+<p>A:  服务器端只渲染在服务器端写好的vue部分，渲染出来的字符串，通过模板html里的</p>
+<pre><code>&lt;!--vue-ssr-outlet--&gt;
+</code></pre><p>确定字符串被插入的位置。然后服务器返回模板加字符串之后的结果给客户端。</p>
+<p>Q2：服务器端是什么时候渲染呢，接到请求才开始渲染，还是预先会渲染好，然后一直储存呢？</p>
+<h2 id="SSR的优缺点"><a href="#SSR的优缺点" class="headerlink" title="SSR的优缺点"></a>SSR的优缺点</h2><p>SSR Introduction再三强调，要确认SSR是否是符合自己需求的，要慎重选择。这侧面说明SSR的缺点在某些方面的影响会很大。</p>
+<p>优点：</p>
+<ol>
+<li>利于SEO。搜索引擎不会等待网页完全完成才开始爬取，通过ajax请求返回的内容就有可能不被搜索引擎的爬虫爬取。如果服务器端能直接返回带有内容的网页，那肯定是利于SEO的。</li>
+<li>更快的展示内容(time-to-content)。在网络环境或者设备较差的情况下，能更快展示内容，提高用户体验。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>开发环境受限。</li>
+<li>构建和部署会有更多要求。</li>
+<li>服务器端负载加大。</li>
+</ol>
+<p>如果SSR带来的优势并不大，那用SSR就是overkill。（Introduction着重提了使用者是否看重time-to-content)。</p>
+<p>就公司的pc站而言，利于seo听起来不错，尤其是用于资讯页和产品页。time-to-content并不是很重要。SSR的缺点目前还不了解，不知道会带来多大负担。</p>
+<h2 id="编写通用代码"><a href="#编写通用代码" class="headerlink" title="编写通用代码"></a>编写通用代码</h2><p>编写在客户端和服务器端都能运行的代码的注意事项：</p>
+<ol>
+<li><p>响应式对象在服务器上，大部分情况下是多余的。</p>
+<p> 因为服务器端在渲染之前就已经预取数据了，这时就不需要响应式对象了。</p>
+</li>
+<li><p>生命钩子的变化。</p>
+<p> 由于没有动态更新，所以只有<strong>beforeCreate</strong>和<strong>created</strong>会被调用。</p>
+<p> 因此会带来全局副作用的事件也不要往beforeCreate和created里放，应该放在beforeMount或者mounted。例如在created里setInterval，而在beforeDestroy里清除setInterval，这在服务端是行不通的，服务器压根不调beforeDestroy，意味着setInterval并不会清除。（为啥mounted都不调用了呢？难道vue是一口气把所有字符串都编译出来？并不是先编译子组件字符串，然后把子组件字符串插入父组件？）</p>
+</li>
+<li><p>平台的API变化。</p>
+<p> 在服务器端，你是访问不到window或者document等全局对象的。很简单，就是因为渲染的环境不同。</p>
+<p> 因此最好将平台API的实现放在一个通用api里，或者找一个库来做这件事。譬如axios，它为服务器端和客户端提供的接口名称都是一样的。</p>
+<p> 对于浏览器端的api，常用的解决办法就是把他们放在只有浏览器才能访问到的lifecycle hooks里。</p>
+</li>
+<li><p>自定义指令</p>
+<p> 多数自定义指令直接操作DOM，但这样在SSR里就会报错。目前有两种解决方法(ssr introduction)：</p>
+<ol>
+<li>推荐使用组件作为抽象机制，并运行在「虚拟 DOM 层级(Virtual-DOM level)」（例如，使用渲染函数(render function)）</li>
+<li>如果你有一个自定义指令，但是不是很容易替换为组件，则可以在创建服务器 renderer 时，使用 directives 选项所提供”服务器端版本(server-side version)”</li>
+</ol>
+</li>
+</ol>
+<h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><ol>
+<li><p>避免状态单例(singleton)</p>
+<p>在node.js里生成的实例应该避免生成共享的实例(除非你真的确认它应该共享)。因为node.js会长期运行，一旦生成了实例，不主动销毁的话，它就会一直存在内存里。例如服务器端返回的vue根实例就不应该是单例，因为服务器需要在每次收到请求时都返回新的实例，否则容易造成状态和请求的交叉污染。</p>
+<p>解决办法：工厂模式产生实例。</p>
+</li>
+</ol>
+<h2 id="路由和代码分割"><a href="#路由和代码分割" class="headerlink" title="路由和代码分割"></a>路由和代码分割</h2><p>router：</p>
+<ol>
+<li>避免stateful singleton</li>
+<li>要等router的异步组件和钩子都准备好之后，服务器端才能返回html。</li>
+</ol>
+<p>code-splitting:</p>
+<p>代码分割和懒加载能帮助你在首屏加载时减少下载的资源数，提升加载效率。关键就是“加载你所需要的东西”。</p>
+<p>不管在客户端还是服务端，都有必要用router.onReady，因为router一定要提前(ahead of time)加载路由组件，以便正确调用组件钩子。</p>
+<h2 id="Data-Pre-Fetching-and-State"><a href="#Data-Pre-Fetching-and-State" class="headerlink" title="Data Pre-Fetching and State"></a>Data Pre-Fetching and State</h2><p>SSR中，在进行渲染进程之前，需要预取数据。而客户端在取数据的时候，也应该取到一样的数据。</p>
+<p>caveats:</p>
+<ol>
+<li>在路由组件里负责预取数据的函数，是拿不到this的。因为取数据的时候，组件还没有被实例化。</li>
+</ol>
+<h2 id="Problems-with-Basic-SSR"><a href="#Problems-with-Basic-SSR" class="headerlink" title="Problems with Basic SSR"></a>Problems with Basic SSR</h2><p>基础的SSR无法热更新，Node.js本身也不支持source map。 gg思密达，每次修改服务器端的代码都得重启一次。</p>
+<p>为了解决热更新的问题， vue-server-renderer提供一个名为createBundleRenderer的API。</p>
+<h2 id="20180315-技术分享"><a href="#20180315-技术分享" class="headerlink" title="20180315 技术分享"></a>20180315 技术分享</h2><p>昨天陆哥做了一次ssr的技术分享，引发了非常多的讨论，主要在于以下几点:</p>
+<ol>
+<li>ssr的优势是seo和一些time-to-content的加速，但是劣势就是需要服务器提前渲染，这对服务器压力较大，且相对于传统spa来说，能够缓存的东西就更少了。 ssr的优势是否能完全抵消劣势？</li>
+<li>学长提出的，关于node层面的东西，例如node层无cookie处理头，node该如何抗住大量访问？（个人对这个问题还有点感兴趣）</li>
+<li>time-to-content的加速主要在于node层面与服务器通信比终端与服务器通信更快。 但是在首屏加载时，如果api返回过慢，那么ssr的页面则会白屏直到服务器端渲染完毕并返回，而spa页面至少可以返回一个带loading的基础页面。</li>
+<li>spa的seo问题比较严重。</li>
+</ol>
+<p>个人的疑问：</p>
+<ol>
+<li>ssr带来的服务器压力有大，怎么计算服务器能够承受的极限? 虽然说可以用钱买服务器，钱能解决的问题都不是问题，可是没有任何测试会令我有一丝不安。</li>
+<li>ssr有办法做到缓存吗，有什么样的缓存机制? 能承担多少缓存？</li>
+<li>node作为服务器中间层可能带来的问题。关于node我了解的实在是太少了。</li>
+<li>seo需要的信息量究竟有多大? tdk不能满足吗？</li>
+</ol>
+<h2 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h2><p>页面级别的缓存：</p>
+<p>用<a href="https://www.nginx.com/blog/benefits-of-microcaching-nginx/" target="_blank" rel="noopener">micro-caching</a>可以做页面级别的缓存。</p>
+<p>是否进行页面缓存，在node层面的server里去判断和处理。</p>
+<p>适用范围： 对于不同用户及不同状态都展示同样内容的页面。</p>
+<p>——————————</p>
+<p>组件级别的缓存：</p>
+<p>用<a href="https://github.com/isaacs/node-lru-cache" target="_blank" rel="noopener">lur-cache</a>可以做组件级别的缓存。</p>
+<p>是否进行组件缓存，是通过组件的<strong>serverCacheKey</strong>进行判断。需要进行缓存的组件，必须要有一个独一无二的name。当<br>serverCacheKey的值是一样的，则使用缓存，否则重新渲染。一些静态组件可以让serverCacheKey返回一个常量。</p>
+<p>适用范围：</p>
+<ol>
+<li>子组件不依赖全局状态</li>
+<li>子组件对渲染context没有副作用。</li>
+</ol>
+<h2 id="nuxt-js"><a href="#nuxt-js" class="headerlink" title="nuxt.js"></a>nuxt.js</h2><p>The Nuxt.js is similar to <a href="https://zeit.co/blog/next" target="_blank" rel="noopener">Next.js</a></p>
+<p>参考链接：</p>
+<p>1.<a href="https://ssr.vuejs.org/en/" target="_blank" rel="noopener">SSR Introduction</a><br>2.<a href="https://nuxtjs.org/guide" target="_blank" rel="noopener">Nuxt.js</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/ssr/ssr/" data-id="clivn5s2c003nml6p592umpji" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ssr/ssr_practice" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/ssr/ssr_practice/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.738Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ssr/">ssr</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/ssr/ssr_practice/">SSR实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在业务中，为了使用vue+ssr，选用nuxt.js作为基础框架进行开发。</p>
+<h2 id="nuxt或ssr的优势"><a href="#nuxt或ssr的优势" class="headerlink" title="nuxt或ssr的优势"></a>nuxt或ssr的优势</h2><ul>
+<li>加快首屏渲染速度</li>
+<li>利于SEO</li>
+<li>nuxt接管了打包的一系列事，方便使用</li>
+</ul>
+<h2 id="使用nuxt中遇到的问题"><a href="#使用nuxt中遇到的问题" class="headerlink" title="使用nuxt中遇到的问题"></a>使用nuxt中遇到的问题</h2><ul>
+<li>服务器端渲染的页面，referer指向不对，需要手动透传。</li>
+<li>nuxt项目页面与非nuxt项目页面之间，通过浏览器的前进后退按钮访问时，可能会出现串账号的问题（见以下问题1）。</li>
+<li>功能特别多的脚手架，在碰见特殊需求时一般都不够灵活。</li>
+<li>nuxt的报错有些微的不友好。</li>
+</ul>
+<h2 id="1-思考：客户的登录状态是否应该在服务器端获取？"><a href="#1-思考：客户的登录状态是否应该在服务器端获取？" class="headerlink" title="1. 思考：客户的登录状态是否应该在服务器端获取？"></a>1. 思考：客户的登录状态是否应该在服务器端获取？</h2><p>在服务器端获取客户的登录状态或者账户信息，是因为在服务器端请求接口可以减少等待时间。</p>
+<p>目前正在迁移项目，将非ssr的项目迁为ssr项目。因为个人中心页面数量多，因此想采用分批迁移替换的方式。</p>
+<p>但迁移中发现一个问题：</p>
+<p><code>如果所有可以改变登录状态页面不在一个ssr项目里，通过浏览器的前进后退，可能会串账户信息。</code></p>
+<p>复现条件：</p>
+<ul>
+<li>登录状态通过服务器端发请求提前获取，存在了window.<strong>NUXT</strong>里。</li>
+<li>如果在服务器端获取了数据，则浏览器端不再重发请求。</li>
+<li>页面a在项目A里，页面b在项目B里。项目A是ssr。</li>
+<li>a页面可以直接点击跳到b页面。</li>
+</ul>
+<p>简单的复现步骤：</p>
+<p>在a页面登录账户1，点击跳到b后，b页面正确显示账户1信息。</p>
+<p>通过浏览器的回退按钮回到a页面，a页面则显示无账户登录。前进到b页面又有登录状态。</p>
+<p>此时就有了ab两个连续访问的页面显示了不同的登录状态。</p>
+<p>还有更复杂一点的步骤可以导致a页面显示账户1，b页面显示账户2。这里就不赘述了，但肯定是可以复现的（我是先看见这种情况才发现的bug）。</p>
+<p>原因：</p>
+<p>b通过浏览器回退回到a时，浏览器直接读取了缓存的a页面的html，该html里携带了登录的信息，且因为有数据，在浏览器端不再发送请求而是直接使用html里的数据，所以a页面在不刷新的情况下一定会为“未登录”。</p>
+<p>方案：</p>
+<pre><code>- 临时： asyncData已经获取了数据的情况下，在a页面的created里再次请求接口，保证浏览器无论怎么访问都可以更新数据。（不加loading的情况下可以看见账户信息的突变）
+- 终极： 所有可以触发用户登录状态的页面都放在一个项目里，浏览器前进后退会触发middleware，此时可以更新状态。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/ssr/ssr_practice/" data-id="clivn5s2e003tml6psaxcr5yb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-other/study-reg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/other/study-reg/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.737Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/other/study-reg/">正则表达式学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-对某个字符进行匹配"><a href="#1-对某个字符进行匹配" class="headerlink" title="1.对某个字符进行匹配"></a>1.对某个字符进行匹配</h2><p><strong> 按匹配范围进行分类 </strong></p>
+<ul>
+<li><p>普通字符（如a）：普通字符本身（a）</p>
+</li>
+<li><p>特殊字符（如. 和 \）: \特殊字符 （如 \ . 和 \ \ , -(连字符) 字符不需要被转译）</p>
+</li>
+<li><p>空白字符(非打印字符):</p>
+<ul>
+<li>\f : 换页符</li>
+<li>\n : 换行符</li>
+</ul>
+</li>
+<li><p>多个字符中的一个</p>
+<ul>
+<li>字符集(如匹配a或者s或者d) : [asd]</li>
+<li><p>字符集合区间(如匹配数字0~9) :</p>
+<p>  [0-9]  //完全等同于[0123456789]</p>
+<p>  [A-Z]</p>
+<p>  [a-z]</p>
+<p>  [A-z] //匹配ASCII字符A到z的所有字母,不常用,包含[、^等其他字符</p>
+</li>
+<li><p>多个字符区间：</p>
+<p>  [A-Za-z0-9]</p>
+</li>
+<li><p>匹配特定类别：</p>
+<p>  \d:任何一个数字</p>
+<p>  \D:任何一个非（数字）</p>
+<p>  \w:字母、数字、下划线</p>
+<p>  \W: 非（字母、数字、下划线）</p>
+<p>  \s:空白字符</p>
+<p>  \S:非空白字符</p>
+</li>
+</ul>
+</li>
+<li>取非匹配: [^0-9] //匹配不上数字的字符</li>
+<li>匹配除换行符之外的任何单个字符：.</li>
+<li><p>或操作符 |。 ‘x|y’匹配’x’或者’y’。</p>
+<p>  例如：</p>
+<p>  <code>/green|red/ //匹配“green apple”中的‘green’和“red apple”中的‘red’</code><br>  <code>/gree(n|r)ed/ //匹配&#39;greened&#39;或&#39;greered&#39;</code></p>
+</li>
+</ul>
+<h2 id="2-对字符进行重复匹配"><a href="#2-对字符进行重复匹配" class="headerlink" title="2.对字符进行重复匹配"></a>2.对字符进行重复匹配</h2><ul>
+<li><p>匹配一个或多个字符： +</p>
+<p>  例子：</p>
+<p>  a+  //匹配一个或连续多个a</p>
+<p>  \w+ //匹配一个或连续多个字母数字字符</p>
+<p>  [0-9]+ //匹配一个或多个数字</p>
+</li>
+<li><p>匹配零个或多个字符： *</p>
+<p>  用法和 + 完全一样。</p>
+</li>
+<li><p>匹配零个或一个字符 ： ？<br>  用法同上。</p>
+</li>
+<li><p>指定重复的次数</p>
+<ul>
+<li>精确的值 [0-9]{6}  //重复出现六个数字</li>
+<li>闭合区间 \d{2,4} //数字最多重复4次，最少重复两次</li>
+<li>半开半闭区间 \d{3,} //至少重复3次</li>
+</ul>
+</li>
+<li><p>懒惰型元字符</p>
+<p>  这是个非常有意思的概念。*，+都是尽可能多的匹配，但是存在一种情况是需要尽可能少的匹配，因此引入懒惰型元字符的概念。懒惰型元字符就是匹配尽可能少的字符。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>贪婪型元字符</th>
+<th>懒惰型元字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>*?</td>
+</tr>
+<tr>
+<td>+</td>
+<td>+?</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>{n,}?</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-位置匹配"><a href="#3-位置匹配" class="headerlink" title="3. 位置匹配"></a>3. 位置匹配</h2><ul>
+<li><p>单词 边界： \b   //用于匹配一个单词的开始或者结尾</p>
+<p>  \bcat\b  //只匹配cat单词</p>
+<p>  \bcat //匹配以cat开头的单词</p>
+<p>  cat\b  //匹配以cat结尾的单词</p>
+</li>
+<li><p>非单词 边界： \B //匹配前或后不是单词边界的符号</p>
+<p>  \B-\B  //匹配color - coded ，不匹配 nine-digit</p>
+</li>
+<li><p>字符串边界： ^ （字符串开头） $ （字符串结尾）</p>
+</li>
+<li><p>分行匹配模式： (?m) //将行分隔符当做字符串分隔符对待，因此^ $还会匹配行分隔符</p>
+</li>
+</ul>
+<h2 id="4-子表达式"><a href="#4-子表达式" class="headerlink" title="4.子表达式"></a>4.子表达式</h2><h3 id="捕获括号"><a href="#捕获括号" class="headerlink" title="捕获括号"></a>捕获括号</h3><p>把一个子表达式当做一个独立的元素使用。子表达式需用（）(称为捕获括号)括起来。</p>
+<p>例子：</p>
+<p><code>(\d{1,3}\.){3}\d{1,3}  // 子表达式\d{1,3}\.重复三次，可以匹配ip地址如10.125.19.211</code></p>
+<p><code>(19|20)\d{2} // 匹配19或者20开始的四位数</code></p>
+<h3 id="非捕获括号-x"><a href="#非捕获括号-x" class="headerlink" title="非捕获括号 (?:x)"></a>非捕获括号 (?:x)</h3><p>匹配’x’但是不记住匹配项。</p>
+<pre><code>const reg1 = /(?:foo)/;
+const reg2 = /(foo)/;
+const str = &apos;foo&apos;;
+str.replace(reg1, &apos;$1&apos;) // &apos;$1&apos; 捕获但是没有记住，所以$1没有值
+str.replace(reg2, &apos;$1&apos;) // &apos;foo&apos; 捕获并且记住，所以$1有值
+</code></pre><h2 id="5-回溯引用"><a href="#5-回溯引用" class="headerlink" title="5.回溯引用"></a>5.回溯引用</h2><p>回溯引用多用来替换字符串。<del>不知道这在js里怎么写。</del></p>
+<p>看了书之后，发现回溯引用就是将子表达式化作变量，按照出现顺序通过 \1 \2 … 进行调用，同一子表达式匹配出的字符串应该是一样的，比如子表达式1匹配到了sat,则后续\1处的调用也必须匹配sat。</p>
+<p>例子：</p>
+<p><code>/(foo) (bar) \1 \2/  // 这个正则表达式能匹配上&quot;foo bar foo bar&quot;，用两个括号分别记住前两个单词，再用\1 \2表示匹配和捕获1(在此是&#39;foo&#39;)、捕获2(在此是&#39;bar&#39;)一样的字符串。 \1 \2用于正则表达式的匹配环节，$1 $2用于正则表达式的替换环节。</code></p>
+<h2 id="6-断言-条件匹配"><a href="#6-断言-条件匹配" class="headerlink" title="6.断言(条件匹配)"></a>6.断言(条件匹配)</h2><h3 id="先行断言-x-y"><a href="#先行断言-x-y" class="headerlink" title="先行断言 x(?=y)"></a>先行断言 x(?=y)</h3><p>匹配’x’，仅当’x’后面跟着’y’。这叫先行断言。</p>
+<p>例子：</p>
+<p><code>/Jack(?=Sprat|Frost)/  // 匹配‘Jack’仅仅当它后面跟着&#39;Sprat&#39;或者是‘Frost’。但是‘Sprat’和‘Frost’都不是匹配结果的一部分。</code></p>
+<h3 id="后行断言-lt-y-x"><a href="#后行断言-lt-y-x" class="headerlink" title="后行断言 (?&lt;=y)x"></a>后行断言 (?&lt;=y)x</h3><p>匹配’x’，仅当’x’前面是’y’。这叫后行断言。</p>
+<p><code>/(?&lt;=Jack|Tom)Sprat/  // 匹配‘ Sprat ’仅仅当它前面是&#39;Jack&#39;或者是‘Tom’。但是‘Jack’和‘Tom’都不是匹配结果的一部分。</code></p>
+<h3 id="反向-先行断言-x-y"><a href="#反向-先行断言-x-y" class="headerlink" title="反向(?)先行断言 x(?!y)"></a>反向(?)先行断言 x(?!y)</h3><p>匹配’x’,仅当’x’后面不是’y’</p>
+<h3 id="反向-后行断言-lt-y-x"><a href="#反向-后行断言-lt-y-x" class="headerlink" title="反向(?)后行断言 (?&lt;!y)x"></a>反向(?)后行断言 (?&lt;!y)x</h3><p>匹配’x’,仅当’x’前面不是’y’</p>
+<h3 id="7-正则表达式小书上还有些东西，没用过也没看过"><a href="#7-正则表达式小书上还有些东西，没用过也没看过" class="headerlink" title="7. 正则表达式小书上还有些东西，没用过也没看过"></a>7. 正则表达式小书上还有些东西，没用过也没看过</h3><p>等真正需要的时候再学吧，不然又忘了</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener">正则表达式-javascript|mdn</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/other/study-reg/" data-id="clivn5s250031ml6pdcffszik" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reg/">reg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python/The-abc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/python/The-abc/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.737Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/python/The-abc/">python基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为什么要学python？</p>
+<p>仅仅是想了解世界多一点。</p>
+<hr>
+<p>与js的不同之处</p>
+<ol>
+<li>执行二元操作符（例如加号）时，如果操作符前后的数据类型不同：js会先做隐式类型转换再进行运算；python会直接报错，需要显示的转换类型才能正确运算。</li>
+<li></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/python/The-abc/" data-id="clivn5s260035ml6pufra1vln" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-other/xss" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/other/xss/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.737Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/other/xss/">DOM Based XSS和html字符编码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近发现页面有xss的安全性问题，我之前简单了解xss攻击是什么，但是细节还是不够清楚，借这个机会再重新学习梳理一下。</p>
+<h2 id="什么是XSS"><a href="#什么是XSS" class="headerlink" title="什么是XSS"></a>什么是XSS</h2><p>世界上有两种事很难，一个是把我的想法放进你的脑袋里，另一个是把你口袋里的钱放到我口袋里。<br>XSS就是把我的代码注入到你的代码里，把你口袋里的钱放到我口袋里。</p>
+<p>正经点，XSS就是向本可以被信任的良性网站注入恶意脚本，而网站因为一些疏忽执行了恶意脚本，从而对受害者为所欲为的攻击。</p>
+<h2 id="XSS分类"><a href="#XSS分类" class="headerlink" title="XSS分类"></a>XSS分类</h2><p>参考<a href="https://owasp.org/www-community/Types_of_Cross-Site_Scripting" target="_blank" rel="noopener">Types of XSS</a>。</p>
+<p>最开始的分类：</p>
+<ol>
+<li><p>Stored XSS: 通常发生在需要在服务器里储存用户输入的场景，例如博客、评论区等，攻击者将恶意代码通过网页提交到服务器，在其他访问者访问相关页面时，如果不经过滤和处理的情况下直接渲染，可造成恶意注入。</p>
+<p> 举个简单🌰，攻击者在某文章评论区里输入了<figure class="highlight plain"><figcaption><span>fish')````，网站没有过滤就直接将这段代码提交到了服务器。受害者在访问这个文章时，服务器下发这条评论，服务器和网站又双叒没有过滤并且直接渲染，受害者就收到了这个小小的攻击。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">2. Reflected XSS: 当用户输入的全部或者部分内容会成为网络请求返回数据的一部分，如果没有经过安全处理就直接渲染造成的攻击属于此列。如果将注入行为拼接到url上，受害者点开时，网站在这种不设防的情况下直接执行请求返回，导致被注入攻击。利用这种漏洞构成url发送给受害者来点击，是很多钓鱼(phishing，音同fishing🐟，谐音梗扣钱)方案的核心。</span><br><span class="line">3. DOM Based XSS: 基于DOM的XSS攻击，利用数据从源头读取到渲染具体DOM过程中不设防造成的攻击。例如从url中的search部分读取数据渲染到页面上，如果不做任何处理，search里携带的恶意字符串可以被document.write直接渲染到页面上。</span><br><span class="line">    举个简单🌰，就是这次业务中发现的漏洞：页面从search中读取name后，经过一系列拼接处理，直接用vue的v-html语法直接进行渲染，导致如果name的值为````&lt;script&gt;alert(&apos;you idiot&apos;)&lt;/script&gt;````，那么不仅侮辱性极强，伤害也很大。</span><br><span class="line"></span><br><span class="line">后来发现XSS可能由以上几种重叠组成，又延伸出一种分类：</span><br><span class="line">1. Server XSS: 非法数据来源于服务端返回，页面无脑执行里面嵌入的脚本。</span><br><span class="line">2. Client XSS: 调用不安全的函数将没经过处理的数据直接渲染到页面上。</span><br><span class="line"></span><br><span class="line">此次发现的问题就是典型的DOM Based XSS，因此接下来对这个方向将多探讨一些。</span><br><span class="line"></span><br><span class="line">## DOM Based XSS防御</span><br><span class="line"></span><br><span class="line">### DOM Based XSS</span><br><span class="line">&gt;DOM Based XSS (or as it is called in some texts, “type-0 XSS”) is an XSS attack wherein the attack payload is executed as a result of modifying the DOM “environment” in the victim’s browser used by the original client side script, so that the client side code runs in an “unexpected” manner. That is, the page itself (the HTTP response that is) does not change, but the client side code contained in the page executes differently due to the malicious modifications that have occurred in the DOM environment.</span><br><span class="line">&gt;</span><br><span class="line">&gt;This is in contrast to other XSS attacks (stored or reflected), wherein the attack payload is placed in the response page (due to a server side flaw).</span><br><span class="line"></span><br><span class="line">翻译一下：服务端返回的页面和数据都没有问题，但是页面自己执行了代码修改了自己的内容，如果在执行过程中被注入了恶意代码，那页面运行肯定不符合预期了。</span><br><span class="line"></span><br><span class="line">DOM Based XSS的防御原则：</span><br><span class="line">页面在读取数据修改自己的内容时，如果涉及到直接修改DOM元素(document.write, innerHTML)，除非是完全信任的数据源，否则一定要经过过滤才渲染。</span><br><span class="line"></span><br><span class="line">HTML、HTML attribute, URL, 和CSS都可以在JS执行上下文中被触达和修改。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## HTML字符实体</span><br><span class="line"></span><br><span class="line">### HTML预留字符</span><br><span class="line">### 模糊的连结符</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">为了将一些HTML会解析的特殊字符用文本形式展示出来，HTML设计了字符引用([Character references](https://html.spec.whatwg.org/multipage/syntax.html#character-references))。</span><br><span class="line">这些字符必须`&amp;`开头, 紧接至少一位0-9a-zA-Z里的字符，最后以`;`结尾。字符分为以下三种：</span><br><span class="line">1. 十进制字符，如````&amp;#169;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>十六进制字符，如<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. 带命名的字符，如````&amp;copy;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<h2 id="其他类型的xss防御（简单介绍）"><a href="#其他类型的xss防御（简单介绍）" class="headerlink" title="其他类型的xss防御（简单介绍）"></a>其他类型的xss防御（简单介绍）</h2><p>目前常用的已知机制包含以下几种：</p>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener">CSP(Content-Security-Policy)</a>：</li>
+</ol>
+<p>CSP是被设计用来防止和减轻某些类型的攻击，例如xss和数据注入，它是完全向下兼容的，不支持它的浏览器会采用默认的同源策略。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>借用大佬的话，网络攻防是很复杂的，不仅是前端的问题，往往需要多端配合来防御攻击。但是前端要力所能及地去守护自己网站的安全。对于一些不安全的js方法和HTML属性（eval、document.write、innerHTML以及衍生出来的语法糖等），在使用之前要多思考是否有使用的必要，如果确实要使用，那一定要对数据进行过滤处理。千里之堤毁于蚁穴，对于网络安全，再小心也不为过。</p>
+<p>学习链接：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener">CSP(mdn)</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">Cross Site Scripting Prevention Cheat Sheet</a></li>
+<li><a href="https://owasp.org/www-community/attacks/xss/#stored-and-reflected-xss-attacks" target="_blank" rel="noopener">Cross Site Scripting (XSS)-owasp</a></li>
+<li><a href="https://owasp.org/www-community/Types_of_Cross-Site_Scripting" target="_blank" rel="noopener">Types of XSS</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">DOM based XSS Prevention Cheat Sheet</a></li>
+<li><a href="https://mathiasbynens.be/notes/ambiguous-ampersands" target="_blank" rel="noopener">Ambiguous ampersands</a></li>
+<li><a href="https://tech.bytedance.net/questions/6901645786388693005" target="_blank" rel="noopener">你们的系统是如何防范XSS攻击的？</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Entity" target="_blank" rel="noopener">Entity</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/other/xss/" data-id="clivn5s270037ml6px7s1vjjn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss/">xss</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/Q&amp;A" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/react/Q&A/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.737Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="react学习的Q-amp-A"><a href="#react学习的Q-amp-A" class="headerlink" title="react学习的Q&amp;A"></a>react学习的Q&amp;A</h1><p>此篇Q&amp;A仅为我本人关于reactjs学习的自问自答，不涉及其他react的衍生库。Answer可能有错处，所以每次看的时候需勤加思考。</p>
+<h2 id="高级指引"><a href="#高级指引" class="headerlink" title="高级指引"></a>高级指引</h2><h3 id="为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？"><a href="#为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？" class="headerlink" title="为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？"></a>为什么使用forwardRef向下传递ref，而不是直接作为props传给子组件？</h3><p>常规函数和class组件不会将ref且props的参数，类似的还有key。forwardRef方法可以收到ref参数，然后将它重命名作为props参数传到被包裹的组件上。（那这个和直接将ref重命名传入被包裹的组件有什么区别吗？forwardRef能想到的优点就是使用者可以直接用ref，更符合直觉，而不用记住并使用重命名，重命名的过程交给组件的维护者。）</p>
+<h2 id="HOOk"><a href="#HOOk" class="headerlink" title="HOOk"></a>HOOk</h2><h3 id="react为什么设计了HOOK？"><a href="#react为什么设计了HOOK？" class="headerlink" title="react为什么设计了HOOK？"></a>react为什么设计了HOOK？</h3><ul>
+<li>相关联的函数被迫拆分到各生命钩子里完成，例如监听器的设置和清除，不够清晰。</li>
+<li>class的写法不够友好，状态逻辑难以复用</li>
+<li>函数组件想维护状态时，不用再强行转换成class组件</li>
+</ul>
+<p>参考： <a href="https://juejin.im/post/5dbbdbd5f265da4d4b5fe57d" target="_blank" rel="noopener">React Hooks 详解（近 1w 字）+ 项目实战</a></p>
+<h3 id="读取state时，其值为何被固定在它被创建的那次渲染中？"><a href="#读取state时，其值为何被固定在它被创建的那次渲染中？" class="headerlink" title="读取state时，其值为何被固定在它被创建的那次渲染中？"></a>读取state时，其值为何被固定在它被创建的那次渲染中？</h3><p>官方hooks的FAQ中提到一个问题，<a href="https://zh-hans.reactjs.org/docs/hooks-faq.html#why-am-i-seeing-stale-props-or-state-inside-my-function" target="_blank" rel="noopener">为什么我会在我的函数中看到陈旧的 props 和 state ？</a>。我不太理解props为何会看到陈旧的，只能归为是父组件的state是陈旧的，这个state作为子组件的props，导致子组件的props是陈旧的。这样的话，其实只有一个问题，就是state是陈旧的。</p>
+<p>官方解释中提到一句，<b>组件内部的任何函数，包括事件处理函数和 effect，都是从它被创建的那次渲染中被「看到」的</b>。没有看过react源码，只是根据<a href="https://zh-hans.reactjs.org/docs/hooks-faq.html#how-does-react-associate-hook-calls-with-components" target="_blank" rel="noopener">官网给出的概念</a>来理解useState的原理。在初始时，useState创建一个变量存到react的”记忆单元格”里，每次更新时，如果已经有这个变量，则返回一个此变量的复制（值类型复制值，对象类型进行一次深拷贝?）值，否则进行初始化。react的hook组件就是一个函数，每次更新的时候都会重新执行一遍，内部定义的回调函数或者异步函数会重新创建一份，由于js的闭包性质，导致这些函数使用的都是此时的state值，不会因为后续state的更改而影响函数所使用的值。</p>
+<h3 id="为什么用useState来保存需要渲染的变量，而不是useRef"><a href="#为什么用useState来保存需要渲染的变量，而不是useRef" class="headerlink" title="为什么用useState来保存需要渲染的变量，而不是useRef?"></a>为什么用useState来保存需要渲染的变量，而不是useRef?</h3><p>经测试，useRef每次返回的都是同一个对象，当current改变时，不会触发组件的更新。使用useState是因为返回的值里有重新设置值的函数，当state值改变时，使用那个函数重新赋值会触发视图的重新更新。</p>
+<h3 id="如何既使用connect-又使用React-forwardRef来包装组件？"><a href="#如何既使用connect-又使用React-forwardRef来包装组件？" class="headerlink" title="如何既使用connect,又使用React.forwardRef来包装组件？"></a>如何既使用connect,又使用React.forwardRef来包装组件？</h3><pre><code>function Components({forwardRef, ...restProps}){
+    /**
+    *   组件实现细节
+    */
+    return (
+        &lt;div ref={forwardRef}&gt;
+            {/*具体实现*/}
+        &lt;/div&gt;
+    )
+}
+
+const ConnectedComponents = connect()(Components)
+export default React.forwardRef((props, ref)=&gt;{
+    return &lt;ConnectedComponents {...props} forwardRef={ref} /&gt;
+});
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/react/Q&A/" data-id="clivn5s28003bml6pjqzujafn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/cssmodule" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/react/cssmodule/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.737Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/react/">react</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/react/cssmodule/">css模块化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSSModule-css模块化"><a href="#CSSModule-css模块化" class="headerlink" title="CSSModule  css模块化"></a>CSSModule  css模块化</h1><pre><code>传统的css提倡与html分离开，便于管理且可移植性强。
+react的css提倡模块化管理,将css嵌入到js中，这样不会污染到全局。
+</code></pre><h3 id="如何实现："><a href="#如何实现：" class="headerlink" title="如何实现："></a>如何实现：</h3><p>参考链接：<a href="http://blog.csdn.net/kun5706947/article/details/52596766" target="_blank" rel="noopener">http://blog.csdn.net/kun5706947/article/details/52596766</a></p>
+<h4 id="1-使用style-loader和css-loader将css嵌入到js中"><a href="#1-使用style-loader和css-loader将css嵌入到js中" class="headerlink" title="1.使用style-loader和css-loader将css嵌入到js中"></a>1.使用style-loader和css-loader将css嵌入到js中</h4><p>webpack提供两个工具处理样式表，css-loader 和 style-loader，二者处理的任务不同，css-loader使你能够使用类似@import 和 url(…)的方法实现 require()的功能,style-loader将所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入webpack打包后的JS文件中。</p>
+<h4 id="2-使用CSS-modules处理，避免全局污染"><a href="#2-使用CSS-modules处理，避免全局污染" class="headerlink" title="2.使用CSS modules处理，避免全局污染"></a>2.使用CSS modules处理，避免全局污染</h4><p>CSS modules 的技术就意在把JS的模块化思想带入CSS中来，通过CSS模块，所有的类名，动画名默认都只作用于当前模块。<br>Webpack从一开始就对CSS模块化提供了支持，在CSS loader中进行配置后，你所需要做的一切就是把”modules“传递都所需要的地方，然后就可以直接把CSS的类名传递到组件的代码中，且这样做只对当前组件有效，不必担心在不同的模块中具有相同的类名可能会造成的问题。</p>
+<h3 id="初学踩坑"><a href="#初学踩坑" class="headerlink" title="初学踩坑"></a>初学踩坑</h3><p>1.在react组件内引入css时，组件中的className需要通过引入的样式来声明，如果直接声明，那么css中相应的样式就不会起效。<br>原因: css modules为了防止全局污染，会把css文件中的类名换为hash值，即原类名不存在，只能通过相应的hash值取得样式。</p>
+<p>比如：</p>
+<p>在ListItem中引入style，在控制台中输出style是这样的：</p>
+<p><a href="http://img.blog.csdn.net/20161126172051636" target="_blank" rel="noopener">style的输出</a></p>
+<p>userImg是一个类名，它在js中最后被替换为’_1Mg9kL_n3wNMjzfPVvifCV’，userImg不再存在。如果在组件中写userImg的话，那最终是没有对应的样式的。因此我们只能通过sytle.userImg取得’_1Mg9kL_n3wNMjzfPVvifCV’来获取相应的样式。</p>
+<pre><code>//wrong
+import style from &apos;./ListItem.css&apos;;
+
+class ListItem extends React.Component{
+    render(){
+        var msg = this.props.msg;
+        return(
+            &lt;li&gt;
+                &lt;div className=&apos;userImg&apos;&gt;
+                    &lt;img src={msg.img}/&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        );
+    }
+}
+
+//right
+import style from &apos;./ListItem.css&apos;;
+
+class ListItem extends React.Component{
+    render(){
+        var msg = this.props.msg;
+        return(
+            &lt;li&gt;
+                &lt;div className={style.userImg}&gt;
+                    &lt;img src={msg.img}/&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        );
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/react/cssmodule/" data-id="clivn5s2a003hml6pxme4qa9v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css-module/">css module</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

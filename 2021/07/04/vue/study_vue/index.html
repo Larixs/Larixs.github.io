@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>学习vue | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基础语法篇 el表示监听范围 new Vue({     el: &amp;apos;#app&amp;apos;,     data: {         message: &amp;apos;Hello Vue.js!&amp;apos;          }     });// app内的元素被监听， app本身不被监听。只能对app内的元素使用v语法  track-by没看懂  less中/deep/ (vue-load">
+<meta name="keywords" content="study notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习vue">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/vue/study_vue/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="基础语法篇 el表示监听范围 new Vue({     el: &amp;apos;#app&amp;apos;,     data: {         message: &amp;apos;Hello Vue.js!&amp;apos;          }     });// app内的元素被监听， app本身不被监听。只能对app内的元素使用v语法  track-by没看懂  less中/deep/ (vue-load">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习vue">
+<meta name="twitter:description" content="基础语法篇 el表示监听范围 new Vue({     el: &amp;apos;#app&amp;apos;,     data: {         message: &amp;apos;Hello Vue.js!&amp;apos;          }     });// app内的元素被监听， app本身不被监听。只能对app内的元素使用v语法  track-by没看懂  less中/deep/ (vue-load">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue/study_vue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/vue/study_vue/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.739Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      学习vue
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基础语法篇"><a href="#基础语法篇" class="headerlink" title="基础语法篇"></a>基础语法篇</h3><ul>
+<li><p>el表示监听范围</p>
+<pre><code>new Vue({
+    el: &apos;#app&apos;,
+    data: {
+        message: &apos;Hello Vue.js!&apos;
+         }    
+});// app内的元素被监听， app本身不被监听。只能对app内的元素使用v语法
+</code></pre></li>
+<li><p>track-by没看懂</p>
+</li>
+<li><p>less中/deep/ (vue-loader特性)需要与scope搭配使用</p>
+</li>
+</ul>
+<h3 id="表单篇"><a href="#表单篇" class="headerlink" title="表单篇"></a>表单篇</h3><ul>
+<li><p>多选框 </p>
+<p>  v-model是数据来源，vue是中间管道，可以进行数据处理，checkedNames | json 是数据终点。</p>
+</li>
+</ul>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;jack&quot; value=&quot;Jack&quot;     v-model=&quot;checkedNames&quot;&gt;
+    &lt;label for=&quot;jack&quot;&gt;Jack&lt;/label&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;john&quot; value=&quot;John&quot;     v-model=&quot;checkedNames&quot;&gt;
+    &lt;label for=&quot;john&quot;&gt;John&lt;/label&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;mike&quot; value=&quot;Mike&quot;     v-model=&quot;checkedNames&quot;&gt;
+    &lt;label for=&quot;mike&quot;&gt;Mike&lt;/label&gt;
+    &lt;br&gt;
+    &lt;span&gt;Checked names: {{ checkedNames | 	json }}&lt;/span&gt;
+&lt;/div&gt;
+</code></pre><p>   js:</p>
+<pre><code>new Vue({
+   el: &apos;#app&apos;,
+   data: {
+         checkedNames: []
+   }
+ });
+</code></pre><ul>
+<li>动态设置checkbox的值</li>
+</ul>
+<pre><code>&lt;input
+  type=&quot;checkbox&quot;
+  v-model=&quot;toggle&quot;
+  v-bind:true-value=&quot;a&quot;
+  v-bind:false-value=&quot;b&quot;&gt;//toggle不需要在data里设置
+</code></pre><ul>
+<li>将option的value设置为对象</li>
+</ul>
+<pre><code> &lt;select v-model=&quot;selected&quot;&gt;
+  &lt;!-- 对象字面量 --&gt;
+  &lt;option v-bind:value=&quot;{ number: 123 }&quot;&gt;123&lt;/option&gt;
+&lt;/select&gt;
+
+
+
+    // 当选中时
+typeof vm.selected // -&gt; &apos;object&apos;
+vm.selected.number // -&gt; 123
+</code></pre><ul>
+<li><p>表单项参数特性</p>
+<ul>
+<li><p>lazy：在默认情况下，v-model 在input 事件中同步输入框值与数据，可以添加一个特性 lazy，从而改到在 change 事件中同步。</p>
+</li>
+<li><p>number ：如果想自动将用户的输入转为 Number 类型（如果原值的转换结果为 NaN 则返回原值），可以添加一个特性 number。</p>
+</li>
+<li><p>debounce ：debounce 设置一个最小的延时，在每次敲击之后延时同步输入框的值与数据。如果每次更新都要进行高耗操作（例如在输入提示中 Ajax 请求），它较为有用。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="具体问题"><a href="#具体问题" class="headerlink" title="具体问题"></a>具体问题</h3><h4 id="Vue-extend-object"><a href="#Vue-extend-object" class="headerlink" title="Vue.extend(object)"></a>Vue.extend(object)</h4><p>混合是一种灵活的分布式复用 Vue 组件的方式。混合对象可以包含任意组件选项。以组件使用混合对象时，所有混合对象的选项将被混入该组件本身的选项。</p>
+<p>Vue.extend()的参数是object。其中，object的mixins属性是可以包含多个自定义混合对象的数组，object中也可以包含任意组件选项。object里的属性之间会相互混合。混合之后的object再与该组件本身的选项混合。</p>
+<p>不管是object内的混合，还是object与组件之间的混合，在默认情况下都遵守下面的混合策略:</p>
+<ul>
+<li><p>函数之间的混合：（例如钩子函数）同名函数混合成一个数组，都会被调用。</p>
+</li>
+<li><p>对象之间的混合：（例如methods） 同名对象将会混合成一个对象。当对象的键名有冲突时，如果是在object内部，则取靠后的键值对；如果是在object与组件之间，则取组件的键值对。</p>
+</li>
+</ul>
+<p>以上的策略成为默认混合策略。除了默认混合策略，还有配合全局变量optionMergeStrategies使用的<a href="https://cn.vuejs.org/v2/guide/mixins.html#自定义选项混合策略" target="_blank" rel="noopener">自定义混合策略</a>。</p>
+<h4 id="Vue-nextTick-callback"><a href="#Vue-nextTick-callback" class="headerlink" title="Vue.nextTick(callback)"></a>Vue.nextTick(callback)</h4><p>Vue异步执行DOM更新。和浏览器开队列攒任务来渲染页面类似，Vue观察到数据有变化的时候，会开启一个队列进行缓冲。缓冲减少了不必要的计算和多余的DOM操作。一个队列循环称为一个tick。Vue.nextTick()即是在本次tick完成之后、下一个tick之前（？）就调用。</p>
+<p>在组件内使用时，不需要用全局Vue，使用this.$nextTick()就可调用，并且回调函数中的this将自动指向当前Vue实例。</p>
+<h4 id="具名slot-作用域插槽"><a href="#具名slot-作用域插槽" class="headerlink" title="具名slot + 作用域插槽"></a>具名slot + 作用域插槽</h4><p>具名slot通过名称来控制外部组件的插入。同一个名称的slot可以在该组件里多处放置，最后渲染时，同名的slot渲染相同的东西。当引入作用域插槽时，同名的slot都引入同一个template，不过会根据传入props的情况来根据同一个template渲染不同的内容出来。</p>
+<p>例如：</p>
+<p>parents.vue</p>
+<pre><code>&lt;div&gt;
+  &lt;child :items=&quot;items&quot;&gt;
+    &lt;template slot=&quot;item&quot; scope=&quot;itemInfo&quot;&gt;
+      &lt;item config=&quot;content&quot; :info=&quot;itemInfo.info&quot;/&gt;
+    &lt;/template&gt;
+  &lt;/child&gt;
+&lt;/div&gt;
+</code></pre><p>把所有child.vue传入slot的参数都集合到itemInfo这个对象里，然后把itemInfo.info作为<item>的info传入。</item></p>
+<p>child.vue</p>
+<pre><code>&lt;ul&gt;
+  &lt;div v-for=&quot;item in items&quot; class=&quot;item-div&quot;&gt;
+    &lt;slot name=&quot;item&quot; :info=&quot;item&quot;&gt; &lt;!-- itemInfo.info = item --&gt;
+    &lt;/slot&gt;
+  &lt;/div&gt;
+&lt;/ul&gt;
+</code></pre><p>child为slot传入参数info。结合parents</p>
+<p>item.vue</p>
+<pre><code>&lt;div&gt;
+  {{info[config]}}
+&lt;/div&gt;
+</code></pre><hr>
+<h4 id="如何将-函数-第三方库-全局注册到vue上"><a href="#如何将-函数-第三方库-全局注册到vue上" class="headerlink" title="如何将 函数/第三方库 全局注册到vue上"></a>如何将 函数/第三方库 全局注册到vue上</h4><p><strong>简单粗暴的方式</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> moment <span class="keyword">from</span> <span class="string">'moment'</span>;</span><br><span class="line">    </span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$moment'</span>, &#123; <span class="attr">value</span>: moment &#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>优雅一点的方式–Vue的plugin</strong></p>
+<p><em>moment.js</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> moment <span class="keyword">from</span> <span class="string">'moment'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install: <span class="function"><span class="keyword">function</span>(<span class="params">Vue</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$moment'</span>, &#123; <span class="attr">value</span>: moment &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>entry.js</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> MomentPlugin <span class="keyword">from</span> <span class="string">'./moment.js'</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(MomentPlugin);</span><br></pre></td></tr></table></figure>
+<p>注册之后，</p>
+<p>在.vue的script里，可以通过vue.$moment或者this.$moment访问到moment。</p>
+<p>在.vue的template里的 &#123;&#123; expression &#125;&#125; 中，也可以直接访问$moment。</p>
+<p>例如</p>
+<pre><code>&lt;p&gt;{{ $moment().format("HH:mm") }}&lt;/p&gt;
+</code></pre><p>会直接输出当前时间</p>
+<p>参考资料</p>
+<ol>
+<li><a href="https://github.com/dwqs/blog/issues/51" target="_blank" rel="noopener">[译]如何在 Vue.js 中使用第三方库</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/vue/study_vue/" data-id="clivn5s2f003xml6pen93mkxg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/vue/how_to_study_vue_deep/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          vue源码学习日记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/vue/study_vue_deep2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">深入学习vue -- 依赖的收集、触发、和更新</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

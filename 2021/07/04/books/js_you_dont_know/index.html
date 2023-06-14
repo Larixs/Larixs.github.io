@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>你不知道的Javascript | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上卷 (scope &amp;amp; closures &amp;amp; this &amp;amp; object prototypes)part1, scope and closuresscope 参与编译的部分：   引擎： 从头到尾负责整个js程序的编译及执行过程。 编译器： 负责语法分析及代码生成。 作用域： 收集并维护所有声明的标识符（变量），确定当前执行的代码对这些标识符的访问权限。   遇到变量时的简">
+<meta name="keywords" content="ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你不知道的Javascript">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/books/js_you_dont_know/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="上卷 (scope &amp;amp; closures &amp;amp; this &amp;amp; object prototypes)part1, scope and closuresscope 参与编译的部分：   引擎： 从头到尾负责整个js程序的编译及执行过程。 编译器： 负责语法分析及代码生成。 作用域： 收集并维护所有声明的标识符（变量），确定当前执行的代码对这些标识符的访问权限。   遇到变量时的简">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="你不知道的Javascript">
+<meta name="twitter:description" content="上卷 (scope &amp;amp; closures &amp;amp; this &amp;amp; object prototypes)part1, scope and closuresscope 参与编译的部分：   引擎： 从头到尾负责整个js程序的编译及执行过程。 编译器： 负责语法分析及代码生成。 作用域： 收集并维护所有声明的标识符（变量），确定当前执行的代码对这些标识符的访问权限。   遇到变量时的简">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-books/js_you_dont_know" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/books/js_you_dont_know/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.732Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/books/">books</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      你不知道的Javascript
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="上卷-scope-amp-closures-amp-this-amp-object-prototypes"><a href="#上卷-scope-amp-closures-amp-this-amp-object-prototypes" class="headerlink" title="上卷 (scope &amp; closures &amp; this &amp; object prototypes)"></a>上卷 (scope &amp; closures &amp; this &amp; object prototypes)</h1><h2 id="part1-scope-and-closures"><a href="#part1-scope-and-closures" class="headerlink" title="part1, scope and closures"></a>part1, scope and closures</h2><h3 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h3><ol>
+<li>参与编译的部分：</li>
+</ol>
+<ul>
+<li>引擎： 从头到尾负责整个js程序的编译及执行过程。</li>
+<li>编译器： 负责语法分析及代码生成。</li>
+<li>作用域： 收集并维护所有声明的标识符（变量），确定当前执行的代码对这些标识符的访问权限。</li>
+</ul>
+<ol start="2">
+<li><p>遇到变量时的简要编译运行过程：</p>
+<p> <code>var a = 2;</code></p>
+<p> 编译器将程序分解并解析成一个抽象语法树（AST），遇到var a时，会先询问作用域是否有一个该名称的变量存在同一个作用域的<em>集合</em>中。如果有，则忽略该声明，继续进行编译，否则会要求作用域在当前作用域的<em>集合</em>中声明一个新的变量， 并命名为a。</p>
+<p> 引擎运行a = 2时，会先询问作用域变量是否存在，如果是，引擎就会使用这个变量，否则继续往上查找。</p>
+</li>
+<li><p>LHS、RHS</p>
+<p>获取变量的值使用的是RHS，为变量赋值（或者说是获得变量的指针？）是用的LHS。 函数声明不会触发LHS。在非严格模式下，LHS在作用域的顶层（即全局作用域）也找不到变量时，全局作用域会创建一个具有该名称的变量并返给引擎。</p>
+</li>
+</ol>
+<ol start="4">
+<li><p>作用域嵌套</p>
+<p> 引擎在当前作用域找不到对应变量时，就会继续向外层作用域查找，直到找到变量或者到达最外层作用域。</p>
+<p> 综合示例：</p>
+<pre><code>function test(str){  // 函数传参时有个隐形变量分配，触发LHS。
+    var a = str;  // 编译器在test作用域内声明变量a，引擎触发RHS查找str的值，触发LHS为变量a赋值。
+    b = a; // 因为没有var这个声明符，所以在编译器没有在test作用域内声明变量b。
+           // 引擎运行时，触发RHS查找a的值，触发LHS查找b。LHS在test作用域内没有找到b，便向外层查找，直到全局作用域。全局作用域也没有变量b，在非严格模式下，全局作用域创建了一个全局变量b，并返回给引擎。
+}
+
+test(&apos;hello world&apos;);  // RHS查找函数。
+console.log(b); // b &gt;&gt; &apos;hello world&apos;
+</code></pre></li>
+<li><p>欺骗词法</p>
+<p> 欺骗词法是指运行时“修改”（或者说欺骗）词法作用域，典型的有eval和with。</p>
+<p> 弊端：</p>
+<ul>
+<li>由于作用域的不确定性，影响编译器的优化。</li>
+<li>在严格模式下会限制或者禁止欺骗词法。</li>
+<li>代码可读性下降。</li>
+</ul>
+</li>
+<li><p>函数作用域与块作用域</p>
+<p> 定义不赘述。</p>
+<p> 注： for循环里如果for的循环变量是声明的let变量，则每次进入循环的时候，都会<strong>重新</strong>绑定到每一个迭代中。</p>
+<p> 加上闭包概念的典型示例：</p>
+<pre><code>for(let i = 1; i &lt;= 5; i++) {
+    setTimeout(function timer(){
+        console.log(i);
+    }, i*1000);
+} // 输出1,2,3,4,5
+
+for (var j = 1; j &lt;= 5; j++){
+    setTimeout(function timer(){
+        console.log(j);
+    }, j*1000);
+} // 输出6,6,6,6,6
+</code></pre></li>
+<li><p>提升</p>
+<ul>
+<li>函数声明会首先被提升。</li>
+<li><p>变量var存在变量声明提升，而let不存在变量声明提升。</p>
+<p>变量var声明提升示例：</p>
+<p>  console.log(a); // undefined<br>  var a;</p>
+<p>  console.log(c); // Uncaught ReferenceError: c is not defined;</p>
+<p>  console.log(b); // Uncaught ReferenceError: b is not defined;<br>  let b;</p>
+<p>原理：</p>
+</li>
+<li><p>编译器在读取<code>console.log(a); var a;</code>时，因为有var声明符，所以编译器会先在当前作用域创建一个变量a，值为undefined。引擎再读取时，存在该变量a，但是该变量取值为undefined。因此打印”undefined”。</p>
+</li>
+<li><code>console.log(c);</code>没有变量声明，编译器也不会提前创建一个相关变量，所以引擎使用时会找不到变量而报错。</li>
+<li>let声明符与var表现不同，没有提升的作用。</li>
+</ul>
+</li>
+</ol>
+<h3 id="closures"><a href="#closures" class="headerlink" title="closures"></a>closures</h3><p>   函数在定义时的词法作用域以外的地方被调用，且此时可以继续访问定义时的词法作用域，该行为称之为闭包。</p>
+<p>   示例</p>
+<pre><code>function foo(){
+    var a = 2;
+    function bar(){
+        console.log(a);
+    }
+    return bar;
+}
+var baz = foo();  // baz也是对bar函数的引用。
+baz(); // 2。通过闭包访问到了foo内部的变量a
+</code></pre><h2 id="part2-this"><a href="#part2-this" class="headerlink" title="part2, this"></a>part2, this</h2><p>this是在运行时进行绑定的，并不是在编写时绑定。this的上下文取决于函数调用时的各种条件，和函数声明的位置没有任何关系，只取决于函数的调用方式。</p>
+<ol>
+<li><p>默认绑定：<br> <strong>非严格模式</strong>下，this默认绑定到全局对象。严格模式下，全局对象无法使用默认绑定，this会绑定到undefined。</p>
+</li>
+<li><p>隐式绑定：<br> 当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象。</p>
+<p> 简单示例：</p>
+<pre><code>function foo() {
+    console.log( this.a );
+}
+var obj = {
+a: 2,
+foo: foo
+};
+obj.foo(); // 2
+</code></pre></li>
+<li><p>隐式丢失：<br> 当为一个绑定了上下文的函数创建一个新的别名时，此时通过新别名调用函数，可能会丢失this对象。注意，参数传递其实也是一种隐形赋值，所以函数在作为参数传递的过程中，容易丢失this对象而使用默认绑定。</p>
+<p> 简单示例：</p>
+<pre><code>function foo() {
+    console.log( this.a );
+}
+var obj = {
+    a: 2,
+    foo: foo
+};
+var bar = obj.foo; // 函数别名！
+var a = &quot;oops, global&quot;; // a 是全局对象的属性
+bar(); // &quot;oops, global&quot; // 丢失了绑定的obj上下文
+</code></pre></li>
+<li><p>显式绑定：</p>
+<ul>
+<li><p>硬绑定：call, apply, bind</p>
+</li>
+<li><p>api调用的”上下文”</p>
+<p>  简单示例：</p>
+<pre><code>function foo(el) {
+    console.log( el, this.id );
+}
+var obj = {
+    id: &quot;awesome&quot;
+}; // 调用 foo(..) 时把 this 绑定到 obj [1, 2, 3].forEach( foo, obj );
+// 1 awesome 2 awesome 3 awesome
+</code></pre></li>
+</ul>
+</li>
+<li><p>new 绑定</p>
+<p> javascript实际上不存在所谓的”构造函数”，只有对于函数的”构造调用”。</p>
+<p> 构造函数调用时的操作：</p>
+<ol>
+<li><p>创建一个全新对象。</p>
+</li>
+<li><p>对这个新对象执行”原型”连接。</p>
+</li>
+<li><p>函数里的this会指向这个新对象（原译文：’这个新对象会绑定到函数调用的this。’，感觉原译文有点奇怪，此项为自行理解的内容）。</p>
+</li>
+<li><p>执行函数。如果函数没有其他返回对象，那么new表达式中的函数调用会自动返回这个新对象。</p>
+</li>
+</ol>
+</li>
+<li><p>优先级</p>
+<p> new 绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
+</li>
+<li><p>箭头函数</p>
+<p> 箭头函数会捕获所在外部函数被调用时的当时环境，并绑定该环境的this。箭头函数的绑定无法被修改。</p>
+</li>
+</ol>
+<h2 id="part3-object"><a href="#part3-object" class="headerlink" title="part3, object"></a>part3, object</h2><p>对象的属性名永远都是字符串。如果使用了string(字面量)以外的其他值作为属性名，那它首先会使用该值的toString方法被转化成一个字符串。</p>
+<h3 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h3><ol>
+<li><p>创建对象常量：</p>
+<p> 结合属性描述符writable: false, configurable: false就可以创建一个真正的常量属性（无法修改、重定义或者删除）。</p>
+</li>
+<li><p>禁止扩展</p>
+<p> 禁止一个对象添加新属性并保留已有属性：</p>
+<p> Object.preventExtensions(myObject);</p>
+</li>
+<li><p>密封</p>
+<p> 禁止添加新属性并且不可删除、重新配置已有的属性。</p>
+<p> 即在一个现有对象上调用 Object.preventExtensions(..) 并把所有现有属性标记为 configurable:false 。</p>
+<p> Object.seal(myObject);</p>
+</li>
+<li><p>冻结</p>
+<p> 禁止添加新属性并且不可修改、删除、重新配置已有属性。</p>
+<p> 即在一个现有对象上调用 Object.seal(..) 并把所有“数据访问”属性标记为 writable:false。</p>
+<p> Object.freeze(myObject);</p>
+</li>
+</ol>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>可以使用@@iterator对象和它的next()方法遍历数据值（而非属性名）。</p>
+<h2 id="part4、-混合对象类"><a href="#part4、-混合对象类" class="headerlink" title="part4、 混合对象类"></a>part4、 混合对象类</h2><p>显式混入（包含寄生式继承）、隐式混入。</p>
+<p>javascript里的类与其他语言的类完全不同，并且本身不提供”多重继承”这个功能。</p>
+<h2 id="part5、-原型"><a href="#part5、-原型" class="headerlink" title="part5、 原型"></a>part5、 原型</h2><p>js中其实不存在真正的类，也不存在通过复制类生成的实例。js中的“类”其实是“差异继承”，即创建的时候声明某些特殊的属性，然后其他的属性都通过委托行为去原型里查找。 js中通过“类”生成“实例”，其实是将两个对象关联起来。</p>
+<p>如果向 [[Prototype]] 链上层已经存在的属性([[Put]])赋值，不一定会触发屏蔽。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>所有函数都可以成为构造函数。只不过有new关键词的时候，函数调用会变成“构造函数调用”。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/books/js_you_dont_know/" data-id="clivn5s1h000zml6p78hu3nxv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/layout/responsive/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          学习响应式布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/books/smashing_nodejs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">了不起的node.js</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

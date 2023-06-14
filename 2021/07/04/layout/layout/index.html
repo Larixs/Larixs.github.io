@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>CSS布局技巧汇总 | Larix&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CSS布局作为一名小白，在刚会制作网页的时候，遇到了不少问题。先把这些遇到的问题和解决方案总结一下，以后用时方便查找。 1. 清除浮动当子元素处于浮动状态时，因为子元素脱离了文档流，所以父元素的高度或宽度不能完全包含子元素，产生了溢出。此时父元素就需要清除浮动，让父元素的高度和宽度能与子元素的相匹配。清除浮动的解决方案： 解决方案1(非body) .clearfix {     overflow:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS布局技巧汇总">
+<meta property="og:url" content="http://larixs.github.io/2021/07/04/layout/layout/index.html">
+<meta property="og:site_name" content="Larix&#39;s blog">
+<meta property="og:description" content="CSS布局作为一名小白，在刚会制作网页的时候，遇到了不少问题。先把这些遇到的问题和解决方案总结一下，以后用时方便查找。 1. 清除浮动当子元素处于浮动状态时，因为子元素脱离了文档流，所以父元素的高度或宽度不能完全包含子元素，产生了溢出。此时父元素就需要清除浮动，让父元素的高度和宽度能与子元素的相匹配。清除浮动的解决方案： 解决方案1(非body) .clearfix {     overflow:">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2021-07-04T11:54:36.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS布局技巧汇总">
+<meta name="twitter:description" content="CSS布局作为一名小白，在刚会制作网页的时候，遇到了不少问题。先把这些遇到的问题和解决方案总结一下，以后用时方便查找。 1. 清除浮动当子元素处于浮动状态时，因为子元素脱离了文档流，所以父元素的高度或宽度不能完全包含子元素，产生了溢出。此时父元素就需要清除浮动，让父元素的高度和宽度能与子元素的相匹配。清除浮动的解决方案： 解决方案1(非body) .clearfix {     overflow:">
+  
+    <link rel="alternate" href="/atom.xml" title="Larix&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Larix&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">world is more wider than what is in your eyes.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://larixs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-layout/layout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/layout/layout/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/layout/">layout</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS布局技巧汇总
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSS布局"><a href="#CSS布局" class="headerlink" title="CSS布局"></a>CSS布局</h1><p>作为一名小白，在刚会制作网页的时候，遇到了不少问题。先把这些遇到的问题和解决方案总结一下，以后用时方便查找。</p>
+<h2 id="1-清除浮动"><a href="#1-清除浮动" class="headerlink" title="1. 清除浮动"></a>1. 清除浮动</h2><p>当子元素处于浮动状态时，因为子元素脱离了文档流，所以父元素的高度或宽度不能完全包含子元素，产生了溢出。此时父元素就需要清除浮动，让父元素的高度和宽度能与子元素的相匹配。<br>清除浮动的解决方案：</p>
+<p>解决方案1(非body)</p>
+<pre><code>.clearfix {
+    overflow: auto;
+ }
+</code></pre><p>解决方案2(非body)</p>
+<pre><code>.clearfix{
+    overflow:hidden;
+}
+</code></pre><p>解决方案3</p>
+<pre><code>.clearfix::after{
+    content:&apos;&apos;;
+    display:block;
+    clear:both;
+}
+</code></pre><h2 id="2-居中"><a href="#2-居中" class="headerlink" title="2. 居中"></a>2. 居中</h2><p>居中分为：</p>
+<ol>
+<li>水平居中</li>
+<li>垂直居中</li>
+<li>水平垂直居中</li>
+</ol>
+<p>####水平居中的方法：</p>
+<p>解决方案1(flex)</p>
+<pre><code>.father{
+    display:flex;
+    justify-content:center;
+}
+</code></pre><p>解决方案2(text-align)</p>
+<pre><code>.father{
+    text-align:center;
+}
+.children{
+    margin: 0 auto;//只要左右边距是auto就行了
+    width: 200px; //如果不设置width的话，看不出居中的效果
+}
+</code></pre><p>解决方案3(margin-left)</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    left:50%;
+    margin-left:-150px;//margin-left的绝对值设为width的一半
+    width:300px;
+}
+</code></pre><p>####垂直居中的方法：</p>
+<p>解决方案1(flex)</p>
+<pre><code>.father{
+    display:flex;
+      flex-direction:column;
+    justify-content:center;
+}
+</code></pre><p>解决方案2(margin-top)</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    top:50%;
+    margin-top:-100px;//margin-top的绝对值设为height的一半
+    height:200px;
+}
+</code></pre><h4 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h4><p>解决方案1（flex）</p>
+<pre><code>.father{
+    display:flex;
+}
+.children{
+    margin:auto;
+}
+</code></pre><p>解决方案2（margin）</p>
+<pre><code>.father{
+    position:relative;
+}
+.children{
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-200px;
+    margin-left:-100px;
+    width:200px;
+    height:400px;
+}
+</code></pre><h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p><a href="https://segmentfault.com/a/1190000002910324" target="_blank" rel="noopener">flex布局</a></p>
+<h2 id="3-自动编号（counter-increment）"><a href="#3-自动编号（counter-increment）" class="headerlink" title="3.自动编号（counter-increment）"></a>3.自动编号（counter-increment）</h2><p>利用counter-increment和counter实现自动标号</p>
+<hr>
+<pre><code>li{
+    counter-increment:item; //从0开始，每有一个li，则为计数器item+1
+}
+li::before{
+    content:counter(item); //取出计数器item的值
+}
+</code></pre><p>以上输出的是从1开始依次编号（1,2,3,4…）的li</p>
+<hr>
+<pre><code>li{
+    counter-increment:item+2; //从0开始每有一个li，则为计数器item+2
+}
+li::before{
+    content:counter(item); //取出计数器item的值
+}
+</code></pre><p>以上输出的是从2开始的偶数编号（2，4，6，8…）的li</p>
+<hr>
+<pre><code>h1{
+    counter-increment:chapter -1 section 2 part; //charpter-1，section+2，part+1；
+    }
+</code></pre><hr>
+<p>####参考链接：<br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment" target="_blank" rel="noopener">counter-increment MDN</a></p>
+<h2 id="4-段落文字左右两边对齐"><a href="#4-段落文字左右两边对齐" class="headerlink" title="4.段落文字左右两边对齐"></a>4.段落文字左右两边对齐</h2><h3 id="text-align-justify"><a href="#text-align-justify" class="headerlink" title="text-align:justify"></a>text-align:justify</h3><p>报纸一样的排版，每行的左右两边努力对齐</p>
+<h3 id="word-break-break-all"><a href="#word-break-break-all" class="headerlink" title="word-break:break-all"></a>word-break:break-all</h3><p>强行拆开一个单词</p>
+<h2 id="5-移动端去掉点击时的阴影"><a href="#5-移动端去掉点击时的阴影" class="headerlink" title="5.移动端去掉点击时的阴影"></a>5.移动端去掉点击时的阴影</h2><pre><code>*{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    /* For some Androids */
+}
+</code></pre><h2 id="6-HTML5、-media兼容ie8的做法"><a href="#6-HTML5、-media兼容ie8的做法" class="headerlink" title="6.HTML5、@media兼容ie8的做法"></a>6.HTML5、@media兼容ie8的做法</h2><pre><code>&lt;!-- html --&gt;
+   &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+ &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+  &lt;!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries  --&gt;
+  &lt;!--[if lt IE 9]&gt;
+  &lt;script src=&quot;//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;//cdn.bootcss.com/respond.js/1.4.2/respond.min.js&quot;&gt;&lt;/script&gt;
+  &lt;![endif]--&gt;
+</code></pre><p>以上为html的代码，还需在css文件中增加以下代码</p>
+<pre><code>article,aside,dialog,footer,header,section,footer,nav,figure,menu{
+  display:block}
+</code></pre><ul>
+<li><p>\&lt;!–[if lt IE 9]&gt;是条件注释，IE以外的浏览器将会把它们看作是普通的注释而完全忽略它们。IE将会根据if条件来判断是否如解析普通的页面内容一样解析条件注释里的内容。条件注释是一种安全的区分IE浏览器版本的语法，且被认为是取代针对IE css hack的首选办法。</p>
+</li>
+<li><p>html5shiv解决html5的兼容性问题，respond解决响应式的问题。respond需要在css文件之后，但要尽早解析，避免出现闪屏。更多注意事项见<a href="https://github.com/scottjehl/Respond" target="_blank" rel="noopener">respond.js</a></p>
+</li>
+</ul>
+<h4 id="什么时候才能不兼容ie8呀-ie8烦死惹-摔"><a href="#什么时候才能不兼容ie8呀-ie8烦死惹-摔" class="headerlink" title="什么时候才能不兼容ie8呀,ie8烦死惹(摔!)"></a>什么时候才能不兼容ie8呀,ie8烦死惹(摔!)</h4><h2 id="7-css3多栏布局"><a href="#7-css3多栏布局" class="headerlink" title="7.css3多栏布局"></a>7.css3多栏布局</h2><ul>
+<li><p>column-width:200px; : 内容会分布在200px宽度的栏位中,视口尺寸变化时,浏览器会自动调整栏位数量。</p>
+</li>
+<li><p>column-count:3; :保持栏位数量不变而让栏位宽度根据视口调整。</p>
+</li>
+<li><p>column-gap:20px; :栏间距</p>
+</li>
+<li><p>column-rule: thin dotted #999;  :栏的分割线</p>
+</li>
+</ul>
+<h2 id="8-让li表现为横向菜单"><a href="#8-让li表现为横向菜单" class="headerlink" title="8.让li表现为横向菜单"></a>8.让li表现为横向菜单</h2><p>方案一 利用table布局</p>
+<pre><code>ul{
+  display:table-row;
+}
+li{
+  display:table-cell;
+}
+</code></pre><p>方案二 利用float布局,加清除浮动</p>
+<pre><code>ul{
+  margin:0;
+  padding:0;
+}
+
+.clearfix::after{
+  content:&quot;&quot;;
+  display:block;
+  clear:both;
+
+}
+li{
+  float:left;
+  list-style:none;
+}
+</code></pre><h2 id="9-三列布局"><a href="#9-三列布局" class="headerlink" title="9.三列布局"></a>9.三列布局</h2><p>双飞翼布局:<br>方案一 position:absolute;</p>
+<pre><code>html
+
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;right&lt;/div&gt;
+    &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;
+ &lt;/div&gt;
+
+
+css
+
+.container{
+  margin:0 100px 0 100px;
+  border:1px solid black;
+}
+
+.main{
+  width:100%;
+  height:200px;
+  border:1pxs solid blue;
+}
+.left{
+  position:absolute;
+  left:0;
+  width:100px;
+  height:200px;
+  border:1px solid red;
+}
+.right{
+  width:100px;
+  height:200px;
+  border:1px solid red;
+  position:absolute;
+  right:0;
+}
+</code></pre><p>方案二 display:flex</p>
+<pre><code>html
+
+&lt;div class=&quot;container&quot;&gt;
+   &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;
+   &lt;div class=&quot;main&quot;&gt;main&lt;/div&gt;
+   &lt;div class=&quot;right&quot;&gt;right&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+css
+
+.container{
+  border:1px solid red;
+  display:flex;
+  height:200px;
+
+}
+.container &gt; div{
+  border:1px solid black;
+}
+.left{
+  width:100px;
+}
+.right{
+  width:100px;
+}
+.main{
+  flex-basis:100%;/*   flex-grow:1; 也同样生效  */
+}
+</code></pre><h2 id="模糊特效"><a href="#模糊特效" class="headerlink" title="模糊特效"></a>模糊特效</h2><p>css3-filter</p>
+<pre><code>filter:blur(20px);
+</code></pre><p>filter对所有元素生效（在ff和chrome下试验过）</p>
+<p>filter还支持其他特效，如反色等等，丰富度较高。</p>
+<h2 id="子元素-height：100"><a href="#子元素-height：100" class="headerlink" title="子元素 height：100%"></a>子元素 height：100%</h2><p>当设置子元素高度为height:100%时，浏览器会寻找其父元素的高度。</p>
+<ul>
+<li><p>如果父元素指定了height值，如100px，则子元素能直接获得高度100px。</p>
+</li>
+<li><p>如果父元素的高度也是使用百分比，则找寻父元素的父元素高度，直到找到为止或者找到height为auto。</p>
+</li>
+<li><p>如果父元素的高度为height:auto,则子元素height:100%会被忽略，其height也是auto。</p>
+</li>
+</ul>
+<h2 id="多余的字添加省略号"><a href="#多余的字添加省略号" class="headerlink" title="多余的字添加省略号"></a>多余的字添加省略号</h2><pre><code>overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+</code></pre><h2 id="隐藏video的下载按钮"><a href="#隐藏video的下载按钮" class="headerlink" title="隐藏video的下载按钮"></a>隐藏video的下载按钮</h2><p>chrome</p>
+<pre><code>video::-internal-media-controls-download-button {
+  display:none; //似乎没有用
+}
+
+video::-webkit-media-controls-enclosure {
+  overflow:hidden; 
+}
+video::-webkit-media-controls-panel {
+  width: calc(100% + 10px); //就是把控制条拉长了，让下载按钮跑到屏幕外
+}
+</code></pre><h2 id="position-absolute-top-0-bottom-0"><a href="#position-absolute-top-0-bottom-0" class="headerlink" title="position:absolute top:0 bottom:0"></a>position:absolute top:0 bottom:0</h2><p>emmmm…很奇特的一个性质，当元素的样式为position:absolute时，如果设置了top:0,bottom:0，那么这个元素在不设height的情况下，高度为父元素的内容高度加padding-top padding-bottom。<br>在top:12px,bottom:12px的情况下，高度与上一种情况一样，只不过向下偏移12px。</p>
+<h2 id="webkit-animation-delay"><a href="#webkit-animation-delay" class="headerlink" title="-webkit-animation-delay"></a>-webkit-animation-delay</h2><p>场景:</p>
+<p>给同类名的不同节点设置不同的animation-delay，安卓机出现了兼容问题，需要使用-webkit-animation-delay。</p>
+<p>尝试1：</p>
+<p>在设置动画相关类名时，同时设置element.style.webkitAnimationDelay。</p>
+<p>结果：</p>
+<p>设置上了，但是不起作用。失败。</p>
+<p>尝试2:</p>
+<p>通过css的counter和css的calc结合，计算当前节点所需要的延时。</p>
+<p>结果：</p>
+<p>counter并不能和calc结合计算。哭泣。</p>
+<p>尝试3:</p>
+<p>通过sass的for循环生成不同的webkitAnimationDelay，总数只能写死。</p>
+<p>结果：</p>
+<p>因为文件结构不允许，失败。</p>
+<p>最终解决方案：</p>
+<p>在设置动画相关类名之<em>前</em>，先设置webkitAnimationDelay。应该是浏览器对于动画相关的时机不同的问题。</p>
+<p>在android的需要-webkit-兼容动画的浏览器上，必须于动画类名添加之前、动画开始之前设置webkitAnimationDelay。</p>
+<p>撒花完结。*★,°*:.☆(￣▽￣)/$:*.°★* 。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/layout/layout/" data-id="clivn5s1o001jml6pepgoph17" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/04/layout/bfc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          BFC (block formatting context)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/layout/pixel_on_android/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">安卓app里的px</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES/">ES</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/layout/">layout</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/redux/">redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ssr/">ssr</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/偏函数应用，柯里化，bind函数/">偏函数应用，柯里化，bind函数</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法-algorithms/">算法 algorithms</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bfc/">bfc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/class/">class</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-module/">css module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-patterns/">design patterns</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic-modules/">dynamic modules</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frame/">frame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end-engineering/">front-end engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/novel/">novel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reg/">reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/responsive/">responsive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/style-guide/">style guide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tips/">tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wap/">wap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/">xss</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES/" style="font-size: 16.67px;">ES</a> <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/bfc/" style="font-size: 10px;">bfc</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-module/" style="font-size: 10px;">css module</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design-patterns/" style="font-size: 10px;">design patterns</a> <a href="/tags/dynamic-modules/" style="font-size: 10px;">dynamic modules</a> <a href="/tags/frame/" style="font-size: 10px;">frame</a> <a href="/tags/front-end-engineering/" style="font-size: 10px;">front-end engineering</a> <a href="/tags/hot-module-and-reload/" style="font-size: 10px;">hot module and reload</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lynx-dsl/" style="font-size: 10px;">lynx dsl</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/novel/" style="font-size: 10px;">novel</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/refactor/" style="font-size: 10px;">refactor</a> <a href="/tags/reg/" style="font-size: 10px;">reg</a> <a href="/tags/responsive/" style="font-size: 13.33px;">responsive</a> <a href="/tags/study-notes/" style="font-size: 20px;">study notes</a> <a href="/tags/style-guide/" style="font-size: 10px;">style guide</a> <a href="/tags/tips/" style="font-size: 10px;">tips</a> <a href="/tags/wap/" style="font-size: 13.33px;">wap</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/23/ES6/es_module_and_commonjs/">ESModule和commonjs</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Larix<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
