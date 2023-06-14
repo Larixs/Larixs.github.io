@@ -66,63 +66,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-other/have-a-taste" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/other/have-a-taste/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.736Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/other/">other</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/other/have-a-taste/">技术尝鲜</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>提及的库，大多没有深入使用过，仅做尝鲜记录。</p>
-<h2 id="拖拽库"><a href="#拖拽库" class="headerlink" title="拖拽库"></a>拖拽库</h2><h3 id="DnD-Drag-and-Drop-react"><a href="#DnD-Drag-and-Drop-react" class="headerlink" title="DnD(Drag and Drop) + react"></a>DnD(Drag and Drop) + react</h3><p>能力方面：<br>将drag和drop变为了一个抽象的对象，而不是对dom进行直接操作。拖拽表现主要基于<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API" target="_blank" rel="noopener">HTML5 drag and drop API</a>。 由于拖拽表现基于原生实现，使拖拽表现更流畅，但其兼容性也受限于浏览器的api实现情况。也可以搭配第三方库的拖拽事件使用。使用核心在于理解items,types,monitors,connectors,drag source, drop target的概念以及他们之间的关系。</p>
-<p>文档方面：<br>文档结构清晰，通过实例讲解各核心概念的运用，方便理解。文档没有中文版本。</p>
-<h2 id="表单库"><a href="#表单库" class="headerlink" title="表单库"></a>表单库</h2><h3 id="formik-react"><a href="#formik-react" class="headerlink" title="formik + react"></a>formik + react</h3><p>能力方面：<br>formik主要是负责收集表单数据以及校验，表单的生成和联动是不在负责范围内的。因为负责的功能单一，所以灵活性高，容易debug，但配置也比较繁琐。因此formik和其他第三方库配合使用更佳，例如校验使用Yup（formik官方推荐），组件库使用antd。formik支持使用相应hook的自定义组件。</p>
-<p>文档方面：<br>文档通俗易懂，由不带sugar的使用方法，一步一步变为带sugar的使用方法，既简单介绍了原理，又讲明白了sugar的用法，思路清晰流畅，赞一个。唯一美中不足的是：文档没有中文版本，英语不好的人读起来有些头大。</p>
-<h3 id="uform-react-antd"><a href="#uform-react-antd" class="headerlink" title="uform + react + antd"></a>uform + react + antd</h3><p>能力方面：<br>uform有两种生成表单的方式，一种是普通的组件构建，另一种是通过JSON Schema来生成表单。uform也接管了表单值收集、校验、联动等功能。内置第三方库的相关组件（例如antd)，也支持自定义组件(只要满足约定的值回传方式)。uform接管的事情比较多，上手方便快捷，但相对来说灵活性低一些，如果出了bug也不好寻找。</p>
-<p>文档方面：<br>文档结构有些零乱，有些操作方法甚至只在示例里使用。</p>
-<h3 id="rxjs"><a href="#rxjs" class="headerlink" title="rxjs"></a>rxjs</h3><p>陆哥推荐的，还没仔细看，占坑</p>
-<h2 id="图表库"><a href="#图表库" class="headerlink" title="图表库"></a>图表库</h2><h3 id="D3-js"><a href="#D3-js" class="headerlink" title="D3.js"></a>D3.js</h3><p>能力方面：<br>支持svg和canvas两种绘图方式。<br>库主要提供图表元件的操作api或者一些计算api，例如关于轴设置的api、关于力学导图的api。由各种各样的api自由组合成图表，自由度极高，适合各类自定义图表。</p>
-<p>文档方面：<br>只有每个api的介绍文档，如何使用靠参考示例或者全靠自己发挥。文档像一本字典，会告诉你现在有哪些字，每个字怎么读、怎么写、是什么意思，但不会教你整篇文章怎么写。没有官方中文文档，民间中文文档更新滞后、质量不高（目前落后整整一个大版本）。</p>
-<h3 id="Highcharts"><a href="#Highcharts" class="headerlink" title="Highcharts"></a>Highcharts</h3><p>能力方面：仅svg绘图。主要以提供配置项的方式生成图表。配置项结构清晰。由于是svg绘图，在定制样式的时候，除了库提供的配置，还是可以通过寻找对应svg元素来改变样式。</p>
-<p>文档方面：文档结构清晰，易于搜索。部分配置项还提供在线示例，方便理解和试用，这点非常赞。</p>
-<p>另：某些延伸版本是需要收费的（例如Highstocks）?</p>
-<h3 id="ECharts"><a href="#ECharts" class="headerlink" title="ECharts"></a>ECharts</h3><p>能力方面：支持canvas和svg绘图。主要以提供配置项的方式生成图表。在使用过程中发现了一些bug，例如想生成一个（不同类型数据）重叠的柱状图，在特定窗口大小下，本应该重叠的柱子会发生错位。</p>
-<p>文档方面：文档结构清晰，配置项并没有按照字母顺序排列，但是有提供搜索功能。可能是文档更新不及时的缘故，某些配置项并没有按照文档描述那样运行。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="加水印"><a href="#加水印" class="headerlink" title="加水印"></a>加水印</h3><p><a href="https://github.com/pa7/watermark.js" target="_blank" rel="noopener">给图片加水印</a>：使用canvas读取图片并添加水印，然后再将canvas导出为图片。</p>
-<p>最开始对加水印感兴趣是看见了阿里语雀的水印。阿里的实现方式和上面的库不太一样，他是将水印大图作为需要加水印区域的背景图。我猜测的实现方案：绘制canvas -&gt; 转为base43 -&gt; 给对应区域设上背景图。实现方式类似于<a href="https://github.com/loadchange/gwm/tree/master/lib" target="_blank" rel="noopener">gwm</a>的canvas模式。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/other/have-a-taste/" data-id="clivn5s20002nml6p0sas5e80" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-other/how_to_write_a_great_component" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/07/04/other/how_to_write_a_great_component/" class="article-date">
@@ -173,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/other/how_to_write_a_great_component/" data-id="clivn5s21002pml6puyb5xaeh" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/other/how_to_write_a_great_component/" data-id="clivnswcc002jun6pk5kvmasu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/component/">component</a></li></ul>
@@ -233,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/other/https/" data-id="clivn5s22002tml6p2si4xswk" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/other/https/" data-id="clivnswcd002mun6pgu80dgwp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
@@ -288,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/other/lynx/" data-id="clivn5s23002vml6ppewl0g7a" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/other/lynx/" data-id="clivnswcd002qun6phywa3wo0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lynx-dsl/">lynx dsl</a></li></ul>
@@ -347,10 +290,120 @@ Array.of(1,2,3) //[1,2,3]
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/other/study-Array/" data-id="clivn5s24002zml6p5cop164l" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/other/study-Array/" data-id="clivnswce002sun6p1amuejem" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-other/have-a-taste" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/other/have-a-taste/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.736Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/other/have-a-taste/">技术尝鲜</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>提及的库，大多没有深入使用过，仅做尝鲜记录。</p>
+<h2 id="拖拽库"><a href="#拖拽库" class="headerlink" title="拖拽库"></a>拖拽库</h2><h3 id="DnD-Drag-and-Drop-react"><a href="#DnD-Drag-and-Drop-react" class="headerlink" title="DnD(Drag and Drop) + react"></a>DnD(Drag and Drop) + react</h3><p>能力方面：<br>将drag和drop变为了一个抽象的对象，而不是对dom进行直接操作。拖拽表现主要基于<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API" target="_blank" rel="noopener">HTML5 drag and drop API</a>。 由于拖拽表现基于原生实现，使拖拽表现更流畅，但其兼容性也受限于浏览器的api实现情况。也可以搭配第三方库的拖拽事件使用。使用核心在于理解items,types,monitors,connectors,drag source, drop target的概念以及他们之间的关系。</p>
+<p>文档方面：<br>文档结构清晰，通过实例讲解各核心概念的运用，方便理解。文档没有中文版本。</p>
+<h2 id="表单库"><a href="#表单库" class="headerlink" title="表单库"></a>表单库</h2><h3 id="formik-react"><a href="#formik-react" class="headerlink" title="formik + react"></a>formik + react</h3><p>能力方面：<br>formik主要是负责收集表单数据以及校验，表单的生成和联动是不在负责范围内的。因为负责的功能单一，所以灵活性高，容易debug，但配置也比较繁琐。因此formik和其他第三方库配合使用更佳，例如校验使用Yup（formik官方推荐），组件库使用antd。formik支持使用相应hook的自定义组件。</p>
+<p>文档方面：<br>文档通俗易懂，由不带sugar的使用方法，一步一步变为带sugar的使用方法，既简单介绍了原理，又讲明白了sugar的用法，思路清晰流畅，赞一个。唯一美中不足的是：文档没有中文版本，英语不好的人读起来有些头大。</p>
+<h3 id="uform-react-antd"><a href="#uform-react-antd" class="headerlink" title="uform + react + antd"></a>uform + react + antd</h3><p>能力方面：<br>uform有两种生成表单的方式，一种是普通的组件构建，另一种是通过JSON Schema来生成表单。uform也接管了表单值收集、校验、联动等功能。内置第三方库的相关组件（例如antd)，也支持自定义组件(只要满足约定的值回传方式)。uform接管的事情比较多，上手方便快捷，但相对来说灵活性低一些，如果出了bug也不好寻找。</p>
+<p>文档方面：<br>文档结构有些零乱，有些操作方法甚至只在示例里使用。</p>
+<h3 id="rxjs"><a href="#rxjs" class="headerlink" title="rxjs"></a>rxjs</h3><p>陆哥推荐的，还没仔细看，占坑</p>
+<h2 id="图表库"><a href="#图表库" class="headerlink" title="图表库"></a>图表库</h2><h3 id="D3-js"><a href="#D3-js" class="headerlink" title="D3.js"></a>D3.js</h3><p>能力方面：<br>支持svg和canvas两种绘图方式。<br>库主要提供图表元件的操作api或者一些计算api，例如关于轴设置的api、关于力学导图的api。由各种各样的api自由组合成图表，自由度极高，适合各类自定义图表。</p>
+<p>文档方面：<br>只有每个api的介绍文档，如何使用靠参考示例或者全靠自己发挥。文档像一本字典，会告诉你现在有哪些字，每个字怎么读、怎么写、是什么意思，但不会教你整篇文章怎么写。没有官方中文文档，民间中文文档更新滞后、质量不高（目前落后整整一个大版本）。</p>
+<h3 id="Highcharts"><a href="#Highcharts" class="headerlink" title="Highcharts"></a>Highcharts</h3><p>能力方面：仅svg绘图。主要以提供配置项的方式生成图表。配置项结构清晰。由于是svg绘图，在定制样式的时候，除了库提供的配置，还是可以通过寻找对应svg元素来改变样式。</p>
+<p>文档方面：文档结构清晰，易于搜索。部分配置项还提供在线示例，方便理解和试用，这点非常赞。</p>
+<p>另：某些延伸版本是需要收费的（例如Highstocks）?</p>
+<h3 id="ECharts"><a href="#ECharts" class="headerlink" title="ECharts"></a>ECharts</h3><p>能力方面：支持canvas和svg绘图。主要以提供配置项的方式生成图表。在使用过程中发现了一些bug，例如想生成一个（不同类型数据）重叠的柱状图，在特定窗口大小下，本应该重叠的柱子会发生错位。</p>
+<p>文档方面：文档结构清晰，配置项并没有按照字母顺序排列，但是有提供搜索功能。可能是文档更新不及时的缘故，某些配置项并没有按照文档描述那样运行。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="加水印"><a href="#加水印" class="headerlink" title="加水印"></a>加水印</h3><p><a href="https://github.com/pa7/watermark.js" target="_blank" rel="noopener">给图片加水印</a>：使用canvas读取图片并添加水印，然后再将canvas导出为图片。</p>
+<p>最开始对加水印感兴趣是看见了阿里语雀的水印。阿里的实现方式和上面的库不太一样，他是将水印大图作为需要加水印区域的背景图。我猜测的实现方案：绘制canvas -&gt; 转为base43 -&gt; 给对应区域设上背景图。实现方式类似于<a href="https://github.com/loadchange/gwm/tree/master/lib" target="_blank" rel="noopener">gwm</a>的canvas模式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/other/have-a-taste/" data-id="clivnswcm003fun6p4guoq8e6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-other/crypto" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/other/crypto/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.735Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/other/crypto/">记一次加密需求开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>Buffer</li>
+<li>SM2<br>公钥加密，私钥解密。同一个公钥加密同一段明文可以产生不同的密文，可能是有时间因子在里面。密文前缀为04时表示为非压缩密文。</li>
+<li>SM4</li>
+<li>为什么已经有SM2了，还要使用SM4加密？<br>答：因为SM4加解密比SM2更快。使用SM4对密文加密速度比SM2更快，然后使用SM2对SM4秘钥进行加密，这样就又有SM2的加密效果。</li>
+</ol>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/Base64_encoding_and_decoding" target="_blank" rel="noopener">Base64的编码与解码</a><br><a href="https://blog.csdn.net/qq_40414209/article/details/100639230" target="_blank" rel="noopener">Base64编码与URLEncode的简介</a></p>
+<p>学习链接：</p>
+<ul>
+<li><a href="http://www.alloyteam.com/2013/12/js-calculate-the-number-of-bytes-occupied-by-a-string/" target="_blank" rel="noopener">JS 计算字符串所占字节数</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/other/crypto/" data-id="clivnswc70026un6pvf1p2p21" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/">crypto</a></li></ul>
 
     </footer>
   </div>
@@ -446,7 +499,7 @@ exports.circumference = (r) =&gt; 2 * PI * r;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/nodejs/study_nodejs/" data-id="clivn5s1v0025ml6pwm522dsk" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/nodejs/study_nodejs/" data-id="clivnswc80028un6puzrmu2xg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
@@ -458,9 +511,9 @@ exports.circumference = (r) =&gt; 2 * PI * r;
 
 
   
-    <article id="post-other/crypto" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-other/frame_mode" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2021/07/04/other/crypto/" class="article-date">
+    <a href="/2021/07/04/other/frame_mode/" class="article-date">
   <time datetime="2021-07-04T11:54:36.735Z" itemprop="datePublished">2021-07-04</time>
 </a>
     
@@ -476,7 +529,7 @@ exports.circumference = (r) =&gt; 2 * PI * r;
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/other/crypto/">记一次加密需求开发</a>
+      <a class="article-title" href="/2021/07/04/other/frame_mode/">mvc 和 mvvm</a>
     </h1>
   
 
@@ -484,25 +537,28 @@ exports.circumference = (r) =&gt; 2 * PI * r;
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>Buffer</li>
-<li>SM2<br>公钥加密，私钥解密。同一个公钥加密同一段明文可以产生不同的密文，可能是有时间因子在里面。密文前缀为04时表示为非压缩密文。</li>
-<li>SM4</li>
-<li>为什么已经有SM2了，还要使用SM4加密？<br>答：因为SM4加解密比SM2更快。使用SM4对密文加密速度比SM2更快，然后使用SM2对SM4秘钥进行加密，这样就又有SM2的加密效果。</li>
+        <h1 id="框架模式"><a href="#框架模式" class="headerlink" title="框架模式"></a>框架模式</h1><p>在不同的应用场景中，框架模式也许会有所改变，因此同一个框架可能出现不同的图示和理解，不要太纠结细节，理解大概便是。以下皆不放图示了，避免引起误会。</p>
+<p>这篇md很难写。1是内容太过抽象，没有合适的例子，2是众说纷纭，我也不是太理解。3是可应用的机会小，细学的动力小。</p>
+<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>全称Model View Controller,即模型-视图-控制器。</p>
+<p>View:<br>放置视图相关的代码，原则上不应该有任何业务逻辑</p>
+<p>Controller：<br>放置视图与模型之间的映射，原则上只放一些与事件绑定相关的代码，并不实现真正的功能，是一个桥梁。</p>
+<p>Model:<br>主要实现逻辑的地方。</p>
+<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>全称Model View ViewModel。</p>
+<p>未完，不续。</p>
+<p>参考链接：</p>
+<ol>
+<li><a href="http://web.jobbole.com/89314/" target="_blank" rel="noopener">浅谈框架模式 MVC、MVP 和 MVVM</a></li>
+<li><a href="http://www.infoq.com/cn/articles/rethinking-mvc-mvvm" target="_blank" rel="noopener">被误解的MVC和被神化的MVVM</a></li>
+<li><a href="http://draveness.me/mvx.html" target="_blank" rel="noopener">浅谈 MVC、MVP 和 MVVM 架构模式</a></li>
 </ol>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/Base64_encoding_and_decoding" target="_blank" rel="noopener">Base64的编码与解码</a><br><a href="https://blog.csdn.net/qq_40414209/article/details/100639230" target="_blank" rel="noopener">Base64编码与URLEncode的简介</a></p>
-<p>学习链接：</p>
-<ul>
-<li><a href="http://www.alloyteam.com/2013/12/js-calculate-the-number-of-bytes-occupied-by-a-string/" target="_blank" rel="noopener">JS 计算字符串所占字节数</a></li>
-</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/other/crypto/" data-id="clivn5s1y002cml6poivnnao2" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/other/frame_mode/" data-id="clivnswca002dun6p16qr6tpv" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/">crypto</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frame/">frame</a></li></ul>
 
     </footer>
   </div>
@@ -590,66 +646,10 @@ exports.circumference = (r) =&gt; 2 * PI * r;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/other/css_with_js/" data-id="clivn5s1z002gml6phehfp3ld" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/other/css_with_js/" data-id="clivnswcb002fun6p9rnrhwy5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-other/frame_mode" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/other/frame_mode/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.735Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/other/">other</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/other/frame_mode/">mvc 和 mvvm</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="框架模式"><a href="#框架模式" class="headerlink" title="框架模式"></a>框架模式</h1><p>在不同的应用场景中，框架模式也许会有所改变，因此同一个框架可能出现不同的图示和理解，不要太纠结细节，理解大概便是。以下皆不放图示了，避免引起误会。</p>
-<p>这篇md很难写。1是内容太过抽象，没有合适的例子，2是众说纷纭，我也不是太理解。3是可应用的机会小，细学的动力小。</p>
-<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>全称Model View Controller,即模型-视图-控制器。</p>
-<p>View:<br>放置视图相关的代码，原则上不应该有任何业务逻辑</p>
-<p>Controller：<br>放置视图与模型之间的映射，原则上只放一些与事件绑定相关的代码，并不实现真正的功能，是一个桥梁。</p>
-<p>Model:<br>主要实现逻辑的地方。</p>
-<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>全称Model View ViewModel。</p>
-<p>未完，不续。</p>
-<p>参考链接：</p>
-<ol>
-<li><a href="http://web.jobbole.com/89314/" target="_blank" rel="noopener">浅谈框架模式 MVC、MVP 和 MVVM</a></li>
-<li><a href="http://www.infoq.com/cn/articles/rethinking-mvc-mvvm" target="_blank" rel="noopener">被误解的MVC和被神化的MVVM</a></li>
-<li><a href="http://draveness.me/mvx.html" target="_blank" rel="noopener">浅谈 MVC、MVP 和 MVVM 架构模式</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/other/frame_mode/" data-id="clivn5s1z002jml6pju6ffm2k" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frame/">frame</a></li></ul>
 
     </footer>
   </div>
@@ -818,7 +818,7 @@ player.play();//ios9以下不需要load
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/layout/strange_feature/" data-id="clivn5s1s001wml6pku64gc6e" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/layout/strange_feature/" data-id="clivnswc3001uun6p2yj6pyzm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wap/">wap</a></li></ul>
@@ -889,11 +889,7 @@ player.play();//ios9以下不需要load
           </li>
         
           <li>
-            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
           </li>
         
           <li>
@@ -901,7 +897,11 @@ player.play();//ios9以下不需要load
           </li>
         
           <li>
-            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
           </li>
         
       </ul>

@@ -144,10 +144,70 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/layout/wap/" data-id="clivn5s1t001yml6pd5ey3j46" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/layout/wap/" data-id="clivnswc4001xun6pimlh9879" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/responsive/">responsive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wap/">wap</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux/auth" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/linux/auth/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.734Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/linux/auth/">文件权限相关及linux操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>权限数字：</p>
+<p>一共三位数字，第一位表示所有者的权限，第二位表示同组用户权限，第三位表示公共用户权限。</p>
+<p>读权限-r-4，写入权限-w-2，执行权限-x-1</p>
+<p>每位数等于各自用户权限数值相加。</p>
+<p>例如</p>
+<p>777： 4+2+1 4+2+1 4+2+1 即三种用户都拥有r,w,x权限</p>
+<p>644： 4+2 4 4 即所有者拥有rw权限，同组用户和公共用户只拥有r权限。</p>
+<hr>
+<p>ubuntu下修改权限</p>
+<p>chmod -R 权限数字 文件名</p>
+<hr>
+<p>查看权限：</p>
+<p>(sudo) ls -l 文件名</p>
+<p>__</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="http://blog.sina.com.cn/s/blog_690c53680101jp61.html" target="_blank" rel="noopener">Linux主机文件777，755，644权限详解</a></li>
+<li><a href="http://www.cnblogs.com/CgenJ/archive/2011/07/28/2119454.html" target="_blank" rel="noopener">Linux系统下如何查看及修改文件读写权限</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/linux/auth/" data-id="clivnswc50020un6p50qb0z5z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
 
     </footer>
   </div>
@@ -777,70 +837,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/linux/TLCL-17.10/" data-id="clivn5s1u0022ml6pdu2e5sh4" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/linux/TLCL-17.10/" data-id="clivnswc60022un6pomn2kp6i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-linux/auth" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/linux/auth/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.734Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/linux/auth/">文件权限相关及linux操作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>权限数字：</p>
-<p>一共三位数字，第一位表示所有者的权限，第二位表示同组用户权限，第三位表示公共用户权限。</p>
-<p>读权限-r-4，写入权限-w-2，执行权限-x-1</p>
-<p>每位数等于各自用户权限数值相加。</p>
-<p>例如</p>
-<p>777： 4+2+1 4+2+1 4+2+1 即三种用户都拥有r,w,x权限</p>
-<p>644： 4+2 4 4 即所有者拥有rw权限，同组用户和公共用户只拥有r权限。</p>
-<hr>
-<p>ubuntu下修改权限</p>
-<p>chmod -R 权限数字 文件名</p>
-<hr>
-<p>查看权限：</p>
-<p>(sudo) ls -l 文件名</p>
-<p>__</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
-<li><a href="http://blog.sina.com.cn/s/blog_690c53680101jp61.html" target="_blank" rel="noopener">Linux主机文件777，755，644权限详解</a></li>
-<li><a href="http://www.cnblogs.com/CgenJ/archive/2011/07/28/2119454.html" target="_blank" rel="noopener">Linux系统下如何查看及修改文件读写权限</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/linux/auth/" data-id="clivn5s1x002aml6pfgpjxkzj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
 
     </footer>
   </div>
@@ -925,7 +925,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/debug/2019_04_26_debug/" data-id="clivn5s1l001bml6p9avmsx86" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/debug/2019_04_26_debug/" data-id="clivnswbv0019un6pn965h4ic" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/">debug</a></li></ul>
@@ -1026,10 +1026,83 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/layout/bfc/" data-id="clivn5s1n001gml6pqji8eemp" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/layout/bfc/" data-id="clivnswbx001eun6p00kxybca" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bfc/">bfc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-layout/pixel_on_android" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/layout/pixel_on_android/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/layout/pixel_on_android/">安卓app里的px</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目前的项目android的app并不全是原生写的页面，大部分是访问h5页面。h5页面是根据视口宽度、利用rem做自适应，而原生写的页面是根据PPI(每英寸像素密度)来做自适应。</p>
+<p>h5写字体大小是用的虚拟像素，而原生写字体大小用的却是物理像素。</p>
+<p>因为双方做自适应的标准不同，因此做出来的页面之间样式并不统一。为了解决这个问题，最终决定h5去适应原生的方案。</p>
+<p>我之前并没有接触过安卓，导致首次沟通非常困难。挫败感很强，憋着一口气还是把这个搞明白了。</p>
+<h2 id="1-参数们"><a href="#1-参数们" class="headerlink" title="1. 参数们"></a>1. 参数们</h2><p>首先看下iphone的参数</p>
+<p><img src="/images/layout/iphone_screen_density.png" alt></p>
+<p>屏幕尺寸： 屏幕对角线长度</p>
+<p>分辨率(pt)： h5前端通过document.documentElement.clientWidth取得的视口宽度。</p>
+<p>Reader:  dpr ?</p>
+<p>分辨率(px)： 安卓前端读到的物理像素宽高。 width * height</p>
+<p>PPI： 每英寸像素密度。安卓前端通过PPI来计算当前屏幕该用多大字体。 PPI^2 = (width^2 + height^2) / 屏幕尺寸^2   这里的参数都是物理像素宽度(因为不会打开根符号，所以就这么写了）</p>
+<h2 id="2-安卓计算字体的方式"><a href="#2-安卓计算字体的方式" class="headerlink" title="2. 安卓计算字体的方式"></a>2. 安卓计算字体的方式</h2><p>安卓是以PPI值为160作为基准， 在PPI为 x 时，该屏幕设置的14号字(即前端意义上的font-size: 14px)为 (x / 160) * 14 + ‘px’</p>
+<h2 id="3-h5计算自适应字体的方式"><a href="#3-h5计算自适应字体的方式" class="headerlink" title="3. h5计算自适应字体的方式"></a>3. h5计算自适应字体的方式</h2><p>很简单，获取clientWidth，为html元素设置rem，rem随clientWidth的增大而增大。clientWidth获取到的是虚拟像素宽度。</p>
+<h2 id="4-差别与解决方案"><a href="#4-差别与解决方案" class="headerlink" title="4. 差别与解决方案"></a>4. 差别与解决方案</h2><p>差别：双方在做自适应时参考的变量不同。h5仅参考视口宽度，安卓参考了物理宽度和物理高度。</p>
+<p>解决方案： h5去适应安卓。h5用的都是虚拟像素，安卓用的是物理像素。安卓通过一些事件或方法，向前端的h5页面传递安卓取到的屏幕物理像素宽度deviceWidth，以及安卓里1虚拟像素所对应的物理像素androidPx。</p>
+<p>此时需要求的就是h5下如何将h5的1px所对应的物理像素和安卓下1px对应的物理像素相等。</p>
+<p>如果不做任何设置，h5下1px虚拟像素所对应的物理像素就是dpr的值。粗略的计算，dpr = deviceWidth / clientWidth 。（clientWidth是h5自己取到的视口宽度）</p>
+<p>公式： ( 1 <em> dpr </em> ratio )px = ( 1 * androidPx )</p>
+<p>即 dpr * ratio = androidPx</p>
+<p>即 deviceWidth /clientWidth  * ratio = androidPx</p>
+<p>即 ratio = androidPx * clientWidth / deviceWidth</p>
+<p>至此，就求出了h5所需的转化比率，只要在获取clientWidth计算rem时，为rem的计算结果乘上这个ratio，即可让h5的自适应效果与安卓的自适应效果大致相同。</p>
+<hr>
+<p>20180307</p>
+<p>重新调整了适配策略。</p>
+<p>前端在viewport的meta里加上 target-densitydpi = device-dpi。</p>
+<p>即  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover,target-densitydpi=device-dpi"></p>
+<p>1rem设为定值20px。</p>
+<p>安卓那边使用dp单位（原来使用sp单位）写页面。</p>
+<p>此时不用传参即可使原生页面和h5页面字体大小一致。</p>
+<p>参考链接：<br>1.<a href="https://stuff.mit.edu/afs/sipb/project/android/docs/guide/webapps/targeting.html" target="_blank" rel="noopener">Targeting Screens from Web Apps | Android Developers</a><br>1.<a href="http://blog.csdn.net/donkor_/article/details/77680042" target="_blank" rel="noopener">两分钟理解Android中PX、DP、SP的区别</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/layout/pixel_on_android/" data-id="clivnswbz001hun6p64ttcxi3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
 
     </footer>
   </div>
@@ -1345,82 +1418,9 @@ video::-webkit-media-controls-panel {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/layout/layout/" data-id="clivn5s1o001jml6pepgoph17" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/layout/layout/" data-id="clivnswc0001nun6pi06cg7da" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-layout/pixel_on_android" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/layout/pixel_on_android/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.733Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/vue/">vue</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/layout/pixel_on_android/">安卓app里的px</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目前的项目android的app并不全是原生写的页面，大部分是访问h5页面。h5页面是根据视口宽度、利用rem做自适应，而原生写的页面是根据PPI(每英寸像素密度)来做自适应。</p>
-<p>h5写字体大小是用的虚拟像素，而原生写字体大小用的却是物理像素。</p>
-<p>因为双方做自适应的标准不同，因此做出来的页面之间样式并不统一。为了解决这个问题，最终决定h5去适应原生的方案。</p>
-<p>我之前并没有接触过安卓，导致首次沟通非常困难。挫败感很强，憋着一口气还是把这个搞明白了。</p>
-<h2 id="1-参数们"><a href="#1-参数们" class="headerlink" title="1. 参数们"></a>1. 参数们</h2><p>首先看下iphone的参数</p>
-<p><img src="/images/layout/iphone_screen_density.png" alt></p>
-<p>屏幕尺寸： 屏幕对角线长度</p>
-<p>分辨率(pt)： h5前端通过document.documentElement.clientWidth取得的视口宽度。</p>
-<p>Reader:  dpr ?</p>
-<p>分辨率(px)： 安卓前端读到的物理像素宽高。 width * height</p>
-<p>PPI： 每英寸像素密度。安卓前端通过PPI来计算当前屏幕该用多大字体。 PPI^2 = (width^2 + height^2) / 屏幕尺寸^2   这里的参数都是物理像素宽度(因为不会打开根符号，所以就这么写了）</p>
-<h2 id="2-安卓计算字体的方式"><a href="#2-安卓计算字体的方式" class="headerlink" title="2. 安卓计算字体的方式"></a>2. 安卓计算字体的方式</h2><p>安卓是以PPI值为160作为基准， 在PPI为 x 时，该屏幕设置的14号字(即前端意义上的font-size: 14px)为 (x / 160) * 14 + ‘px’</p>
-<h2 id="3-h5计算自适应字体的方式"><a href="#3-h5计算自适应字体的方式" class="headerlink" title="3. h5计算自适应字体的方式"></a>3. h5计算自适应字体的方式</h2><p>很简单，获取clientWidth，为html元素设置rem，rem随clientWidth的增大而增大。clientWidth获取到的是虚拟像素宽度。</p>
-<h2 id="4-差别与解决方案"><a href="#4-差别与解决方案" class="headerlink" title="4. 差别与解决方案"></a>4. 差别与解决方案</h2><p>差别：双方在做自适应时参考的变量不同。h5仅参考视口宽度，安卓参考了物理宽度和物理高度。</p>
-<p>解决方案： h5去适应安卓。h5用的都是虚拟像素，安卓用的是物理像素。安卓通过一些事件或方法，向前端的h5页面传递安卓取到的屏幕物理像素宽度deviceWidth，以及安卓里1虚拟像素所对应的物理像素androidPx。</p>
-<p>此时需要求的就是h5下如何将h5的1px所对应的物理像素和安卓下1px对应的物理像素相等。</p>
-<p>如果不做任何设置，h5下1px虚拟像素所对应的物理像素就是dpr的值。粗略的计算，dpr = deviceWidth / clientWidth 。（clientWidth是h5自己取到的视口宽度）</p>
-<p>公式： ( 1 <em> dpr </em> ratio )px = ( 1 * androidPx )</p>
-<p>即 dpr * ratio = androidPx</p>
-<p>即 deviceWidth /clientWidth  * ratio = androidPx</p>
-<p>即 ratio = androidPx * clientWidth / deviceWidth</p>
-<p>至此，就求出了h5所需的转化比率，只要在获取clientWidth计算rem时，为rem的计算结果乘上这个ratio，即可让h5的自适应效果与安卓的自适应效果大致相同。</p>
-<hr>
-<p>20180307</p>
-<p>重新调整了适配策略。</p>
-<p>前端在viewport的meta里加上 target-densitydpi = device-dpi。</p>
-<p>即  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover,target-densitydpi=device-dpi"></p>
-<p>1rem设为定值20px。</p>
-<p>安卓那边使用dp单位（原来使用sp单位）写页面。</p>
-<p>此时不用传参即可使原生页面和h5页面字体大小一致。</p>
-<p>参考链接：<br>1.<a href="https://stuff.mit.edu/afs/sipb/project/android/docs/guide/webapps/targeting.html" target="_blank" rel="noopener">Targeting Screens from Web Apps | Android Developers</a><br>1.<a href="http://blog.csdn.net/donkor_/article/details/77680042" target="_blank" rel="noopener">两分钟理解Android中PX、DP、SP的区别</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/layout/pixel_on_android/" data-id="clivn5s1p001mml6pgelrkm88" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
-
     </footer>
   </div>
   
@@ -1496,10 +1496,77 @@ var docEl = doc.documentElement;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/layout/responsive/" data-id="clivn5s1r001sml6pb1img7zi" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/layout/responsive/" data-id="clivnswc1001oun6pq106koxp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/responsive/">responsive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-books/refactoring_improving_the_design_of_existing_code" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/books/refactoring_improving_the_design_of_existing_code/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.732Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/books/">books</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/books/refactoring_improving_the_design_of_existing_code/">重构 改善既有代码的设计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="refactoring-improving-the-design-of-existing-code"><a href="#refactoring-improving-the-design-of-existing-code" class="headerlink" title="refactoring improving the design of existing code"></a>refactoring improving the design of existing code</h1><p>Written by Martin Fowler (American)</p>
+<p>熊节（译）</p>
+<p>重构的定义：在不改变软件可观察行为的前提下改善其内部结构。</p>
+<h3 id="第一章-重构-第一个案例"><a href="#第一章-重构-第一个案例" class="headerlink" title="第一章 重构 第一个案例"></a>第一章 重构 第一个案例</h3><blockquote>
+<p>如果你发现自己需要为一个程序添加一个特性，而代码结构使你无法很方便地达成目的，那就先重构那个程序，使特性的添加比较容易进行，然后再添加特性。</p>
+</blockquote>
+<blockquote>
+<p>重构之前，首先检查自己是否有一套可靠的测试机制，这些测试必须有自我检验能力。</p>
+</blockquote>
+<p>Q： 测试需要什么特性，在前端如何编写测试呢？</p>
+<p>第一章以后有需要可以再看一遍，现在只是囫囵吞枣地过了一遍，有点“太长不看”的意思。</p>
+<h3 id="第二章-重构原则"><a href="#第二章-重构原则" class="headerlink" title="第二章 重构原则"></a>第二章 重构原则</h3><blockquote>
+<p>事不过三，三则重构。</p>
+</blockquote>
+<p>何时不该进行重构:</p>
+<ul>
+<li><p>现有代码根本不能正常运作（此时该重写而非重构）</p>
+</li>
+<li><p>项目已近最后期限。（重构的确能提高生产力，但是时间紧急的情况下不应该分心于重构。如果最后你没有足够的时间，通常就表示你其实早该进行重构。）</p>
+</li>
+</ul>
+<p>重构与设计：</p>
+<p>在写代码之前，如果力求设计灵活性高，那么这个软件会变得复杂而难以维护。尤其是为系统各处所有可能变化的地方建立起灵活性时，整个系统的复杂度和维护难度都会大大提高。为了获得自己想要的灵活性，你不得不加入比实际需要更多的灵活性。当然，如果最后发现所有这些灵活性都毫无用处，这才是最大的失败。</p>
+<p>有了重构，你可以有一种不同的方式来设计这些软件。你仍然需要思考潜在的变化以及相应的灵活的解决方案，但是你现在可以不用每个都去实现。在实现之前询问自己：“把一个简单的方案重构成这个灵活的方案需要多大难度？”，如果答案是：“相当容易”，那么现在可以先实现这个简单的方案，待以后有需求的时候再重构成灵活的方案。</p>
+<h3 id="第三章-代码的坏味道"><a href="#第三章-代码的坏味道" class="headerlink" title="第三章 代码的坏味道"></a>第三章 代码的坏味道</h3><p>看完全书之后应该再回顾一下第三章。因为第一次看第三章时，对于各种情况的处理，作者列出了许多重构的手法，但是这些手法细节都在后面，所以应该在看完全书之后再回顾一下第三章，加深理解。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/books/refactoring_improving_the_design_of_existing_code/" data-id="clivnswbr000xun6paj5bmmhg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/refactor/">refactor</a></li></ul>
 
     </footer>
   </div>
@@ -1713,60 +1780,10 @@ var obj = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/books/js_you_dont_know/" data-id="clivn5s1h000zml6p78hu3nxv" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/books/js_you_dont_know/" data-id="clivnswbs0010un6phzghm1pi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-books/smashing_nodejs" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/books/smashing_nodejs/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.732Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/books/">books</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/books/smashing_nodejs/">了不起的node.js</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="了不起的node-js"><a href="#了不起的node-js" class="headerlink" title="了不起的node.js"></a>了不起的node.js</h1><h3 id="Chapter-3-阻塞与非阻塞IO"><a href="#Chapter-3-阻塞与非阻塞IO" class="headerlink" title="Chapter 3 阻塞与非阻塞IO"></a>Chapter 3 阻塞与非阻塞IO</h3><p>Node为js引入了一个复杂的概念: 共享状态的并发。</p>
-<p>通俗讲，Node中，你需要对回调函数如何修改当前内存中的变量（状态）特别小心。此外，你还需要特别注意对错误的处理是否会潜在的修改这些状态。</p>
-<p>Node采用一个长期运行的进程；Node使用了事件轮询；Node是单线程的； </p>
-<hr>
-<p>本书没有看完。在Chapter 5的时候，让我看得十分恼火。</p>
-<p>例如有一小节讲“理解什么是流”，我并没有发现它讲什么是流、流有什么特征，只讲了哪些东西属于流，以及后来书中引入了一个用node写的读取文件夹和文件的示例，一开始就给出了一段不优雅的代码，我照着敲了一遍之后发现功能并不完整。接着书上就开始重构了？！可是这段重构不仅是把一些揉在一起的函数提出来，还在不断的完善功能。这根本不算重构，这就叫没写完的需求接着写好吧。而且重构的过程就是东改一点西加一点，没有明确的思路和计划，看的我晕头转向，最后仍然没有给出完整的整段代码。</p>
-<p>搞不懂这本书是教人写代码还是教人node。如果是教有基础的人学node，那这本书把重点放错了，没有放到node上。node讲的不清晰、不透彻、不广泛、不深入，例子也不是直接给出最优雅的写法，有非常多的代码注释和绕来绕去和node本身无关的优化思路。如果是教没基础的人学node…那还是先学js再来学node吧。</p>
-<p>综上，讲解浅显，例子讲解混乱，这本书十分不合我的胃口。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/books/smashing_nodejs/" data-id="clivn5s1j0013ml6p6k1ayr58" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
 
     </footer>
   </div>
@@ -1834,11 +1851,7 @@ var obj = {
           </li>
         
           <li>
-            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
           </li>
         
           <li>
@@ -1846,7 +1859,11 @@ var obj = {
           </li>
         
           <li>
-            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
           </li>
         
       </ul>

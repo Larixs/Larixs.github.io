@@ -92,7 +92,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>许久没有更新博客了，最近写nodejs脚本的时候遇到了commonjs和ESModule的问题，正好之前用得稀里糊涂的，这次好好学习一下。</p>
+        <p>许久没有更新博客了，最近写 nodejs 脚本的时候遇到了 commonjs 和 ESModule 的问题，正好之前用得稀里糊涂的，这次好好学习一下。</p>
 <h1 id="ES-Module"><a href="#ES-Module" class="headerlink" title="ES Module"></a>ES Module</h1><h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><h3 id="仅导出"><a href="#仅导出" class="headerlink" title="仅导出"></a>仅导出</h3><ul>
 <li><p>named exports: 命名导出，每次可以导出一个或者多个。</p>
 </li>
@@ -104,255 +104,90 @@
 <p>更多示例可以直接去看<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" target="_blank" rel="noopener">mdn</a></p>
 <h3 id="重导出（re-exporting-aggregating"><a href="#重导出（re-exporting-aggregating" class="headerlink" title="重导出（re-exporting / aggregating)"></a>重导出（re-exporting / aggregating)</h3><p>算是一个导入再导出的一个语法糖吧。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export &#123;</span><br><span class="line">  default as function1,</span><br><span class="line">  function2,</span><br><span class="line">&#125; from &apos;bar.js&apos;;</span><br><span class="line"></span><br><span class="line">// 等价于</span><br><span class="line">import &#123; default as function1, function2 &#125; from &apos;bar.js&apos;;</span><br><span class="line">export &#123; function1, function2 &#125;;</span><br></pre></td></tr></table></figure>
-<p>然而这种语法是会报错的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export DefaultExport from &apos;bar.js&apos;; // Invalid</span><br></pre></td></tr></table></figure></p>
-<p>正确的语法应该是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export &#123; default as DefaultExport &#125; from &apos;bar.js&apos;; // valid</span><br></pre></td></tr></table></figure></p>
-<p>我猜是因为export 本身支持的export xxx这种语法必须是要导出一个对象，然而import xxx可能是任意类型，两者冲突了，所以从编译层面就不让这种语法生效会更好。</p>
-<h3 id="嵌入式脚本"><a href="#嵌入式脚本" class="headerlink" title="嵌入式脚本"></a>嵌入式脚本</h3><p>嵌入式脚本不可以使用export。</p>
+<p>然而这种语法是会报错的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export DefaultExport from &apos;bar.js&apos;; // Invalid</span><br></pre></td></tr></table></figure>
+<p>正确的语法应该是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export &#123; default as DefaultExport &#125; from &apos;bar.js&apos;; // valid</span><br></pre></td></tr></table></figure>
+<p>我猜是因为 export 本身支持的 export xxx 这种语法必须是要导出一个对象，然而 import xxx 可能是任意类型，两者冲突了，所以从编译层面就不让这种语法生效会更好。</p>
+<h3 id="嵌入式脚本"><a href="#嵌入式脚本" class="headerlink" title="嵌入式脚本"></a>嵌入式脚本</h3><p>嵌入式脚本不可以使用 export。</p>
 <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ul>
-<li><p>import all exports: <code>import * as allVar</code>，所有导出内容，包含命名导出及默认导出。allVar会是一个对象，默认导出会作为allVar的key名为default对应的值。</p>
+<li><p>import all exports: <code>import * as allVar</code>，所有导出内容，包含命名导出及默认导出。allVar 会是一个对象，默认导出会作为 allVar 的 key 名为 default 对应的值。</p>
 </li>
-<li><p>import named exports: <code>import {var1, var2}</code>，引入命名导出的部分。没找到，对应的值就为undefined。个人觉得可以看做是”import all exports”的解构语法。</p>
+<li><p>import named exports: <code>import {var1, var2}</code>，引入命名导出的部分。没找到，对应的值就为 undefined。个人觉得可以看做是”import all exports”的解构语法。</p>
 </li>
 <li><p>import default exports: <code>import defaultVar</code>，引入默认导出的部分。</p>
 </li>
-<li><p>import side effects: <code>import &quot;xxx./js&quot;</code>，仅运行这个js，可能是为了获取其副作用。 </p>
+<li><p>import side effects: <code>import &quot;xxx./js&quot;</code>，仅运行这个 js，可能是为了获取其副作用。</p>
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// test.js</span><br><span class="line">export const b = &apos;b&apos;     // 命名导出</span><br><span class="line">export default &#123;    // 默认导出</span><br><span class="line">  a: 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import &#123; b, default as _defaultModule &#125; from &apos;./test.js&apos;</span><br><span class="line">import defaultModule from &apos;./test.js&apos;</span><br><span class="line">import * as allModule from &apos;./test.js&apos;</span><br><span class="line"></span><br><span class="line">console.log(&apos;name export&apos;, b) // &apos;b&apos;</span><br><span class="line">console.log(&apos;default export&apos;, defaultModule) // &#123;a:1&#125;</span><br><span class="line">console.log(_defaultModule === defaultModule) // true</span><br><span class="line">console.log(&apos;all export&apos;, allModule) // &#123;b:&apos;b&apos;, default: &#123;a:1&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>一个之前老记错的case</p>
+<p>一个之前老记错的 case</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// test.js</span><br><span class="line">export default &#123;    // 默认导出</span><br><span class="line">  a: 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import &#123; a &#125; from &apos;./test.js&apos;</span><br><span class="line">console.log(&apos;name export&apos;, a) // undefined</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import defaultModule from &apos;./test.js&apos;</span><br><span class="line">import * as allModule from &apos;./test.js&apos;</span><br><span class="line">console.log(&apos;default export&apos;, defaultModule) // &#123;a:1&#125;</span><br><span class="line">console.log(&apos;all export&apos;, allModule) // &#123;default: &#123;a:1&#125;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="嵌入式脚本-1"><a href="#嵌入式脚本-1" class="headerlink" title="嵌入式脚本"></a>嵌入式脚本</h3><p>嵌入式脚本引入modules时，需要在script上增加 type=”module”。</p>
+<h3 id="嵌入式脚本-1"><a href="#嵌入式脚本-1" class="headerlink" title="嵌入式脚本"></a>嵌入式脚本</h3><p>嵌入式脚本引入 modules 时，需要在 script 上增加 type=”module”。</p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
 <li><p>live bindings</p>
-<p>通过export在mdn上的解释，export导出的是live bindings，再根据其他文章综合判断，应该是引用的意思。即<strong>export导出的是引用</strong>。</p>
-<p>模块内的值更新了之后，所有使用export导出值的地方都能使用最新值。</p>
+<p>通过 export 在 mdn 上的解释，export 导出的是 live bindings，再根据其他文章综合判断，应该是引用的意思。即<strong>export 导出的是引用</strong>。</p>
+<p>模块内的值更新了之后，所有使用 export 导出值的地方都能使用最新值。</p>
 </li>
 <li><p>read-only</p>
-<p>通过import在mdn上的解释，import使用的是通过export导出的<strong>不可修改的引用</strong>。</p>
+<p>通过 import 在 mdn 上的解释，import 使用的是通过 export 导出的<strong>不可修改的引用</strong>。</p>
 </li>
 <li><p>strict-mode</p>
 <p>被引入的模块都会以严格模式运行。</p>
 </li>
 <li><p>静态引入、动态引入</p>
-<p><code>import x from</code>这种语法有syntactic rigid，需要编译时置于顶部且无法做到动态引入加载。如果需要动态引入，则需要<code>import ()</code>语法。有趣的是，在mdn上，前者分类到了 <strong>Statements &amp; declarations</strong>, 后者分类到了 <strong>Expressions &amp; operators</strong>。这俩是根据什么分类的呢？</p>
+<p><code>import x from</code>这种语法有 syntactic rigid，需要编译时置于顶部且无法做到动态引入加载。如果需要动态引入，则需要<code>import ()</code>语法。有趣的是，在 mdn 上，前者分类到了 <strong>Statements &amp; declarations</strong>, 后者分类到了 <strong>Expressions &amp; operators</strong>。这俩是根据什么分类的呢？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">true &amp;&amp; import test from &quot;./a.js&quot;;</span><br><span class="line">// SyntaxError: import can only be used in import() or import.meta</span><br><span class="line">// 这里应该是把import当成了动态引入而报错</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>示例</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">const test = &#123;</span><br><span class="line">  a: 1</span><br><span class="line">&#125;;</span><br><span class="line">export default test;</span><br><span class="line">// 改动模块内部的值</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">  test.a = 2;</span><br><span class="line">&#125;, 1000);</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import test from &apos;./index.js&apos;</span><br><span class="line"></span><br><span class="line">/* live bindings */</span><br><span class="line">console.log(test) // &#123;a:1&#125;</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">  console.log(test) // &#123;a:2&#125;</span><br><span class="line">&#125;, 2000)</span><br><span class="line"></span><br><span class="line">/* read-only */</span><br><span class="line">test= &#123; a: 3 &#125; // 报错, Error: &quot;test&quot; is read-only.</span><br><span class="line"></span><br><span class="line">/* syntactically rigid */</span><br><span class="line">if(true)&#123;</span><br><span class="line">  import test from &apos;./index.js&apos; // 报错, SyntaxError: &apos;import&apos; and &apos;export&apos; may only appear at the top level</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="commonJS"><a href="#commonJS" class="headerlink" title="commonJS"></a>commonJS</h1><h2 id="导出-1"><a href="#导出-1" class="headerlink" title="导出"></a>导出</h2><p>在 Node.js 模块系统中，每个文件都被视为独立的模块。模块导入导出实际是由nodejs的<a href="http://nodejs.cn/api-v12/modules.html#modules_the_module_wrapper" target="_blank" rel="noopener">模块封装器</a>实现，通过为<code>module.exports</code>分配新的值来实现导出具体内容。</p>
-<p><code>module.exports</code>有个简写变量<code>exports</code>，其实就是个引用复制。exports作用域只限于模块文件内部。<br>原理类似于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// nodejs内部</span><br><span class="line">exports = module.exports</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;&#125;, &#123;&#125;</span><br><span class="line">console.log(exports === module.exports) // true</span><br></pre></td></tr></table></figure></p>
-<p>注意，nodejs实际导出的是module.exports，以下几种经典case单独看一下：</p>
+<h1 id="commonJS"><a href="#commonJS" class="headerlink" title="commonJS"></a>commonJS</h1><h2 id="导出-1"><a href="#导出-1" class="headerlink" title="导出"></a>导出</h2><p>在 Node.js 模块系统中，每个文件都被视为独立的模块。模块导入导出实际是由 nodejs 的<a href="http://nodejs.cn/api-v12/modules.html#modules_the_module_wrapper" target="_blank" rel="noopener">模块封装器</a>实现，通过为<code>module.exports</code>分配新的值来实现导出具体内容。</p>
+<p><code>module.exports</code>有个简写变量<code>exports</code>，其实就是个引用复制。exports 作用域只限于模块文件内部。<br>原理类似于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// nodejs内部</span><br><span class="line">exports = module.exports</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;&#125;, &#123;&#125;</span><br><span class="line">console.log(exports === module.exports) // true</span><br></pre></td></tr></table></figure>
+<p>注意，nodejs 实际导出的是 module.exports，以下几种经典 case 单独看一下：</p>
 <p>case1</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// ✅使用exports</span><br><span class="line">exports.a = xxx</span><br><span class="line">console.log(exports === module.exports) // true</span><br><span class="line"></span><br><span class="line">// ✅等价于</span><br><span class="line">module.exports.a = xxx</span><br></pre></td></tr></table></figure>
-<p>case2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// ✅这么写可以导出，最终导出的是&#123;a:&apos;1&apos;&#125;</span><br><span class="line">module.exports = &#123;a:&apos;1&apos;&#125;</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;&#125;, &#123;a:&apos;1&apos;&#125;</span><br><span class="line">console.log(exports === module.exports) // false</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// ❌不会将&#123;a:&apos;1&apos;&#125;导出，最终导出的是&#123;&#125;</span><br><span class="line">exports = &#123;a:&apos;1&apos;&#125;</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;a:&apos;1&apos;&#125;, &#123;&#125;</span><br><span class="line">console.log(exports === module.exports) // false</span><br></pre></td></tr></table></figure></p>
-<h2 id="引入-1"><a href="#引入-1" class="headerlink" title="引入"></a>引入</h2><p>通过require语法引入：</p>
+<p>case2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// ✅这么写可以导出，最终导出的是&#123;a:&apos;1&apos;&#125;</span><br><span class="line">module.exports = &#123;a:&apos;1&apos;&#125;</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;&#125;, &#123;a:&apos;1&apos;&#125;</span><br><span class="line">console.log(exports === module.exports) // false</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// ❌不会将&#123;a:&apos;1&apos;&#125;导出，最终导出的是&#123;&#125;</span><br><span class="line">exports = &#123;a:&apos;1&apos;&#125;</span><br><span class="line"></span><br><span class="line">console.log(exports, module.exports) // &#123;a:&apos;1&apos;&#125;, &#123;&#125;</span><br><span class="line">console.log(exports === module.exports) // false</span><br></pre></td></tr></table></figure>
+<h2 id="引入-1"><a href="#引入-1" class="headerlink" title="引入"></a>引入</h2><p>通过 require 语法引入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// a是test.js里module.exports导出的部分</span><br><span class="line">const a = require(&apos;./test.js&apos;)</span><br></pre></td></tr></table></figure>
-<p>原理伪代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function require(/* ... */) &#123;</span><br><span class="line">  const module = &#123; exports: &#123;&#125; &#125;;</span><br><span class="line">  ((module, exports) =&gt; &#123;</span><br><span class="line">    // Module code here. In this example, define a function.</span><br><span class="line">    function someFunc() &#123;&#125;</span><br><span class="line">    exports = someFunc;</span><br><span class="line">    // At this point, exports is no longer a shortcut to module.exports, and</span><br><span class="line">    // this module will still export an empty default object.</span><br><span class="line">    module.exports = someFunc;</span><br><span class="line">    // At this point, the module will now export someFunc, instead of the</span><br><span class="line">    // default object.</span><br><span class="line">  &#125;)(module, module.exports);</span><br><span class="line">  return module.exports;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>某个导出文件(test.js)实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// test.js被另外一个文件引用后，会打印&apos;B&apos;</span><br><span class="line">function funcA() &#123;</span><br><span class="line">  console.log(&quot;A&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function funcB() &#123;</span><br><span class="line">  console.log(&quot;B&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports = funcA;</span><br><span class="line">module.exports = funcB;</span><br></pre></td></tr></table></figure>
+<p>上面 test.js 原理伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function require(/* ... */) &#123;</span><br><span class="line">  const module = &#123; exports: &#123;&#125; &#125;;</span><br><span class="line">  // Notice: 传入的exports 是module.exports的引用</span><br><span class="line">  ((module, exports) =&gt; &#123;</span><br><span class="line">    function funcA() &#123;</span><br><span class="line">      console.log(&quot;A&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    function funcB() &#123;</span><br><span class="line">      console.log(&quot;B&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    // 修改了exports的指向</span><br><span class="line">    exports = funcA;</span><br><span class="line">    // 运行上一行代码之后，module.exports是&#123;&#125;，exports是funcA。</span><br><span class="line"></span><br><span class="line">    // 修改module.exports的指向</span><br><span class="line">    module.exports = funcB;</span><br><span class="line">    // 运行上一行代码之后，module.exports是funcB，exports是funcA。</span><br><span class="line"></span><br><span class="line">  &#125;)(module, module.exports);</span><br><span class="line"></span><br><span class="line">  // 导出module.exports为funcB</span><br><span class="line">  return module.exports;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h2><h3 id="值拷贝"><a href="#值拷贝" class="headerlink" title="值拷贝"></a>值拷贝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// test.js</span><br><span class="line">let test = &#123;a:&apos;1&apos;&#125;</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">  test = &#123;a:&apos;2&apos;&#125;</span><br><span class="line">&#125;,1000)</span><br><span class="line">module.exports = test</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">const test1 = require(&apos;./test.js&apos;)</span><br><span class="line">console.log(test1) // &#123;a:1&#125;</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">  console.log(test1) // &#123;a:1&#125;</span><br><span class="line">&#125;,2000)</span><br></pre></td></tr></table></figure>
-<h1 id="ES-Module和-commonJS区别"><a href="#ES-Module和-commonJS区别" class="headerlink" title="ES Module和 commonJS区别"></a>ES Module和 commonJS区别</h1><ol>
+<h1 id="ES-Module-和-commonJS-区别"><a href="#ES-Module-和-commonJS-区别" class="headerlink" title="ES Module 和 commonJS 区别"></a>ES Module 和 commonJS 区别</h1><ol>
 <li>语法</li>
 </ol>
-<p><code>exports</code>、<code>module.exports</code>和<code>require</code> 是<strong>Node.js模块系统</strong>关键字。</p>
-<p><code>export</code>、<code>export default</code>和<code>import</code> 则是<strong>ES6模块系统</strong>的关键字: </p>
+<p><code>exports</code>、<code>module.exports</code>和<code>require</code> 是<strong>Node.js 模块系统</strong>关键字。</p>
+<p><code>export</code>、<code>export default</code>和<code>import</code> 则是<strong>ES6 模块系统</strong>的关键字:</p>
 <ol start="2">
 <li>原理</li>
 </ol>
 <p><code>exports</code>、<code>module.exports</code>导出的模块为值复制。</p>
-<p><code>export</code>、<code>export default</code>为引用复制。 </p>
+<p><code>export</code>、<code>export default</code>为引用复制。</p>
 <ol start="3">
 <li>时机</li>
 </ol>
-<p>ES Module静态加载是编译时确定，ES Module动态加载是运行时确定。</p>
-<p>CommonJS是运行时确定。</p>
+<p>ES Module 静态加载是编译时确定，ES Module 动态加载是运行时确定。</p>
+<p>CommonJS 是运行时确定。</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" target="_blank" rel="noopener">export-mdn</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank" rel="noopener">import-mdn</a></li>
 <li><a href="https://nodejs.org/dist/latest-v16.x/docs/api/modules.html" target="_blank" rel="noopener">nodejs-commonjs</a></li>
-<li><a href="https://juejin.cn/post/6938581764432461854" target="_blank" rel="noopener">聊聊什么是CommonJs和Es Module及它们的区别
+<li><a href="https://juejin.cn/post/6938581764432461854" target="_blank" rel="noopener">聊聊什么是 CommonJs 和 Es Module 及它们的区别
 </a></li>
-<li><a href="https://blog.csdn.net/dwf_H/article/details/109720851" target="_blank" rel="noopener">ES Module和CommonJS的区别
+<li><a href="https://blog.csdn.net/dwf_H/article/details/109720851" target="_blank" rel="noopener">ES Module 和 CommonJS 的区别
 </a></li>
 </ul>
-<p>小小吐槽，英文文档表达的准确性不如mdn，node的中文文档翻译质量也emm。CSDN上有些关于node的文章，关于module.exports和exports部分讲的都是错的🤦‍♀️认真学习还是看官网比较好，其他作者的文章作为辅助用来梳理思路/复习</p>
+<p>小小吐槽，node 的英文文档表达的准确性不如 mdn，node 的中文文档翻译质量也一言难尽。CSDN 上有些关于 node 的文章，关于 module.exports 和 exports 部分讲的都是错的 🤦‍♀️ 认真学习还是看官网比较好，其他作者的文章作为辅助用来梳理思路/复习</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2022/07/23/ES6/es_module_and_commonjs/" data-id="clivn5s1c000kml6psrf7dw5q" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-webpack/hot_module_and_reload" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/webpack/hot_module_and_reload/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.740Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/webpack/">webpack</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>zelda项目突然有一天就不支持在dev环境下热刷新了。</p>
-<p>可能是因为zelda经历了一次项目文件的重构，不知道把什么写掉了（可是我确实不记得见过或者修改过关于热更新热加载的代码）。</p>
-<p>曾经修了一下午无果，google出的方案也都失效，就放弃了。</p>
-<p>今天上午因为后台挂了，没有办法写需求，突然想起来我还可以fix这个问题。这次运气很好，换了关键词（可能上次搜索时钻牛角尖了）就搜到了解决方案。</p>
-<p>目前在zelda中，要想实现热刷新热加载，需要以下3个条件：</p>
-<ol>
-<li>dev环境下每个入口处添加“webpack-hot-middleware/client?reload=true”,即</li>
-</ol>
-<pre><code>webpack.config.js={
-    entry:{
-      entry1:[entry1.js,&quot;webpack-hot-middleware/client?reload=true&quot;],
-      entry2:[entry2.js,&quot;webpack-hot-middleware/client?reload=true&quot;],
-    }
-}
-</code></pre><ol start="2">
-<li><p>在webpack配置中添加plugin插件new webpack.HotModuleReplacementPlugin()。</p>
-</li>
-<li><p>在Express实例中添加中间件’webpack-hot-middleware’。</p>
-</li>
-</ol>
-<p>终于解决了，开心。o(<em>￣▽￣</em>)ブ </p>
-<p>原来是少了第一条，因此虽然代码已经热更新了，但是页面没有刷新。感谢写文章的大佬(上次查了好多问题和文章都没写第一条，生气)。</p>
-<p>参考链接：</p>
-<ol>
-<li><a href="https://godbasin.github.io/2017/08/19/webpack-multi-project-6-hot-reload/" target="_blank" rel="noopener">webpack多页面配置6–热加载刷新</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/webpack/hot_module_and_reload/" data-id="clivn5s2k004cml6p0x8sg748" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-webpack/how_to_write_a_plugin" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/webpack/how_to_write_a_plugin/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.740Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/webpack/">webpack</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="How-to-write-a-plugin"><a href="#How-to-write-a-plugin" class="headerlink" title="How to write a plugin"></a>How to write a plugin</h1><p>如何写一个webpack插件（译）</p>
-<hr>
-<h3 id="Compiler-and-Compilation"><a href="#Compiler-and-Compilation" class="headerlink" title="Compiler and Compilation"></a>Compiler and Compilation</h3><p>####Compiler:</p>
-<p>Compiler对象代表整个配置好的webpack环境。这个对象在webpack启动时构建一次，并且配置好了options、loaders、plugins等操作设置。 </p>
-<p>当将插件应用于webpack环境中时，这个插件将接收这个compiler的引用。利用compiler来访问主要的webpack环境。</p>
-<h4 id="Compilation"><a href="#Compilation" class="headerlink" title="Compilation:"></a>Compilation:</h4><p>一个compilation对象代表a single build of versioned assets. 当运行webpack development middleware时，每次文件改变被监测到时，都会创建一个新的compilation，因此产生新的一组编译好的资源。 </p>
-<p>Compilation可以提供模块资源的当前状态、编译后的assets、改变的文件和被监视的依赖。<br>compilation还提供许多回调点，插件可以执行自定义操作。</p>
-<h4 id="基本的插件结构"><a href="#基本的插件结构" class="headerlink" title="基本的插件结构"></a>基本的插件结构</h4><p>插件是在原型上有apply方法的实例对象。apply方法在安装这个插件时，被webpack的compiler调用一次。apply方法会接收到webpack compiler的引用，这能访问到compiler的回调。</p>
-<p>参考链接：</p>
-<ol>
-<li><a href="https://github.com/webpack/docs/wiki/how-to-write-a-plugin" target="_blank" rel="noopener">how to write a plugin</a></li>
-<li><a href="https://github.com/webpack/webpack/blob/master/lib/Compiler.js" target="_blank" rel="noopener">compiler.js</a></li>
-<li><a href="https://github.com/webpack/webpack/blob/master/lib/Compilation.js" target="_blank" rel="noopener">Compilation.js</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/webpack/how_to_write_a_plugin/" data-id="clivn5s2l004gml6pf9ab18f8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plugin/">plugin</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-webpack/some_webpack_plugins" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/webpack/some_webpack_plugins/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.740Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/webpack/">webpack</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>webpack最强大的应该就是插件了。目前存在的插件数量众多，使用的方法和适用场景也是纷繁复杂。在此记录一下使用插件过程中碰到的一些问题。</p>
-<h2 id="babel-polyfill-amp-amp-babel-runtime"><a href="#babel-polyfill-amp-amp-babel-runtime" class="headerlink" title="babel-polyfill &amp;&amp; babel-runtime"></a>babel-polyfill &amp;&amp; babel-runtime</h2><p>不班门弄斧了，直接贴链接吧。</p>
-<p>参考链接：</p>
-<ol>
-<li><a href="https://segmentfault.com/q/1010000005596587" target="_blank" rel="noopener">babel的polyfill和runtime的区别</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/webpack/some_webpack_plugins/" data-id="clivn5s2m004kml6p6hm3nshd" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2022/07/23/ES6/es_module_and_commonjs/" data-id="clivnswbl000jun6pcrtw0u36" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
@@ -435,10 +270,182 @@ module.exports = config;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/webpack/studyWebpack/" data-id="clivn5s2n004oml6pm2u5hg2b" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/webpack/studyWebpack/" data-id="clivnswcv0047un6p8p95nd0u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/some_webpack_plugins" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/webpack/some_webpack_plugins/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.740Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/webpack/">webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/webpack/some_webpack_plugins/">webpack的一些插件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>webpack最强大的应该就是插件了。目前存在的插件数量众多，使用的方法和适用场景也是纷繁复杂。在此记录一下使用插件过程中碰到的一些问题。</p>
+<h2 id="babel-polyfill-amp-amp-babel-runtime"><a href="#babel-polyfill-amp-amp-babel-runtime" class="headerlink" title="babel-polyfill &amp;&amp; babel-runtime"></a>babel-polyfill &amp;&amp; babel-runtime</h2><p>不班门弄斧了，直接贴链接吧。</p>
+<p>参考链接：</p>
+<ol>
+<li><a href="https://segmentfault.com/q/1010000005596587" target="_blank" rel="noopener">babel的polyfill和runtime的区别</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/webpack/some_webpack_plugins/" data-id="clivnswcw004bun6p5s52ue21" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/how_to_write_a_plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/webpack/how_to_write_a_plugin/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.740Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/webpack/">webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="How-to-write-a-plugin"><a href="#How-to-write-a-plugin" class="headerlink" title="How to write a plugin"></a>How to write a plugin</h1><p>如何写一个webpack插件（译）</p>
+<hr>
+<h3 id="Compiler-and-Compilation"><a href="#Compiler-and-Compilation" class="headerlink" title="Compiler and Compilation"></a>Compiler and Compilation</h3><p>####Compiler:</p>
+<p>Compiler对象代表整个配置好的webpack环境。这个对象在webpack启动时构建一次，并且配置好了options、loaders、plugins等操作设置。 </p>
+<p>当将插件应用于webpack环境中时，这个插件将接收这个compiler的引用。利用compiler来访问主要的webpack环境。</p>
+<h4 id="Compilation"><a href="#Compilation" class="headerlink" title="Compilation:"></a>Compilation:</h4><p>一个compilation对象代表a single build of versioned assets. 当运行webpack development middleware时，每次文件改变被监测到时，都会创建一个新的compilation，因此产生新的一组编译好的资源。 </p>
+<p>Compilation可以提供模块资源的当前状态、编译后的assets、改变的文件和被监视的依赖。<br>compilation还提供许多回调点，插件可以执行自定义操作。</p>
+<h4 id="基本的插件结构"><a href="#基本的插件结构" class="headerlink" title="基本的插件结构"></a>基本的插件结构</h4><p>插件是在原型上有apply方法的实例对象。apply方法在安装这个插件时，被webpack的compiler调用一次。apply方法会接收到webpack compiler的引用，这能访问到compiler的回调。</p>
+<p>参考链接：</p>
+<ol>
+<li><a href="https://github.com/webpack/docs/wiki/how-to-write-a-plugin" target="_blank" rel="noopener">how to write a plugin</a></li>
+<li><a href="https://github.com/webpack/webpack/blob/master/lib/Compiler.js" target="_blank" rel="noopener">compiler.js</a></li>
+<li><a href="https://github.com/webpack/webpack/blob/master/lib/Compilation.js" target="_blank" rel="noopener">Compilation.js</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/webpack/how_to_write_a_plugin/" data-id="clivnswcy004fun6plvzdj0sj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plugin/">plugin</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/hot_module_and_reload" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/webpack/hot_module_and_reload/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.740Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/webpack/">webpack</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>zelda项目突然有一天就不支持在dev环境下热刷新了。</p>
+<p>可能是因为zelda经历了一次项目文件的重构，不知道把什么写掉了（可是我确实不记得见过或者修改过关于热更新热加载的代码）。</p>
+<p>曾经修了一下午无果，google出的方案也都失效，就放弃了。</p>
+<p>今天上午因为后台挂了，没有办法写需求，突然想起来我还可以fix这个问题。这次运气很好，换了关键词（可能上次搜索时钻牛角尖了）就搜到了解决方案。</p>
+<p>目前在zelda中，要想实现热刷新热加载，需要以下3个条件：</p>
+<ol>
+<li>dev环境下每个入口处添加“webpack-hot-middleware/client?reload=true”,即</li>
+</ol>
+<pre><code>webpack.config.js={
+    entry:{
+      entry1:[entry1.js,&quot;webpack-hot-middleware/client?reload=true&quot;],
+      entry2:[entry2.js,&quot;webpack-hot-middleware/client?reload=true&quot;],
+    }
+}
+</code></pre><ol start="2">
+<li><p>在webpack配置中添加plugin插件new webpack.HotModuleReplacementPlugin()。</p>
+</li>
+<li><p>在Express实例中添加中间件’webpack-hot-middleware’。</p>
+</li>
+</ol>
+<p>终于解决了，开心。o(<em>￣▽￣</em>)ブ </p>
+<p>原来是少了第一条，因此虽然代码已经热更新了，但是页面没有刷新。感谢写文章的大佬(上次查了好多问题和文章都没写第一条，生气)。</p>
+<p>参考链接：</p>
+<ol>
+<li><a href="https://godbasin.github.io/2017/08/19/webpack-multi-project-6-hot-reload/" target="_blank" rel="noopener">webpack多页面配置6–热加载刷新</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/webpack/hot_module_and_reload/" data-id="clivnswcz004jun6p7k8pjrpl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hot-module-and-reload/">hot module and reload</a></li></ul>
 
     </footer>
   </div>
@@ -522,7 +529,7 @@ myCompiler.run();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/webpack/webpack4-tapable/" data-id="clivn5s2p004sml6p3hc8dmr0" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/webpack/webpack4-tapable/" data-id="clivnswd0004nun6pzil8qvv1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
@@ -573,7 +580,7 @@ myCompiler.run();
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/vue/how_to_study_vue_deep/" data-id="clivn5s2d003qml6pj0awsdga" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/vue/how_to_study_vue_deep/" data-id="clivnswcp003qun6pni7l4vft" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
@@ -737,7 +744,81 @@ vm.selected.number // -&gt; 123
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/vue/study_vue/" data-id="clivn5s2f003xml6pen93mkxg" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/vue/study_vue/" data-id="clivnswcq003sun6pn3151swr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue/study_vue_deep1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/04/vue/study_vue_deep1/" class="article-date">
+  <time datetime="2021-07-04T11:54:36.739Z" itemprop="datePublished">2021-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/04/vue/study_vue_deep1/">深入学习vue -- 如何监听data变化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本次学习core/Observer/index.js core/Observer/array.js</p>
+<p>以下简称为index.js和array.js</p>
+<h3 id="1、基础原理："><a href="#1、基础原理：" class="headerlink" title="1、基础原理："></a>1、基础原理：</h3><h4 id="a-访问器属性"><a href="#a-访问器属性" class="headerlink" title="a) 访问器属性"></a>a) 访问器属性</h4><p>对象属性分为两种，一种是数据属性，另一种是访问器属性。平常使用的属性都是数据属性。例如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.a = <span class="number">5</span>; <span class="comment">//a为数据属性。</span></span><br></pre></td></tr></table></figure>    
+<p>访问器属性不能直接定义，需要用Object.defineProperty()来定义。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用js高程的例子</span></span><br><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">    _year : <span class="number">2004</span>, <span class="comment">//"_year"是数据属性</span></span><br><span class="line">    edition : <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">"year"</span>, &#123; <span class="comment">//"year"是访问器属性</span></span><br><span class="line">    <span class="keyword">get</span>: function()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._year;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function(newValue)&#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>._year = newValue;</span><br><span class="line">            <span class="keyword">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">book.year = <span class="number">2005</span>; <span class="comment">//此时访问的是访问器属性"year"</span></span><br><span class="line">alert(book.edition); <span class="comment">//2</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>   
+<p>vue利用了访问器属性来实现数据监听。因为Object.defineProperty()是ES5实现的api，且无法shim，因此vue不支持ie8及以下浏览器。</p>
+<p>相关api：Object.getOwnPropertyDescriptor (访问器属性、数据属性都能读到)</p>
+<h4 id="b-继承数组"><a href="#b-继承数组" class="headerlink" title="b) 继承数组"></a>b) 继承数组</h4><p>Vue通过<strong>寄生组合式继承</strong>方式来继承数组，以改写数组的一系列方法，方便数组元素变动时能够监听。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line"><span class="keyword">const</span> arrayProto = <span class="built_in">Array</span>.prototype </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> arrayMethods = <span class="built_in">Object</span>.create(arrayProto)</span><br><span class="line"></span><br><span class="line"><span class="comment">//改写  'push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse' 方法以监听增加的元素。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>   
+<p>在Observer里改写Array类型的value的原型，使其指向arrayMethods.。</p>
+<p>在实现了<strong>proto</strong>属性的浏览器里，可以直接将value的<strong>proto</strong>改写为arrayMethods，以实现数组继承（protoAugment）。</p>
+<p>在没有实现<strong>proto</strong>属性的浏览器里，只能将改写后的方法作为不可枚举的属性定义到value上（copyAugment）。</p>
+<p>参考资料:</p>
+<ol>
+<li><a href="http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/" target="_blank" rel="noopener">How ECMAScript 5 still does not allow to subclass array</a></li>
+<li>js高程</li>
+</ol>
+<h3 id="2、代码实现："><a href="#2、代码实现：" class="headerlink" title="2、代码实现："></a>2、代码实现：</h3><p>Observer简略流程图(可能并不标准)</p>
+<p><img src="/images/vue/Observer.png" alt></p>
+<h3 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h3><p>index.js主要对传入的数据进行改造监听。它会将数据属性转化为对应的访问器属性，以达到数据成为响应式的目的。</p>
+<p>array.js主要改造Array的方法。</p>
+<p>可以看出，vue对Array和Object的处理方式是不一样的。</p>
+<p>对于Array，vue改写了它的原型，改造了它的方法。当调用改变元素数量或顺序的方法时，新增元素能够被监听并且通知依赖它的数据等能够更新。</p>
+<p>对于Object，vue将遍历它的property并且将可修改的属性转化为访问器属性，因此在访问该属性值时可以设置依赖等，在设置该属性值时可以触发依赖更新。如果property的值为Object,那么将继续observe该property的值。</p>
+<p>这是data能够成为响应式的基础。</p>
+<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><ol>
+<li><a href="https://github.com/vuejs/vue/tree/706c67d1d013577fdbfab258bca78557419cba7c" target="_blank" rel="noopener">vue早期版本</a></li>
+<li><a href="https://github.com/vuejs/vue/tree/0cc8c27a3543b63677f1ac947d404bcda47b26e2" target="_blank" rel="noopener">vue近期版本</a> </li>
+<li><a href="https://github.com/youngwind/blog" target="_blank" rel="noopener">youngwind的blog</a></li>
+<li>《JavaScript高级程序设计》</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://larixs.github.io/2021/07/04/vue/study_vue_deep1/" data-id="clivnswcr003xun6p2qlk930t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
@@ -818,81 +899,7 @@ vm.selected.number // -&gt; 123
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/vue/study_vue_deep2/" data-id="clivn5s2g0040ml6p4arhz2qq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-vue/study_vue_deep1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/04/vue/study_vue_deep1/" class="article-date">
-  <time datetime="2021-07-04T11:54:36.739Z" itemprop="datePublished">2021-07-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/vue/">vue</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/04/vue/study_vue_deep1/">深入学习vue -- 如何监听data变化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本次学习core/Observer/index.js core/Observer/array.js</p>
-<p>以下简称为index.js和array.js</p>
-<h3 id="1、基础原理："><a href="#1、基础原理：" class="headerlink" title="1、基础原理："></a>1、基础原理：</h3><h4 id="a-访问器属性"><a href="#a-访问器属性" class="headerlink" title="a) 访问器属性"></a>a) 访问器属性</h4><p>对象属性分为两种，一种是数据属性，另一种是访问器属性。平常使用的属性都是数据属性。例如</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.a = <span class="number">5</span>; <span class="comment">//a为数据属性。</span></span><br></pre></td></tr></table></figure>    
-<p>访问器属性不能直接定义，需要用Object.defineProperty()来定义。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用js高程的例子</span></span><br><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">    _year : <span class="number">2004</span>, <span class="comment">//"_year"是数据属性</span></span><br><span class="line">    edition : <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">"year"</span>, &#123; <span class="comment">//"year"是访问器属性</span></span><br><span class="line">    <span class="keyword">get</span>: function()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._year;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function(newValue)&#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>._year = newValue;</span><br><span class="line">            <span class="keyword">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">book.year = <span class="number">2005</span>; <span class="comment">//此时访问的是访问器属性"year"</span></span><br><span class="line">alert(book.edition); <span class="comment">//2</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>   
-<p>vue利用了访问器属性来实现数据监听。因为Object.defineProperty()是ES5实现的api，且无法shim，因此vue不支持ie8及以下浏览器。</p>
-<p>相关api：Object.getOwnPropertyDescriptor (访问器属性、数据属性都能读到)</p>
-<h4 id="b-继承数组"><a href="#b-继承数组" class="headerlink" title="b) 继承数组"></a>b) 继承数组</h4><p>Vue通过<strong>寄生组合式继承</strong>方式来继承数组，以改写数组的一系列方法，方便数组元素变动时能够监听。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line"><span class="keyword">const</span> arrayProto = <span class="built_in">Array</span>.prototype </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> arrayMethods = <span class="built_in">Object</span>.create(arrayProto)</span><br><span class="line"></span><br><span class="line"><span class="comment">//改写  'push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse' 方法以监听增加的元素。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>   
-<p>在Observer里改写Array类型的value的原型，使其指向arrayMethods.。</p>
-<p>在实现了<strong>proto</strong>属性的浏览器里，可以直接将value的<strong>proto</strong>改写为arrayMethods，以实现数组继承（protoAugment）。</p>
-<p>在没有实现<strong>proto</strong>属性的浏览器里，只能将改写后的方法作为不可枚举的属性定义到value上（copyAugment）。</p>
-<p>参考资料:</p>
-<ol>
-<li><a href="http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/" target="_blank" rel="noopener">How ECMAScript 5 still does not allow to subclass array</a></li>
-<li>js高程</li>
-</ol>
-<h3 id="2、代码实现："><a href="#2、代码实现：" class="headerlink" title="2、代码实现："></a>2、代码实现：</h3><p>Observer简略流程图(可能并不标准)</p>
-<p><img src="/images/vue/Observer.png" alt></p>
-<h3 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h3><p>index.js主要对传入的数据进行改造监听。它会将数据属性转化为对应的访问器属性，以达到数据成为响应式的目的。</p>
-<p>array.js主要改造Array的方法。</p>
-<p>可以看出，vue对Array和Object的处理方式是不一样的。</p>
-<p>对于Array，vue改写了它的原型，改造了它的方法。当调用改变元素数量或顺序的方法时，新增元素能够被监听并且通知依赖它的数据等能够更新。</p>
-<p>对于Object，vue将遍历它的property并且将可修改的属性转化为访问器属性，因此在访问该属性值时可以设置依赖等，在设置该属性值时可以触发依赖更新。如果property的值为Object,那么将继续observe该property的值。</p>
-<p>这是data能够成为响应式的基础。</p>
-<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><ol>
-<li><a href="https://github.com/vuejs/vue/tree/706c67d1d013577fdbfab258bca78557419cba7c" target="_blank" rel="noopener">vue早期版本</a></li>
-<li><a href="https://github.com/vuejs/vue/tree/0cc8c27a3543b63677f1ac947d404bcda47b26e2" target="_blank" rel="noopener">vue近期版本</a> </li>
-<li><a href="https://github.com/youngwind/blog" target="_blank" rel="noopener">youngwind的blog</a></li>
-<li>《JavaScript高级程序设计》</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://larixs.github.io/2021/07/04/vue/study_vue_deep1/" data-id="clivn5s2i0044ml6pywmyyd9k" class="article-share-link">Share</a>
+      <a data-url="http://larixs.github.io/2021/07/04/vue/study_vue_deep2/" data-id="clivnswcs003zun6pslfl1ttk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-notes/">study notes</a></li></ul>
@@ -963,11 +970,7 @@ vm.selected.number // -&gt; 123
           </li>
         
           <li>
-            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
           </li>
         
           <li>
@@ -975,7 +978,11 @@ vm.selected.number // -&gt; 123
           </li>
         
           <li>
-            <a href="/2021/07/04/webpack/studyWebpack/">webpack入门</a>
+            <a href="/2021/07/04/webpack/how_to_write_a_plugin/">如何写一个webpack插件（译）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/webpack/hot_module_and_reload/">webpack热加载与热更新</a>
           </li>
         
       </ul>
