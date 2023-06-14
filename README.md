@@ -19,3 +19,7 @@
 `git config --local user.name "larixs"`
 
 `git config --local user.email 627398360.com`
+
+- The "mode" argument must be integer.
+
+可能是 node 版本和 hexo 不匹配。已知 node 12.22.3 和 hexo 3.9.0 匹配。（hexo -v 可查看）
